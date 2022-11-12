@@ -1,1 +1,1 @@
-# SE-KBS-1
+# OpenPOS
