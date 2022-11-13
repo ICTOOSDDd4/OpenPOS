@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "dyJRvxVxD7Mcr8aT6O9oCJziSjuBq0ov/mWOaCzlr0X8Trql5jN6XNgF3+nKht0aylpcrH6pAe1xYLs5bnY6Vg==",
+  "dgSpecHash": "OcOl2hKIflu8XFB9whER592X1niUUtxSA7T7vGSht7GzHzKMpKJhu0VZJkoRZeqAWnC6Cxajx+/2pg/sMFkOLw==",
   "success": true,
-  "projectFilePath": "C:\\LearnC#\\OpenPOS\\OpenPOS-Application\\OpenPOS-Application.csproj",
+  "projectFilePath": "C:\\LearnC#\\OpenPOS\\OpenPOS\\OpenPOS-Application\\OpenPOS-Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\jmccr\\.nuget\\packages\\googlegson\\2.9.1\\googlegson.2.9.1.nupkg.sha512",
     "C:\\Users\\jmccr\\.nuget\\packages\\microsoft.extensions.configuration\\7.0.0\\microsoft.extensions.configuration.7.0.0.nupkg.sha512",
@@ -100,10 +100,10 @@
     "C:\\Users\\jmccr\\.nuget\\packages\\xamarin.kotlin.stdlib.jdk8\\1.7.10\\xamarin.kotlin.stdlib.jdk8.1.7.10.nupkg.sha512",
     "C:\\Users\\jmccr\\.nuget\\packages\\xamarin.kotlinx.coroutines.android\\1.6.4\\xamarin.kotlinx.coroutines.android.1.6.4.nupkg.sha512",
     "C:\\Users\\jmccr\\.nuget\\packages\\xamarin.kotlinx.coroutines.core.jvm\\1.6.4\\xamarin.kotlinx.coroutines.core.jvm.1.6.4.nupkg.sha512",
-    "C:\\Users\\jmccr\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\7.0.0\\microsoft.netcore.app.runtime.win-x64.7.0.0.nupkg.sha512",
-    "C:\\Users\\jmccr\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\7.0.0\\microsoft.windowsdesktop.app.runtime.win-x64.7.0.0.nupkg.sha512",
+    "C:\\Users\\jmccr\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.19041.27\\microsoft.windows.sdk.net.ref.10.0.19041.27.nupkg.sha512",
     "C:\\Users\\jmccr\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\7.0.0\\microsoft.aspnetcore.app.runtime.win-x64.7.0.0.nupkg.sha512",
-    "C:\\Users\\jmccr\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.19041.27\\microsoft.windows.sdk.net.ref.10.0.19041.27.nupkg.sha512"
+    "C:\\Users\\jmccr\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\7.0.0\\microsoft.windowsdesktop.app.runtime.win-x64.7.0.0.nupkg.sha512",
+    "C:\\Users\\jmccr\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\7.0.0\\microsoft.netcore.app.runtime.win-x64.7.0.0.nupkg.sha512"
   ],
   "logs": []
 }

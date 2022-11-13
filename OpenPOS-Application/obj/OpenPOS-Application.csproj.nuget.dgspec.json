@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\LearnC#\\OpenPOS\\OpenPOS-Application\\OpenPOS-Application.csproj": {}
+    "C:\\LearnC#\\OpenPOS\\OpenPOS\\OpenPOS-Application\\OpenPOS-Application.csproj": {}
   },
   "projects": {
-    "C:\\LearnC#\\OpenPOS\\OpenPOS-Application\\OpenPOS-Application.csproj": {
+    "C:\\LearnC#\\OpenPOS\\OpenPOS\\OpenPOS-Application\\OpenPOS-Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\LearnC#\\OpenPOS\\OpenPOS-Application\\OpenPOS-Application.csproj",
+        "projectUniqueName": "C:\\LearnC#\\OpenPOS\\OpenPOS\\OpenPOS-Application\\OpenPOS-Application.csproj",
         "projectName": "OpenPOS-Application",
-        "projectPath": "C:\\LearnC#\\OpenPOS\\OpenPOS-Application\\OpenPOS-Application.csproj",
+        "projectPath": "C:\\LearnC#\\OpenPOS\\OpenPOS\\OpenPOS-Application\\OpenPOS-Application.csproj",
         "packagesPath": "C:\\Users\\jmccr\\.nuget\\packages\\",
-        "outputPath": "C:\\LearnC#\\OpenPOS\\OpenPOS-Application\\obj\\",
+        "outputPath": "C:\\LearnC#\\OpenPOS\\OpenPOS\\OpenPOS-Application\\obj\\",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
         "fallbackFolders": [
