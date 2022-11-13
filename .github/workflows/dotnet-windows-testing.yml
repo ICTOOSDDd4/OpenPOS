@@ -28,8 +28,8 @@ jobs:
       with:
         dotnet-version: 7.0.x
     - name: Restoring dependencies
-      run: dotnet restore OpenPOS/OpenPOS.sln
+      run: dotnet restore OpenPOS.sln
     - name: Building
-      run: dotnet build --no-restore OpenPOS/OpenPOS.sln
+      run: dotnet build --no-restore OpenPOS.sln
     - name: Testing
-      run: dotnet test --no-build --verbosity normal OpenPOS/OpenPOS.sln
+      run: dotnet test --no-build --verbosity normal OpenPOS.sln
