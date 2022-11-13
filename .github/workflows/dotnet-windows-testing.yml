@@ -27,8 +27,9 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 7.0.x
-    - name: Restoring dependencies
-      run: dotnet restore
+        # Voor wanneer er dependencies worden toegevoeg
+#    - name: Restoring dependencies
+#      run: dotnet restore
     - name: Building
       run: dotnet build --no-restore
     - name: Testing
