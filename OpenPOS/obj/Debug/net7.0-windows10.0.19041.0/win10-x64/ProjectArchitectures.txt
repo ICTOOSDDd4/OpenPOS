@@ -1,0 +1,1 @@
+C:\LearnC#\OpenPOS\OpenPOS\OpenPOS\OpenPOS-Application.csproj;x64
