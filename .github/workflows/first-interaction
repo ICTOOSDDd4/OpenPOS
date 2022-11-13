@@ -1,0 +1,14 @@
+name: 'First interaction'
+description: 'Greet new contributors when they create their first issue or open their first pull request'
+author: 'GitHub'
+inputs:
+  repo-token:
+    description: 'Token for the repository. Can be passed in using {{ secrets.GITBOT }}'
+    required: true
+  issue-message:
+    description: 'Thanks for helping us making OpenPOS even better, we are gonna take a look at this issue ASAP.'
+  pr-message:
+    description: 'Yay! Your first PR! Thanks for helping us improve OpenPOS!'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
