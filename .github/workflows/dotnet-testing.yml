@@ -38,19 +38,19 @@ jobs:
       run: dotnet tool install -g redth.net.maui.check
       shell: pwsh
 
-    - name: Install .NET MAUI
-      shell: pwsh
-      run: |
-          & dotnet nuget locals all --clear
-          & dotnet workload install maui --source https://aka.ms/dotnet7/nuget/index.json --source https://api.nuget.org/v3/index.json
-          & dotnet workload install android ios maccatalyst tvos macos maui wasm-tools maui-maccatalyst --source https://aka.ms/dotnet7/nuget/index.json --source https://api.nuget.org/v3/index.json
+    # - name: Install .NET MAUI
+    #   shell: pwsh
+    #   run: |
+    #       & dotnet nuget locals all --clear
+    #       & dotnet workload install maui --source https://aka.ms/dotnet7/nuget/index.json --source https://api.nuget.org/v3/index.json
+    #       & dotnet workload install android ios maccatalyst tvos macos maui wasm-tools maui-maccatalyst --source https://aka.ms/dotnet7/nuget/index.json --source https://api.nuget.org/v3/index.json
 
-    - name: Restore packages
-      run: |
-        cd 7.0/Apps/OpenPOS-Application/src/
-        dotnet restore OpenPOS-Application.sln
+    # - name: Restore packages
+    #   run: |
+    #     cd 7.0/Apps/OpenPOS-Application/src/
+    #     dotnet restore OpenPOS-Application.sln
 
-    - name: Build Windows MSIX
+    - name: Build Windows
       run: |
         cd .\7.0\Apps\OpenPOS\src\
         dotnet publish -f net7.0-windows10.0.19041.0 -c Release 
