@@ -27,10 +27,9 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 7.0.x
-        # Voor wanneer er dependencies worden toegevoeg
-#    - name: Restoring dependencies
-#      run: dotnet restore
+    - name: Restoring dependencies
+      run: dotnet restore OpenPOS.sln
     - name: Building
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore OpenPOS.sln
     - name: Testing
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --no-build --verbosity normal OpenPOS.sln
