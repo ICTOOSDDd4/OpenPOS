@@ -32,7 +32,12 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
           dotnet-version: '${{env.DOTNETVERSION}}'
-    
+          
+    # install .NET MAUI
+    - name: Install .NET MAUI
+      run: dotnet tool install -g redth.net.maui.check
+      shell: pwsh
+
     - name: Install .NET MAUI
       shell: pwsh
       run: |
@@ -44,18 +49,12 @@ jobs:
       run: |
         cd 7.0/Apps/OpenPOS-Application/src/
         dotnet restore OpenPOS-Application.sln
-
-    - name: Building
-      run: dotnet build --no-restore 
-
-    - name: Testing
-      run: dotnet test --no-build --verbosity normal
           
-#       - name: Build and Run UnitTests
-#         shell: bash
-#         run: |
-#           dotnet build <path to unit test csproj>
-#           dotnet test <path to unit test csproj> --no-build --verbosity normal
+    - name: Build and Run UnitTests
+      shell: bash
+      run: |
+        dotnet build OpenPOS-Testing\OpenPOS-Testing.csproj
+        dotnet test OpenPOS-Testing\OpenPOS-Testing.csproj --no-build --verbosity normal
 
       # https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/certutil
       # commandline util to encode to base64 on windows
@@ -108,11 +107,11 @@ jobs:
         #   shell: bash
         #   run: jarsigner -keystore android/release.decrypted.jks -storepass "${{ secrets.RELEASE_KEYSTORE_PASSWORD }}" -signedjar ./android/app/build/outputs/bundle/release/app-release-signed.aab ./android/app/build/outputs/bundle/release/app-release.aab release
 
-  #       - name: Build and Run UnitTests
-  #         shell: bash
-  #         run: |
-  #           dotnet build <path to unit test csproj>
-  #           dotnet test <path to unit test csproj> --no-build --verbosity normal
+        - name: Build and Run UnitTests
+          shell: bash
+          run: |
+            dotnet build OpenPOS-Testing\OpenPOS-Testing.csproj
+            dotnet test OpenPOS-Testing\OpenPOS-Testing.csproj --no-build --verbosity normal
 
   buildmacCatalyst:
     runs-on: macos-12
@@ -149,11 +148,11 @@ jobs:
           dotnet build -f net7.0-maccatalyst -c Release -o ./artifacts
           dotnet publish -f net7.0-maccatalyst -c Release -p:BuildIpa=True -o ./artifacts
 
-#       - name: Build and Run UnitTests
-#         shell: bash
-#         run: |
-#           dotnet build <path to unit test csproj>
-#           dotnet test <path to unit test csproj> --no-build --verbosity normal
+      - name: Build and Run UnitTests
+        shell: bash
+        run: |
+          dotnet build OpenPOS-Testing\OpenPOS-Testing.csproj
+          dotnet test OpenPOS-Testing\OpenPOS-Testing.csproj --no-build --verbosity normal
 
       - uses: actions/upload-artifact@v2
         with:
@@ -193,11 +192,11 @@ jobs:
           cd 7.0/Apps/OpenPOS-Application/src
           dotnet build -f net7.0-ios -c Debug /p:packageApp=false /p:buildForSimulator=true /p:ArchiveOnBuild=false
 
-#       - name: Build and Run UnitTests
-#         shell: bash
-#         run: |
-#           dotnet build <path to unit test csproj>
-#           dotnet test <path to unit test csproj> --no-build --verbosity normal
+      - name: Build and Run UnitTests
+        shell: bash
+        run: |
+          dotnet build OpenPOS-Testing\OpenPOS-Testing.csproj
+          dotnet test OpenPOS-Testing\OpenPOS-Testing.csproj --no-build --verbosity normal
 
       - uses: actions/upload-artifact@v2
         with:

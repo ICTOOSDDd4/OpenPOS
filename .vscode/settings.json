@@ -1,0 +1,10 @@
+{
+    "vscord.status.idle.check": false,
+    "vscord.status.problems.enabled": true,
+    "vscord.app.name": "Visual Studio Code",
+    "vscord.status.details.idle.enabled": false,
+    "vscord.status.state.text.editing": "Working on {file_name}{file_extension}",
+    "vscord.status.state.text.debugging": "Debugging: {file_name}",
+    "vscord.status.button.active.enabled": false,
+    "vscord.status.button.enabled": false
+}
