@@ -1,0 +1,18 @@
+name: Issue workflow
+
+on:
+  issues:
+    types:
+      - opened
+
+jobs:
+  close-issues:
+    name: Close issue without a label
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/add-to-project@v0.3.0
+        with:
+          project-url: https://github.com/orgs/ICTOOSDDd4/projects/2
+          github-token: ${{ secrets.GITBOT }}
+          labeled: feature, documentation, bug, duplicate, good first issue, help wanted, invalid, question, wontfix, request, stale, will not be implemented
+          label-operator: NOT
