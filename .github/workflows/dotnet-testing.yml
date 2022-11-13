@@ -43,5 +43,31 @@ jobs:
     
     - name: Test with .NET
       run: dotnet test --configuration Release --no-build --verbosity normal
+      
+  AndroidWorkflow:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ env.DOTNETVERSION }}
+    
+    - name: Install .NET MAUI
+      shell: bash
+      run: |
+          dotnet nuget locals all --clear 
+          dotnet workload install maui
+          dotnet workload install android ios maccatalyst tvos macos maui wasm-tools
+
+    - name : Build Android App
+      shell: bash
+      run: |
+            cd 7.0/Apps/OpenPOS-App/src
+            dotnet publish -f:net7.0-android -c:Release
+    
+    - name: Test with .NET
+      run: dotnet test --configuration Release --no-build --verbosity normal
+    
   
       
