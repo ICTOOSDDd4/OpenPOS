@@ -16,11 +16,12 @@ on:
       - "bug**"
 
 jobs:
+ 
   build:
 
     runs-on: windows-latest
 
-    steps:
+    steps:  
     - uses: actions/checkout@v3
     - name: Setuping up .NET
       uses: actions/setup-dotnet@v3
@@ -32,3 +33,8 @@ jobs:
       run: dotnet build --no-restore
     - name: Testing
       run: dotnet test --no-build --verbosity normal
+    - name: Discord status update
+    - uses: sarisia/actions-status-discord@v1
+      if: always()
+      with:
+       webhook: ${{ secrets.DISCORD_WEBHOOK }}
