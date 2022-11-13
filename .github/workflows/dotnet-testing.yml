@@ -49,6 +49,11 @@ jobs:
       run: |
         cd 7.0/Apps/OpenPOS-Application/src/
         dotnet restore OpenPOS-Application.sln
+
+    - name: Build Windows MSIX
+      run: |
+        cd .\7.0\Apps\OpenPOS\src\
+        dotnet publish -f net7.0-windows10.0.19041.0 -c Release 
           
     - name: Build and Run UnitTests
       shell: bash
