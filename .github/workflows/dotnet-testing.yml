@@ -31,12 +31,12 @@ jobs:
       with:
         dotnet-version: ${{ env.DOTNETVERSION }}
     
-    # - name: Install .NET MAUI
-    #   shell: bash
-    #   run: |
-    #       dotnet nuget locals all --clear 
-    #       dotnet workload install maui --source https://aka.ms/dotnet6/nuget/index.json --source https://api.nuget.org/v3/index.json
-    #       dotnet workload install android ios maccatalyst tvos macos maui wasm-tools --source https://aka.ms/dotnet6/nuget/index.json --source https://api.nuget.org/v3/index.json
+    - name: Install .NET MAUI
+      shell: bash
+      run: |
+          dotnet nuget locals all --clear 
+          dotnet workload install maui
+          dotnet workload install android ios maccatalyst tvos macos maui wasm-toolss
 
     - name: Build with .NET
       run: dotnet build --configuration Release
