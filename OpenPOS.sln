@@ -1,7 +1,5 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenPOS-Application", "OpenPOS-Application\OpenPOS-Application.csproj", "{17F9ED32-57A3-46D4-903C-5F99AC0B2D0A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenPOS-Testing", "OpenPOS-Testing\OpenPOS-Testing.csproj", "{70C05774-FA49-4C8E-8B6C-D700C206BC2F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenPOS-App", "OpenPOS-App\OpenPOS-App.csproj", "{BC782B53-0AF6-4BD2-8430-060F43189451}"
