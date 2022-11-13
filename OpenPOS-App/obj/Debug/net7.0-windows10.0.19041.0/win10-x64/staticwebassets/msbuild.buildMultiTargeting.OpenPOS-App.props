@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\OpenPOS-App.props" />
+</Project>

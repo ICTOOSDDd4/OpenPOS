@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenPOS-Application", "Open
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenPOS-Testing", "OpenPOS-Testing\OpenPOS-Testing.csproj", "{70C05774-FA49-4C8E-8B6C-D700C206BC2F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenPOS-App", "OpenPOS-App\OpenPOS-App.csproj", "{BC782B53-0AF6-4BD2-8430-060F43189451}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{70C05774-FA49-4C8E-8B6C-D700C206BC2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70C05774-FA49-4C8E-8B6C-D700C206BC2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70C05774-FA49-4C8E-8B6C-D700C206BC2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC782B53-0AF6-4BD2-8430-060F43189451}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC782B53-0AF6-4BD2-8430-060F43189451}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC782B53-0AF6-4BD2-8430-060F43189451}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC782B53-0AF6-4BD2-8430-060F43189451}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
