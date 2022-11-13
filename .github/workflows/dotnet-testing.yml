@@ -36,7 +36,7 @@ jobs:
       run: |
           dotnet nuget locals all --clear 
           dotnet workload install maui
-          dotnet workload install android ios maccatalyst tvos macos maui wasm-toolss
+          dotnet workload install android ios maccatalyst tvos macos maui wasm-tools
 
     - name: Build with .NET
       run: dotnet build --configuration Release
