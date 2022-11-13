@@ -9,10 +9,10 @@ jobs:
   close_issue:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: peter-evans/close-issue@v2.2.0
-      - name: Close issue if it doesn't have a label
-        if: join(github.event.issue.labels) == ''
+      - if: join(github.event.issue.labels) == ''
+        uses: peter-evans/close-issue@v2.2.0
+        name: Close issue if it doesn't have a label
+        token: ${{ secrets.GITBOT }}
         with:
           comment: Issue doesn't have a label. Closing it.
           
