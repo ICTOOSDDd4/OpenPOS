@@ -30,22 +30,24 @@ Example:
 This will follow.
 
 ## Testing
-Step 1: Retoring dependacies
+Step 1: Installing .NET MAUI
 	
 ```
-dotnet restore
+dotnet nuget locals all --clear 
+          dotnet workload install maui
+          dotnet workload install android ios maccatalyst tvos macos maui wasm-tools
 ```
 
 Step 2: Building the application
 	
 ```
-dotnet build --no-restore
+dotnet build --configuration Release
 ```
 
 Step 3: Running tests
 	
 ```
-dotnet test --no-buld --verbosity normal
+dotnet test --configuration Release --no-build --verbosity normal
 ```
 
 ## Deployment guide
