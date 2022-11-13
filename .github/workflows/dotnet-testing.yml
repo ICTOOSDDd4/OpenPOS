@@ -37,12 +37,12 @@ jobs:
       shell: pwsh
       run: |
           & dotnet nuget locals all --clear
-          & dotnet workload install maui --source https://aka.ms/dotnet6/nuget/index.json --source https://api.nuget.org/v3/index.json
-          & dotnet workload install android ios maccatalyst tvos macos maui wasm-tools maui-maccatalyst --source https://aka.ms/dotnet6/nuget/index.json --source https://api.nuget.org/v3/index.json
+          & dotnet workload install maui --source https://aka.ms/dotnet7/nuget/index.json --source https://api.nuget.org/v3/index.json
+          & dotnet workload install android ios maccatalyst tvos macos maui wasm-tools maui-maccatalyst --source https://aka.ms/dotnet7/nuget/index.json --source https://api.nuget.org/v3/index.json
 
     - name: Restore packages
       run: |
-        cd 6.0/Apps/OpenPOS-Application/src/
+        cd 7.0/Apps/OpenPOS-Application/src/
         dotnet restore OpenPOS-Application.sln
 
     - name: Building
@@ -77,15 +77,15 @@ jobs:
 
         - name: Restore packages
           run: |
-            cd 6.0/Apps/OpenPOS-Application/src/
+            cd 7.0/Apps/OpenPOS-Application/src/
             dotnet restore OpenPOS-Application.sln
 
         - name: Install .NET MAUI
           shell: bash
           run: |
             dotnet nuget locals all --clear 
-            dotnet workload install maui --source https://aka.ms/dotnet6/nuget/index.json --source https://api.nuget.org/v3/index.json
-            dotnet workload install android ios maccatalyst tvos macos maui wasm-tools --source https://aka.ms/dotnet6/nuget/index.json --source https://api.nuget.org/v3/index.json
+            dotnet workload install maui --source https://aka.ms/dotnet7/nuget/index.json --source https://api.nuget.org/v3/index.json
+            dotnet workload install android ios maccatalyst tvos macos maui wasm-tools --source https://aka.ms/dotnet7/nuget/index.json --source https://api.nuget.org/v3/index.json
 
           # https://docs.microsoft.com/en-us/dotnet/maui/android/deployment/overview
         - name : Build Android App
@@ -131,15 +131,15 @@ jobs:
 
       - name: Restore packages
         run: |
-          cd 6.0/Apps/OpenPOS-Application/src/
+          cd 7.0/Apps/OpenPOS-Application/src/
           dotnet restore OpenPOS-Application.sln
 
       - name: Install .NET MAUI
         shell: bash
         run: |
           dotnet nuget locals all --clear 
-          dotnet workload install maui --source https://aka.ms/dotnet6/nuget/index.json --source https://api.nuget.org/v3/index.json
-          dotnet workload install android ios maccatalyst tvos macos maui wasm-tools --source https://aka.ms/dotnet6/nuget/index.json --source https://api.nuget.org/v3/index.json
+          dotnet workload install maui --source https://aka.ms/dotnet7/nuget/index.json --source https://api.nuget.org/v3/index.json
+          dotnet workload install android ios maccatalyst tvos macos maui wasm-tools --source https://aka.ms/dotnet7/nuget/index.json --source https://api.nuget.org/v3/index.json
         
         # https://docs.microsoft.com/en-us/dotnet/maui/macos/deployment/overview
       - name : Build MacCatalyst App
@@ -159,7 +159,7 @@ jobs:
         with:
           name: artifacts-mac
           path: |
-            6.0/Apps/OpenPOS-Application/src/artifacts/**/*.pkg
+            7.0/Apps/OpenPOS-Application/src/artifacts/**/*.pkg
   
   buildiOS:
     runs-on: macos-12
@@ -178,20 +178,20 @@ jobs:
         shell: bash
         run: |
           dotnet nuget locals all --clear 
-          dotnet workload install maui --source https://aka.ms/dotnet6/nuget/index.json --source https://api.nuget.org/v3/index.json
-          dotnet workload install android ios maccatalyst tvos macos maui wasm-tools --source https://aka.ms/dotnet6/nuget/index.json --source https://api.nuget.org/v3/index.json
+          dotnet workload install maui --source https://aka.ms/dotnet7/nuget/index.json --source https://api.nuget.org/v3/index.json
+          dotnet workload install android ios maccatalyst tvos macos maui wasm-tools --source https://aka.ms/dotnet7/nuget/index.json --source https://api.nuget.org/v3/index.json
     
       - name: Restore packages
         run: |
-          cd 6.0/Apps/OpenPOS-Application/src/
+          cd 7.0/Apps/OpenPOS-Application/src/
           dotnet restore OpenPOS-Application.sln
         
         # https://docs.microsoft.com/en-us/dotnet/maui/ios/deployment/overview
       - name : Build iOS App
         shell: bash
         run: |
-          cd 6.0/Apps/OpenPOS-Application/src
-          dotnet build -f net6.0-ios -c Debug /p:packageApp=false /p:buildForSimulator=true /p:ArchiveOnBuild=false
+          cd 7.0/Apps/OpenPOS-Application/src
+          dotnet build -f net7.0-ios -c Debug /p:packageApp=false /p:buildForSimulator=true /p:ArchiveOnBuild=false
 
 #       - name: Build and Run UnitTests
 #         shell: bash
@@ -203,5 +203,5 @@ jobs:
         with:
           name: artifacts-ios
           path: |
-            6.0/Apps/OpenPOS-Application/src/OpenPOS-Application/bin/Debug/net6.0-ios/iossimulator-x64/**/*.app
+            7.0/Apps/OpenPOS-Application/src/OpenPOS-Application/bin/Debug/net7.0-ios/iossimulator-x64/**/*.app
       
