@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/add-to-project@v0.3.0
         with:
-          project-url: https://github.com/orgs/ICTOOSDDd4/projects/3
+          project-url: https://github.com/orgs/ICTOOSDDd4/projects/2
           github-token: ${{ secrets.GITBOT }}
           labeled: feature, documentation
           label-operator: OR
