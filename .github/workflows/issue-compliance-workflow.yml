@@ -12,18 +12,8 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/github-script@v3
       - name: Close issue if it doesn't have a label
+        if: join(github.event.issue.labels) == ''
         with:
           github-token: ${{secrets.GITBOT}}
-          issue-number: ${{ github.event.issue.number }}
-          body: |
-            There was no label added, so issue is auto-closed.
-          script: |
-            const issue = context.issue;
-            const labels = context.payload.issue.labels;
-            if (labels.length === 0) {
-              await github.issues.update({
-                ...issue,
-                state: 'closed'
-              });
-            }
+          
           
