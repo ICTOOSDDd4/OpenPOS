@@ -27,6 +27,8 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
        dotnet-version: 7.0.x
+    - name: Restoring Workload
+      run: dotnet workload restore
     - name: Restoring dependencies
       run: dotnet restore
     - name: Building
