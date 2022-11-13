@@ -23,11 +23,11 @@ env:
 jobs:
  
   buildWindows:
-
     runs-on: windows-latest
 
     steps:  
     - uses: actions/checkout@v3
+    
     - name: Setup .NET SDK ${{env.DOTNETVERSION}}
       uses: actions/setup-dotnet@v1
       with:
@@ -166,12 +166,9 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2
-
       # https://docs.github.com/en/actions/deployment/deploying-xcode-applications/installing-an-apple-certificate-on-macos-runners-for-xcode-development
       # github docs for installing cert and provisioning profile
       
-      - name: Install the Apple certificate and provisioning profile
-                 
       - name: Setup .NET SDK ${{env.DOTNETVERSION}}
         uses: actions/setup-dotnet@v1
         with:
