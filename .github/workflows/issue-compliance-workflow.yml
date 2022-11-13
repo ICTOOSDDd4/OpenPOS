@@ -1,4 +1,4 @@
-name: Issue workflow
+name: Checking issue compliance workflow
 
 on:
   issues:
@@ -6,13 +6,24 @@ on:
       - opened
 
 jobs:
-  close-issues:
-    name: Close issue without a label
+  close_issue:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/add-to-project@v0.3.0
+      
+      - uses: actions/checkout@v2
+      - uses: actions/github-script@v3
+      - name: Close issue if it doesn't have a label
         with:
-          project-url: https://github.com/orgs/ICTOOSDDd4/projects/2
-          github-token: ${{ secrets.GITBOT }}
-          labeled: feature, documentation, bug, duplicate, good first issue, help wanted, invalid, question, wontfix, request, stale, will not be implemented
-          label-operator: NOT
+          github-token: ${{secrets.GITBOT}}
+          script: |
+            const issue = context.issue;
+            const labels = context.payload.issue.labels;
+            if (labels.length === 0) {
+              await github.issues.update({
+                ...issue,
+                state: 'closed'
+              });
+            }
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            There was no label added, so issue is auto-closed.
