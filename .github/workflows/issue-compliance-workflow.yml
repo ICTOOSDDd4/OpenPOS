@@ -9,12 +9,14 @@ jobs:
   close_issue:
     runs-on: ubuntu-latest
     steps:
-      
       - uses: actions/checkout@v2
       - uses: actions/github-script@v3
       - name: Close issue if it doesn't have a label
         with:
           github-token: ${{secrets.GITBOT}}
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            There was no label added, so issue is auto-closed.
           script: |
             const issue = context.issue;
             const labels = context.payload.issue.labels;
@@ -24,6 +26,4 @@ jobs:
                 state: 'closed'
               });
             }
-          issue-number: ${{ github.event.issue.number }}
-          body: |
-            There was no label added, so issue is auto-closed.
+          
