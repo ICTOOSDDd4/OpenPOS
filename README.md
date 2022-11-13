@@ -34,8 +34,8 @@ Step 1: Installing .NET MAUI
 	
 ```
 dotnet nuget locals all --clear 
-          dotnet workload install maui
-          dotnet workload install android ios maccatalyst tvos macos maui wasm-tools
+dotnet workload install maui
+dotnet workload install android ios maccatalyst tvos macos maui wasm-tools
 ```
 
 Step 2: Building the application
