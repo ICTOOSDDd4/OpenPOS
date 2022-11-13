@@ -23,6 +23,7 @@ Example:
 + Added Credit Cart support
 - Removed unused dependancies.
 ```
+- Every issue that is created should contain a label
 
 
 ## Setup guide
