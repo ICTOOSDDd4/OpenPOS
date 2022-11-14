@@ -10,22 +10,15 @@ jobs:
     name: Add issue to project
     runs-on: ubuntu-latest
     steps:
-    # - name: Add issue to project
-    #   uses: actions/add-to-project@v0.3.0
-    #   with:
-    #     project-url: https://github.com/orgs/ICTOOSDDd4/projects/2
-    #     column-name: "Product Backlog"
-    #     github-token: ${{ secrets.GITBOT }}
-    #     labeled: feature, documentation, enhancement
-    #     label-operator: OR
     - name: Add issue to project
-      if: ${{ contains(github.event.issue.labels.*.name, 'feature') || contains(github.event.issue.labels.*.name, 'documentation') || contains(github.event.issue.labels.*.name, 'enhancement') }}
-      uses: docker://takanabe/github-actions-automate-projects:v0.0.1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITBOT }}
-        GITHUB_PROJECT_URL: https://github.com/orgs/ICTOOSDDd4/projects/2
-        GITHUB_PROJECT_COLUMN_NAME: Product Backlog
-      
+      uses: actions/add-to-project@v0.3.0
+      with:
+        project-url: https://github.com/orgs/ICTOOSDDd4/projects/2
+        column-name: "Product Backlog"
+        github-token: ${{ secrets.GITBOT }}
+        labeled: feature, documentation, enhancement
+        label-operator: OR
+    
     - name: Sending discord message
       if: ${{ contains(github.event.issue.labels.*.name, 'feature') || contains(github.event.issue.labels.*.name, 'documentation') || contains(github.event.issue.labels.*.name, 'enhancement') }}
       uses: stegzilla/discord-notify@v4
@@ -38,12 +31,12 @@ jobs:
         username: GitHub Project Mananger
 
     - name: Adding bug to project
-      if: ${{ contains(github.event.issue.labels.*.name, 'bug')}}
-      uses: docker://takanabe/github-actions-automate-projects:v0.0.1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITBOT }}
-        GITHUB_PROJECT_URL: https://github.com/orgs/ICTOOSDDd4/projects/2
-        GITHUB_PROJECT_COLUMN_NAME: Product Backlog
+      uses: actions/add-to-project@v0.3.0
+      with:
+        project-url: https://github.com/orgs/ICTOOSDDd4/projects/3
+        column-name: "Product Backlog"
+        github-token: ${{ secrets.GITBOT }}
+        labeled: bug
     
     - name: Sending discord message
       if: ${{ contains(github.event.issue.labels.*.name, 'bug')}}
