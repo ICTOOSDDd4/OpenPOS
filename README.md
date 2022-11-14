@@ -15,7 +15,11 @@ Example: feature/Giftcard_support
 ```
 Example: bug-fix/not_showing_the_order_total
 ```
-- Commit descripting are required
+- When creating a branch for documentation, the keyword docs is required in the branch name.
+```
+Example: docs/improved-user-manual
+```
+- Commit description is required
 	The + symbol is used for indicating that something was added.
 	The - symbol is used for indicating something was removed.
 ```
