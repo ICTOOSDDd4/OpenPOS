@@ -23,7 +23,7 @@ jobs:
       with:
         access-token: ${{ secrets.GITBOT }}
         project-name: "OpenPOS - Project"
-        target-column: "Product Backlog"
+        target-column: "ProductBacklog"
         
     
     - name: Sending discord message
