@@ -21,7 +21,7 @@ jobs:
       if: ${{ contains(github.event.issue.labels.*.name, 'feature') || contains(github.event.issue.labels.*.name, 'documentation') || contains(github.event.issue.labels.*.name, 'enhancement') }}
       uses: kin/gh-action-move-issues-to-column@v1.0
       with:
-        action-token: ${{ secrets.GITBOT }}
+        access-token: ${{ secrets.GITBOT }}
         project-name: "OpenPOS - Project"
         target-column: "Product Backlog"
         
@@ -41,7 +41,7 @@ jobs:
       if: ${{ contains(github.event.issue.labels.*.name, 'bug')}}
       uses: kin/gh-action-move-issues-to-column@v1.0
       with:
-        action-token: ${{ secrets.GITBOT }}
+        access-token: ${{ secrets.GITBOT }}
         project-name: "OpenPOS - Bug tracking"
         target-column: "Product Backlog"
     
