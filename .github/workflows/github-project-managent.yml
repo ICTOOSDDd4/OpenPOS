@@ -4,17 +4,48 @@ on:
   issues:
     types:
       - opened
-      - edited
 
 jobs:
   add-to-project:
     name: Add issue to project
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/add-to-project@v0.3.0
-        with:
-          project-url: https://github.com/orgs/ICTOOSDDd4/projects/2
-          column-name: "Product Backlog"
-          github-token: ${{ secrets.GITBOT }}
-          labeled: feature, documentation, enhancement
-          label-operator: OR
+    - uses: stegzilla/discord-notify@v4
+      # - uses: actions/add-to-project@v0.3.0
+      #   with:
+      #     project-url: https://github.com/orgs/ICTOOSDDd4/projects/2
+      #     column-name: "Product Backlog"
+      #     github-token: ${{ secrets.GITBOT }}
+      #     labeled: feature, documentation, enhancement
+      #     label-operator: OR
+    - name: Add new issue to Project
+      if: github.event.issue.labels == feature || github.event.issue.labels == documentation || github.event.issue.labels == enhancement
+      uses: konradpabjan/actions-add-new-issue-to-column@v1.1
+      with:
+        action-token: ${{ secrets.GITBOT }}
+        project-url: https://github.com/orgs/ICTOOSDDd4/projects/2
+        column-name: "Product Backlog"
+        webhook_url: ${{ secrets.DISCORD_WEBHOOK_ACTIONS_STATUS }}
+        title: "New issue added to project"
+        message: "**${{ github.event.issue.title }}** has been added to the project\n${{ github.event.pull_request.html_url }}"
+        include_image: true
+        username: GitHub Project Mananger
+
+    - name: Adding bug to project
+      if: github.event.issue.labels == bug
+      uses: konradpabjan/actions-add-new-issue-to-column@v1.1
+      
+      with:
+        action-token: ${{ secrets.GITBOT }}
+        project-url: https://github.com/orgs/ICTOOSDDd4/projects/3
+        column-name: "Product Backlog"
+        webhook_url: ${{ secrets.DISCORD_WEBHOOK_ACTIONS_STATUS }}
+        title: "New bug added to project"
+        message: "**${{ github.event.issue.title }}** has been added to the bug project\n${{ github.event.pull_request.html_url }}"
+        include_image: true
+        username: GitHub Project Mananger
+    
+
+    
+
+      
