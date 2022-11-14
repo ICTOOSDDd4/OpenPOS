@@ -11,9 +11,9 @@ on:
   pull_request:
     branches: 
       - "master"
-      - "develop"
-      - "feature**"
-      - "bug**"
+      - "development/**"
+      - "feature/**"
+      - "bug-fix/**"
   
   workflow_dispatch:
 
