@@ -18,7 +18,7 @@ jobs:
       #     labeled: feature, documentation, enhancement
       #     label-operator: OR
     - name: Add new issue to Project
-      if: contains(github.event.pull_request.labels.*.name, '<label_name>')
+      if: ${{ contains(github.event.issue.labels.*.name, 'feature') || contains(github.event.issue.labels.*.name, 'documentation') || contains(github.event.issue.labels.*.name, 'enhancement') }}
       uses: konradpabjan/actions-add-new-issue-to-column@v1.1
       with:
         action-token: ${{ secrets.GITBOT }}
@@ -46,7 +46,7 @@ jobs:
         column-name: "Product Backlog"
     
     - name: Sending discord message
-      if: ${{ github.event.issue.labels.*.name == 'bug'}}
+      if: ${{ contains(github.event.issue.labels.*.name, 'bug')}}
       uses: stegzilla/discord-notify@v4
       with:
         webhook_url: ${{ secrets.DISCORD_WEBHOOK_ACTIONS_STATUS }}
