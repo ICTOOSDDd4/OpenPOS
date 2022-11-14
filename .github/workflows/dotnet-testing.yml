@@ -38,7 +38,7 @@ jobs:
           dotnet workload install android ios maccatalyst tvos macos maui wasm-tools
     
     - name: Restore nuget packages
-      run: dotnet restore OpenPS.sln
+      run: dotnet restore OpenPOS.sln
 
     - name: Build with .NET
       run: dotnet build --configuration Release
@@ -63,7 +63,7 @@ jobs:
           dotnet workload install android ios maccatalyst tvos macos maui wasm-tools
 
     - name: Restore nuget packages
-      run: dotnet restore OpenPS.sln
+      run: dotnet restore OpenPOS.sln
 
     - name : Build Android App
       shell: bash
@@ -89,7 +89,7 @@ jobs:
           dotnet workload install android ios maccatalyst tvos macos maui wasm-tools
     
     - name: Restore nuget packages
-      run: dotnet restore OpenPS.sln
+      run: dotnet restore OpenPOS.sln
 
     - name: Build with .NET
       run: |
@@ -116,7 +116,7 @@ jobs:
           dotnet workload install android ios maccatalyst tvos macos maui wasm-tools
     
     - name: Restore nuget packages
-      run: dotnet restore OpenPS.sln
+      run: dotnet restore OpenPOS.sln
 
     - name: Build with .NET
       run: dotnet build -f net6.0-ios -c Debug /p:packageApp=false /p:buildForSimulator=true /p:ArchiveOnBuild=false
