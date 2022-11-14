@@ -34,6 +34,7 @@ jobs:
         title: "New issue added to project"
         message: "**${{ github.event.issue.title }}** has been added to the project\n${{ github.event.pull_request.html_url }}"
         include_image: true
+        avatar_url: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png        
         username: GitHub Project Mananger
 
     - name: Adding bug to project
@@ -53,6 +54,7 @@ jobs:
         title: "New bug added to project"
         message: "**${{ github.event.issue.title }}** has been added to the bug project\n${{ github.event.pull_request.html_url }}"
         include_image: true
+        avatar_url: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
         username: GitHub Project Mananger
     
 
