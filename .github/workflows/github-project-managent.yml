@@ -19,7 +19,7 @@ jobs:
       #     label-operator: OR
     - name: Add new issue to Project
       if: ${{ contains(github.event.issue.labels.*.name, 'feature') || contains(github.event.issue.labels.*.name, 'documentation') || contains(github.event.issue.labels.*.name, 'enhancement') }}
-      uses: konradpabjan/actions-add-new-issue-to-column@v1.1
+      uses: kin/gh-action-move-issues-to-column@v1.0
       with:
         action-token: ${{ secrets.GITBOT }}
         project-name: "OpenPOS - Project"
@@ -39,8 +39,7 @@ jobs:
 
     - name: Adding bug to project
       if: ${{ contains(github.event.issue.labels.*.name, 'bug')}}
-      uses: konradpabjan/actions-add-new-issue-to-column@v1.1
-      
+      uses: kin/gh-action-move-issues-to-column@v1.0
       with:
         action-token: ${{ secrets.GITBOT }}
         project-name: "OpenPOS - Bug tracking"
