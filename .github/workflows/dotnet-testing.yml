@@ -93,7 +93,7 @@ jobs:
 
     - name: Build with .NET
       run: |
-          dotnet build -f net7.0-maccatalyst
+          dotnet publish -f net7.0-maccatalyst
               
     - name: Test with .NET
       run: dotnet test --configuration Release --no-build --verbosity normal
@@ -118,7 +118,7 @@ jobs:
       run: dotnet restore OpenPOS.sln
 
     - name: Build with .NET
-      run: dotnet build -f net7.0-ios
+      run: dotnet publish -f net7.0-ios
     
     - name: Test with .NET
       run: dotnet test --configuration Release --no-build --verbosity normal
