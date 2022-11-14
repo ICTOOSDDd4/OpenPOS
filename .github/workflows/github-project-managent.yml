@@ -10,22 +10,22 @@ jobs:
     name: Add issue to project
     runs-on: ubuntu-latest
     steps:
-      # - uses: actions/add-to-project@v0.3.0
-      #   with:
-      #     project-url: https://github.com/orgs/ICTOOSDDd4/projects/2
-      #     column-name: "Product Backlog"
-      #     github-token: ${{ secrets.GITBOT }}
-      #     labeled: feature, documentation, enhancement
-      #     label-operator: OR
-    - name: Add new issue to Project
+    # - name: Add issue to project
+    #   uses: actions/add-to-project@v0.3.0
+    #   with:
+    #     project-url: https://github.com/orgs/ICTOOSDDd4/projects/2
+    #     column-name: "Product Backlog"
+    #     github-token: ${{ secrets.GITBOT }}
+    #     labeled: feature, documentation, enhancement
+    #     label-operator: OR
+    - name: Add issue to project
       if: ${{ contains(github.event.issue.labels.*.name, 'feature') || contains(github.event.issue.labels.*.name, 'documentation') || contains(github.event.issue.labels.*.name, 'enhancement') }}
-      uses: kin/gh-action-move-issues-to-column@v1.0
-      with:
-        access-token: ${{ secrets.GITBOT }}
-        project-name: "OpenPOS - Project"
-        target-column: "ProductBacklog"
-        
-    
+      uses: docker://takanabe/github-actions-automate-projects:v0.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITBOT }}
+        GITHUB_PROJECT_URL: https://github.com/orgs/ICTOOSDDd4/projects/2
+        GITHUB_PROJECT_COLUMN_NAME: Product Backlog
+      
     - name: Sending discord message
       if: ${{ contains(github.event.issue.labels.*.name, 'feature') || contains(github.event.issue.labels.*.name, 'documentation') || contains(github.event.issue.labels.*.name, 'enhancement') }}
       uses: stegzilla/discord-notify@v4
@@ -39,11 +39,11 @@ jobs:
 
     - name: Adding bug to project
       if: ${{ contains(github.event.issue.labels.*.name, 'bug')}}
-      uses: kin/gh-action-move-issues-to-column@v1.0
-      with:
-        access-token: ${{ secrets.GITBOT }}
-        project-name: "OpenPOS - Bug tracking"
-        target-column: "Product Backlog"
+      uses: docker://takanabe/github-actions-automate-projects:v0.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITBOT }}
+        GITHUB_PROJECT_URL: https://github.com/orgs/ICTOOSDDd4/projects/2
+        GITHUB_PROJECT_COLUMN_NAME: Product Backlog
     
     - name: Sending discord message
       if: ${{ contains(github.event.issue.labels.*.name, 'bug')}}
