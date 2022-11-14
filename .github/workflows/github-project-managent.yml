@@ -19,7 +19,7 @@ jobs:
       #     labeled: feature, documentation, enhancement
       #     label-operator: OR
     - name: Add new issue to Project
-      if: github.event.issue.labels == feature || github.event.issue.labels == documentation || github.event.issue.labels == enhancement
+      if: github.event.issue.labels == 'feature' || github.event.issue.labels == 'documentation' || github.event.issue.labels == 'enhancement'
       uses: konradpabjan/actions-add-new-issue-to-column@v1.1
       with:
         action-token: ${{ secrets.GITBOT }}
@@ -32,7 +32,7 @@ jobs:
         username: GitHub Project Mananger
 
     - name: Adding bug to project
-      if: github.event.issue.labels == bug
+      if: github.event.issue.labels == 'bug'
       uses: konradpabjan/actions-add-new-issue-to-column@v1.1
       
       with:
