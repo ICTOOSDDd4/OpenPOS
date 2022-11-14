@@ -10,7 +10,6 @@ jobs:
     name: Add issue to project
     runs-on: ubuntu-latest
     steps:
-    - uses: stegzilla/discord-notify@v4
       # - uses: actions/add-to-project@v0.3.0
       #   with:
       #     project-url: https://github.com/orgs/ICTOOSDDd4/projects/2
@@ -25,6 +24,11 @@ jobs:
         action-token: ${{ secrets.GITBOT }}
         project-url: https://github.com/orgs/ICTOOSDDd4/projects/2
         column-name: "Product Backlog"
+        
+    
+    - name: Sending discord message
+      uses: stegzilla/discord-notify@v4
+      with:
         webhook_url: ${{ secrets.DISCORD_WEBHOOK_ACTIONS_STATUS }}
         title: "New issue added to project"
         message: "**${{ github.event.issue.title }}** has been added to the project\n${{ github.event.pull_request.html_url }}"
@@ -39,13 +43,15 @@ jobs:
         action-token: ${{ secrets.GITBOT }}
         project-url: https://github.com/orgs/ICTOOSDDd4/projects/3
         column-name: "Product Backlog"
+    
+    - name: Sending discord message
+      uses: stegzilla/discord-notify@v4
+      with:
         webhook_url: ${{ secrets.DISCORD_WEBHOOK_ACTIONS_STATUS }}
         title: "New bug added to project"
         message: "**${{ github.event.issue.title }}** has been added to the bug project\n${{ github.event.pull_request.html_url }}"
         include_image: true
         username: GitHub Project Mananger
-    
-
     
 
       
