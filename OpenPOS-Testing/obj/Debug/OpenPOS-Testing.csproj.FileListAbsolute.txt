@@ -1,0 +1,9 @@
+C:\LearnC#\OpenPOS\OpenPOS\OpenPOS-Testing\bin\Debug\OpenPOS_Testing.dll
+C:\LearnC#\OpenPOS\OpenPOS\OpenPOS-Testing\bin\Debug\OpenPOS_Testing.pdb
+C:\LearnC#\OpenPOS\OpenPOS\OpenPOS-Testing\bin\Debug\nunit.framework.dll
+C:\LearnC#\OpenPOS\OpenPOS\OpenPOS-Testing\bin\Debug\nunit.framework.xml
+C:\LearnC#\OpenPOS\OpenPOS\OpenPOS-Testing\obj\Debug\OpenPOS-Testing.csproj.AssemblyReference.cache
+C:\LearnC#\OpenPOS\OpenPOS\OpenPOS-Testing\obj\Debug\OpenPOS-Testing.csproj.CoreCompileInputs.cache
+C:\LearnC#\OpenPOS\OpenPOS\OpenPOS-Testing\obj\Debug\OpenPOS-Testing.csproj.CopyComplete
+C:\LearnC#\OpenPOS\OpenPOS\OpenPOS-Testing\obj\Debug\OpenPOS_Testing.dll
+C:\LearnC#\OpenPOS\OpenPOS\OpenPOS-Testing\obj\Debug\OpenPOS_Testing.pdb

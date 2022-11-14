@@ -95,33 +95,32 @@ jobs:
 
     - name: Build with .NET
       run: |
-          dotnet build -f net7.0-maccatalyst -c Release -o ./artifacts
-          dotnet publish -f net7.0-maccatalyst -c Release -p:BuildIpa=True -o ./artifacts
-    
+          dotnet build -f net7.0-maccatalyst
+              
     - name: Test with .NET
       run: dotnet test --configuration Release --no-build --verbosity normal
       
-#   iOSWorkflow:
-#     runs-on: macos-latest
-#     steps:
-#     - uses: actions/checkout@v2
-#     - name: Setup .NET
-#       uses: actions/setup-dotnet@v1
-#       with:
-#         dotnet-version: ${{ env.DOTNETVERSION }}
+  iOSWorkflow:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ env.DOTNETVERSION }}
     
-#     - name: Install .NET MAUI
-#       shell: bash
-#       run: |
-#           dotnet nuget locals all --clear 
-#           dotnet workload install maui
-#           dotnet workload install android ios maccatalyst tvos macos maui wasm-tools
+    - name: Install .NET MAUI
+      shell: bash
+      run: |
+          dotnet nuget locals all --clear 
+          dotnet workload install maui
+          dotnet workload install android ios maccatalyst tvos macos maui wasm-tools
     
-#     - name: Restore nuget packages
-#       run: dotnet restore OpenPOS.sln
+    - name: Restore nuget packages
+      run: dotnet restore OpenPOS.sln
 
-#     - name: Build with .NET
-#       run: dotnet build -f net6.0-ios -c Debug /p:packageApp=false /p:buildForSimulator=true /p:ArchiveOnBuild=false
+    - name: Build with .NET
+      run: dotnet build -f net7.0-ios
     
-#     - name: Test with .NET
-#       run: dotnet test --configuration Release --no-build --verbosity normal
+    - name: Test with .NET
+      run: dotnet test --configuration Release --no-build --verbosity normal
