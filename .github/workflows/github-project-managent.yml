@@ -22,8 +22,8 @@ jobs:
       uses: konradpabjan/actions-add-new-issue-to-column@v1.1
       with:
         action-token: ${{ secrets.GITBOT }}
-        project-url: https://github.com/orgs/ICTOOSDDd4/projects/2
-        column-name: "Product Backlog"
+        project-name: "OpenPOS - Project"
+        target-column: "Product Backlog"
         
     
     - name: Sending discord message
@@ -43,8 +43,8 @@ jobs:
       
       with:
         action-token: ${{ secrets.GITBOT }}
-        project-url: https://github.com/orgs/ICTOOSDDd4/projects/3
-        column-name: "Product Backlog"
+        project-name: "OpenPOS - Bug tracking"
+        target-column: "Product Backlog"
     
     - name: Sending discord message
       if: ${{ contains(github.event.issue.labels.*.name, 'bug')}}
