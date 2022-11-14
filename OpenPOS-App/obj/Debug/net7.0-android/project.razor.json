@@ -8,187 +8,35 @@
   "ProjectWorkspaceState": {
     "TagHelpers": [
       {
-        "HashCode": -41894961,
+        "HashCode": 634954701,
         "Kind": "Components.Component",
-        "Name": "OpenPOS_App.Main",
+        "Name": "OpenPOS_App.Shared.NavMenu",
         "AssemblyName": "OpenPOS-App",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "Main"
+            "TagName": "NavMenu"
           }
         ],
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "OpenPOS_App.Main"
+          "Common.TypeName": "OpenPOS_App.Shared.NavMenu"
         }
       },
       {
-        "HashCode": 1575854185,
+        "HashCode": 93528945,
         "Kind": "Components.Component",
-        "Name": "OpenPOS_App.Main",
+        "Name": "OpenPOS_App.Shared.NavMenu",
         "AssemblyName": "OpenPOS-App",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "OpenPOS_App.Main"
+            "TagName": "OpenPOS_App.Shared.NavMenu"
           }
         ],
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "OpenPOS_App.Main",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
-        }
-      },
-      {
-        "HashCode": 1018646479,
-        "Kind": "Components.Component",
-        "Name": "OpenPOS_App.Pages.Counter",
-        "AssemblyName": "OpenPOS-App",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "Counter"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "OpenPOS_App.Pages.Counter"
-        }
-      },
-      {
-        "HashCode": -784327234,
-        "Kind": "Components.Component",
-        "Name": "OpenPOS_App.Pages.Counter",
-        "AssemblyName": "OpenPOS-App",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "OpenPOS_App.Pages.Counter"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "OpenPOS_App.Pages.Counter",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
-        }
-      },
-      {
-        "HashCode": -742890691,
-        "Kind": "Components.Component",
-        "Name": "OpenPOS_App.Pages.FetchData",
-        "AssemblyName": "OpenPOS-App",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "FetchData"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "OpenPOS_App.Pages.FetchData"
-        }
-      },
-      {
-        "HashCode": -1552126972,
-        "Kind": "Components.Component",
-        "Name": "OpenPOS_App.Pages.FetchData",
-        "AssemblyName": "OpenPOS-App",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "OpenPOS_App.Pages.FetchData"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "OpenPOS_App.Pages.FetchData",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
-        }
-      },
-      {
-        "HashCode": -1274736117,
-        "Kind": "Components.Component",
-        "Name": "OpenPOS_App.Pages.Index",
-        "AssemblyName": "OpenPOS-App",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "Index"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "OpenPOS_App.Pages.Index"
-        }
-      },
-      {
-        "HashCode": -440555995,
-        "Kind": "Components.Component",
-        "Name": "OpenPOS_App.Pages.Index",
-        "AssemblyName": "OpenPOS-App",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "OpenPOS_App.Pages.Index"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "OpenPOS_App.Pages.Index",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
-        }
-      },
-      {
-        "HashCode": -1357737601,
-        "Kind": "Components.Component",
-        "Name": "OpenPOS_App.Shared.SurveyPrompt",
-        "AssemblyName": "OpenPOS-App",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "SurveyPrompt"
-          }
-        ],
-        "BoundAttributes": [
-          {
-            "Kind": "Components.Component",
-            "Name": "Title",
-            "TypeName": "System.String",
-            "Metadata": {
-              "Common.PropertyName": "Title"
-            }
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "OpenPOS_App.Shared.SurveyPrompt"
-        }
-      },
-      {
-        "HashCode": 1518208129,
-        "Kind": "Components.Component",
-        "Name": "OpenPOS_App.Shared.SurveyPrompt",
-        "AssemblyName": "OpenPOS-App",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "OpenPOS_App.Shared.SurveyPrompt"
-          }
-        ],
-        "BoundAttributes": [
-          {
-            "Kind": "Components.Component",
-            "Name": "Title",
-            "TypeName": "System.String",
-            "Metadata": {
-              "Common.PropertyName": "Title"
-            }
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "OpenPOS_App.Shared.SurveyPrompt",
+          "Common.TypeName": "OpenPOS_App.Shared.NavMenu",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
@@ -289,35 +137,187 @@
         }
       },
       {
-        "HashCode": 634954701,
+        "HashCode": -1357737601,
         "Kind": "Components.Component",
-        "Name": "OpenPOS_App.Shared.NavMenu",
+        "Name": "OpenPOS_App.Shared.SurveyPrompt",
         "AssemblyName": "OpenPOS-App",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "NavMenu"
+            "TagName": "SurveyPrompt"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "Title",
+            "TypeName": "System.String",
+            "Metadata": {
+              "Common.PropertyName": "Title"
+            }
           }
         ],
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "OpenPOS_App.Shared.NavMenu"
+          "Common.TypeName": "OpenPOS_App.Shared.SurveyPrompt"
         }
       },
       {
-        "HashCode": 93528945,
+        "HashCode": 1518208129,
         "Kind": "Components.Component",
-        "Name": "OpenPOS_App.Shared.NavMenu",
+        "Name": "OpenPOS_App.Shared.SurveyPrompt",
         "AssemblyName": "OpenPOS-App",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "OpenPOS_App.Shared.NavMenu"
+            "TagName": "OpenPOS_App.Shared.SurveyPrompt"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "Title",
+            "TypeName": "System.String",
+            "Metadata": {
+              "Common.PropertyName": "Title"
+            }
           }
         ],
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "OpenPOS_App.Shared.NavMenu",
+          "Common.TypeName": "OpenPOS_App.Shared.SurveyPrompt",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": -742890691,
+        "Kind": "Components.Component",
+        "Name": "OpenPOS_App.Pages.FetchData",
+        "AssemblyName": "OpenPOS-App",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "FetchData"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "OpenPOS_App.Pages.FetchData"
+        }
+      },
+      {
+        "HashCode": -1552126972,
+        "Kind": "Components.Component",
+        "Name": "OpenPOS_App.Pages.FetchData",
+        "AssemblyName": "OpenPOS-App",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "OpenPOS_App.Pages.FetchData"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "OpenPOS_App.Pages.FetchData",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 1018646479,
+        "Kind": "Components.Component",
+        "Name": "OpenPOS_App.Pages.Counter",
+        "AssemblyName": "OpenPOS-App",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "Counter"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "OpenPOS_App.Pages.Counter"
+        }
+      },
+      {
+        "HashCode": -784327234,
+        "Kind": "Components.Component",
+        "Name": "OpenPOS_App.Pages.Counter",
+        "AssemblyName": "OpenPOS-App",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "OpenPOS_App.Pages.Counter"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "OpenPOS_App.Pages.Counter",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": -1274736117,
+        "Kind": "Components.Component",
+        "Name": "OpenPOS_App.Pages.Index",
+        "AssemblyName": "OpenPOS-App",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "Index"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "OpenPOS_App.Pages.Index"
+        }
+      },
+      {
+        "HashCode": -440555995,
+        "Kind": "Components.Component",
+        "Name": "OpenPOS_App.Pages.Index",
+        "AssemblyName": "OpenPOS-App",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "OpenPOS_App.Pages.Index"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "OpenPOS_App.Pages.Index",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": -41894961,
+        "Kind": "Components.Component",
+        "Name": "OpenPOS_App.Main",
+        "AssemblyName": "OpenPOS-App",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "Main"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "OpenPOS_App.Main"
+        }
+      },
+      {
+        "HashCode": 1575854185,
+        "Kind": "Components.Component",
+        "Name": "OpenPOS_App.Main",
+        "AssemblyName": "OpenPOS-App",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "OpenPOS_App.Main"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "OpenPOS_App.Main",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
