@@ -13,10 +13,10 @@ name: "CodeQL"
 
 on:
   push:
-    branches: [ "master", bug, develop, feature ]
+    branches: [ "master", develop ]
   pull_request:
     # The branches below must be a subset of the branches above
-    branches: [ "master" ]
+    branches: [ "master", "bug**", "develop", "feature**" ]
   schedule:
     - cron: '45 22 * * 0'
 
@@ -55,8 +55,17 @@ jobs:
 
     # Autobuild attempts to build any compiled languages  (C/C++, C#, Go, or Java).
     # If this step fails, then you should remove it and run the build manually (see below)
-    - name: Autobuild
-      uses: github/codeql-action/autobuild@v2
+    - name: Build Application
+      uses: |
+        github/codeql-action/autobuild@v2
+        actions/setup-dotnet@v1
+      with:
+        dotnet-version: 7.0.x
+        run: |
+          dotnet nuget locals all --clear 
+          dotnet workload install maui
+          dotnet workload install android ios maccatalyst tvos macos maui wasm-tools
+          dotnet build --configuration Release
 
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
