@@ -14,7 +14,7 @@ jobs:
       - uses: actions/add-to-project@v0.3.0
         with:
           project-url: https://github.com/orgs/ICTOOSDDd4/projects/2
-          column-name: Product Backlog
+          column-name: "Product Backlog"
           github-token: ${{ secrets.GITBOT }}
           labeled: feature, documentation, enhancement
           label-operator: OR
