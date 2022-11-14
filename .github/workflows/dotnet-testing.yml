@@ -72,8 +72,6 @@ jobs:
     - name: Test with .NET
       run: dotnet test --configuration Release --no-build --verbosity normal
 
-# Apple stuff doesn't work yet
-
   MacOSWorkflow:
     runs-on: macos-latest
     steps:
