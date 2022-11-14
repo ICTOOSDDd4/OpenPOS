@@ -23,7 +23,7 @@ on:
 jobs:
   analyze:
     name: Analyze
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     permissions:
       actions: read
       contents: read
@@ -65,7 +65,7 @@ jobs:
           dotnet workload install maui
           dotnet workload install android ios maccatalyst tvos macos maui wasm-tools
           dotnet build --configuration Release
-          
+
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
 
