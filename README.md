@@ -7,15 +7,15 @@
 Welcome to OpenPOS, a new Open Source Point of Sale system. We want to offer entrepreneurs a worry free the Point of Sale system that lets them focus on what they supposed to do, <ins>Running their business!</ins>
 
 ## Repository Rules
-- When creating a branch for a new feature, the keyword feature is required in the branch name.
+- When creating a branch for a new feature, feature/ is required in the branch name.
 ```
 Example: feature/Giftcard_support
 ```
-- When creating a branch for a bug fix, the keyword bug is required in the branch name.
+- When creating a branch for a bug fix, bug-fix/ is required in the branch name.
 ```
 Example: bug-fix/not_showing_the_order_total
 ```
-- When creating a branch for documentation, the keyword docs is required in the branch name.
+- When creating a branch for documentation, docs/ is required in the branch name.
 ```
 Example: docs/improved-user-manual
 ```
