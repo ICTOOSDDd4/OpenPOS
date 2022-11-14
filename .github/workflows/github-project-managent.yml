@@ -27,7 +27,7 @@ jobs:
         
     
     - name: Sending discord message
-      if: ${{ github.event.issue.labels.*.name.*.name == 'feature' || github.event.issue.labels.*.name.*.name == 'documentation' || github.event.issue.labels.*.name == 'enhancement' }}
+      if: ${{ contains(github.event.issue.labels.*.name, 'feature') || contains(github.event.issue.labels.*.name, 'documentation') || contains(github.event.issue.labels.*.name, 'enhancement') }}
       uses: stegzilla/discord-notify@v4
       with:
         webhook_url: ${{ secrets.DISCORD_WEBHOOK_ACTIONS_STATUS }}
@@ -37,7 +37,7 @@ jobs:
         username: GitHub Project Mananger
 
     - name: Adding bug to project
-      if: ${{ github.event.issue.labels.*.name == 'bug'}}
+      if: ${{ contains(github.event.issue.labels.*.name, 'bug')}}
       uses: konradpabjan/actions-add-new-issue-to-column@v1.1
       
       with:
