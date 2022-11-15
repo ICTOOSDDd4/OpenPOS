@@ -10,7 +10,7 @@ assignees: ''
 A clear and concise description of the new feature that will be implemented
 
 **User stories**
-List here all the user stories that apply to this new feature. With all the 
+List all the user stories that apply to this new feature.
 
 **UI Designs**
 Add all the UI Design screenshots here.
