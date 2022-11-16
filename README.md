@@ -4,7 +4,7 @@
 
 > **WARNING**: THIS REPOSITORY IS A WORK IN PROGRESS, THE CURRENT VERSION IS NOT READY FOR DEPLOYMENT.
 # Welcome to OpenPOS
-Welcome to OpenPOS, a new Open Source Point of Sale system. We want to offer entrepreneurs a modern and up to date Point of Sale system that lets them focus on what what is important!, <ins>OpenPOS will make you more efficient!</ins>
+Welcome to OpenPOS, a new Open Source Point of Sale system. We want to offer entrepreneurs a modern and up to date Point of Sale system that lets them focus on what what is important!.
 
 ## Repository Rules
 - When creating a branch for a new feature, feature/ is required in the branch name.
