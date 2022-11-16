@@ -1,6 +1,6 @@
 ---
 name: New approved feature
-about: Suggest an idea for this project
+about: A new feature to add to the product, that already got approved by one of the code owners.
 title: 'Feature: [FEATURE]'
 labels: feature
 assignees: ''
