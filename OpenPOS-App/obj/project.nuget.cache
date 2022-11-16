@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "by6gKQV5uivAGOAlbvnVGvpL/SsCnY5YNBsWyoSNTDz9OurH2uAsheU3KY/Oa4DEQ354gwgHBaJvEFQocl5eTQ==",
+  "dgSpecHash": "BDsIabh4kQRtoKmtvzSrSBvwVs4BOClvOC1YXz0YhX7QstkjK8fOEl5fjqpg0zYKzni6SjD/p73JYiw2L0Do/A==",
   "success": true,
   "projectFilePath": "C:\\LearnC#\\OpenPOS\\OpenPOS\\OpenPOS-App\\OpenPOS-App.csproj",
   "expectedPackageFiles": [
@@ -123,7 +123,6 @@
     "C:\\Users\\jmccr\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\7.0.0\\microsoft.netcore.app.runtime.win-x64.7.0.0.nupkg.sha512",
     "C:\\Users\\jmccr\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\7.0.0\\microsoft.windowsdesktop.app.runtime.win-x64.7.0.0.nupkg.sha512",
     "C:\\Users\\jmccr\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\7.0.0\\microsoft.aspnetcore.app.runtime.win-x64.7.0.0.nupkg.sha512",
-    "C:\\Users\\jmccr\\.nuget\\packages\\microsoft.netcore.app.crossgen2.win-x64\\7.0.0\\microsoft.netcore.app.crossgen2.win-x64.7.0.0.nupkg.sha512",
     "C:\\Users\\jmccr\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.19041.27\\microsoft.windows.sdk.net.ref.10.0.19041.27.nupkg.sha512"
   ],
   "logs": []
