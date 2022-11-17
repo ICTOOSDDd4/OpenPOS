@@ -23922,24 +23922,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\jmccr\\.nuget\\packages\\": {},
+    "C:\\Users\\tymen\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\LearnC#\\OpenPOS\\OpenPOS\\OpenPOS-App\\OpenPOS-App.csproj",
+      "projectUniqueName": "C:\\Users\\tymen\\Documents\\A - Coderen\\School\\C#\\KBS\\OpenPOS\\OpenPOS-App\\OpenPOS-App.csproj",
       "projectName": "OpenPOS-App",
-      "projectPath": "C:\\LearnC#\\OpenPOS\\OpenPOS\\OpenPOS-App\\OpenPOS-App.csproj",
-      "packagesPath": "C:\\Users\\jmccr\\.nuget\\packages\\",
-      "outputPath": "C:\\LearnC#\\OpenPOS\\OpenPOS\\OpenPOS-App\\obj\\",
+      "projectPath": "C:\\Users\\tymen\\Documents\\A - Coderen\\School\\C#\\KBS\\OpenPOS\\OpenPOS-App\\OpenPOS-App.csproj",
+      "packagesPath": "C:\\Users\\tymen\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\tymen\\Documents\\A - Coderen\\School\\C#\\KBS\\OpenPOS\\OpenPOS-App\\obj\\",
       "projectStyle": "PackageReference",
       "crossTargeting": true,
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\jmccr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\tymen\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
