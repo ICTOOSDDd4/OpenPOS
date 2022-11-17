@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace OpenPOS_App.Models
 {
-    internal class User
+    internal class Product
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
-        public string Last_name { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
+        public double Price { get; set; }
+        public string Description { get; set; }
+        
     }
 }
