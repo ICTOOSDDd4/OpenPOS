@@ -795,3 +795,4 @@ FodyWeavers.xsd
 /OpenPOS-App/obj/Debug/net7.0-ios/iossimulator-x64/OpenPOS-App.nfloat.g.cs
 /OpenPOS-App/obj/Debug/net7.0-windows10.0.19041.0/win10-x64/XamlSaveStateFile.xml
 /OpenPOS-App/obj/Debug/net7.0-maccatalyst/maccatalyst-x64/OpenPOS-App.nfloat.g.cs
+/OpenPOS-App/bin/Debug/net7.0-windows10.0.19041.0/win10-x64/AppX/vs.appxrecipe
