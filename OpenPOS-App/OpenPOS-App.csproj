@@ -56,7 +56,6 @@
       <Folder Include="Models\" />
       <Folder Include="Controllers\" />
       <Folder Include="Exceptions\" />
-      <Folder Include="Services\" />
     </ItemGroup>
 
 </Project>

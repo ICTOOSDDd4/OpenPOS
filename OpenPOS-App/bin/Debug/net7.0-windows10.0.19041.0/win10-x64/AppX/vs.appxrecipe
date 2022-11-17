@@ -29,25 +29,25 @@
     <AppXManifest Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2022-11-17T09:38:55.519</Modified>
+      <Modified>2022-11-17T12:37:38.215</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2022-11-17T09:38:55.101</Modified>
+      <Modified>2022-11-17T12:37:37.754</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\OpenPOS-App.runtimeconfig.json">
       <PackagePath>OpenPOS-App.runtimeconfig.json</PackagePath>
-      <Modified>2022-11-17T09:38:54.823</Modified>
+      <Modified>2022-11-17T12:37:37.454</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\OpenPOS-App.dll">
       <PackagePath>OpenPOS-App.dll</PackagePath>
-      <Modified>2022-11-17T09:38:53.155</Modified>
+      <Modified>2022-11-17T12:37:35.921</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\apphost.exe">
       <PackagePath>OpenPOS-App.exe</PackagePath>
-      <Modified>2022-11-17T09:38:53.218</Modified>
+      <Modified>2022-11-17T12:37:35.992</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -907,7 +907,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\OpenPOS-App.deps.json">
       <PackagePath>OpenPOS-App.deps.json</PackagePath>
-      <Modified>2022-11-17T09:38:55.339</Modified>
+      <Modified>2022-11-17T12:37:38.006</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files\dotnet\packs\Microsoft.Maui.Controls.Ref.win\7.0.49\ref\net7.0-windows10.0.19041\Microsoft.Maui.Controls.Compatibility.pri">
       <PackagePath>Microsoft.Maui.Controls.Compatibility.pri</PackagePath>
@@ -923,239 +923,239 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\Resources\Raw\AboutAssets.txt">
       <PackagePath>AboutAssets.txt</PackagePath>
-      <Modified>2022-11-17T09:29:59.362</Modified>
+      <Modified>2022-11-17T12:26:57.637</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-100.png">
       <PackagePath>splashSplashScreen.scale-100.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.275</Modified>
+      <Modified>2022-11-17T12:27:02.040</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-125.png">
       <PackagePath>splashSplashScreen.scale-125.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.289</Modified>
+      <Modified>2022-11-17T12:27:02.040</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-150.png">
       <PackagePath>splashSplashScreen.scale-150.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.311</Modified>
+      <Modified>2022-11-17T12:27:02.040</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-200.png">
       <PackagePath>splashSplashScreen.scale-200.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.340</Modified>
+      <Modified>2022-11-17T12:27:02.041</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-400.png">
       <PackagePath>splashSplashScreen.scale-400.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.450</Modified>
+      <Modified>2022-11-17T12:27:02.042</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\f\OpenSans-Regular.ttf">
       <PackagePath>OpenSans-Regular.ttf</PackagePath>
-      <Modified>2022-11-17T09:29:59.360</Modified>
+      <Modified>2022-11-17T12:27:02.013</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\f\OpenSans-Semibold.ttf">
       <PackagePath>OpenSans-Semibold.ttf</PackagePath>
-      <Modified>2022-11-17T09:29:59.361</Modified>
+      <Modified>2022-11-17T12:27:02.015</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appicon.ico">
       <PackagePath>appicon.ico</PackagePath>
-      <Modified>2022-11-17T09:38:52.510</Modified>
+      <Modified>2022-11-17T12:27:02.016</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-100.png">
       <PackagePath>appiconLargeTile.scale-100.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.789</Modified>
+      <Modified>2022-11-17T12:27:02.016</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-125.png">
       <PackagePath>appiconLargeTile.scale-125.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.801</Modified>
+      <Modified>2022-11-17T12:27:02.016</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-150.png">
       <PackagePath>appiconLargeTile.scale-150.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.812</Modified>
+      <Modified>2022-11-17T12:27:02.017</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-200.png">
       <PackagePath>appiconLargeTile.scale-200.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.830</Modified>
+      <Modified>2022-11-17T12:27:02.017</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-400.png">
       <PackagePath>appiconLargeTile.scale-400.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.897</Modified>
+      <Modified>2022-11-17T12:27:02.019</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-16.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-16.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.588</Modified>
+      <Modified>2022-11-17T12:27:02.019</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-24.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-24.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.592</Modified>
+      <Modified>2022-11-17T12:27:02.019</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-256.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-256.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.608</Modified>
+      <Modified>2022-11-17T12:27:02.020</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-32.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-32.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.595</Modified>
+      <Modified>2022-11-17T12:27:02.020</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-48.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-48.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.600</Modified>
+      <Modified>2022-11-17T12:27:02.020</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-16.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-16.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.567</Modified>
+      <Modified>2022-11-17T12:27:02.020</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-24.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-24.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.570</Modified>
+      <Modified>2022-11-17T12:27:02.021</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-256.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-256.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.586</Modified>
+      <Modified>2022-11-17T12:27:02.021</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-32.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-32.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.574</Modified>
+      <Modified>2022-11-17T12:27:02.021</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-48.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-48.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.578</Modified>
+      <Modified>2022-11-17T12:27:02.023</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-100.png">
       <PackagePath>appiconLogo.scale-100.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.522</Modified>
+      <Modified>2022-11-17T12:27:02.023</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-125.png">
       <PackagePath>appiconLogo.scale-125.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.527</Modified>
+      <Modified>2022-11-17T12:27:02.023</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-150.png">
       <PackagePath>appiconLogo.scale-150.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.530</Modified>
+      <Modified>2022-11-17T12:27:02.023</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-200.png">
       <PackagePath>appiconLogo.scale-200.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.535</Modified>
+      <Modified>2022-11-17T12:27:02.024</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-400.png">
       <PackagePath>appiconLogo.scale-400.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.541</Modified>
+      <Modified>2022-11-17T12:27:02.024</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-16.png">
       <PackagePath>appiconLogo.targetsize-16.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.545</Modified>
+      <Modified>2022-11-17T12:27:02.024</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-24.png">
       <PackagePath>appiconLogo.targetsize-24.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.548</Modified>
+      <Modified>2022-11-17T12:27:02.024</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-256.png">
       <PackagePath>appiconLogo.targetsize-256.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.562</Modified>
+      <Modified>2022-11-17T12:27:02.026</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-32.png">
       <PackagePath>appiconLogo.targetsize-32.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.552</Modified>
+      <Modified>2022-11-17T12:27:02.026</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-48.png">
       <PackagePath>appiconLogo.targetsize-48.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.556</Modified>
+      <Modified>2022-11-17T12:27:02.027</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-100.png">
       <PackagePath>appiconMediumTile.scale-100.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.664</Modified>
+      <Modified>2022-11-17T12:27:02.027</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-125.png">
       <PackagePath>appiconMediumTile.scale-125.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.671</Modified>
+      <Modified>2022-11-17T12:27:02.027</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-150.png">
       <PackagePath>appiconMediumTile.scale-150.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.678</Modified>
+      <Modified>2022-11-17T12:27:02.028</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-200.png">
       <PackagePath>appiconMediumTile.scale-200.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.689</Modified>
+      <Modified>2022-11-17T12:27:02.028</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-400.png">
       <PackagePath>appiconMediumTile.scale-400.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.712</Modified>
+      <Modified>2022-11-17T12:27:02.029</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-100.png">
       <PackagePath>appiconSmallTile.scale-100.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.636</Modified>
+      <Modified>2022-11-17T12:27:02.029</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-125.png">
       <PackagePath>appiconSmallTile.scale-125.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.639</Modified>
+      <Modified>2022-11-17T12:27:02.029</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-150.png">
       <PackagePath>appiconSmallTile.scale-150.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.643</Modified>
+      <Modified>2022-11-17T12:27:02.029</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-200.png">
       <PackagePath>appiconSmallTile.scale-200.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.649</Modified>
+      <Modified>2022-11-17T12:27:02.031</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-400.png">
       <PackagePath>appiconSmallTile.scale-400.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.659</Modified>
+      <Modified>2022-11-17T12:27:02.031</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-100.png">
       <PackagePath>appiconStoreLogo.scale-100.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.612</Modified>
+      <Modified>2022-11-17T12:27:02.031</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-125.png">
       <PackagePath>appiconStoreLogo.scale-125.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.616</Modified>
+      <Modified>2022-11-17T12:27:02.032</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-150.png">
       <PackagePath>appiconStoreLogo.scale-150.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.620</Modified>
+      <Modified>2022-11-17T12:27:02.032</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-200.png">
       <PackagePath>appiconStoreLogo.scale-200.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.625</Modified>
+      <Modified>2022-11-17T12:27:02.032</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-400.png">
       <PackagePath>appiconStoreLogo.scale-400.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.631</Modified>
+      <Modified>2022-11-17T12:27:02.033</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-100.png">
       <PackagePath>appiconWideTile.scale-100.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.718</Modified>
+      <Modified>2022-11-17T12:27:02.033</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-125.png">
       <PackagePath>appiconWideTile.scale-125.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.725</Modified>
+      <Modified>2022-11-17T12:27:02.033</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-150.png">
       <PackagePath>appiconWideTile.scale-150.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.733</Modified>
+      <Modified>2022-11-17T12:27:02.035</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-200.png">
       <PackagePath>appiconWideTile.scale-200.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.745</Modified>
+      <Modified>2022-11-17T12:27:02.035</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-400.png">
       <PackagePath>appiconWideTile.scale-400.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.781</Modified>
+      <Modified>2022-11-17T12:27:02.036</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-100.png">
       <PackagePath>dotnet_bot.scale-100.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.559</Modified>
+      <Modified>2022-11-17T12:27:02.036</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-125.png">
       <PackagePath>dotnet_bot.scale-125.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.568</Modified>
+      <Modified>2022-11-17T12:27:02.036</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-150.png">
       <PackagePath>dotnet_bot.scale-150.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.582</Modified>
+      <Modified>2022-11-17T12:27:02.037</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-200.png">
       <PackagePath>dotnet_bot.scale-200.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.601</Modified>
+      <Modified>2022-11-17T12:27:02.037</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-400.png">
       <PackagePath>dotnet_bot.scale-400.png</PackagePath>
-      <Modified>2022-11-17T09:38:52.644</Modified>
+      <Modified>2022-11-17T12:27:02.038</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
