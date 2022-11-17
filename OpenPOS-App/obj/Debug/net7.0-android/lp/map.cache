@@ -155,3 +155,5 @@ maui.aar
 Microsoft.Maui.aar
 Microsoft.Maui.Essentials.aar
 Xamarin.Google.Crypto.Tink.Android.aar
+Microsoft.AspNetCore.Components.WebView.Maui.dll
+Microsoft.AspNetCore.Components.WebView.Maui.aar
