@@ -791,3 +791,4 @@ FodyWeavers.xsd
 # Additional files built by Visual Studio
 
 # End of https://www.toptal.com/developers/gitignore/api/dotnetcore,visualstudiocode,visualstudio,rider,aspnetcore,node,java
+/OpenPOS-App/.vs/OpenPOS-App.App/v17/.suo
