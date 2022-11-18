@@ -6,9 +6,15 @@ using System.Threading.Tasks;
 
 namespace OpenPOS_APP.Models
 {
-    internal class Floor
+    public class Floor
     {
         public int Id { get; set; }
         public string Storey { get; set; }
+
+        public Floor(int id, string storey)
+        {
+            Id = id;
+            Storey = storey;
+        }
     }
 }

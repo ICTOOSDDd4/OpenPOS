@@ -6,9 +6,16 @@ using System.Threading.Tasks;
 
 namespace OpenPOS_APP.Models
 {
-    internal class Category
+    public class Category
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
+
+        public Category(int id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
     }
 }
