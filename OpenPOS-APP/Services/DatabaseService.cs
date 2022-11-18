@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,7 +21,7 @@ namespace OpenPOS_APP.Services
             CloseSQLConnection();
         }
 
-        public static List<Object> Execute(String query)
+        public static List<List<string>> Execute(String query, Object model)
         {
             Dbcontext.Open();
             using (SqlCommand command = new SqlCommand(query, Dbcontext))
@@ -33,10 +34,17 @@ namespace OpenPOS_APP.Services
                     //check if there are records
                     if (reader.HasRows)
                     {
-                        List<Object> result = new List<Object>();
+                        List<List<string>> result = new List<List<string>>();
                         while (reader.Read())
                         {
-                            result.Add(reader);
+                            int count = 0;
+                            List<string> list = new List<string>();
+                            foreach (PropertyInfo prop in model.GetType().GetProperties())
+                            {
+                                list.Add(reader[count].ToString());
+                                count++;
+                            }
+                            result.Add(list);
                         }
                         return result;
                     }
