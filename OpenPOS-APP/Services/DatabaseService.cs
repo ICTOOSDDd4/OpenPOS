@@ -10,7 +10,7 @@ namespace OpenPOS_APP.Services
 {
     internal static class DatabaseService
     {
-        public static SqlConnection dbcontext { get; private set; }
+        public static SqlConnection Dbcontext { get; private set; }
         public static void Initialize()
         {
             OpenSqlConnection();
@@ -22,7 +22,7 @@ namespace OpenPOS_APP.Services
 
         public static SqlDataReader Execute(String query)
         {
-            using (SqlCommand command = new SqlCommand(query, dbcontext))
+            using (SqlCommand command = new SqlCommand(query, Dbcontext))
             {
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
@@ -33,15 +33,6 @@ namespace OpenPOS_APP.Services
                     if (reader.HasRows)
                     {
                         return reader;
-                        //while (reader.Read())
-                        //{
-                        //    string id = reader.GetInt32(0).ToString();
-                        //    string name = reader.GetString(1);
-                        //    string last_name = reader.GetString(2);
-
-                        //    //display retrieved record
-                        //    System.Diagnostics.Debug.WriteLine("{0},{1},{2}", id, name, last_name);
-                        //}
                     }
                     else
                     {
@@ -55,18 +46,22 @@ namespace OpenPOS_APP.Services
         private static void OpenSqlConnection()
         {
             string connectionString = GetConnectionString();
-
-            using (dbcontext = new SqlConnection())
+            Dbcontext = new SqlConnection
             {
-                dbcontext.ConnectionString = connectionString;
+                ConnectionString = connectionString
+            };
+            Dbcontext.Open();
+            //using (Dbcontext = new SqlConnection())
+            //{
+            //    Dbcontext.ConnectionString = connectionString;
 
-                dbcontext.Open();
-            }
+            //    Dbcontext.Open();
+            //}
         }
 
         private static void CloseSQLConnection()
         {
-            dbcontext.Close();
+            Dbcontext.Close();
         }
         static private string GetConnectionString()
         {
