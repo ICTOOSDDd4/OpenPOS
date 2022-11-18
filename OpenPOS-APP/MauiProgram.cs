@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using OpenPOS_APP.Services;
 
 namespace OpenPOS_APP;
 
@@ -18,7 +19,7 @@ public static class MauiProgram
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
-
+		DatabaseService.Initialize();
 		return builder.Build();
 	}
 }
