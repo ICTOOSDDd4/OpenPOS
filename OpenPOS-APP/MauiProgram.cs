@@ -16,17 +16,23 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
-
+		
+		// Searching and importing the appsettings.json file
       var a = Assembly.GetExecutingAssembly();
       using var stream = a.GetManifestResourceStream("OpenPOS_APP.appsettings.json");
 
-      var config = new ConfigurationBuilder()
-               .AddJsonStream(stream)
-               .Build();
-
-
-      builder.Configuration.AddConfiguration(config);
-      builder.Services.AddTransient<MainPage>();
+      if (stream != null)
+      {
+	      // Adding config file into the MAUI configuration
+	      var config = new ConfigurationBuilder()
+		      .AddJsonStream(stream)
+		      .Build();
+	      builder.Configuration.AddConfiguration(config);
+	      
+	      // Use Add Transient to add the configuration to the right page.
+	      builder.Services.AddTransient<MainPage>();
+      }
+      
 #if DEBUG
       builder.Logging.AddDebug();
 #endif
