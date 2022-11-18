@@ -20,7 +20,7 @@ namespace OpenPOS_APP.Services
             CloseSQLConnection();
         }
 
-        public static SqlDataReader Execute(String query)
+        public static List<Object> Execute(String query)
         {
             Dbcontext.Open();
             using (SqlCommand command = new SqlCommand(query, Dbcontext))
@@ -33,7 +33,12 @@ namespace OpenPOS_APP.Services
                     //check if there are records
                     if (reader.HasRows)
                     {
-                        return reader;
+                        List<Object> result = new List<Object>();
+                        while (reader.Read())
+                        {
+                            result.Add(reader);
+                        }
+                        return result;
                     }
                     else
                     {
