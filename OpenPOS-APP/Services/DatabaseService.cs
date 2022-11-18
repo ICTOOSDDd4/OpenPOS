@@ -14,6 +14,10 @@ namespace OpenPOS_APP.Services
         {
             OpenSqlConnection();
         }
+        public static void CloseConnection()
+        {
+            CloseSQLConnection();
+        }
         private static void OpenSqlConnection()
         {
             string connectionString = GetConnectionString();
@@ -24,6 +28,11 @@ namespace OpenPOS_APP.Services
 
                 dbcontext.Open();
             }
+        }
+
+        private static void CloseSQLConnection()
+        {
+            dbcontext.Close();
         }
         static private string GetConnectionString()
         {
