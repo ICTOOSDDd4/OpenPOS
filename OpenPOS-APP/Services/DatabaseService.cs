@@ -22,6 +22,7 @@ namespace OpenPOS_APP.Services
 
         public static SqlDataReader Execute(String query)
         {
+            Dbcontext.Open();
             using (SqlCommand command = new SqlCommand(query, Dbcontext))
             {
                 using (SqlDataReader reader = command.ExecuteReader())
@@ -50,7 +51,6 @@ namespace OpenPOS_APP.Services
             {
                 ConnectionString = connectionString
             };
-            Dbcontext.Open();
             //using (Dbcontext = new SqlConnection())
             //{
             //    Dbcontext.ConnectionString = connectionString;
