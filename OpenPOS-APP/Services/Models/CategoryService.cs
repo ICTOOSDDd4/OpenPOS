@@ -1,5 +1,6 @@
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Interfaces;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace OpenPOS_APP.Services.Models;
@@ -14,7 +15,10 @@ public class CategoryService : IModelService<Category>
 
     public static Category FindByID(int id)
     {
-        Category result = DatabaseService.ExecuteSingle<Category>("SELECT * FROM [dbo].[Category] WHERE [Id] = " + id);
+        SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[Category] WHERE [Id] = @ID");
+        query.Parameters.Add("@ID", SqlDbType.Int);
+        query.Parameters["@ID"].Value = id;
+        Category result = DatabaseService.ExecuteSingle<Category>(query);
         return result;
     }
 
