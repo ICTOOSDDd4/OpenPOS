@@ -39,7 +39,7 @@ public class BillService : IModelService<Bill>
 
     public static bool Update(Bill obj)
     {
-        SqlCommand query = new SqlCommand("UPDATE [dbo].[Bill] SET [user_id] = @userid," + " [paid] = @paid " + " WHERE [id] = @id");
+        SqlCommand query = new SqlCommand("UPDATE [dbo].[Bill] SET [user_id] = @userid, [paid] = @paid WHERE [id] = @id");
         
         query.Parameters.Add("@userid", SqlDbType.Int);
         query.Parameters["@userid"].Value = obj.User_id;
