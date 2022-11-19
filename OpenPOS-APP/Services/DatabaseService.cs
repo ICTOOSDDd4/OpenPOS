@@ -22,10 +22,6 @@ namespace OpenPOS_APP.Services
                 ConnectionString = connectionString
             };
         }
-        public static void CloseConnection()
-        {
-            CloseSQLConnection();
-        }
 
         public static void Execute(string query)
         {
@@ -41,6 +37,48 @@ namespace OpenPOS_APP.Services
             }
 
         }
+
+        public static T ExecuteSingle<T>(string query)
+        {
+            try
+            {
+                Dbcontext.Open();
+                using (SqlCommand command = new SqlCommand(query, Dbcontext))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            var type = typeof(T);
+                            T obj = (T)Activator.CreateInstance(type);
+                            while (reader.Read())
+                            {
+                                foreach (var prop in type.GetProperties())
+                                {
+                                    var propType = prop.PropertyType;
+                                    prop.SetValue(obj, Convert.ChangeType(reader[prop.Name].ToString(), propType));
+                                }
+                            }
+                            CloseConnection();
+                            return obj;
+                        }
+                        else
+                        {
+                            System.Diagnostics.Debug.WriteLine("No data found.");
+                            CloseConnection();
+                            throw new SqlNullValueException();
+                        }
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                System.Diagnostics.Debug.WriteLine($"Failed to execute {query}");
+                CloseConnection();
+                throw new Exception();
+            }
+        }
+
         public static List<T> Execute<T>(String query)
         {
             try
@@ -91,7 +129,7 @@ namespace OpenPOS_APP.Services
             return list;
         }
 
-        private static void CloseSQLConnection()
+        public static void CloseConnection()
         {
             Dbcontext.Close();
         }
