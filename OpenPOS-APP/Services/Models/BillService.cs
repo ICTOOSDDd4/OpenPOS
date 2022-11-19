@@ -7,26 +7,39 @@ public class BillService : IModelService<Bill>
 {
     public static List<Bill> GetAll()
     {
-        throw new NotImplementedException();
+        List<Bill> resultList = DatabaseService.Execute<Bill>("SELECT * FROM [dbo].[Bill]");
+
+        return resultList;
     }
 
     public static Bill FindByID(int id)
     {
-        throw new NotImplementedException();
+        Bill result = DatabaseService.ExecuteSingle<Bill>("SELECT * FROM [dbo].[Bill] WHERE [ID] = " + id);
+        
+        return result;
     }
 
     public static bool Delete(Bill obj)
     {
-        throw new NotImplementedException();
+        int billId = obj.Id;
+        DatabaseService.Execute("DELETE FROM [dbo].[Bill] WHERE [ID] = " + billId);
+        return true;
     }
 
     public static bool Update(Bill obj)
     {
-        throw new NotImplementedException();
+        int billId = obj.Id;
+
+        string q = "user_id = '" + obj.User_id + "', paid = '" + obj.Paid + "' WHERE id = " + billId;
+        
+        DatabaseService.Execute("UPDATE [dbo].[Bill] SET " + q);
+        return true;
     }
 
     public static bool Create(Bill obj)
     {
-        throw new NotImplementedException();
+        string q = "'" + obj.User_id + "', '" + obj.Paid + "'";
+        DatabaseService.Execute("INSERT INTO [dbo].[Bill] (user_id, paid) VALUES (" + q + ")");
+        return true;
     }
 }

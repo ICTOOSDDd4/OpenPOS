@@ -9,7 +9,7 @@ public static class MauiProgram
 {
 	public static MauiApp CreateMauiApp()
 	{
-		Initilize();
+		Initialize();
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
@@ -24,7 +24,7 @@ public static class MauiProgram
 		#endif
         return builder.Build();
 	}
-	private static void Initilize()
+	private static void Initialize()
 	{
         DatabaseService.Initialize();
         foreach (User user in UserService.GetAll())
