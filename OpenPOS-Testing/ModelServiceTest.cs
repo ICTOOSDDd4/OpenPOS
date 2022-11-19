@@ -10,26 +10,27 @@ namespace OpenPOS_Testing;
 [TestFixture]
 public class ModelServiceTest
 {
+    public static IConfiguration InitConfiguration()
+    {
+        var a = Assembly.GetExecutingAssembly();
+        using var stream = a.GetManifestResourceStream("OpenPOS_Testing.appsettings.test.json");
+        if (stream != null)
+        {
+            var config = new ConfigurationBuilder()
+                .AddJsonStream(stream)
+                .Build();
+            
+            return config;
+        }
 
+        return null;
+    }
     
     [SetUp]
     public void SetUp()
     {
-        
-        var a = Assembly.GetExecutingAssembly();
-        DatabaseSettings dbSettings = new DatabaseSettings();
-        using var stream = a.GetManifestResourceStream("OpenPOS_APP.appsettings.json");
-        
-            if (stream != null)
-            {
-                // Adding config file into the MAUI configuration
-                var config = new ConfigurationBuilder()
-                    .AddJsonStream(stream)
-                    .Build();
-                config.GetSection("DATABASE_CONNECTION").Bind(dbSettings);
-            }
-        
-        DatabaseService.Initialize(dbSettings.DatabaseConnectionString);
+        var config = InitConfiguration();
+        DatabaseService.Initialize(config["DATABASE_CONNECTION.connection_string"]);
     }
 
     [Test]

@@ -43,6 +43,7 @@ public static class MauiProgram
 	      // Use Add Transient to add the configuration to the right page.
 	      builder.Services.AddTransient<MainPage>();
       }
+      else throw new Exception();
       
 #if DEBUG
       builder.Logging.AddDebug();
