@@ -123,7 +123,7 @@ namespace OpenPOS_APP.Services
         {
             // Contains Connection String
             // Delete this string whenever you commit your repo to git
-            return "Data Source=78.47.170.183,1433;Initial Catalog=OpenPOS_dev;User ID=sa;Password=o9JRxbGq8p3HFZ;Integrated Security=false;TrustServerCertificate=True";
+            return "PLACEHOLDER FOR CONNECT STRING";
         }
     }
 }
