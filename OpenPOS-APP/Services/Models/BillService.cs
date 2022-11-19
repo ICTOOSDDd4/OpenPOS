@@ -29,7 +29,7 @@ public class BillService : IModelService<Bill>
     {
         int billId = obj.Id;
         
-        DatabaseService.Execute("DELETE FROM [dbo].[Bill] WHERE [ID] = " + billId);
+        DatabaseService.Execute(new SqlCommand("DELETE FROM [dbo].[Bill] WHERE [ID] = " + billId));
         
         return true;
     }
@@ -39,7 +39,7 @@ public class BillService : IModelService<Bill>
         int billId = obj.Id;
         string q = "user_id = '" + obj.User_id + "', paid = '" + obj.Paid + "' WHERE id = " + billId;
         
-        DatabaseService.Execute("UPDATE [dbo].[Bill] SET " + q);
+        DatabaseService.Execute(new SqlCommand("UPDATE [dbo].[Bill] SET " + q));
         
         return true;
     }
@@ -48,7 +48,7 @@ public class BillService : IModelService<Bill>
     {
         string q = "'" + obj.User_id + "', '" + obj.Paid + "'";
         
-        DatabaseService.Execute("INSERT INTO [dbo].[Bill] (user_id, paid) VALUES (" + q + ")");
+        DatabaseService.Execute(new SqlCommand("INSERT INTO [dbo].[Bill] (user_id, paid) VALUES (" + q + ")"));
         
         return true;
     }

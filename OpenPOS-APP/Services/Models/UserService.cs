@@ -28,7 +28,7 @@ public class UserService : IModelService<User>
     {
         int userId = obj.Id;
         
-        DatabaseService.Execute("DELETE FROM [dbo].[user] WHERE id = " + userId);
+        DatabaseService.Execute(new SqlCommand("DELETE FROM [dbo].[user] WHERE id = " + userId));
         
         return true;
     }
@@ -39,7 +39,7 @@ public class UserService : IModelService<User>
         string q = "name = '" + obj.Name + "', last_name = '" + obj.Last_name + "', password = '" + obj.Password +
                    "', email = '" + obj.Email + "' WHERE id = " + userId;
         
-        DatabaseService.Execute("UPDATE [dbo].[user] SET " + q);
+        DatabaseService.Execute(new SqlCommand("UPDATE [dbo].[user] SET " + q));
         
         return true;
     }
@@ -48,7 +48,7 @@ public class UserService : IModelService<User>
     {
         string q = "'" + obj.Name + "', '" + obj.Last_name + "', '" + obj.Password + "', '" + obj.Email + "'";
         
-        DatabaseService.Execute("INSERT INTO [dbo].[user] (name, last_name, password, email) VALUES (" + q + ")");
+        DatabaseService.Execute(new SqlCommand("INSERT INTO [dbo].[user] (name, last_name, password, email) VALUES (" + q + ")"));
         
         return true;
     }
