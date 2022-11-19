@@ -15,8 +15,15 @@ public static class MauiProgram
 			.UseMauiApp<App>()
 			.ConfigureFonts(fonts =>
 			{
-				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+				fonts.AddFont("LeagueSpartan-Black.ttf", "LeagueSpartanBlack");
+				fonts.AddFont("LeagueSpartan-Medium.ttf", "LeagueSpartanMedium");
+				fonts.AddFont("LeagueSpartan-Regular.ttf", "LeagueSpartanRegular");
+				fonts.AddFont("LeagueSpartan-SemiBold.ttf", "LeagueSpartanSemiBold");
+				fonts.AddFont("LeagueSpartan-Bold.ttf", "LeagueSpartanBold");
+				fonts.AddFont("LeagueSpartan-ExtraBold.ttf", "LeagueSpartanExtraBold");
+				fonts.AddFont("LeagueSpartan-ExtraLight.ttf", "LeagueSpartanExtraLight");
+				fonts.AddFont("LeagueSpartan-Light.ttf", "LeagueSpartanLight");
+				fonts.AddFont("LeagueSpartan-Thin.ttf", "LeagueSpartanThin");
 			});
 
 		#if DEBUG
