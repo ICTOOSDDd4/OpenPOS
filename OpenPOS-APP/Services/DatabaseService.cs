@@ -30,7 +30,7 @@ namespace OpenPOS_APP.Services
                 Dbcontext.Open();
                 SqlCommand command = new SqlCommand(query, Dbcontext);
                 SqlDataReader reader = command.ExecuteReader();
-                CloseConnection();
+                reader.Close();
             } catch (Exception ex) { 
                 System.Diagnostics.Debug.WriteLine(ex.Message);
                 CloseConnection();
@@ -40,76 +40,55 @@ namespace OpenPOS_APP.Services
 
         public static T ExecuteSingle<T>(string query)
         {
-            try
+            using (SqlConnection connection = new SqlConnection(GetConnectionString()))
             {
-                Dbcontext.Open();
-                using (SqlCommand command = new SqlCommand(query, Dbcontext))
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@tPatSName", "Your-Parm-Value");
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                try
                 {
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        if (reader.HasRows)
-                        {
-                            var type = typeof(T);
-                            T obj = (T)Activator.CreateInstance(type);
-                            while (reader.Read())
-                            {
-                                foreach (var prop in type.GetProperties())
-                                {
-                                    var propType = prop.PropertyType;
-                                    prop.SetValue(obj, Convert.ChangeType(reader[prop.Name].ToString(), propType));
-                                }
-                            }
-                            CloseConnection();
-                            return obj;
-                        }
-                        else
-                        {
-                            System.Diagnostics.Debug.WriteLine("No data found.");
-                            CloseConnection();
-                            throw new SqlNullValueException();
-                        }
-                    }
+                    return getObject<T>(reader);
                 }
-            }
-            catch (SqlException e)
-            {
-                System.Diagnostics.Debug.WriteLine($"Failed to execute {query}");
-                CloseConnection();
-                throw new Exception();
+                finally
+                {
+                    reader.Close();
+                }
             }
         }
 
         public static List<T> Execute<T>(String query)
         {
-            try
+            using (SqlConnection connection = new SqlConnection(GetConnectionString()))
             {
-                Dbcontext.Open();
-                using (SqlCommand command = new SqlCommand(query, Dbcontext))
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@tPatSName", "Your-Parm-Value");
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                try
                 {
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        if (reader.HasRows)
-                        {
-                            List<T> list = GetList<T>(reader);
-                            CloseConnection();
-                            return list;
-                        }
-                        else
-                        {
-                            System.Diagnostics.Debug.WriteLine("No data found.");
-                            CloseConnection();
-                            throw new SqlNullValueException();
-                        }
-                    }
+                    return GetList<T>(reader);
+                }
+                finally
+                {
+                    reader.Close();
                 }
             }
-            catch (SqlException e)
-            {
-                System.Diagnostics.Debug.WriteLine($"Failed to execute {query}");
-                CloseConnection();
-                throw new Exception();
-            }
+        }
 
+        private static T getObject<T> (SqlDataReader reader)
+        {
+            var type = typeof(T);
+            T obj = (T)Activator.CreateInstance(type);
+            while (reader.Read())
+            {
+                foreach (var prop in type.GetProperties())
+                {
+                    var propType = prop.PropertyType;
+                    prop.SetValue(obj, Convert.ChangeType(reader[prop.Name].ToString(), propType));
+                }
+            }
+            return obj;
         }
 
         private static List<T> GetList<T>(SqlDataReader reader)
@@ -137,7 +116,7 @@ namespace OpenPOS_APP.Services
         {
             // Contains Connection String
             // Delete this string whenever you commit your repo to git
-            return "";
+            return "Data Source=78.47.170.183,1433;Initial Catalog=OpenPOS_dev;User ID=sa;Password=54RixO9qWdT;Integrated Security=false;TrustServerCertificate=True";
         }
     }
 }
