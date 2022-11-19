@@ -7,26 +7,37 @@ public class ProductService : IModelService<Product>
 {
     public static List<Product> GetAll()
     {
-        throw new NotImplementedException();
+        List<Product> resultList = DatabaseService.Execute<Product>("SELECT * FROM [dbo].[Product]");
+        return resultList;
     }
 
     public static Product FindByID(int id)
     {
-        throw new NotImplementedException();
+        Product result = DatabaseService.ExecuteSingle<Product>("SELECT * FROM [dbo].[Product] WHERE [Id] = " + id);
+        return result;
     }
 
     public static bool Delete(Product obj)
     {
-        throw new NotImplementedException();
+        int productId = obj.Id;
+        DatabaseService.Execute("DELETE FROM [dbo].[Product] WHERE [Id] = " + productId);
+        return true;
     }
 
     public static bool Update(Product obj)
     {
-        throw new NotImplementedException();
+        int productId = obj.Id;
+        string q = "[Name] = '" + obj.Name + "', [Price] = " + obj.Price + ", [Description] = '" + obj.Description + "' WHERE [Id] = " + productId;
+        
+        DatabaseService.Execute("UPDATE [dbo].[Product] SET " + q);
+
+        return true;
     }
 
     public static bool Create(Product obj)
     {
-        throw new NotImplementedException();
+        string q = "('" + obj.Name + "', " + obj.Price + ", '" + obj.Description + "')";
+        DatabaseService.Execute("INSERT INTO [dbo].[Product] ([Name], [Price], [Description]) VALUES " + q);
+        return true;
     }
 }

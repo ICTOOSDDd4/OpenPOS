@@ -7,26 +7,37 @@ public class RoleService : IModelService<Role>
 {
     public static List<Role> GetAll()
     {
-        throw new NotImplementedException();
+        List<Role> resultList = DatabaseService.Execute<Role>("SELECT * FROM [dbo].[role]");
+        return resultList;
     }
 
     public static Role FindByID(int id)
     {
-        throw new NotImplementedException();
+        Role result = DatabaseService.ExecuteSingle<Role>("SELECT * FROM [dbo].[role] WHERE id = " + id);
+        return result;
     }
 
     public static bool Delete(Role obj)
     {
-        throw new NotImplementedException();
+        int roleId = obj.Id;
+        DatabaseService.Execute("DELETE FROM [dbo].[role] WHERE id = " + roleId);
+        return true;
     }
 
     public static bool Update(Role obj)
     {
-        throw new NotImplementedException();
+        int roleId = obj.Id;
+        string q = "title = '" + obj.Title + "' WHERE id = " + roleId;
+        
+        DatabaseService.Execute("UPDATE [dbo].[role] SET " + q);
+        
+        return true;
     }
 
     public static bool Create(Role obj)
     {
-        throw new NotImplementedException();
+        string title = obj.Title;
+        DatabaseService.Execute("INSERT INTO [dbo].[role] (title) VALUES ('" + title + "')");
+        return true;
     }
 }

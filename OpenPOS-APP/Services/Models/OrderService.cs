@@ -7,26 +7,39 @@ public class OrderService : IModelService<Order>
 {
     public static List<Order> GetAll()
     {
-        throw new NotImplementedException();
+        List<Order> resultList = DatabaseService.Execute<Order>("SELECT * FROM [dbo].[Order]");
+        return resultList;
     }
 
     public static Order FindByID(int id)
     {
-        throw new NotImplementedException();
+        Order result = DatabaseService.ExecuteSingle<Order>("SELECT * FROM [dbo].[Order] WHERE ID = " + id);
+
+        return result;
     }
 
     public static bool Delete(Order obj)
     {
-        throw new NotImplementedException();
+        int orderId = obj.Id;
+       DatabaseService.Execute("DELETE FROM [dbo].[Order] WHERE ID = " + orderId);
+       return true;
     }
 
     public static bool Update(Order obj)
     {
-        throw new NotImplementedException();
+        int orderId = obj.Id;
+        string q = "status = " + obj.Status + ", User_id = " + obj.User_id + ", bill_id = " + obj.Bill_id +
+                   "WHERE Id = " + orderId;
+        
+        DatabaseService.Execute("UPDATE [dbo].[Order] SET " + q);
+        return true;
     }
 
     public static bool Create(Order obj)
     {
-        throw new NotImplementedException();
+        string q = obj.Status + ", " + obj.User_id + ", " + obj.Bill_id;
+        
+        DatabaseService.Execute("INSERT INTO [dbo].[Order] (status, User_id, bill_id) VALUES (" + q +")");
+        return true;
     }
 }

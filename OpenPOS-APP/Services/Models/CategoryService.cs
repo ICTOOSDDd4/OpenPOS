@@ -7,26 +7,34 @@ public class CategoryService : IModelService<Category>
 {
     public static List<Category> GetAll()
     {
-        throw new NotImplementedException();
+        List<Category> resultList = DatabaseService.Execute<Category>("SELECT * FROM [dbo].[Category]");
+        return resultList;
     }
 
     public static Category FindByID(int id)
     {
-        throw new NotImplementedException();
+        Category result = DatabaseService.ExecuteSingle<Category>("SELECT * FROM [dbo].[Category] WHERE [Id] = " + id);
+        return result;
     }
 
     public static bool Delete(Category obj)
     {
-        throw new NotImplementedException();
+        int categoryId = obj.Id;
+       DatabaseService.Execute("DELETE FROM [dbo].[Category] WHERE [Id] = " + categoryId);
+        return true;
     }
 
     public static bool Update(Category obj)
     {
-        throw new NotImplementedException();
+        int categoryId = obj.Id;
+        string q = "name = '" + obj.Name + "' WHERE [Id] = " + categoryId;
+        DatabaseService.Execute("UPDATE [dbo].[Category] SET " + q);
+        return true;
     }
 
     public static bool Create(Category obj)
     {
-        throw new NotImplementedException();
+        DatabaseService.Execute("INSERT INTO [dbo].[Category] ([Name]) VALUES ('" + obj.Name + "')");
+        return true;
     }
 }
