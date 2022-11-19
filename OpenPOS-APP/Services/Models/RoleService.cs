@@ -1,3 +1,4 @@
+using System.Data;
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Interfaces;
 using System.Data.SqlClient;
@@ -15,36 +16,45 @@ public class RoleService : IModelService<Role>
 
     public static Role FindByID(int id)
     {
-        Role result = DatabaseService.ExecuteSingle<Role>(new SqlCommand("SELECT * FROM [dbo].[role] WHERE id = " + id));
+        SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[Role] WHERE [ID] = @ID");
+        
+        query.Parameters.Add("@ID", SqlDbType.Int);
+        query.Parameters["@ID"].Value = id;
+
+        Role result = DatabaseService.ExecuteSingle<Role>(query);
         
         return result;
     }
 
     public static bool Delete(Role obj)
     {
-        int roleId = obj.Id;
+        SqlCommand query = new SqlCommand("DELETE FROM [dbo].[Role] WHERE [ID] = @ID");
         
-        DatabaseService.Execute(new SqlCommand("DELETE FROM [dbo].[role] WHERE id = " + roleId));
+        query.Parameters.Add("@ID", SqlDbType.Int);
+        query.Parameters["@ID"].Value = obj.Id;
         
-        return true;
+        return DatabaseService.Execute(query);
     }
 
     public static bool Update(Role obj)
     {
-        int roleId = obj.Id;
-        string q = "title = '" + obj.Title + "' WHERE id = " + roleId;
+        SqlCommand query = new SqlCommand("UPDATE [dbo].[Role] SET [title] = @Title WHERE [ID] = @ID");
         
-        DatabaseService.Execute(new SqlCommand("UPDATE [dbo].[role] SET " + q));
+        query.Parameters.Add("@Title", SqlDbType.VarChar);
+        query.Parameters["@Title"].Value = obj.Title;
+        query.Parameters.Add("@ID", SqlDbType.Int);
+        query.Parameters["@ID"].Value = obj.Id;
         
-        return true;
+        return DatabaseService.Execute(query);
     }
 
     public static bool Create(Role obj)
     {
-        string title = obj.Title;
+        SqlCommand query = new SqlCommand("INSERT INTO [dbo].[Role] ([title]) VALUES (@Title)");
         
-        DatabaseService.Execute(new SqlCommand("INSERT INTO [dbo].[role] (title) VALUES ('" + title + "')"));
+        query.Parameters.Add("@Title", SqlDbType.VarChar);
+        query.Parameters["@Title"].Value = obj.Title;
         
-        return true;
+        return DatabaseService.Execute(query);
     }
 }

@@ -17,8 +17,10 @@ public class FloorService : IModelService<Floor>
     public static Floor FindByID(int id)
     {
         SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[Floor] WHERE [Id] = @ID");
+        
         query.Parameters.Add("@ID", SqlDbType.Int);
         query.Parameters["@ID"].Value = id;
+        
         Floor result = DatabaseService.ExecuteSingle<Floor>(query);
 
         return result;
@@ -26,29 +28,33 @@ public class FloorService : IModelService<Floor>
 
     public static bool Delete(Floor obj)
     {
-        int floorInt = obj.Id;
+        SqlCommand query = new SqlCommand("DELETE FROM [dbo].[Floor] WHERE [Id] = @ID");
         
-        DatabaseService.Execute(new SqlCommand("DELETE FROM [dbo].[Floor] WHERE [ID] = " + floorInt));
+        query.Parameters.Add("@ID", SqlDbType.Int);
+        query.Parameters["@ID"].Value = obj.Id;
         
-        return true;
+        return DatabaseService.Execute(query);
     }
 
     public static bool Update(Floor obj)
     {
-        int floorInt = obj.Id;
-        string q = "storey = '" + obj.Storey + "' WHERE [ID] = " + floorInt;
+        SqlCommand query = new SqlCommand("UPDATE [dbo].[Floor] SET [storey] = @Storey WHERE [Id] = @ID");
         
-        DatabaseService.Execute(new SqlCommand("UPDATE [dbo].[Floor] SET " + q));
+        query.Parameters.Add("@Storey", SqlDbType.VarChar);
+        query.Parameters["@Storey"].Value = obj.Storey;
+        query.Parameters.Add("@ID", SqlDbType.Int);
+        query.Parameters["@ID"].Value = obj.Id;
         
-        return true;
+        return DatabaseService.Execute(query);
     }
 
     public static bool Create(Floor obj)
     {
-        string q = "'" + obj.Storey + "'";
+        SqlCommand query = new SqlCommand("INSERT INTO [dbo].[Floor] ([storey]) VALUES (@Storey)");
         
-        DatabaseService.Execute(new SqlCommand("INSERT INTO [dbo].[Floor] ([storey]) VALUES (" + q + ")"));
+        query.Parameters.Add("@Storey", SqlDbType.VarChar);
+        query.Parameters["@Storey"].Value = obj.Storey;
         
-        return true;
+        return DatabaseService.Execute(query);
     }
 }

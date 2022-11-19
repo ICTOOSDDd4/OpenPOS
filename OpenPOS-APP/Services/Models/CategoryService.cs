@@ -16,8 +16,10 @@ public class CategoryService : IModelService<Category>
     public static Category FindByID(int id)
     {
         SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[Category] WHERE [Id] = @ID");
+        
         query.Parameters.Add("@ID", SqlDbType.Int);
         query.Parameters["@ID"].Value = id;
+        
         Category result = DatabaseService.ExecuteSingle<Category>(query);
 
         return result;
@@ -25,27 +27,33 @@ public class CategoryService : IModelService<Category>
 
     public static bool Delete(Category obj)
     {
-        int categoryId = obj.Id;
+        SqlCommand query = new SqlCommand("DELETE FROM [dbo].[Category] WHERE [Id] = @ID");
         
-       DatabaseService.Execute(new SqlCommand("DELETE FROM [dbo].[Category] WHERE [Id] = " + categoryId));
-       
-        return true;
+        query.Parameters.Add("@ID", SqlDbType.Int);
+        query.Parameters["@ID"].Value = obj.Id;
+        
+        return DatabaseService.Execute(query);
     }
 
     public static bool Update(Category obj)
     {
-        int categoryId = obj.Id;
-        string q = "name = '" + obj.Name + "' WHERE [Id] = " + categoryId;
+        SqlCommand query = new SqlCommand("UPDATE [dbo].[Category] SET [Name] = @Name WHERE [Id] = @ID");
         
-        DatabaseService.Execute(new SqlCommand("UPDATE [dbo].[Category] SET " + q));
+        query.Parameters.Add("@Name", SqlDbType.VarChar);
+        query.Parameters["@Name"].Value = obj.Name;
+        query.Parameters.Add("@ID", SqlDbType.Int);
+        query.Parameters["@ID"].Value = obj.Id;
         
-        return true;
+        return DatabaseService.Execute(query);
     }
 
     public static bool Create(Category obj)
     {
-        DatabaseService.Execute(new SqlCommand("INSERT INTO [dbo].[Category] ([Name]) VALUES ('" + obj.Name + "')"));
+        SqlCommand query = new SqlCommand("INSERT INTO [dbo].[Category] ([Name]) VALUES (@Name)");
         
-        return true;
+        query.Parameters.Add("@Name", SqlDbType.VarChar);
+        query.Parameters["@Name"].Value = obj.Name;
+        
+        return DatabaseService.Execute(query);
     }
 }

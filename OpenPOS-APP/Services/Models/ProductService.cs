@@ -1,3 +1,4 @@
+using System.Data;
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Interfaces;
 using System.Data.SqlClient;
@@ -15,36 +16,53 @@ public class ProductService : IModelService<Product>
 
     public static Product FindByID(int id)
     {
-        Product result = DatabaseService.ExecuteSingle<Product>(new SqlCommand("SELECT * FROM [dbo].[Product] WHERE [Id] = " + id));
+        SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[Product] WHERE [ID] = @ID");
+        
+        query.Parameters.Add("@ID", SqlDbType.Int);
+        query.Parameters["@ID"].Value = id;
+
+        Product result = DatabaseService.ExecuteSingle<Product>(query);
         
         return result;
     }
 
     public static bool Delete(Product obj)
     {
-        int productId = obj.Id;
+        SqlCommand query = new SqlCommand("DELETE FROM [dbo].[product] WHERE [ID] = @ProductID");
         
-        DatabaseService.Execute(new SqlCommand("DELETE FROM [dbo].[Product] WHERE [Id] = " + productId));
+        query.Parameters.Add("@ProductID", SqlDbType.Int);
+        query.Parameters["@ProductID"].Value = obj.Id;
         
-        return true;
+        return DatabaseService.Execute(query);
     }
 
     public static bool Update(Product obj)
     {
-        int productId = obj.Id;
-        string q = "[Name] = '" + obj.Name + "', [Price] = " + obj.Price + ", [Description] = '" + obj.Description + "' WHERE [Id] = " + productId;
+        SqlCommand query = new SqlCommand("UPDATE [dbo].[Product] SET [Name] = @Name, [Price] = @Price, [description] = @Description WHERE [ID] = @ID");
         
-        DatabaseService.Execute(new SqlCommand("UPDATE [dbo].[Product] SET " + q));
-
-        return true;
+        query.Parameters.Add("@Name", SqlDbType.VarChar);
+        query.Parameters["@Name"].Value = obj.Name;
+        query.Parameters.Add("@Price", SqlDbType.Decimal);
+        query.Parameters["@Price"].Value = obj.Price;
+        query.Parameters.Add("@Description", SqlDbType.VarChar);
+        query.Parameters["@Description"].Value = obj.Description;
+        query.Parameters.Add("@ID", SqlDbType.Int);
+        query.Parameters["@ID"].Value = obj.Id;
+        
+        return DatabaseService.Execute(query);
     }
 
     public static bool Create(Product obj)
     {
-        string q = "('" + obj.Name + "', " + obj.Price + ", '" + obj.Description + "')";
+        SqlCommand query = new SqlCommand("INSERT INTO [dbo].[Product] ([Name], [Price], [Description]) VALUES (@Name, @Price, @Description)");
         
-        DatabaseService.Execute(new SqlCommand("INSERT INTO [dbo].[Product] ([Name], [Price], [Description]) VALUES " + q));
+        query.Parameters.Add("@Name", SqlDbType.VarChar);
+        query.Parameters["@Name"].Value = obj.Name;
+        query.Parameters.Add("@Price", SqlDbType.Decimal);
+        query.Parameters["@Price"].Value = obj.Price;
+        query.Parameters.Add("@Description", SqlDbType.VarChar);
+        query.Parameters["@Description"].Value = obj.Description;
         
-        return true;
+        return DatabaseService.Execute(query);
     }
 }

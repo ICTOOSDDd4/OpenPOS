@@ -17,8 +17,10 @@ public class UserService : IModelService<User>
     public static User FindByID(int id)
     {
         SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[user] WHERE [Id] = @ID");
+        
         query.Parameters.Add("@ID", SqlDbType.Int);
         query.Parameters["@ID"].Value = id;
+        
         User result = DatabaseService.ExecuteSingle<User>(query);
 
         return result;
@@ -26,30 +28,45 @@ public class UserService : IModelService<User>
 
     public static bool Delete(User obj)
     {
-        int userId = obj.Id;
+        SqlCommand query = new SqlCommand("DELETE FROM [dbo].[user] WHERE [Id] = @ID");
         
-        DatabaseService.Execute(new SqlCommand("DELETE FROM [dbo].[user] WHERE id = " + userId));
+        query.Parameters.Add("@ID", SqlDbType.Int);
+        query.Parameters["@ID"].Value = obj.Id;
         
-        return true;
+        return DatabaseService.Execute(query);
     }
 
     public static bool Update(User obj)
     {
-        int userId = obj.Id;
-        string q = "name = '" + obj.Name + "', last_name = '" + obj.Last_name + "', password = '" + obj.Password +
-                   "', email = '" + obj.Email + "' WHERE id = " + userId;
+        SqlCommand query = new SqlCommand("UPDATE [dbo].[user] SET [Name] = @Name, [last_name] = @LastName, [email] = @Email, [password] = @Password WHERE [id] = @ID");
         
-        DatabaseService.Execute(new SqlCommand("UPDATE [dbo].[user] SET " + q));
+        query.Parameters.Add("@Name", SqlDbType.VarChar);
+        query.Parameters["@Name"].Value = obj.Name;
+        query.Parameters.Add("@LastName", SqlDbType.VarChar);
+        query.Parameters["@LastName"].Value = obj.Last_name;
+        query.Parameters.Add("@Email", SqlDbType.VarChar);
+        query.Parameters["@Email"].Value = obj.Email;
+        query.Parameters.Add("@Password", SqlDbType.VarChar);
+        query.Parameters["@Password"].Value = obj.Password;
+        query.Parameters.Add("@ID", SqlDbType.Int);
+        query.Parameters["@ID"].Value = obj.Id;
         
-        return true;
+        return DatabaseService.Execute(query);
     }
 
     public static bool Create(User obj)
     {
-        string q = "'" + obj.Name + "', '" + obj.Last_name + "', '" + obj.Password + "', '" + obj.Email + "'";
+        SqlCommand query = new SqlCommand("INSERT INTO [dbo].[user] ([Name], [last_name], [email], [password]) VALUES (@Name, @LastName, @Email, @Password)");
         
-        DatabaseService.Execute(new SqlCommand("INSERT INTO [dbo].[user] (name, last_name, password, email) VALUES (" + q + ")"));
+        query.Parameters.Add("@Name", SqlDbType.VarChar);
+        query.Parameters["@Name"].Value = obj.Name;
+        query.Parameters.Add("@LastName", SqlDbType.VarChar);
+        query.Parameters["@LastName"].Value = obj.Last_name;
+        query.Parameters.Add("@Email", SqlDbType.VarChar);
+        query.Parameters["@Email"].Value = obj.Email;
+        query.Parameters.Add("@Password", SqlDbType.VarChar);
+        query.Parameters["@Password"].Value = obj.Password;
         
-        return true;
+        return DatabaseService.Execute(query);
     }
 }

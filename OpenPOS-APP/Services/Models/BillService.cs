@@ -17,6 +17,7 @@ public class BillService : IModelService<Bill>
     public static Bill FindByID(int id)
     {
         SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[Bill] WHERE [ID] = @ID");
+        
         query.Parameters.Add("@ID", SqlDbType.Int);
         query.Parameters["@ID"].Value = id;
 
@@ -27,31 +28,38 @@ public class BillService : IModelService<Bill>
 
     public static bool Delete(Bill obj)
     {
-        int billId = obj.Id;
         SqlCommand query = new SqlCommand("DELETE FROM [dbo].[Bill] WHERE [ID] = @BillId");
-        query.Parameters.Add("@BillId", SqlDbType.Int);
-        query.Parameters["@BillId"].Value = billId;
-        DatabaseService.Execute(query);
         
-        return true;
+        query.Parameters.Add("@BillId", SqlDbType.Int);
+        query.Parameters["@BillId"].Value = obj.Id;
+        
+        return DatabaseService.Execute(query);
+        
     }
 
     public static bool Update(Bill obj)
     {
-        int billId = obj.Id;
-        string q = "user_id = '" + obj.User_id + "', paid = '" + obj.Paid + "' WHERE id = " + billId;
+        SqlCommand query = new SqlCommand("UPDATE [dbo].[Bill] SET [user_id] = @userid," + " [paid] = @paid " + " WHERE [id] = @id");
         
-        DatabaseService.Execute(new SqlCommand("UPDATE [dbo].[Bill] SET " + q));
+        query.Parameters.Add("@userid", SqlDbType.Int);
+        query.Parameters["@userid"].Value = obj.User_id;
+        query.Parameters.Add("@paid", SqlDbType.Bit);
+        query.Parameters["@paid"].Value = obj.Paid;
+        query.Parameters.Add("@id", SqlDbType.Int);
+        query.Parameters["@id"].Value = obj.Id;
         
-        return true;
+        return DatabaseService.Execute(query);
     }
 
     public static bool Create(Bill obj)
     {
-        string q = "'" + obj.User_id + "', '" + obj.Paid + "'";
+        SqlCommand query = new SqlCommand("INSERT INTO [dbo].[Bill] ([user_id], [paid]) VALUES (@userid, @paid)");
         
-        DatabaseService.Execute(new SqlCommand("INSERT INTO [dbo].[Bill] (user_id, paid) VALUES (" + q + ")"));
+        query.Parameters.Add("@userid", SqlDbType.Int);
+        query.Parameters["@userid"].Value = obj.User_id;
+        query.Parameters.Add("@paid", SqlDbType.Bit);
+        query.Parameters["@paid"].Value = obj.Paid;
         
-        return true;
+        return DatabaseService.Execute(query);
     }
 }
