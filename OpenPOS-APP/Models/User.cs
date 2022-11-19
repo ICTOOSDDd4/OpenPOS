@@ -15,9 +15,8 @@ namespace OpenPOS_APP.Models
         public string Password { get; set; }
 
         public User() { }
-        public User(int id, string name, string lastName, string email, string password)
+        public User(string name, string lastName, string email, string password)
         {
-            Id = id;
             Name = name;
             Last_name = lastName;
             Email = email;

@@ -28,7 +28,7 @@ public class UserService : IModelService<User>
 
     public static bool Delete(User obj)
     {
-        SqlCommand query = new SqlCommand("DELETE FROM [dbo].[user] WHERE [Id] = @ID");
+        SqlCommand query = new SqlCommand("DELETE FROM [dbo].[user] WHERE [Id] = @ID", DatabaseService.Dbcontext);
         
         query.Parameters.Add("@ID", SqlDbType.Int);
         query.Parameters["@ID"].Value = obj.Id;
@@ -38,7 +38,7 @@ public class UserService : IModelService<User>
 
     public static bool Update(User obj)
     {
-        SqlCommand query = new SqlCommand("UPDATE [dbo].[user] SET [Name] = @Name, [last_name] = @LastName, [email] = @Email, [password] = @Password WHERE [id] = @ID");
+        SqlCommand query = new SqlCommand("UPDATE [dbo].[user] SET [Name] = @Name, " +" [last_name] = @LastName, " + " [email] = @Email, " + " [password] = @Password " + " WHERE [id] = @ID", DatabaseService.Dbcontext);
         
         query.Parameters.Add("@Name", SqlDbType.VarChar);
         query.Parameters["@Name"].Value = obj.Name;
@@ -56,7 +56,7 @@ public class UserService : IModelService<User>
 
     public static bool Create(User obj)
     {
-        SqlCommand query = new SqlCommand("INSERT INTO [dbo].[user] ([Name], [last_name], [email], [password]) VALUES (@Name, @LastName, @Email, @Password)");
+        SqlCommand query = new SqlCommand("INSERT INTO [dbo].[user] ([Name], [last_name], [email], [password]) VALUES (@Name" + ", @LastName," + " @Email," + " @Password)", DatabaseService.Dbcontext);
         
         query.Parameters.Add("@Name", SqlDbType.VarChar);
         query.Parameters["@Name"].Value = obj.Name;
@@ -66,6 +66,8 @@ public class UserService : IModelService<User>
         query.Parameters["@Email"].Value = obj.Email;
         query.Parameters.Add("@Password", SqlDbType.VarChar);
         query.Parameters["@Password"].Value = obj.Password;
+        
+        Console.WriteLine(query.ToString());
         
         return DatabaseService.Execute(query);
     }
