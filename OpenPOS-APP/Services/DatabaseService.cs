@@ -13,13 +13,13 @@ namespace OpenPOS_APP.Services
 {
     public static class DatabaseService
     {
+        private static string _connectionString;
         public static SqlConnection Dbcontext { get; private set; }
-        public static void Initialize()
+        public static void Initialize(string connection)
         {
-            string connectionString = GetConnectionString();
             Dbcontext = new SqlConnection
             {
-                ConnectionString = connectionString
+                ConnectionString = connection
             };
         }
 
@@ -123,7 +123,7 @@ namespace OpenPOS_APP.Services
         {
             // Contains Connection String
             // Delete this string whenever you commit your repo to git
-            return "PLACEHOLDER FOR CONNECT STRING";
+            return _connectionString;
         }
     }
 }

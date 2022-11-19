@@ -4,6 +4,7 @@ using OpenPOS_APP.Services;
 using OpenPOS_APP.Services.Models;
 using Microsoft.Extensions.Configuration;
 using System.Reflection;
+using OpenPOS_APP.Settings;
 
 namespace OpenPOS_APP;
 
@@ -11,7 +12,6 @@ public static class MauiProgram
 {
 	public static MauiApp CreateMauiApp()
 	{
-		Initialize();
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
@@ -39,7 +39,7 @@ public static class MauiProgram
 		      .AddJsonStream(stream)
 		      .Build();
 	      builder.Configuration.AddConfiguration(config);
-	      
+
 	      // Use Add Transient to add the configuration to the right page.
 	      builder.Services.AddTransient<MainPage>();
       }
@@ -50,12 +50,12 @@ public static class MauiProgram
 
 		return builder.Build();
 	}
-	private static void Initialize()
-	{
-        DatabaseService.Initialize();
-        foreach (User user in UserService.GetAll())
-        {
-            System.Diagnostics.Debug.WriteLine(user.Name);
-        }
-    }
+	// private static void Initialize()
+	// {
+ //        DatabaseService.Initialize();
+ //        foreach (User user in UserService.GetAll())
+ //        {
+ //            System.Diagnostics.Debug.WriteLine(user.Name);
+ //        }
+ //    }
 }

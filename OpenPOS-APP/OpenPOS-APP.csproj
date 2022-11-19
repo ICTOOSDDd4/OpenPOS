@@ -67,4 +67,8 @@
 	  <Folder Include="Models\" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Compile Include="Settings\DatabaseSettings.cs" />
+	</ItemGroup>
+
 </Project>

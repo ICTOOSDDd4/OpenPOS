@@ -1,17 +1,21 @@
 ﻿using Microsoft.Extensions.Configuration;
+using OpenPOS_APP.Services;
+using OpenPOS_APP.Settings;
 
 namespace OpenPOS_APP;
 
 public partial class MainPage : ContentPage
 {
 	private int _count;
-	private IConfiguration _configuration;
-  
+
 	public MainPage(IConfiguration config)
 
 	{
 		InitializeComponent();
-		_configuration = config;
+
+		// Starting up DB connection
+		var settings = config.GetRequiredSection("DATABASE_CONNECTION").Get<DatabaseSettings>();
+		if (settings != null) DatabaseService.Initialize(settings.DatabaseConnectionString);
 	}
 
 	private async void OnCounterClicked(object sender, EventArgs e)
@@ -24,12 +28,7 @@ public partial class MainPage : ContentPage
 			CounterBtn.Text = $"Clicked {_count} times";
 
 		SemanticScreenReader.Announce(CounterBtn.Text);
-
-      var settings = _configuration.GetRequiredSection("TEST").Get<Settings>();
-		await DisplayAlert("Config", $"{nameof(settings.testing_string)}: {settings.testing_string}" +
-            $"{settings.testing_int} :  {settings.testing_int}", "OK");
-
-   }
+	}
 
     
 }
