@@ -43,6 +43,7 @@ namespace OpenPOS_APP.Services
             using (SqlConnection connection = new SqlConnection(GetConnectionString()))
             {
                 SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@tPatSName", "Your-Parm-Value");
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
                 try
@@ -61,6 +62,7 @@ namespace OpenPOS_APP.Services
             using (SqlConnection connection = new SqlConnection(GetConnectionString()))
             {
                 SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@tPatSName", "Your-Parm-Value");
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
                 try
