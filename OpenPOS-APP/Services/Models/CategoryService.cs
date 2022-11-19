@@ -1,5 +1,6 @@
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Interfaces;
+using System.Data.SqlClient;
 
 namespace OpenPOS_APP.Services.Models;
 
@@ -7,7 +8,7 @@ public class CategoryService : IModelService<Category>
 {
     public static List<Category> GetAll()
     {
-        List<Category> resultList = DatabaseService.Execute<Category>("SELECT * FROM [dbo].[Category]");
+        List<Category> resultList = DatabaseService.Execute<Category>(new SqlCommand("SELECT * FROM [dbo].[Category]"));
         return resultList;
     }
 

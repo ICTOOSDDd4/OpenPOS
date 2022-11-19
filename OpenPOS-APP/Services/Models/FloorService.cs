@@ -1,5 +1,6 @@
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Interfaces;
+using System.Data.SqlClient;
 
 namespace OpenPOS_APP.Services.Models;
 
@@ -7,13 +8,13 @@ public class FloorService : IModelService<Floor>
 {
     public static List<Floor> GetAll()
     {
-        List<Floor> resultList = DatabaseService.Execute<Floor>("SELECT * FROM [dbo].[Floor]");
+        List<Floor> resultList = DatabaseService.Execute<Floor>(new SqlCommand("SELECT * FROM [dbo].[Floor]"));
         return resultList;
     }
 
     public static Floor FindByID(int id)
     {
-        Floor result = DatabaseService.ExecuteSingle<Floor>("SELECT * FROM [dbo].[Floor] WHERE [ID] = " + id);
+        Floor result = DatabaseService.ExecuteSingle<Floor>($"SELECT * FROM [dbo].[Floor] WHERE [ID] = {id}");
         return result;
     }
 

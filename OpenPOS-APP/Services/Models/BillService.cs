@@ -1,5 +1,7 @@
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Interfaces;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace OpenPOS_APP.Services.Models;
 
@@ -7,14 +9,18 @@ public class BillService : IModelService<Bill>
 {
     public static List<Bill> GetAll()
     {
-        List<Bill> resultList = DatabaseService.Execute<Bill>("SELECT * FROM [dbo].[Bill]");
+        List<Bill> resultList = DatabaseService.Execute<Bill>(new SqlCommand("SELECT * FROM [dbo].[Bill]"));
 
         return resultList;
     }
 
     public static Bill FindByID(int id)
     {
-        Bill result = DatabaseService.ExecuteSingle<Bill>("SELECT * FROM [dbo].[Bill] WHERE [ID] = " + id);
+        SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[Bill] WHERE [ID] = @ID");
+        query.Parameters.Add("@ID", SqlDbType.Int);
+        query.Parameters["@ID"].Value = id;
+
+        Bill result = DatabaseService.ExecuteSingle<Bill>(query);
         
         return result;
     }

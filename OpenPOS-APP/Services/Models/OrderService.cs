@@ -1,5 +1,6 @@
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Interfaces;
+using System.Data.SqlClient;
 
 namespace OpenPOS_APP.Services.Models;
 
@@ -7,7 +8,7 @@ public class OrderService : IModelService<Order>
 {
     public static List<Order> GetAll()
     {
-        List<Order> resultList = DatabaseService.Execute<Order>("SELECT * FROM [dbo].[Order]");
+        List<Order> resultList = DatabaseService.Execute<Order>(new SqlCommand("SELECT * FROM [dbo].[Order]"));
         return resultList;
     }
 
