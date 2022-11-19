@@ -1,3 +1,4 @@
+using System.Data;
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Interfaces;
 using System.Data.SqlClient;
@@ -15,7 +16,10 @@ public class OrderService : IModelService<Order>
 
     public static Order FindByID(int id)
     {
-        Order result = DatabaseService.ExecuteSingle<Order>(new SqlCommand("SELECT * FROM [dbo].[Order] WHERE ID = " + id));
+        SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[Order] WHERE [Id] = @ID");
+        query.Parameters.Add("@ID", SqlDbType.Int);
+        query.Parameters["@ID"].Value = id;
+        Order result = DatabaseService.ExecuteSingle<Order>(query);
 
         return result;
     }
