@@ -28,8 +28,10 @@ public class BillService : IModelService<Bill>
     public static bool Delete(Bill obj)
     {
         int billId = obj.Id;
-        
-        DatabaseService.Execute(new SqlCommand("DELETE FROM [dbo].[Bill] WHERE [ID] = " + billId));
+        SqlCommand query = new SqlCommand("DELETE FROM [dbo].[Bill] WHERE [ID] = @BillId");
+        query.Parameters.Add("@BillId", SqlDbType.Int);
+        query.Parameters["@BillId"].Value = billId;
+        DatabaseService.Execute(query);
         
         return true;
     }
