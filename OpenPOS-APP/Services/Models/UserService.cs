@@ -16,7 +16,10 @@ public class UserService : IModelService<User>
 
     public static User FindByID(int id)
     {
-        User result = DatabaseService.ExecuteSingle<User>("SELECT * FROM [dbo].[user] WHERE id = " + id);
+        SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[user] WHERE [Id] = @ID");
+        query.Parameters.Add("@ID", SqlDbType.Int);
+        query.Parameters["@ID"].Value = id;
+        User result = DatabaseService.ExecuteSingle<User>(query);
 
         return result;
     }
