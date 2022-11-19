@@ -15,7 +15,7 @@ public class RoleService : IModelService<Role>
 
     public static Role FindByID(int id)
     {
-        Role result = DatabaseService.ExecuteSingle<Role>("SELECT * FROM [dbo].[role] WHERE id = " + id);
+        Role result = DatabaseService.ExecuteSingle<Role>(new SqlCommand("SELECT * FROM [dbo].[role] WHERE id = " + id));
         
         return result;
     }

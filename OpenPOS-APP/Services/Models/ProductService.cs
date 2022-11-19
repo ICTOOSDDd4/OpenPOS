@@ -15,7 +15,7 @@ public class ProductService : IModelService<Product>
 
     public static Product FindByID(int id)
     {
-        Product result = DatabaseService.ExecuteSingle<Product>("SELECT * FROM [dbo].[Product] WHERE [Id] = " + id);
+        Product result = DatabaseService.ExecuteSingle<Product>(new SqlCommand("SELECT * FROM [dbo].[Product] WHERE [Id] = " + id));
         
         return result;
     }

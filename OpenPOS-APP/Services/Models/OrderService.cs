@@ -15,7 +15,7 @@ public class OrderService : IModelService<Order>
 
     public static Order FindByID(int id)
     {
-        Order result = DatabaseService.ExecuteSingle<Order>("SELECT * FROM [dbo].[Order] WHERE ID = " + id);
+        Order result = DatabaseService.ExecuteSingle<Order>(new SqlCommand("SELECT * FROM [dbo].[Order] WHERE ID = " + id));
 
         return result;
     }

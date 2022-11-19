@@ -9,13 +9,13 @@ public class CategoryService : IModelService<Category>
 {
     public static List<Category> GetAll()
     {
-        List<Category> resultList = DatabaseService.Execute<Category>("SELECT * FROM [dbo].[Category]");
+        List<Category> resultList = DatabaseService.Execute<Category>(new SqlCommand("SELECT * FROM [dbo].[Category]"));
         return resultList;
     }
 
     public static Category FindByID(int id)
     {
-        Category result = DatabaseService.ExecuteSingle<Category>("SELECT * FROM [dbo].[Category] WHERE [Id] = " + id);
+        Category result = DatabaseService.ExecuteSingle<Category>(new SqlCommand("SELECT * FROM [dbo].[Category] WHERE [Id] = " + id));
         return result;
     }
 

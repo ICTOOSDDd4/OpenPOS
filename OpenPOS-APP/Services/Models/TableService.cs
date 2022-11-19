@@ -15,7 +15,7 @@ public class TableService : IModelService<Table>
 
     public static Table FindByID(int id)
     {
-        Table result = DatabaseService.ExecuteSingle<Table>("SELECT * FROM [dbo].[restaurant_table] WHERE id = '" + id + "'");
+        Table result = DatabaseService.ExecuteSingle<Table>(new SqlCommand("SELECT * FROM [dbo].[restaurant_table] WHERE id = '" + id + "'"));
 
         return result;
     }

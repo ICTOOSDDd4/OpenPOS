@@ -15,7 +15,7 @@ public class FloorService : IModelService<Floor>
 
     public static Floor FindByID(int id)
     {
-        Floor result = DatabaseService.ExecuteSingle<Floor>($"SELECT * FROM [dbo].[Floor] WHERE [ID] = {id}");
+        Floor result = DatabaseService.ExecuteSingle<Floor>(new SqlCommand($"SELECT * FROM [dbo].[Floor] WHERE [ID] = {id}"));
 
         return result;
     }
