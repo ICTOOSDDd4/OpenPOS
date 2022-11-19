@@ -1,3 +1,5 @@
+using OpenPOS_APP.Services;
+
 namespace OpenPOS_Testing
 {
     public class Tests
