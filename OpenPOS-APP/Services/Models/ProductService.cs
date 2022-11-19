@@ -1,31 +1,31 @@
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Interfaces;
 
-namespace OpenPOS_APP.Services;
+namespace OpenPOS_APP.Services.Models;
 
-public class TableService: IModelService<Table>
+public class ProductService : IModelService<Product>
 {
-    public static List<Table> GetAll()
+    public static List<Product> GetAll()
     {
         throw new NotImplementedException();
     }
 
-    public static Table FindByID(int id)
+    public static Product FindByID(int id)
     {
         throw new NotImplementedException();
     }
 
-    public static bool Delete(Table obj)
+    public static bool Delete(Product obj)
     {
         throw new NotImplementedException();
     }
 
-    public static bool Update(Table obj)
+    public static bool Update(Product obj)
     {
         throw new NotImplementedException();
     }
 
-    public static bool Create(Table obj)
+    public static bool Create(Product obj)
     {
         throw new NotImplementedException();
     }

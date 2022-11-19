@@ -1,31 +1,31 @@
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Interfaces;
 
-namespace OpenPOS_APP.Services;
+namespace OpenPOS_APP.Services.Models;
 
-public class BillService: IModelService<Bill>
+public class FloorService : IModelService<Floor>
 {
-    public static List<Bill> GetAll()
+    public static List<Floor> GetAll()
     {
         throw new NotImplementedException();
     }
 
-    public static Bill FindByID(int id)
+    public static Floor FindByID(int id)
     {
         throw new NotImplementedException();
     }
 
-    public static bool Delete(Bill obj)
+    public static bool Delete(Floor obj)
     {
         throw new NotImplementedException();
     }
 
-    public static bool Update(Bill obj)
+    public static bool Update(Floor obj)
     {
         throw new NotImplementedException();
     }
 
-    public static bool Create(Bill obj)
+    public static bool Create(Floor obj)
     {
         throw new NotImplementedException();
     }

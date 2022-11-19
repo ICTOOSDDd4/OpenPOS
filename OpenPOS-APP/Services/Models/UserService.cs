@@ -3,9 +3,9 @@ using System.Data.SqlClient;
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Interfaces;
 
-namespace OpenPOS_APP.Services;
+namespace OpenPOS_APP.Services.Models;
 
-public class UserService: IModelService<User>
+public class UserService : IModelService<User>
 {
     public static List<User> GetAll()
     {
