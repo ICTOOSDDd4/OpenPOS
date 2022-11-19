@@ -17,4 +17,8 @@
     <PackageReference Include="coverlet.collector" Version="3.1.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\OpenPOS-APP\OpenPOS-APP.csproj" />
+  </ItemGroup>
+
 </Project>

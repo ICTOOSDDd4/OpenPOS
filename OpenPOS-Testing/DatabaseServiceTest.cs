@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OpenPOS_Testing
+﻿namespace OpenPOS_Testing
 {
-    public class DatabaseServiceTest
+   public class DatabaseServiceTest
     {
         [SetUp]
         public void Setup()
@@ -18,6 +12,7 @@ namespace OpenPOS_Testing
         {
             
             Assert.Pass();
+            DatabaseSerivce
         }
     }
 }

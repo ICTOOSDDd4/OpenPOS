@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace OpenPOS_APP.Services
 {
-    internal static class DatabaseService
+    public static class DatabaseService
     {
         public static SqlConnection Dbcontext { get; private set; }
         public static void Initialize()
