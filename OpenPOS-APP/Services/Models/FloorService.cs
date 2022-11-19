@@ -1,3 +1,4 @@
+using System.Data;
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Interfaces;
 using System.Data.SqlClient;
@@ -15,7 +16,10 @@ public class FloorService : IModelService<Floor>
 
     public static Floor FindByID(int id)
     {
-        Floor result = DatabaseService.ExecuteSingle<Floor>(new SqlCommand($"SELECT * FROM [dbo].[Floor] WHERE [ID] = {id}"));
+        SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[Floor] WHERE [Id] = @ID");
+        query.Parameters.Add("@ID", SqlDbType.Int);
+        query.Parameters["@ID"].Value = id;
+        Floor result = DatabaseService.ExecuteSingle<Floor>(query);
 
         return result;
     }

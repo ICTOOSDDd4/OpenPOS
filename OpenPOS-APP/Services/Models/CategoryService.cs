@@ -15,7 +15,11 @@ public class CategoryService : IModelService<Category>
 
     public static Category FindByID(int id)
     {
-        Category result = DatabaseService.ExecuteSingle<Category>(new SqlCommand("SELECT * FROM [dbo].[Category] WHERE [Id] = " + id));
+        SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[Category] WHERE [Id] = @ID");
+        query.Parameters.Add("@ID", SqlDbType.Int);
+        query.Parameters["@ID"].Value = id;
+        Category result = DatabaseService.ExecuteSingle<Category>(query);
+
         return result;
     }
 

@@ -23,18 +23,20 @@ namespace OpenPOS_APP.Services
             };
         }
 
-        public static void Execute(SqlCommand query)
+        public static bool Execute(SqlCommand query)
         {
             try
             {
                 Dbcontext.Open();
                 SqlDataReader reader = query.ExecuteReader();
                 reader.Close();
+                return true;
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine(ex.Message);
                 CloseConnection();
+                return false;
             }
         }
 
@@ -121,7 +123,7 @@ namespace OpenPOS_APP.Services
         {
             // Contains Connection String
             // Delete this string whenever you commit your repo to git
-            return "Data Source=78.47.170.183,1433;Initial Catalog=OpenPOS_dev;User ID=sa;Password=y9mfK6YrK8AvxQ;Integrated Security=false;TrustServerCertificate=True";
+            return "Data Source=78.47.170.183,1433;Initial Catalog=OpenPOS_dev;User ID=sa;Password=o9JRxbGq8p3HFZ;Integrated Security=false;TrustServerCertificate=True";
         }
     }
 }
