@@ -8,6 +8,7 @@ public static class MauiProgram
 {
 	public static MauiApp CreateMauiApp()
 	{
+		Initilize();
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
@@ -17,14 +18,17 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
-#if DEBUG
+		#if DEBUG
 		builder.Logging.AddDebug();
-#endif
-		DatabaseService.Initialize();
-		foreach(User user in UserService.GetAll())
-		{
-            System.Diagnostics.Debug.WriteLine(user.Name);
-        }
+		#endif
         return builder.Build();
 	}
+	private static void Initilize()
+	{
+        DatabaseService.Initialize();
+        foreach (User user in UserService.GetAll())
+        {
+            System.Diagnostics.Debug.WriteLine(user.Name);
+        }
+    }
 }
