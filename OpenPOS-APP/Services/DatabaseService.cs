@@ -37,7 +37,6 @@ namespace OpenPOS_APP.Services
                 System.Diagnostics.Debug.WriteLine(ex.Message);
                 CloseConnection();
             }
-
         }
 
         public static T ExecuteSingle<T>(string query)
@@ -45,9 +44,9 @@ namespace OpenPOS_APP.Services
             using (SqlConnection connection = new SqlConnection(GetConnectionString()))
             {
                 SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@tPatSName", "Your-Parm-Value");
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
+
                 try
                 {
                     return getObject<T>(reader);
@@ -64,9 +63,9 @@ namespace OpenPOS_APP.Services
             using (SqlConnection connection = new SqlConnection(GetConnectionString()))
             {
                 SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@tPatSName", "Your-Parm-Value");
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
+
                 try
                 {
                     return GetList<T>(reader);
@@ -90,6 +89,7 @@ namespace OpenPOS_APP.Services
                     prop.SetValue(obj, Convert.ChangeType(reader[prop.Name].ToString(), propType));
                 }
             }
+
             return obj;
         }
 
@@ -107,6 +107,7 @@ namespace OpenPOS_APP.Services
                 }
                 list.Add(obj);
             }
+
             return list;
         }
 
@@ -114,6 +115,7 @@ namespace OpenPOS_APP.Services
         {
             Dbcontext.Close();
         }
+
         static private string GetConnectionString()
         {
             // Contains Connection String
