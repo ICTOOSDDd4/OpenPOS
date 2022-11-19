@@ -23,13 +23,12 @@ namespace OpenPOS_APP.Services
             };
         }
 
-        public static void Execute(string query)
+        public static void Execute(SqlCommand query)
         {
             try
             {
                 Dbcontext.Open();
-                SqlCommand command = new SqlCommand(query, Dbcontext);
-                SqlDataReader reader = command.ExecuteReader();
+                SqlDataReader reader = query.ExecuteReader();
                 reader.Close();
             }
             catch (Exception ex)

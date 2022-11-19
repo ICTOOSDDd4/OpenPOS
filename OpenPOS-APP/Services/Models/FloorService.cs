@@ -24,7 +24,7 @@ public class FloorService : IModelService<Floor>
     {
         int floorInt = obj.Id;
         
-        DatabaseService.Execute("DELETE FROM [dbo].[Floor] WHERE [ID] = " + floorInt);
+        DatabaseService.Execute(new SqlCommand("DELETE FROM [dbo].[Floor] WHERE [ID] = " + floorInt));
         
         return true;
     }
@@ -34,7 +34,7 @@ public class FloorService : IModelService<Floor>
         int floorInt = obj.Id;
         string q = "storey = '" + obj.Storey + "' WHERE [ID] = " + floorInt;
         
-        DatabaseService.Execute("UPDATE [dbo].[Floor] SET " + q);
+        DatabaseService.Execute(new SqlCommand("UPDATE [dbo].[Floor] SET " + q));
         
         return true;
     }
@@ -43,7 +43,7 @@ public class FloorService : IModelService<Floor>
     {
         string q = "'" + obj.Storey + "'";
         
-        DatabaseService.Execute("INSERT INTO [dbo].[Floor] ([storey]) VALUES (" + q + ")");
+        DatabaseService.Execute(new SqlCommand("INSERT INTO [dbo].[Floor] ([storey]) VALUES (" + q + ")"));
         
         return true;
     }

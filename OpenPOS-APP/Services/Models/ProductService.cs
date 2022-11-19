@@ -24,7 +24,7 @@ public class ProductService : IModelService<Product>
     {
         int productId = obj.Id;
         
-        DatabaseService.Execute("DELETE FROM [dbo].[Product] WHERE [Id] = " + productId);
+        DatabaseService.Execute(new SqlCommand("DELETE FROM [dbo].[Product] WHERE [Id] = " + productId));
         
         return true;
     }
@@ -34,7 +34,7 @@ public class ProductService : IModelService<Product>
         int productId = obj.Id;
         string q = "[Name] = '" + obj.Name + "', [Price] = " + obj.Price + ", [Description] = '" + obj.Description + "' WHERE [Id] = " + productId;
         
-        DatabaseService.Execute("UPDATE [dbo].[Product] SET " + q);
+        DatabaseService.Execute(new SqlCommand("UPDATE [dbo].[Product] SET " + q));
 
         return true;
     }
@@ -43,7 +43,7 @@ public class ProductService : IModelService<Product>
     {
         string q = "('" + obj.Name + "', " + obj.Price + ", '" + obj.Description + "')";
         
-        DatabaseService.Execute("INSERT INTO [dbo].[Product] ([Name], [Price], [Description]) VALUES " + q);
+        DatabaseService.Execute(new SqlCommand("INSERT INTO [dbo].[Product] ([Name], [Price], [Description]) VALUES " + q));
         
         return true;
     }

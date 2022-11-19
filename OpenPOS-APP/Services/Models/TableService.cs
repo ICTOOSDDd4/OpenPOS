@@ -24,7 +24,7 @@ public class TableService : IModelService<Table>
     {
         int tableId = obj.Id;
         
-        DatabaseService.Execute("DELETE FROM [dbo].[restaurant_table] WHERE id = '" + tableId + "'");
+        DatabaseService.Execute(new SqlCommand("DELETE FROM [dbo].[restaurant_table] WHERE id = '" + tableId + "'"));
 
         return true;
     }
@@ -35,7 +35,7 @@ public class TableService : IModelService<Table>
         string q = "table_number = '" + obj.Table_number + "', bill_id = '" + obj.Bill_id + "', floor_id = '" +
                    obj.Floor_id + "' WHERE id = '" + tableId + "'";
 
-        DatabaseService.Execute("UPDATE [dbo].[restaurant_table] SET " + q );
+        DatabaseService.Execute(new SqlCommand("UPDATE [dbo].[restaurant_table] SET " + q) );
 
         return true;
     }
@@ -44,7 +44,7 @@ public class TableService : IModelService<Table>
     {
         string q = "'" + obj.Table_number + "', '" + obj.Bill_id + "', '" + obj.Floor_id + "'";
 
-        DatabaseService.Execute("INSERT INTO [dbo].[restaurant_table] (table_number, bill_id, floor_id) VALUES (" + q + ")");
+        DatabaseService.Execute(new SqlCommand("INSERT INTO [dbo].[restaurant_table] (table_number, bill_id, floor_id) VALUES (" + q + ")"));
 
         return true;
     }

@@ -24,7 +24,7 @@ public class RoleService : IModelService<Role>
     {
         int roleId = obj.Id;
         
-        DatabaseService.Execute("DELETE FROM [dbo].[role] WHERE id = " + roleId);
+        DatabaseService.Execute(new SqlCommand("DELETE FROM [dbo].[role] WHERE id = " + roleId));
         
         return true;
     }
@@ -34,7 +34,7 @@ public class RoleService : IModelService<Role>
         int roleId = obj.Id;
         string q = "title = '" + obj.Title + "' WHERE id = " + roleId;
         
-        DatabaseService.Execute("UPDATE [dbo].[role] SET " + q);
+        DatabaseService.Execute(new SqlCommand("UPDATE [dbo].[role] SET " + q));
         
         return true;
     }
@@ -43,7 +43,7 @@ public class RoleService : IModelService<Role>
     {
         string title = obj.Title;
         
-        DatabaseService.Execute("INSERT INTO [dbo].[role] (title) VALUES ('" + title + "')");
+        DatabaseService.Execute(new SqlCommand("INSERT INTO [dbo].[role] (title) VALUES ('" + title + "')"));
         
         return true;
     }

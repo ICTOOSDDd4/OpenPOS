@@ -23,7 +23,7 @@ public class CategoryService : IModelService<Category>
     {
         int categoryId = obj.Id;
         
-       DatabaseService.Execute("DELETE FROM [dbo].[Category] WHERE [Id] = " + categoryId);
+       DatabaseService.Execute(new SqlCommand("DELETE FROM [dbo].[Category] WHERE [Id] = " + categoryId));
        
         return true;
     }
@@ -33,14 +33,14 @@ public class CategoryService : IModelService<Category>
         int categoryId = obj.Id;
         string q = "name = '" + obj.Name + "' WHERE [Id] = " + categoryId;
         
-        DatabaseService.Execute("UPDATE [dbo].[Category] SET " + q);
+        DatabaseService.Execute(new SqlCommand("UPDATE [dbo].[Category] SET " + q));
         
         return true;
     }
 
     public static bool Create(Category obj)
     {
-        DatabaseService.Execute("INSERT INTO [dbo].[Category] ([Name]) VALUES ('" + obj.Name + "')");
+        DatabaseService.Execute(new SqlCommand("INSERT INTO [dbo].[Category] ([Name]) VALUES ('" + obj.Name + "')"));
         
         return true;
     }

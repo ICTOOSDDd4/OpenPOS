@@ -24,7 +24,7 @@ public class OrderService : IModelService<Order>
     {
         int orderId = obj.Id;
         
-       DatabaseService.Execute("DELETE FROM [dbo].[Order] WHERE ID = " + orderId);
+       DatabaseService.Execute(new SqlCommand("DELETE FROM [dbo].[Order] WHERE ID = " + orderId));
        
        return true;
     }
@@ -35,7 +35,7 @@ public class OrderService : IModelService<Order>
         string q = "status = " + obj.Status + ", User_id = " + obj.User_id + ", bill_id = " + obj.Bill_id +
                    "WHERE Id = " + orderId;
         
-        DatabaseService.Execute("UPDATE [dbo].[Order] SET " + q);
+        DatabaseService.Execute(new SqlCommand("UPDATE [dbo].[Order] SET " + q));
         
         return true;
     }
@@ -44,7 +44,7 @@ public class OrderService : IModelService<Order>
     {
         string q = obj.Status + ", " + obj.User_id + ", " + obj.Bill_id;
         
-        DatabaseService.Execute("INSERT INTO [dbo].[Order] (status, User_id, bill_id) VALUES (" + q +")");
+        DatabaseService.Execute(new SqlCommand("INSERT INTO [dbo].[Order] (status, User_id, bill_id) VALUES (" + q +")"));
         
         return true;
     }
