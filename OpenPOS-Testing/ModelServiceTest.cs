@@ -19,7 +19,7 @@ public class ModelServiceTest
         var a = Assembly.GetExecutingAssembly();
         DatabaseSettings dbSettings = new DatabaseSettings();
         using var stream = a.GetManifestResourceStream("OpenPOS_APP.appsettings.json");
-
+        
             if (stream != null)
             {
                 // Adding config file into the MAUI configuration
@@ -28,7 +28,7 @@ public class ModelServiceTest
                     .Build();
                 config.GetSection("DATABASE_CONNECTION").Bind(dbSettings);
             }
-
+        
         DatabaseService.Initialize(dbSettings.DatabaseConnectionString);
     }
 
