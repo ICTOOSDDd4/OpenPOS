@@ -31,7 +31,9 @@ namespace OpenPOS_APP.Services
                 SqlCommand command = new SqlCommand(query, Dbcontext);
                 SqlDataReader reader = command.ExecuteReader();
                 reader.Close();
-            } catch (Exception ex) { 
+            }
+            catch (Exception ex)
+            {
                 System.Diagnostics.Debug.WriteLine(ex.Message);
                 CloseConnection();
             }
@@ -43,6 +45,7 @@ namespace OpenPOS_APP.Services
             using (SqlConnection connection = new SqlConnection(GetConnectionString()))
             {
                 SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@tPatSName", "Your-Parm-Value");
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
                 try
@@ -61,6 +64,7 @@ namespace OpenPOS_APP.Services
             using (SqlConnection connection = new SqlConnection(GetConnectionString()))
             {
                 SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@tPatSName", "Your-Parm-Value");
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
                 try
@@ -74,7 +78,7 @@ namespace OpenPOS_APP.Services
             }
         }
 
-        private static T getObject<T> (SqlDataReader reader)
+        private static T getObject<T>(SqlDataReader reader)
         {
             var type = typeof(T);
             T obj = (T)Activator.CreateInstance(type);
@@ -114,7 +118,7 @@ namespace OpenPOS_APP.Services
         {
             // Contains Connection String
             // Delete this string whenever you commit your repo to git
-            return "Data Source=78.47.170.183,1433;Initial Catalog=OpenPOS_dev;User ID=sa;Password=54RixO9qWdT;Integrated Security=false;TrustServerCertificate=True";
+            return "";
         }
     }
 }
