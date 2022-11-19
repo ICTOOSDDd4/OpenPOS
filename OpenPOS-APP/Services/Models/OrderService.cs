@@ -8,6 +8,7 @@ public class OrderService : IModelService<Order>
     public static List<Order> GetAll()
     {
         List<Order> resultList = DatabaseService.Execute<Order>("SELECT * FROM [dbo].[Order]");
+        
         return resultList;
     }
 
@@ -21,7 +22,9 @@ public class OrderService : IModelService<Order>
     public static bool Delete(Order obj)
     {
         int orderId = obj.Id;
+        
        DatabaseService.Execute("DELETE FROM [dbo].[Order] WHERE ID = " + orderId);
+       
        return true;
     }
 
@@ -32,6 +35,7 @@ public class OrderService : IModelService<Order>
                    "WHERE Id = " + orderId;
         
         DatabaseService.Execute("UPDATE [dbo].[Order] SET " + q);
+        
         return true;
     }
 
@@ -40,6 +44,7 @@ public class OrderService : IModelService<Order>
         string q = obj.Status + ", " + obj.User_id + ", " + obj.Bill_id;
         
         DatabaseService.Execute("INSERT INTO [dbo].[Order] (status, User_id, bill_id) VALUES (" + q +")");
+        
         return true;
     }
 }

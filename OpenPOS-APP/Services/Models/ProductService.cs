@@ -8,19 +8,23 @@ public class ProductService : IModelService<Product>
     public static List<Product> GetAll()
     {
         List<Product> resultList = DatabaseService.Execute<Product>("SELECT * FROM [dbo].[Product]");
+        
         return resultList;
     }
 
     public static Product FindByID(int id)
     {
         Product result = DatabaseService.ExecuteSingle<Product>("SELECT * FROM [dbo].[Product] WHERE [Id] = " + id);
+        
         return result;
     }
 
     public static bool Delete(Product obj)
     {
         int productId = obj.Id;
+        
         DatabaseService.Execute("DELETE FROM [dbo].[Product] WHERE [Id] = " + productId);
+        
         return true;
     }
 
@@ -37,7 +41,9 @@ public class ProductService : IModelService<Product>
     public static bool Create(Product obj)
     {
         string q = "('" + obj.Name + "', " + obj.Price + ", '" + obj.Description + "')";
+        
         DatabaseService.Execute("INSERT INTO [dbo].[Product] ([Name], [Price], [Description]) VALUES " + q);
+        
         return true;
     }
 }

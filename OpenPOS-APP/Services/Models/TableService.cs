@@ -22,6 +22,7 @@ public class TableService : IModelService<Table>
     public static bool Delete(Table obj)
     {
         int tableId = obj.Id;
+        
         DatabaseService.Execute("DELETE FROM [dbo].[restaurant_table] WHERE id = '" + tableId + "'");
 
         return true;
@@ -30,7 +31,6 @@ public class TableService : IModelService<Table>
     public static bool Update(Table obj)
     {
         int tableId = obj.Id;
-
         string q = "table_number = '" + obj.Table_number + "', bill_id = '" + obj.Bill_id + "', floor_id = '" +
                    obj.Floor_id + "' WHERE id = '" + tableId + "'";
 
