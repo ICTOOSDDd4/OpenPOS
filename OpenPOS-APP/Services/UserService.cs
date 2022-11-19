@@ -9,8 +9,7 @@ public class UserService: IModelService<User>
 {
     public static List<User> GetAll()
     {
-        List<User> resultList = new List<User>();
-        Object reader = DatabaseService.Execute("SELECT * FROM [dbo].[user]",);
+        List<User> resultList = DatabaseService.Execute<User>("SELECT * FROM [dbo].[user]");
 
         return resultList;
     }

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using OpenPOS_APP.Models;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using System.Linq;
@@ -14,62 +16,79 @@ namespace OpenPOS_APP.Services
         public static SqlConnection Dbcontext { get; private set; }
         public static void Initialize()
         {
-            OpenSqlConnection();
+            string connectionString = GetConnectionString();
+            Dbcontext = new SqlConnection
+            {
+                ConnectionString = connectionString
+            };
         }
         public static void CloseConnection()
         {
             CloseSQLConnection();
         }
 
-        public static List<List<string>> Execute(String query, Object model)
+        public static void Execute(string query)
         {
-            Dbcontext.Open();
-            using (SqlCommand command = new SqlCommand(query, Dbcontext))
+            try
             {
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    System.Diagnostics.Debug.WriteLine(Environment.NewLine + "Retrieving data from database..." + Environment.NewLine);
-                    System.Diagnostics.Debug.WriteLine("Retrieved records:");
+                Dbcontext.Open();
+                SqlCommand command = new SqlCommand(query, Dbcontext);
+                SqlDataReader reader = command.ExecuteReader();
+                CloseConnection();
+            } catch (Exception ex) { 
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                CloseConnection();
+            }
 
-                    //check if there are records
-                    if (reader.HasRows)
+        }
+        public static List<T> Execute<T>(String query)
+        {
+            try
+            {
+                Dbcontext.Open();
+                using (SqlCommand command = new SqlCommand(query, Dbcontext))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        List<List<string>> result = new List<List<string>>();
-                        while (reader.Read())
+                        if (reader.HasRows)
                         {
-                            int count = 0;
-                            List<string> list = new List<string>();
-                            foreach (PropertyInfo prop in model.GetType().GetProperties())
-                            {
-                                list.Add(reader[count].ToString());
-                                count++;
-                            }
-                            result.Add(list);
+                            List<T> list = GetList<T>(reader);
+                            CloseConnection();
+                            return list;
                         }
-                        return result;
-                    }
-                    else
-                    {
-                        System.Diagnostics.Debug.WriteLine("No data found.");
-                        throw new SqlNullValueException();
+                        else
+                        {
+                            System.Diagnostics.Debug.WriteLine("No data found.");
+                            CloseConnection();
+                            throw new SqlNullValueException();
+                        }
                     }
                 }
             }
+            catch (SqlException e)
+            {
+                System.Diagnostics.Debug.WriteLine($"Failed to execute {query}");
+                CloseConnection();
+                throw new Exception();
+            }
+
         }
 
-        private static void OpenSqlConnection()
+        private static List<T> GetList<T>(SqlDataReader reader)
         {
-            string connectionString = GetConnectionString();
-            Dbcontext = new SqlConnection
+            List<T> list = new List<T>();
+            while (reader.Read())
             {
-                ConnectionString = connectionString
-            };
-            //using (Dbcontext = new SqlConnection())
-            //{
-            //    Dbcontext.ConnectionString = connectionString;
-
-            //    Dbcontext.Open();
-            //}
+                var type = typeof(T);
+                T obj = (T)Activator.CreateInstance(type);
+                foreach (var prop in type.GetProperties())
+                {
+                    var propType = prop.PropertyType;
+                    prop.SetValue(obj, Convert.ChangeType(reader[prop.Name].ToString(), propType));
+                }
+                list.Add(obj);
+            }
+            return list;
         }
 
         private static void CloseSQLConnection()
@@ -78,6 +97,8 @@ namespace OpenPOS_APP.Services
         }
         static private string GetConnectionString()
         {
+            // Contains Connection String
+            // Delete this string whenever you commit your repo to git
             return "";
         }
     }
