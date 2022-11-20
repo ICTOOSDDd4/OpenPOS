@@ -29,24 +29,7 @@ public static class MauiProgram
 			});
 		
 		// Searching and importing the appsettings.json file
-      var a = Assembly.GetExecutingAssembly();
-      using var stream = a.GetManifestResourceStream("OpenPOS_APP.appsettings.json");
-
-      if (stream != null)
-      {
-	      var config = new ConfigurationBuilder()
-		      .AddJsonStream(stream)
-		      .Build();
-	      builder.Configuration.AddConfiguration(config);
-	      
-	      ApplicationSettings.DbSett = config.GetRequiredSection("DATABASE_CONNECTION").Get<DatabaseSettings>();
-	      if (ApplicationSettings.DbSett != null)
-	      {
-		      System.Diagnostics.Debug.WriteLine(ApplicationSettings.DbSett.connection_string);
-		      DatabaseService.Initialize();
-	      }
-      }
-      else throw new Exception();
+      Initialize();
       
 #if DEBUG
       builder.Logging.AddDebug();
@@ -54,12 +37,20 @@ public static class MauiProgram
 
 		return builder.Build();
 	}
-	// private static void Initialize()
-	// {
- //        DatabaseService.Initialize();
- //        foreach (User user in UserService.GetAll())
- //        {
- //            System.Diagnostics.Debug.WriteLine(user.Name);
- //        }
- //    }
+	private static void Initialize()
+	{
+		var a = Assembly.GetExecutingAssembly();
+		using var stream = a.GetManifestResourceStream("OpenPOS_APP.appsettings.json");
+		if (stream != null)
+		{
+			var config = new ConfigurationBuilder()
+				.AddJsonStream(stream)
+				.Build();
+			ApplicationSettings.DbSett = config.GetRequiredSection("DATABASE_CONNECTION").Get<DatabaseSettings>();
+			if (ApplicationSettings.DbSett != null)
+			{
+				DatabaseService.Initialize();
+			}
+		} else throw new ApplicationException("Can't find appsettings.json file");
+	}
 }
