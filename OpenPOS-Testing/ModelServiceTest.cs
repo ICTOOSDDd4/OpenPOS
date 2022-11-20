@@ -10,32 +10,32 @@ namespace OpenPOS_Testing;
 [TestFixture]
 public class ModelServiceTest
 {
-    public static IConfiguration InitConfiguration()
+    public static void ConnectionString()
     {
         var a = Assembly.GetExecutingAssembly();
         using var stream = a.GetManifestResourceStream("OpenPOS_Testing.appsettings.test.json");
-        if (stream != null)
-        {
-            var config = new ConfigurationBuilder()
-                .AddJsonStream(stream)
-                .Build();
-            
-            return config;
-        }
+      if (stream != null)
+      {
+         var config = new ConfigurationBuilder()
+             .AddJsonStream(stream)
+             .Build();
 
-        return null;
+         ApplicationSettings.DbSettings = config.GetRequiredSection("DATABASE_CONNECTION").Get<DatabaseSettings>();
+      }
+      else throw new Exception();
     }
     
     [SetUp]
     public void SetUp()
     {
-        var config = InitConfiguration();
-        DatabaseService.Initialize(config["DATABASE_CONNECTION.connection_string"]);
+      ConnectionString();
+        DatabaseService.Initialize(ApplicationSettings.DbSettings.DatabaseConnectionString);
     }
 
     [Test]
     public void UserService_GetAllUsers_ReturnsAllUsers()
     {
+      DatabaseService.Initialize(ApplicationSettings.DbSettings.DatabaseConnectionString);
         var users = UserService.GetAll();
         Assert.Greater(users.Count, 1);
     }
@@ -58,6 +58,7 @@ public class ModelServiceTest
     [Test]
     public void UserService_CreateUser_ReturnsTrue()
     {
+
         var user = new User
         {
             Name = "Voornaam",
