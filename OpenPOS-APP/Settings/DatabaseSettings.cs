@@ -9,7 +9,19 @@ namespace OpenPOS_APP.Settings
 {
    public class DatabaseSettings
    {
-      public string DatabaseConnectionString { get; set; }
-      
+      private string _connection_string;
+      public string connection_string
+      {
+         get
+         {
+            return _connection_string;
+         }
+         set
+         {
+            ArgumentNullException.ThrowIfNullOrEmpty(nameof(value));
+            _connection_string = value;
+         }
+      }
+
    }
 }

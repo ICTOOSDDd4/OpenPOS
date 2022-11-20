@@ -34,14 +34,17 @@ public static class MauiProgram
 
       if (stream != null)
       {
-	      // Adding config file into the MAUI configuration
 	      var config = new ConfigurationBuilder()
 		      .AddJsonStream(stream)
 		      .Build();
 	      builder.Configuration.AddConfiguration(config);
-
-	      // Use Add Transient to add the configuration to the right page.
-	      builder.Services.AddTransient<MainPage>();
+	      
+	      ApplicationSettings.DbSett = config.GetRequiredSection("DATABASE_CONNECTION").Get<DatabaseSettings>();
+	      if (ApplicationSettings.DbSett != null)
+	      {
+		      System.Diagnostics.Debug.WriteLine(ApplicationSettings.DbSett.connection_string);
+		      DatabaseService.Initialize();
+	      }
       }
       else throw new Exception();
       

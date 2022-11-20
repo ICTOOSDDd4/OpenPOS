@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using OpenPOS_APP.Settings;
 
 namespace OpenPOS_APP.Services
 {
@@ -15,11 +16,12 @@ namespace OpenPOS_APP.Services
     {
         private static string _connectionString;
         public static SqlConnection Dbcontext { get; private set; }
-        public static void Initialize(string connection)
+        public static void Initialize()
         {
+            _connectionString = ApplicationSettings.DbSett.connection_string;
             Dbcontext = new SqlConnection
             {
-                ConnectionString = connection
+                ConnectionString = _connectionString
             };
         }
 

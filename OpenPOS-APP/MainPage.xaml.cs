@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using OpenPOS_APP.Services;
+using OpenPOS_APP.Services.Models;
 using OpenPOS_APP.Settings;
 
 namespace OpenPOS_APP;
@@ -8,17 +9,17 @@ public partial class MainPage : ContentPage
 {
 	private int _count;
 
-	public MainPage(IConfiguration config)
+	public MainPage()
 
 	{
 		InitializeComponent();
-
+		_count = UserService.GetAll().Count();
 		// Starting up DB connection
-		var settings = config.GetRequiredSection("DATABASE_CONNECTION").Get<DatabaseSettings>();
-		if (settings != null) DatabaseService.Initialize(settings.DatabaseConnectionString);
+		// var settings = config.GetRequiredSection("DATABASE_CONNECTION").Get<DatabaseSettings>();
+		// if (settings != null) DatabaseService.Initialize(settings.DatabaseConnectionString);
 	}
 
-	private async void OnCounterClicked(object sender, EventArgs e)
+	private void OnCounterClicked(object sender, EventArgs e)
 	{
 		_count++;
 
