@@ -56,7 +56,7 @@ public class ModelServiceTest
     }
 
     [Test]
-    public void UserService_CreateUser_ReturnsTrue()
+    public void UserService_CreateUser_ReturnsObject()
     {
 
         var user = new User
@@ -67,7 +67,7 @@ public class ModelServiceTest
             Password = "TestPassword"
         };
         var result = UserService.Create(user);
-        Assert.IsTrue(result);
+        Assert.AreEqual(user.Email, result.Email);
     }
 
     [Test]
