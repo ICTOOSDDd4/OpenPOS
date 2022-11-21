@@ -63,7 +63,7 @@
                 Clicked="OnLoginButtonClicked"
                 HorizontalOptions="Center"
                 TextColor="Black"
-                BackgroundColor="Gray"   
+                BackgroundColor="Gray" CornerRadius="10"   
              />
 
         </VerticalStackLayout>
