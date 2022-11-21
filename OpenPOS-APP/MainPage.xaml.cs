@@ -23,10 +23,6 @@ public partial class MainPage : ContentPage
 
 		SemanticScreenReader.Announce(CounterBtn.Text);
 
-      var settings = _configuration.GetRequiredSection("TEST").Get<Settings>();
-		await DisplayAlert("Config", $"{nameof(settings.testing_string)}: {settings.testing_string}" +
-            $"{settings.testing_int} :  {settings.testing_int}", "OK");
-
    }
 
     
