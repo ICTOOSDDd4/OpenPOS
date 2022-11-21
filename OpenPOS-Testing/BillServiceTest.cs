@@ -54,7 +54,7 @@ public class BillServiceTest
         };
         var result = BillService.Create(bill);
         _bill = result;
-        Assert.AreEqual(bill.User_id, result.User_id);
+        Assert.That(result.User_id, Is.EqualTo(_bill.User_id));
     }
 
     [Test]
@@ -62,17 +62,21 @@ public class BillServiceTest
     {
         BillService_Createbill_ReturnsObject();
         var bill = BillService.FindByID(_bill.Id);
-        Assert.AreEqual(_bill.User_id, bill.User_id);
+        Assert.That(bill.User_id, Is.EqualTo(_bill.User_id));
         BillService_Deletebill_ReturnsTrue();
     }
 
     [Test]
     public void BillService_Updatebill_ReturnsTrue()
     {
+        BillService_Createbill_ReturnsObject();
         Bill bill = BillService.FindByID(_bill.Id);
+        Assert.IsTrue(bill.Paid);
         bill.Paid = false;
         var result = BillService.Update(bill);
         Assert.IsTrue(result);
+        Assert.That(BillService.FindByID(_bill.Id).Paid, Is.EqualTo(false));
+        BillService_Deletebill_ReturnsTrue();
     }
 
 
@@ -82,5 +86,6 @@ public class BillServiceTest
         var bill = BillService.FindByID(_bill.Id);
         var result = BillService.Delete(bill);
         Assert.IsTrue(result);
+        Assert.That(BillService.FindByID(_bill.Id).User_id, Is.EqualTo(0));
     }
 }

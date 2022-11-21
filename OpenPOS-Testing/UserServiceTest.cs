@@ -56,7 +56,7 @@ public class UserServiceTest
         var result = UserService.Create(user);
         
         _user = result;
-        Assert.AreEqual(user.Email, result.Email);
+        Assert.That(user.Email, Is.EqualTo(_user.Email));
     }
     
     [Test]
@@ -64,7 +64,7 @@ public class UserServiceTest
     {
         UserService_CreateUser_ReturnsObject();
         var user = UserService.FindByID(_user.Id);
-        Assert.AreEqual(_user.Email, user.Email);
+        Assert.That(user.Email, Is.EqualTo(_user.Email));
         UserService_DeleteUser_ReturnsTrue();
     }
 
@@ -72,12 +72,14 @@ public class UserServiceTest
     public void UserService_UpdateUser_ReturnsTrue()
     {
         UserService_CreateUser_ReturnsObject();
+
         var user = UserService.FindByID(_user.Id);
-        
+        Assert.That(user.Name, Is.Not.EqualTo("Gerard"));
         user.Name = "Gerard";
         user.Last_name = "Joling";
         var result = UserService.Update(user);
         Assert.IsTrue(result);
+        Assert.That(UserService.FindByID(_user.Id).Name, Is.EqualTo("Gerard"));
         UserService_DeleteUser_ReturnsTrue();
     }
 
@@ -87,5 +89,6 @@ public class UserServiceTest
         var user = UserService.FindByID(_user.Id);
         var result = UserService.Delete(user);
         Assert.IsTrue(result);
+        Assert.IsNull(UserService.FindByID(_user.Id).Name);
     }
 }
