@@ -1,1 +1,0 @@
-C:\Users\tymen\Documents\A - Coderen\School\C#\KBS\OpenPOS\OpenPOS-App\OpenPOS-App.csproj;x64
