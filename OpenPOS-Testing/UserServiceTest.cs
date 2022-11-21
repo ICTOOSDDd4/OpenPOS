@@ -52,8 +52,10 @@ public class UserServiceTest
             Email = "email",
             Password = "TestPassword"
         };
-        _user = user;
+
         var result = UserService.Create(user);
+        
+        _user = result;
         Assert.AreEqual(user.Email, result.Email);
     }
     
@@ -69,11 +71,14 @@ public class UserServiceTest
     [Test]
     public void UserService_UpdateUser_ReturnsTrue()
     {
+        UserService_CreateUser_ReturnsObject();
         var user = UserService.FindByID(_user.Id);
+        
         user.Name = "Gerard";
         user.Last_name = "Joling";
         var result = UserService.Update(user);
         Assert.IsTrue(result);
+        UserService_DeleteUser_ReturnsTrue();
     }
 
     [Test]

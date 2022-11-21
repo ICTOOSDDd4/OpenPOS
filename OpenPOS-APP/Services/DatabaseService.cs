@@ -30,6 +30,7 @@ namespace OpenPOS_APP.Services
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 System.Diagnostics.Debug.WriteLine(ex.Message);
                 CloseConnection();
                 return false;
