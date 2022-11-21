@@ -48,13 +48,13 @@ public class FloorService : IModelService<Floor>
         return DatabaseService.Execute(query);
     }
 
-    public static bool Create(Floor obj)
+    public static Floor Create(Floor obj)
     {
         SqlCommand query = new SqlCommand("INSERT INTO [dbo].[Floor] ([storey]) VALUES (@Storey)");
         
         query.Parameters.Add("@Storey", SqlDbType.VarChar);
         query.Parameters["@Storey"].Value = obj.Storey;
         
-        return DatabaseService.Execute(query);
+        return DatabaseService.ExecuteSingle<Floor>(query);
     }
 }

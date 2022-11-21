@@ -10,5 +10,5 @@ public interface IModelService<T>
 
     public static abstract bool Update(T obj);
 
-    public static abstract bool Create(T obj);
+    public static abstract T Create(T obj);
 }

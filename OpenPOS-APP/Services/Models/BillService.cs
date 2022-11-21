@@ -51,7 +51,7 @@ public class BillService : IModelService<Bill>
         return DatabaseService.Execute(query);
     }
 
-    public static bool Create(Bill obj)
+    public static Bill Create(Bill obj)
     {
         SqlCommand query = new SqlCommand("INSERT INTO [dbo].[Bill] ([user_id], [paid]) VALUES (@userid, @paid)");
         
@@ -60,6 +60,6 @@ public class BillService : IModelService<Bill>
         query.Parameters.Add("@paid", SqlDbType.Bit);
         query.Parameters["@paid"].Value = obj.Paid;
         
-        return DatabaseService.Execute(query);
+        return DatabaseService.ExecuteSingle<Bill>(query);
     }
 }

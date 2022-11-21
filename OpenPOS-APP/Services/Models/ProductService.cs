@@ -52,7 +52,7 @@ public class ProductService : IModelService<Product>
         return DatabaseService.Execute(query);
     }
 
-    public static bool Create(Product obj)
+    public static Product Create(Product obj)
     {
         SqlCommand query = new SqlCommand("INSERT INTO [dbo].[Product] ([Name], [Price], [Description]) VALUES (@Name, @Price, @Description)");
         
@@ -63,6 +63,6 @@ public class ProductService : IModelService<Product>
         query.Parameters.Add("@Description", SqlDbType.VarChar);
         query.Parameters["@Description"].Value = obj.Description;
         
-        return DatabaseService.Execute(query);
+        return DatabaseService.ExecuteSingle<Product>(query);
     }
 }

@@ -48,13 +48,13 @@ public class RoleService : IModelService<Role>
         return DatabaseService.Execute(query);
     }
 
-    public static bool Create(Role obj)
+    public static Role Create(Role obj)
     {
         SqlCommand query = new SqlCommand("INSERT INTO [dbo].[Role] ([title]) VALUES (@Title)");
         
         query.Parameters.Add("@Title", SqlDbType.VarChar);
         query.Parameters["@Title"].Value = obj.Title;
         
-        return DatabaseService.Execute(query);
+        return DatabaseService.ExecuteSingle<Role>(query);
     }
 }

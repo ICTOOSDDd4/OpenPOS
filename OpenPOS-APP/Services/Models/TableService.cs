@@ -52,7 +52,7 @@ public class TableService : IModelService<Table>
         return DatabaseService.Execute(query);
     }
 
-    public static bool Create(Table obj)
+    public static Table Create(Table obj)
     {
         SqlCommand query = new SqlCommand("INSERT INTO [dbo].[restaurant_table] ([table_number], [bill_id], [floor_id]) VALUES (@TableNumber, @BillId, @FloorId)");
         
@@ -63,6 +63,6 @@ public class TableService : IModelService<Table>
         query.Parameters.Add("@FloorId", SqlDbType.Int);
         query.Parameters["@FloorId"].Value = obj.Floor_id;
            
-        return DatabaseService.Execute(query);
+        return DatabaseService.ExecuteSingle<Table>(query);
     }
 }

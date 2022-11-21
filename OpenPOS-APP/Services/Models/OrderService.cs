@@ -50,7 +50,7 @@ public class OrderService : IModelService<Order>
         return DatabaseService.Execute(query);
     }
 
-    public static bool Create(Order obj)
+    public static Order Create(Order obj)
     {
         SqlCommand query = new SqlCommand("INSERT INTO [dbo].[order] ([status], [user_id], [bill_id]) VALUES (@status, @userid, @billId)");
 
@@ -61,6 +61,6 @@ public class OrderService : IModelService<Order>
         query.Parameters.Add("@billId", SqlDbType.Int);
         query.Parameters["@billId"].Value = obj.Bill_id;
 
-        return DatabaseService.Execute(query);
+        return DatabaseService.ExecuteSingle<Order>(query);
     }
 }

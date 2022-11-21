@@ -54,7 +54,7 @@ public class UserService : IModelService<User>
         return DatabaseService.Execute(query);
     }
 
-    public static bool Create(User obj)
+    public static User Create(User obj)
     {
         SqlCommand query = new SqlCommand("INSERT INTO [dbo].[user] ([Name], [last_name], [email], [password]) VALUES (@Name" + ", @LastName," + " @Email," + " @Password)", DatabaseService.Dbcontext);
         
@@ -69,6 +69,6 @@ public class UserService : IModelService<User>
         
         Console.WriteLine(query.ToString());
         
-        return DatabaseService.Execute(query);
+        return DatabaseService.ExecuteSingle<User>(query);
     }
 }

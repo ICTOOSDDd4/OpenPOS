@@ -47,13 +47,13 @@ public class CategoryService : IModelService<Category>
         return DatabaseService.Execute(query);
     }
 
-    public static bool Create(Category obj)
+    public static Category Create(Category obj)
     {
         SqlCommand query = new SqlCommand("INSERT INTO [dbo].[Category] ([Name]) VALUES (@Name)");
         
         query.Parameters.Add("@Name", SqlDbType.VarChar);
         query.Parameters["@Name"].Value = obj.Name;
         
-        return DatabaseService.Execute(query);
+        return DatabaseService.ExecuteSingle<Category>(query);
     }
 }
