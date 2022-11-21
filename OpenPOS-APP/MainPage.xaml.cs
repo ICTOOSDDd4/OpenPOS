@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+
+﻿using OpenPOS_APP.Services.Models;
 namespace OpenPOS_APP;
 
 public partial class MainPage : ContentPage
@@ -6,7 +7,7 @@ public partial class MainPage : ContentPage
 	private string _username;
 	private string _password;
 	private ResourceDictionary AppColors = new ResourceDictionary();
-	public MainPage(IConfiguration config)
+	public MainPage()
 	{
 		InitializeComponent();
 		AppColors.Add("Resources/Styles/Colors.xaml", typeof(ResourceDictionary));
