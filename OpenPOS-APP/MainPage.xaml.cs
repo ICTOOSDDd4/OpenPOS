@@ -20,7 +20,7 @@ public partial class MainPage : ContentPage
 		if (string.IsNullOrEmpty(_password) || string.IsNullOrEmpty(_username))
 		{
 			MainLoginButton.IsEnabled = false;
-         if (AppColors.TryGetValue("Gray", out var color))
+         if (AppColors.TryGetValue("Gray100", out var color))
          {
             MainLoginButton.BackgroundColor = (Color)color;
          }
@@ -42,7 +42,7 @@ public partial class MainPage : ContentPage
 		if (string.IsNullOrEmpty(_password) || string.IsNullOrEmpty(_username))
 		{
 			MainLoginButton.IsEnabled = false;
-         if (AppColors.TryGetValue("Gray", out var color))
+         if (AppColors.TryGetValue("Gray100", out var color))
          {
             MainLoginButton.BackgroundColor = (Color)color;
          }

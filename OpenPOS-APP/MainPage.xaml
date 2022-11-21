@@ -1,8 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="OpenPOS_APP.MainPage"
-             BackgroundColor="White">
+             x:Class="OpenPOS_APP.MainPage">
              
     <ContentPage.Resources>
         <ResourceDictionary Source="Resources/Styles/Colors.xaml"></ResourceDictionary>
@@ -20,9 +19,9 @@
                 HorizontalOptions="Center"/>
 
             <Label
-                Text="Weclome to your OpenPOS Experience"
+                Text="Login to get acces to your OpenPOS Experience"
                 SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+                SemanticProperties.Description="The way to access your OpenPOS Experience"
                 TextColor="Black"
                 FontSize="18"
                 HorizontalOptions="Center" />
@@ -32,12 +31,12 @@
                 Placeholder="Username"
                 TextChanged="OnTextFilledUsername"
                 SemanticProperties.Description="Username"
-                MaxLength="50"
                 TextColor="Black"
-                SelectionLength="50"
-                HorizontalTextAlignment="Center"
                 WidthRequest="250"
+                MaxLength="50"
+                SelectionLength="50"
                 ClearButtonVisibility="WhileEditing"
+                HorizontalOptions="Center"
             />
 
             <Entry
@@ -46,14 +45,12 @@
                 IsPassword="True"
                 TextChanged="OnTextFilledPassword"
                 SemanticProperties.Description="Password"
-                MaximumWidthRequest="500"
                 TextColor="Black"
-                HorizontalTextAlignment="Center"
                 WidthRequest="250"
                 MaxLength="100"
+                MaximumWidthRequest="500"
                 ClearButtonVisibility="WhileEditing"
-                BackgroundColor="{StaticResource OpenPos-Blue}"
-            ></Entry>
+                HorizontalOptions="Center"/>
             
             <Button
                 x:Name="MainLoginButton"
