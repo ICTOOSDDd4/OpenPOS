@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="OpenPOS_APP.MainPage">
+             x:Class="OpenPOS_APP.MainPage"
+             Shell.NavBarIsVisible="False">
              
     <ContentPage.Resources>
         <ResourceDictionary Source="Resources/Styles/Colors.xaml"></ResourceDictionary>
@@ -27,10 +28,10 @@
                 HorizontalOptions="Center" />
 
             <Entry
-                x:Name="UsernameEntry"
-                Placeholder="Username"
+                x:Name="EmailEntry"
+                Placeholder="Email"
                 TextChanged="OnTextFilledUsername"
-                SemanticProperties.Description="Username"
+                SemanticProperties.Description="Email"
                 TextColor="Black"
                 WidthRequest="250"
                 MaxLength="50"
@@ -47,8 +48,8 @@
                 SemanticProperties.Description="Password"
                 TextColor="Black"
                 WidthRequest="250"
-                MaxLength="100"
-                MaximumWidthRequest="500"
+                MaxLength="50"
+                SelectionLength="50"
                 ClearButtonVisibility="WhileEditing"
                 HorizontalOptions="Center"/>
             
@@ -62,7 +63,7 @@
                 TextColor="Black"
                 BackgroundColor="Gray" CornerRadius="10"   
              />
-
+            
         </VerticalStackLayout>
     </ScrollView>
 

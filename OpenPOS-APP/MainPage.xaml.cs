@@ -24,7 +24,7 @@ public partial class MainPage : ContentPage
          {
             MainLoginButton.BackgroundColor = (Color)color;
          }
-         UsernameEntry.Placeholder = "Please enter your username";
+         EmailEntry.Placeholder = "Please enter your email";
 		} 
 		else
 		{
