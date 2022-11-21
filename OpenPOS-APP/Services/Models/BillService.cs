@@ -16,7 +16,7 @@ public class BillService : IModelService<Bill>
 
     public static Bill FindByID(int id)
     {
-        SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[Bill] WHERE [ID] = @ID");
+        SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[Bill] WHERE [id] = @ID");
         
         query.Parameters.Add("@ID", SqlDbType.Int);
         query.Parameters["@ID"].Value = id;
@@ -28,7 +28,7 @@ public class BillService : IModelService<Bill>
 
     public static bool Delete(Bill obj)
     {
-        SqlCommand query = new SqlCommand("DELETE FROM [dbo].[Bill] WHERE [ID] = @BillId");
+        SqlCommand query = new SqlCommand("DELETE FROM [dbo].[Bill] WHERE [id] = @BillId");
         
         query.Parameters.Add("@BillId", SqlDbType.Int);
         query.Parameters["@BillId"].Value = obj.Id;
@@ -53,13 +53,17 @@ public class BillService : IModelService<Bill>
 
     public static Bill Create(Bill obj)
     {
-        SqlCommand query = new SqlCommand("INSERT INTO [dbo].[Bill] ([user_id], [paid])  OUTPUT  inserted.*  VALUES (@userid, @paid)");
+        SqlCommand query = new SqlCommand("INSERT INTO [dbo].[Bill] ([user_id], [paid], [created_at], [updated_at])  OUTPUT  inserted.*  VALUES (@userid, @paid, @created_at, @updated_at)");
         
         query.Parameters.Add("@userid", SqlDbType.Int);
         query.Parameters["@userid"].Value = obj.User_id;
         query.Parameters.Add("@paid", SqlDbType.Bit);
         query.Parameters["@paid"].Value = obj.Paid;
-        
+        query.Parameters.Add("@created_at", SqlDbType.DateTime);
+        query.Parameters["@created_at"].Value = obj.Created_at;
+        query.Parameters.Add("@updated_at", SqlDbType.DateTime);
+        query.Parameters["@updated_at"].Value = obj.Updated_at;
+
         return DatabaseService.ExecuteSingle<Bill>(query);
     }
 }

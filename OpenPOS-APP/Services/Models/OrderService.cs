@@ -52,7 +52,7 @@ public class OrderService : IModelService<Order>
 
     public static Order Create(Order obj)
     {
-        SqlCommand query = new SqlCommand("INSERT INTO [dbo].[order] ([status], [user_id], [bill_id])  OUTPUT  inserted.*  VALUES (@status, @userid, @billId)");
+        SqlCommand query = new SqlCommand("INSERT INTO [dbo].[order] ([status], [user_id], [bill_id], [created_at], [updated_at])  OUTPUT  inserted.*  VALUES (@status, @userid, @billId, @created_at, @updated_at)");
 
         query.Parameters.Add("@status", SqlDbType.TinyInt);
         query.Parameters["@status"].Value = obj.Status;
@@ -60,6 +60,10 @@ public class OrderService : IModelService<Order>
         query.Parameters["@userid"].Value = obj.User_id;
         query.Parameters.Add("@billId", SqlDbType.Int);
         query.Parameters["@billId"].Value = obj.Bill_id;
+        query.Parameters.Add("@created_at", SqlDbType.DateTime);
+        query.Parameters["@created_at"].Value = obj.CreatedAt;
+        query.Parameters.Add("@updated_at", SqlDbType.DateTime);
+        query.Parameters["@updated_at"].Value = obj.UpdatedAt;
 
         return DatabaseService.ExecuteSingle<Order>(query);
     }

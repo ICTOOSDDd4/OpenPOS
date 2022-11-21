@@ -1,4 +1,5 @@
 ﻿using System.Data.SqlClient;
+using Microsoft.Maui.Controls;
 using OpenPOS_APP.Settings;
 
 namespace OpenPOS_APP.Services
@@ -16,12 +17,14 @@ namespace OpenPOS_APP.Services
             };
         }
 
-        public static bool Execute(SqlCommand query)
+        public static bool Execute(SqlCommand command)
         {
             try
             {
-                Dbcontext.Open();
-                SqlDataReader reader = query.ExecuteReader();
+                SqlConnection connection = new SqlConnection(GetConnectionString());
+                command.Connection = connection;
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
                 reader.Close();
                 return true;
             }

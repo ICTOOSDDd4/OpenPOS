@@ -3,6 +3,8 @@ using OpenPOS_APP.Services;
 using Microsoft.Extensions.Configuration;
 using System.Reflection;
 using OpenPOS_APP.Settings;
+using OpenPOS_APP.Models;
+using OpenPOS_APP.Services.Models;
 
 namespace OpenPOS_APP;
 
@@ -51,6 +53,10 @@ public static class MauiProgram
 			{
 				DatabaseService.Initialize();
 			}
-		} else throw new ApplicationException("Can't find appsettings.json file");
+            Bill bill = BillService.FindByID(12);
+            bill.Paid = false;
+            var result = BillService.Update(bill);
+			System.Diagnostics.Debug.WriteLine(result);
+        } else throw new ApplicationException("Can't find appsettings.json file");
 	}
 }
