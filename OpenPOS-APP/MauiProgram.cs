@@ -43,8 +43,10 @@ public static class MauiProgram
 			var config = new ConfigurationBuilder()
 				.AddJsonStream(stream)
 				.Build();
-			
+
 			ApplicationSettings.DbSett = config.GetRequiredSection("DATABASE_CONNECTION").Get<DatabaseSettings>();
+			ApplicationSettings.TikkieSet = config.GetRequiredSection("TIKKIE_API").Get<TikkieSettings>();
+			
 			if (ApplicationSettings.DbSett != null)
 			{
 				DatabaseService.Initialize();

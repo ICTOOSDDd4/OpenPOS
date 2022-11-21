@@ -2,6 +2,6 @@
 
 public class TikkieSettings
 {
-    public string ApiKey { get; set; }
+    public string Key { get; set; }
     
 }
