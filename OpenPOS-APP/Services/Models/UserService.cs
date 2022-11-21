@@ -28,7 +28,7 @@ public class UserService : IModelService<User>
 
     public static bool Delete(User obj)
     {
-        SqlCommand query = new SqlCommand("DELETE FROM [dbo].[user] WHERE [Id] = @ID");
+        SqlCommand query = new SqlCommand("DELETE FROM [dbo].[user] WHERE [id] = @ID");
         
         query.Parameters.Add("@ID", SqlDbType.Int);
         query.Parameters["@ID"].Value = obj.Id;
