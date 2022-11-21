@@ -1,18 +1,19 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using OpenPOS_APP.Services.Models;
 
 namespace OpenPOS_APP;
 
 public partial class MainPage : ContentPage
 {
 	private int _count;
-	private IConfiguration _configuration;
-	public MainPage(IConfiguration config)
+
+	public MainPage()
+
 	{
 		InitializeComponent();
-		_configuration = config;
+		_count = UserService.GetAll().Count();
 	}
 
-	private async void OnCounterClicked(object sender, EventArgs e)
+	private void OnCounterClicked(object sender, EventArgs e)
 	{
 		_count++;
 
@@ -22,12 +23,7 @@ public partial class MainPage : ContentPage
 			CounterBtn.Text = $"Clicked {_count} times";
 
 		SemanticScreenReader.Announce(CounterBtn.Text);
-
-      var settings = _configuration.GetRequiredSection("TEST").Get<Settings>();
-		await DisplayAlert("Config", $"{nameof(settings.testing_string)}: {settings.testing_string}" +
-            $"{settings.testing_int} :  {settings.testing_int}", "OK");
-
-   }
+	}
 
     
 }
