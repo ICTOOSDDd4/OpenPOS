@@ -8,9 +8,14 @@
             Spacing="25"
             Padding="30,0"
             VerticalOptions="Center">
+<<<<<<< Updated upstream
 
             <Image
                 Source="dotnet_bot.png"
+=======
+            <Image 
+                Source="openpos_logo_v1.png"
+>>>>>>> Stashed changes
                 SemanticProperties.Description="Cute dot net bot waving hi to you!"
                 HeightRequest="200"
                 HorizontalOptions="Center" />
