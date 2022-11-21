@@ -1,5 +1,6 @@
 
-﻿using OpenPOS_APP.Services.Models;
+﻿using System.Reflection;
+ using OpenPOS_APP.Services.Models;
 namespace OpenPOS_APP;
 
 public partial class MainPage : ContentPage
@@ -10,16 +11,20 @@ public partial class MainPage : ContentPage
 	public MainPage()
 	{
 		InitializeComponent();
-		AppColors.Add("Resources/Styles/Colors.xaml", typeof(ResourceDictionary));
+		AppColors.SetAndLoadSource(new Uri("Resources/Styles/Colors.xaml", UriKind.RelativeOrAbsolute), "Resources/Styles/Colors.xaml", this.GetType().GetTypeInfo().Assembly, null );
 	}
 
-	private void OnTextFilledUsername(object sender, EventArgs e)
+	private void OnTextFilledUsername(object sender, TextChangedEventArgs e)
 	{
-		_username = nameof(UsernameEntry.Text);
-		if (string.IsNullOrEmpty(_username))
+		_username = e.NewTextValue;
+		if (string.IsNullOrEmpty(_password) || string.IsNullOrEmpty(_username))
 		{
 			MainLoginButton.IsEnabled = false;
-			UsernameEntry.Placeholder = "Please enter your username";
+         if (AppColors.TryGetValue("Gray", out var color))
+         {
+            MainLoginButton.BackgroundColor = (Color)color;
+         }
+         UsernameEntry.Placeholder = "Please enter your username";
 		} 
 		else
 		{
@@ -31,13 +36,17 @@ public partial class MainPage : ContentPage
 		}
 	}
 
-	private void OnTextFilledPassword(object sender, EventArgs e)
+	private void OnTextFilledPassword(object sender, TextChangedEventArgs e)
 	{
-		_password = nameof(PasswordEntry.Text);
-		if (string.IsNullOrEmpty(_password))
+		_password = e.NewTextValue;
+		if (string.IsNullOrEmpty(_password) || string.IsNullOrEmpty(_username))
 		{
 			MainLoginButton.IsEnabled = false;
-			PasswordEntry.Placeholder = "Please enter your password";
+         if (AppColors.TryGetValue("Gray", out var color))
+         {
+            MainLoginButton.BackgroundColor = (Color)color;
+         }
+         PasswordEntry.Placeholder = "Please enter your password";
 		}
 		else
 		{
@@ -49,9 +58,13 @@ public partial class MainPage : ContentPage
 		}
 	}
 
-	private void OnLoginButtonClicked(object sender, EventArgs e)
+	private async void OnLoginButtonClicked(object sender, EventArgs e)
 	{
 		//TODO: Login auth with DB
+		
+		await DisplayAlert("Test", "Logging in...", "OK");
+
+
 	}
 
     
