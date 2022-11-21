@@ -25,39 +25,45 @@
                 TextColor="Black"
                 FontSize="18"
                 HorizontalOptions="Center" />
-            
+
             <Entry
+                x:Name="UsernameEntry"
                 Placeholder="Username"
-                Text="{Binding Username}"
+                TextChanged="OnTextFilledUsername"
                 SemanticProperties.Description="Username"
-                MaxLength="5"
+                MaxLength="50"
                 TextColor="Black"
-                SelectionLength="5"
+                SelectionLength="50"
                 HorizontalTextAlignment="Center"
-                WidthRequest="500"
+                WidthRequest="250"
+                ClearButtonVisibility="WhileEditing"
             />
 
-            <Line
-                X1="40"
-                Y1="0"
-                X2="40"
-                Y2="0"
-                BackgroundColor="{StaticResource OpenPos-Yellow}"
-            />
-
-            <Label
-                Text="Weclome to your OpenPOS Experience"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
-
+            <Entry
+                x:Name="PasswordEntry"
+                Placeholder="Password"
+                IsPassword="True"
+                TextChanged="OnTextFilledPassword"
+                SemanticProperties.Description="Password"
+                MaximumWidthRequest="500"
+                TextColor="Black"
+                HorizontalTextAlignment="Center"
+                WidthRequest="250"
+                MaxLength="100"
+                ClearButtonVisibility="WhileEditing"
+                BackgroundColor="{StaticResource OpenPos-Blue}"
+            ></Entry>
+            
             <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
+                x:Name="MainLoginButton"
+                Text="LOGIN"
+                SemanticProperties.Hint="Press to login"
+                IsEnabled="False"
+                Clicked="OnLoginButtonClicked"
+                HorizontalOptions="Center"
+                TextColor="Black"
+                BackgroundColor="Gray"   
+             />
 
         </VerticalStackLayout>
     </ScrollView>
