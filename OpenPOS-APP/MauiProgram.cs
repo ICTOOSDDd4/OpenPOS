@@ -1,7 +1,5 @@
 using Microsoft.Extensions.Logging;
-using OpenPOS_APP.Models;
 using OpenPOS_APP.Services;
-using OpenPOS_APP.Services.Models;
 using Microsoft.Extensions.Configuration;
 using System.Reflection;
 using OpenPOS_APP.Settings;
@@ -28,8 +26,7 @@ public static class MauiProgram
 				fonts.AddFont("LeagueSpartan-Thin.ttf", "LeagueSpartanThin");
 			});
 		
-		// Searching and importing the appsettings.json file
-      Initialize();
+		Initialize();
       
 #if DEBUG
       builder.Logging.AddDebug();
@@ -46,6 +43,7 @@ public static class MauiProgram
 			var config = new ConfigurationBuilder()
 				.AddJsonStream(stream)
 				.Build();
+			
 			ApplicationSettings.DbSett = config.GetRequiredSection("DATABASE_CONNECTION").Get<DatabaseSettings>();
 			if (ApplicationSettings.DbSett != null)
 			{

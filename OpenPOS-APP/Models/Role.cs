@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OpenPOS_APP.Models
+﻿namespace OpenPOS_APP.Models
 {
     public class Role
     {

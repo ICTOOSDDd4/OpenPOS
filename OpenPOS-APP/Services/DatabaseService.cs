@@ -1,13 +1,4 @@
-﻿using OpenPOS_APP.Models;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Data.SqlTypes;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.SqlClient;
 using OpenPOS_APP.Settings;
 
 namespace OpenPOS_APP.Services
