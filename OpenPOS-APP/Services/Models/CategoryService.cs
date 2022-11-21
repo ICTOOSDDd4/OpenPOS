@@ -49,7 +49,7 @@ public class CategoryService : IModelService<Category>
 
     public static Category Create(Category obj)
     {
-        SqlCommand query = new SqlCommand("INSERT INTO [dbo].[Category] ([Name]) VALUES (@Name)");
+        SqlCommand query = new SqlCommand("INSERT INTO [dbo].[Category] ([Name])  OUTPUT  inserted.*  VALUES (@Name)");
         
         query.Parameters.Add("@Name", SqlDbType.VarChar);
         query.Parameters["@Name"].Value = obj.Name;

@@ -50,7 +50,7 @@ public class RoleService : IModelService<Role>
 
     public static Role Create(Role obj)
     {
-        SqlCommand query = new SqlCommand("INSERT INTO [dbo].[Role] ([title]) VALUES (@Title)");
+        SqlCommand query = new SqlCommand("INSERT INTO [dbo].[Role] ([title])  OUTPUT  inserted.*  VALUES (@Title)");
         
         query.Parameters.Add("@Title", SqlDbType.VarChar);
         query.Parameters["@Title"].Value = obj.Title;

@@ -52,7 +52,7 @@ public class OrderService : IModelService<Order>
 
     public static Order Create(Order obj)
     {
-        SqlCommand query = new SqlCommand("INSERT INTO [dbo].[order] ([status], [user_id], [bill_id]) VALUES (@status, @userid, @billId)");
+        SqlCommand query = new SqlCommand("INSERT INTO [dbo].[order] ([status], [user_id], [bill_id])  OUTPUT  inserted.*  VALUES (@status, @userid, @billId)");
 
         query.Parameters.Add("@status", SqlDbType.TinyInt);
         query.Parameters["@status"].Value = obj.Status;

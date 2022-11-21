@@ -54,7 +54,7 @@ public class ProductService : IModelService<Product>
 
     public static Product Create(Product obj)
     {
-        SqlCommand query = new SqlCommand("INSERT INTO [dbo].[Product] ([Name], [Price], [Description]) VALUES (@Name, @Price, @Description)");
+        SqlCommand query = new SqlCommand("INSERT INTO [dbo].[Product] ([Name], [Price], [Description])  OUTPUT  inserted.*  VALUES (@Name, @Price, @Description)");
         
         query.Parameters.Add("@Name", SqlDbType.VarChar);
         query.Parameters["@Name"].Value = obj.Name;

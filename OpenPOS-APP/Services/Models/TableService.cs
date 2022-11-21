@@ -54,7 +54,7 @@ public class TableService : IModelService<Table>
 
     public static Table Create(Table obj)
     {
-        SqlCommand query = new SqlCommand("INSERT INTO [dbo].[restaurant_table] ([table_number], [bill_id], [floor_id]) VALUES (@TableNumber, @BillId, @FloorId)");
+        SqlCommand query = new SqlCommand("INSERT INTO [dbo].[restaurant_table] ([table_number], [bill_id], [floor_id])  OUTPUT  inserted.*  VALUES (@TableNumber, @BillId, @FloorId)");
         
         query.Parameters.Add("@TableNumber", SqlDbType.Int);
         query.Parameters["@TableNumber"].Value = obj.Table_number;

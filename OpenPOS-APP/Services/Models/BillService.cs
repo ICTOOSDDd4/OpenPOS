@@ -53,7 +53,7 @@ public class BillService : IModelService<Bill>
 
     public static Bill Create(Bill obj)
     {
-        SqlCommand query = new SqlCommand("INSERT INTO [dbo].[Bill] ([user_id], [paid]) VALUES (@userid, @paid)");
+        SqlCommand query = new SqlCommand("INSERT INTO [dbo].[Bill] ([user_id], [paid])  OUTPUT  inserted.*  VALUES (@userid, @paid)");
         
         query.Parameters.Add("@userid", SqlDbType.Int);
         query.Parameters["@userid"].Value = obj.User_id;

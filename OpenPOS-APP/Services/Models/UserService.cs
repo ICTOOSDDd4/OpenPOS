@@ -56,7 +56,7 @@ public class UserService : IModelService<User>
 
     public static User Create(User obj)
     {
-        SqlCommand query = new SqlCommand("INSERT INTO [dbo].[user] ([Name], [last_name], [email], [password]) VALUES (@Name" + ", @LastName," + " @Email," + " @Password)", DatabaseService.Dbcontext);
+        SqlCommand query = new SqlCommand("INSERT INTO [dbo].[user] ([Name], [last_name], [email], [password]) OUTPUT  inserted.* VALUES (@Name" + ", @LastName," + " @Email," + " @Password)", DatabaseService.Dbcontext);
         
         query.Parameters.Add("@Name", SqlDbType.VarChar);
         query.Parameters["@Name"].Value = obj.Name;
