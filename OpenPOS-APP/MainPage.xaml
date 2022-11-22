@@ -79,10 +79,7 @@
                 <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="CreateNewAccount_Tapped"/>
                     </Label.GestureRecognizers>
-                
-
             </Label>
-            
         </VerticalStackLayout>
     </ScrollView>
 
