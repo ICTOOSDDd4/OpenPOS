@@ -61,7 +61,8 @@
                 Clicked="OnLoginButtonClicked"
                 HorizontalOptions="Center"
                 TextColor="Black"
-                BackgroundColor="Gray" CornerRadius="10"   
+                BackgroundColor="{StaticResource Gray100}" 
+                CornerRadius="10"   
              />
             
             <Label 
@@ -82,5 +83,4 @@
             </Label>
         </VerticalStackLayout>
     </ScrollView>
-
 </ContentPage>
