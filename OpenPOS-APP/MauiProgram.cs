@@ -29,7 +29,7 @@ public static class MauiProgram
 			});
 		
 		Initialize();
-      
+
 #if DEBUG
       builder.Logging.AddDebug();
 #endif
