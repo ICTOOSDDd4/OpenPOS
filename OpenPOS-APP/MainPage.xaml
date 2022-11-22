@@ -64,6 +64,25 @@
                 BackgroundColor="Gray" CornerRadius="10"   
              />
             
+            <Label 
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" >
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Don't have an account? " />
+                        <Span 
+                            Text="Create one here." 
+                            TextColor="Blue" 
+                            TextDecorations="Underline"  />
+                    </FormattedString>
+                </Label.FormattedText>
+                <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="CreateNewAccount_Tapped"/>
+                    </Label.GestureRecognizers>
+                
+
+            </Label>
+            
         </VerticalStackLayout>
     </ScrollView>
 

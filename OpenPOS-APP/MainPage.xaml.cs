@@ -13,7 +13,14 @@ public partial class MainPage : ContentPage
 		InitializeComponent();
 		AppColors.SetAndLoadSource(new Uri("Resources/Styles/Colors.xaml", UriKind.RelativeOrAbsolute), "Resources/Styles/Colors.xaml", this.GetType().GetTypeInfo().Assembly, null );
 	}
+	
+	private async void CreateNewAccount_Tapped(object sender, EventArgs e)
+	{
+		// Navigation.PushAsync();
+		await DisplayAlert("Test", "Creating account...", "OK");
 
+	}
+	
 	private void OnTextFilledUsername(object sender, TextChangedEventArgs e)
 	{
 		_username = e.NewTextValue;
