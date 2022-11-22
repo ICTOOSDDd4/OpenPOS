@@ -67,6 +67,12 @@ public partial class MainPage : ContentPage
 		{
 			//TODO: ROUING
 			await Shell.Current.GoToAsync(nameof(TafelKeuzeScherm));
+			
+			// If you want to save the user inputs when they press the back button
+			// Remove this block of code.
+			_password = string.Empty; _username = string.Empty;
+			EmailEntry.Text = string.Empty;
+			PasswordEntry.Text = string.Empty;
 
 		} else { await DisplayAlert("Oops", "You got it wrong", "Try again"); }
 		
@@ -75,7 +81,7 @@ public partial class MainPage : ContentPage
 	private async void CreateNewAccount_Tapped(object sender, EventArgs e)
 	{
 		// Navigation.PushAsync();
-		await DisplayAlert("Test", "Creating account...", "OK");
+		await DisplayAlert("Work in Progress", "This feature is still under development try agian later.", "Alright");
 
 	}
 
