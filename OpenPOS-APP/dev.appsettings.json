@@ -1,0 +1,11 @@
+{
+    "TIKKIE_API": {
+        "Key": ""
+    },
+
+    "DATABASE_CONNECTION": {
+        "connection_string": ""
+
+    }
+
+}
