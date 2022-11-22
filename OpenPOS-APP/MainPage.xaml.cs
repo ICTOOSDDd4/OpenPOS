@@ -1,4 +1,7 @@
 
+using OpenPOS_APP.Models;
+using OpenPOS_APP.Services.Models;
+using OpenPOS_APP.Settings;
 using System.Reflection;
 namespace OpenPOS_APP;
 
@@ -59,7 +62,11 @@ public partial class MainPage : ContentPage
 	private async void OnLoginButtonClicked(object sender, EventArgs e)
 	{
 		//TODO: Login auth with DB
-		await DisplayAlert("Test", "Logging in...", "OK");
+		//await DisplayAlert("Test", "Logging in...", "OK");
+      if (UserAuth(_username, _password)) 
+		{
+			//TODO: ROUING
+		} else { await DisplayAlert("Oops", "You got it wrong", "Try again"); }
 		
 	}
 	
@@ -68,6 +75,17 @@ public partial class MainPage : ContentPage
 		// Navigation.PushAsync();
 		await DisplayAlert("Test", "Creating account...", "OK");
 
+	}
+
+	private bool UserAuth(string username, string password)
+	{
+		User user = UserService.Authenticate(_username, _password);
+
+		if (user != null)
+		{
+			ApplicationSettings.LoggedinUser = user;
+			return true;
+		} else { return false; }
 	}
 
     
