@@ -66,6 +66,8 @@ public partial class MainPage : ContentPage
       if (UserAuth(_username, _password)) 
 		{
 			//TODO: ROUING
+			await Shell.Current.GoToAsync(nameof(TafelKeuzeScherm));
+
 		} else { await DisplayAlert("Oops", "You got it wrong", "Try again"); }
 		
 	}

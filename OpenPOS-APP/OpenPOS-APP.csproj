@@ -71,4 +71,16 @@
 	<ItemGroup>
 	  <None Remove="appsettings.json" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="TafelKeuzeScherm.xaml.cs">
+	    <DependentUpon>TafelKeuzeScherm.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="TafelKeuzeScherm.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
 </Project>
