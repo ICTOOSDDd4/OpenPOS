@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OpenPOS_APP.TablePickerScreen"
+             Title="TablePickerScreen"
+             Shell.NavBarIsVisible="False">
+
+    <ContentPage.Resources>
+        <ResourceDictionary Source="Resources/Styles/Colors.xaml"></ResourceDictionary>
+    </ContentPage.Resources>
+
+    <VerticalStackLayout
+        Spacing="25"
+        Padding="30,0"
+        VerticalOptions="Center"
+        HorizontalOptions="Center">
+
+        <Image 
+                Source="openpos_logo_v1.png"
+                SemanticProperties.Description="Cute dot net bot waving hi to you!"
+                HeightRequest="100"
+                HorizontalOptions="Center"/>
+
+        <Label 
+            Text="Welcome! Please enter your table number."
+            FontFamily="LeagueSpartan-Meduim"
+            FontSize="20"
+            HorizontalTextAlignment="Center"
+            VerticalOptions="Center"
+            HorizontalOptions="Center" />
+        
+        <Entry
+            x:Name="TableNumberEntry"
+            SemanticProperties.Description="Enter your table number"
+            SemanticProperties.Hint="Enter your table numbers"
+            Keyboard="Numeric"
+            TextChanged="OnTableNumberEntryChanged"
+            TextColor="Black"
+            WidthRequest="250"
+            MaxLength="3"
+            HorizontalTextAlignment="Center"
+            SelectionLength="50"
+            ReturnType="Next"
+            />
+        
+        <Label
+            x:Name="ErrorDisplayLabel"
+            IsVisible="false"
+            TextColor="Red"
+            Text="Placeholder"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            />
+        
+        <Button
+                x:Name="SubmitButton"
+                Text="Sumbit"
+                SemanticProperties.Hint="Press to continue"
+                IsEnabled="true"
+                Clicked="OnSubmitButtonClicked"
+                HorizontalOptions="Center"
+                TextColor="Black"
+                BackgroundColor="{StaticResource OpenPos-Green}" 
+                CornerRadius="10"   
+             />
+
+    </VerticalStackLayout>
+</ContentPage>
