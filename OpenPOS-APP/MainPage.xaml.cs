@@ -61,12 +61,15 @@ public partial class MainPage : ContentPage
 
 	private async void OnLoginButtonClicked(object sender, EventArgs e)
 	{
+		//Dit maakt testen makkelijker, moet eruit
+		
+		await Shell.Current.GoToAsync(nameof(CheckoutOverview));
 		//TODO: Login auth with DB
 		//await DisplayAlert("Test", "Logging in...", "OK");
       if (UserAuth(_username, _password)) 
 		{
 			//TODO: ROUING
-			await Shell.Current.GoToAsync(nameof(CheckoutOverview));
+		
 		} else { await DisplayAlert("Oops", "You got it wrong", "Try again"); }
 		
 	}

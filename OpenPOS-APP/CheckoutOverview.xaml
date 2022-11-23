@@ -6,10 +6,37 @@
              Shell.NavBarIsVisible="False">
 
     <VerticalStackLayout HorizontalOptions="Center">
-        <Label
-            x:Name="LabelHello"
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <ListView x:Name="CheckoutListView"
+                  ItemsSource="{Binding CheckoutItems}"
+                  WidthRequest="200"
+                  HeightRequest="200"
+                  >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                    <Grid Padding="10">
+                        <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="1"
+                           Text="{Binding Name}"
+                           FontAttributes="Italic"
+                           HorizontalOptions="Start"/>
+                    <Label Grid.Row="1"
+                           Grid.Column="1"
+                           Text="{Binding Price}"
+                           FontAttributes="Italic"
+                           VerticalOptions="End" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
     </VerticalStackLayout>
 </ContentPage>
