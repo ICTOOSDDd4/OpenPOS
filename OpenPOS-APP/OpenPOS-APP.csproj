@@ -71,4 +71,9 @@
 	<ItemGroup>
 	  <None Remove="appsettings.json" />
 	</ItemGroup>
+	<ItemGroup>
+	  <MauiXaml Update="CheckoutOverview.xaml">
+	    <SubType></SubType>
+	  </MauiXaml>
+	</ItemGroup>
 </Project>
