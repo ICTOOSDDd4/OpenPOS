@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OpenPOS_APP.CheckoutItemCardView"
+             x:Name="CheckoutCardView">
+    <ContentView.Resources>
+        <ResourceDictionary Source="Resources/Styles/Colors.xaml"></ResourceDictionary>
+    </ContentView.Resources>
+    <VerticalStackLayout
+        VerticalOptions="Center"
+        HorizontalOptions="Center">
+    <HorizontalStackLayout
+            BackgroundColor="{ StaticResource Gray300}"
+            x:Name="TextContainer"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            Spacing="10"
+            Padding="10,0"
+            WidthRequest="300"
+            HeightRequest="100">
+            <Image
+                x:Name="CardImage"
+                Source="openpos_icon.png"
+                HeightRequest="60"
+                />
+            <VerticalStackLayout
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+                <Label x:Name="ProductName"
+                       Text="Placeholder name"
+                       TextColor="Black"
+                       FontSize="18"
+                       FontFamily="LeagueSpartan-Medium"/>
+                <Label x:Name="ProductDescription"
+                       Text="Placeholder desc"
+                       FontSize="12"
+                       FontFamily="LeagueSpartan-Regular"/>
+            </VerticalStackLayout>
+            <VerticalStackLayout
+                Padding="10,0"
+                VerticalOptions="Center"
+                HorizontalOptions="Center">
+                <Label x:Name="AmountText"
+                   HorizontalTextAlignment="Center"
+                   Text="Amount"
+                   FontSize="14"
+                />
+                <Label x:Name="AmountCount"
+                       HorizontalTextAlignment="Center"
+                   Text="12"
+                   FontSize="11"
+             />
+            </VerticalStackLayout>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <HorizontalStackLayout 
+                BackgroundColor="Red"
+                WidthRequest="150"
+                HeightRequest="20"/>
+
+            <HorizontalStackLayout 
+                BackgroundColor="Green"
+                WidthRequest="150"
+                HeightRequest="20"/>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentView>

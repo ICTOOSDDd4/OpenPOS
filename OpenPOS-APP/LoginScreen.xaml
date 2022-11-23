@@ -9,8 +9,9 @@
         <ResourceDictionary Source="Resources/Styles/Colors.xaml"></ResourceDictionary>
     </ContentPage.Resources>
 
-    <ScrollView>
+    <ScrollView x:Name="Scroll">
         <VerticalStackLayout
+            x:Name="Vertical"
             Spacing="25"
             Padding="30,0"
             VerticalOptions="Center">
@@ -69,7 +70,6 @@
                 BackgroundColor="{StaticResource Gray100}" 
                 CornerRadius="10"
              />
-
             <Label 
                 VerticalOptions="Center" 
                 HorizontalOptions="Center" >
