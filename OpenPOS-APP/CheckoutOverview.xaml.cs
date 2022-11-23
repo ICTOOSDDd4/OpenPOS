@@ -1,4 +1,5 @@
 ﻿using OpenPOS_APP.Models;
+using OpenPOS_APP.Services.Models;
 
 namespace OpenPOS_APP;
 
@@ -7,20 +8,18 @@ public partial class CheckoutOverview : ContentPage
 	public CheckoutOverview()
 	{
 		InitializeComponent();
-		
-		List<Product> CheckoutItems = new List<Product>();
-		
-		CheckoutItems.Add(new Product(1, "Lasagne bolognese", 15, "Van authentiek Italiaans recept"));
-		CheckoutItems.Add(new Product(1, "Lasagne Kaasje", 16, "Van authentiek Italiaans recept"));
-		CheckoutItems.Add(new Product(1, "Lasagne met bananen", 222, "Van authentiek Italiaans recept"));
-        CheckoutItems.Add(new Product(1, "Lasagne bolognese", 15, "Van authentiek Italiaans recept"));
-        CheckoutItems.Add(new Product(1, "Lasagne Kaasje", 16, "Van authentiek Italiaans recept"));
-        CheckoutItems.Add(new Product(1, "Lasagne met bananen", 222, "Van authentiek Italiaans recept"));
-        CheckoutItems.Add(new Product(1, "Lasagne bolognese", 15, "Van authentiek Italiaans recept"));
-        CheckoutItems.Add(new Product(1, "Lasagne Kaasje", 16, "Van authentiek Italiaans recept"));
-        CheckoutItems.Add(new Product(1, "Lasagne met bananen", 222, "Van authentiek Italiaans recept"));
 
-
+        List<Product> CheckoutItems = new List<Product>();
+        for (int i = 0; i < 10; i++)
+        {
+            CheckoutItems.Add(new Product()
+            {
+                Name = "Product " + i,
+                Price = i + 0.99,
+                Description = "Dit is product " + i
+            });
+        }
+        
         CheckoutListView.ItemsSource = CheckoutItems;
 
 	}

@@ -5,12 +5,14 @@
              Title="CheckoutOverview"
              Shell.NavBarIsVisible="False">
 
-    <VerticalStackLayout HorizontalOptions="Center">
+    <VerticalStackLayout HorizontalOptions="Start"
+                         Margin="100, 100, 0, 0">
+
         <ListView x:Name="CheckoutListView"
                   ItemsSource="{Binding CheckoutItems}"
-                  WidthRequest="450"
-                  HeightRequest="600"
-                  >
+                  WidthRequest="600"
+                  HeightRequest="650"
+        >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -24,19 +26,21 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                         <Image Grid.RowSpan="2"
-                               Source="openpos_transparent_white.png"
-                               Aspect="AspectFill"
+                               Source="dotnet_bot.png"
+                               Aspect="AspectFit"
                                HeightRequest="120"
                                WidthRequest="120" />
                         <Label Grid.Column="1"
                                Text="{Binding Name}"
-                               FontAttributes="Italic"
-                               HorizontalOptions="Start"/>
+                               HorizontalOptions="Start"
+                               HorizontalTextAlignment="End"
+                               WidthRequest="460"/>
                         <Label Grid.Row="1"
                            Grid.Column="1"
-                           Text="{Binding Price}"
-                           FontAttributes="Italic"
-                           VerticalOptions="End" />
+                           Text="{Binding Price, StringFormat='€{0}'}"
+                           VerticalOptions="End"
+                           HorizontalTextAlignment="End"
+                           WidthRequest="460"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
