@@ -8,8 +8,8 @@
     <VerticalStackLayout HorizontalOptions="Center">
         <ListView x:Name="CheckoutListView"
                   ItemsSource="{Binding CheckoutItems}"
-                  WidthRequest="200"
-                  HeightRequest="200"
+                  WidthRequest="450"
+                  HeightRequest="600"
                   >
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -23,11 +23,16 @@
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="1"
-                           Text="{Binding Name}"
-                           FontAttributes="Italic"
-                           HorizontalOptions="Start"/>
-                    <Label Grid.Row="1"
+                        <Image Grid.RowSpan="2"
+                               Source="openpos_transparent_white.png"
+                               Aspect="AspectFill"
+                               HeightRequest="120"
+                               WidthRequest="120" />
+                        <Label Grid.Column="1"
+                               Text="{Binding Name}"
+                               FontAttributes="Italic"
+                               HorizontalOptions="Start"/>
+                        <Label Grid.Row="1"
                            Grid.Column="1"
                            Text="{Binding Price}"
                            FontAttributes="Italic"
