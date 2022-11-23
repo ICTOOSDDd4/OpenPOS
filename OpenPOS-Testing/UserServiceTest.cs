@@ -31,6 +31,7 @@ public class UserServiceTest
                 .Build();
             
             ApplicationSettings.DbSett = config.GetRequiredSection("DATABASE_CONNECTION").Get<DatabaseSettings>();
+            
             if (ApplicationSettings.DbSett != null)
             {
                 System.Diagnostics.Debug.WriteLine(ApplicationSettings.DbSett.connection_string);
@@ -38,7 +39,7 @@ public class UserServiceTest
         }
         else throw new Exception();
         
-      DatabaseService.Initialize();
+        DatabaseService.Initialize();
     }
     
     
@@ -48,10 +49,11 @@ public class UserServiceTest
     public void UserService_GetAllUsers_ReturnsAllUsers()
     {
         var user = this.user;
-
         var result = UserService.Create(user);
         var users = UserService.GetAll();
+        
         Assert.Greater(users.Count, 0);
+        
         UserService.Delete(result);
     }
 
@@ -60,10 +62,10 @@ public class UserServiceTest
     {
 
         var user = this.user;
-
         var result = UserService.Create(user);
         
         Assert.That(user.Email, Is.EqualTo(result.Email));
+       
         UserService.Delete(result);
     }
     
@@ -73,6 +75,7 @@ public class UserServiceTest
         var user = this.user;
         var createdUser = UserService.Create(user);
         var result = UserService.FindByID(createdUser.Id);
+        
         Assert.That(user.Email, Is.EqualTo(result.Email));
         
         UserService.Delete(result);
@@ -82,12 +85,14 @@ public class UserServiceTest
     public void UserService_UpdateUser_ReturnsTrue()
     {
         var user = this.user;
-        
         var createdUser = UserService.Create(user);
+        
         Assert.That(createdUser.Name, Is.Not.EqualTo("Gerard"));
         createdUser.Name = "Gerard";
         createdUser.Last_name = "Joling";
+        
         var result = UserService.Update(createdUser);
+        
         Assert.IsTrue(result);
         Assert.That(UserService.FindByID(createdUser.Id).Name, Is.EqualTo("Gerard"));
         
@@ -98,9 +103,9 @@ public class UserServiceTest
     public void UserService_DeleteUser_ReturnsTrue()
     {
         var user = this.user;
-        
         var createdUser = UserService.Create(user);
         var result = UserService.Delete(createdUser);
+        
         Assert.IsTrue(result);
         Assert.IsNull(UserService.FindByID(createdUser.Id).Name);
     }
@@ -109,9 +114,10 @@ public class UserServiceTest
     public void UserService_LoginUser_ReturnsUserObject()
     {
         //Deze user is al aangemaakt in de database
-        var email = "unittest@openpos.org";
-        var password = "unittest";
-        var user = UserService.Authenticate(email, password);
+        string email = "unittest@openpos.org";
+        string password = "unittest";
+        
+        User user = UserService.Authenticate(email, password);
         
         Assert.That(user.Email, Is.EqualTo(email));
     }
@@ -122,6 +128,7 @@ public class UserServiceTest
     {
         string email = "unittest@openpos.org";
         string password = "wrongpassword";
+       
         User user = UserService.Authenticate(email, password);
         
         Assert.IsNull(user);
