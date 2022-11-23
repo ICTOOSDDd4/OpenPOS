@@ -15,9 +15,9 @@
             Padding="30,0"
             VerticalOptions="Center">
             <Image 
-                Source="openpos_transparent_black.png"
+                Source="openpos_logo_v1.png"
                 SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
+                HeightRequest="100"
                 HorizontalOptions="Center"/>
 
             <Label
@@ -55,7 +55,7 @@
                 SelectionLength="50"
                 ClearButtonVisibility="WhileEditing"
                 HorizontalOptions="Center"
-                ReturnType="Send"
+                ReturnType="Next"
                 />
 
             <Button

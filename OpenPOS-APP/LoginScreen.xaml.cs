@@ -43,11 +43,8 @@ public partial class LoginScreen : ContentPage
 
    private async void OnLoginButtonClicked(object sender, EventArgs e)
    {
-      //TODO: Login auth with DB
-      //await DisplayAlert("Test", "Logging in...", "OK");
       if (UserAuth(_username, _password))
       {
-         //TODO: ROUING
          await Shell.Current.GoToAsync(nameof(TablePickerScreen));
 
          // If you want to save the user inputs when they press the back button
@@ -63,9 +60,11 @@ public partial class LoginScreen : ContentPage
 
    private async void CreateNewAccount_Tapped(object sender, EventArgs e)
    {
-      // Navigation.PushAsync();
       await DisplayAlert("Work in Progress", "This feature is still under development try agian later.", "Alright");
-
+   }
+   protected override void OnNavigatedTo(NavigatedToEventArgs args)
+   {
+      base.OnNavigatedTo(args);
    }
 
    private bool UserAuth(string username, string password)

@@ -1,6 +1,7 @@
 using Microsoft.Maui;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using Windows.Security.Authentication.OnlineId;
 
 namespace OpenPOS_APP;
 
@@ -32,21 +33,18 @@ public partial class TablePickerScreen : ContentPage
       string oldValue = e.OldTextValue;
       string newValue = e.NewTextValue;
 
-      if (e.OldTextValue.Any(c => char.IsLetter(c)) || e.NewTextValue.Any(c => char.IsLetter(c)))
-      {
-         ErrorDisplayLabel.Text = "You can only input numbers.";
-         ErrorDisplayLabel.IsVisible = true;
-         string placeholder = Regex.Replace(e.NewTextValue, "[^0-9]+", "");
-         TableNumberEntry.Text = placeholder;
-         ActivateButton(false);
-      }
-
       if (int.TryParse(e.NewTextValue, out value))
       {
          _tableNumber = value;
-         ErrorDisplayLabel.IsVisible = false;
+         if (oldValue != null)
+         {
+            if (oldValue.Any(e => char.IsLetter(e)))
+            {
+               ErrorDisplayLabel.IsVisible = true;
+            }
+            else { ErrorDisplayLabel.IsVisible = false; }
+         }
          ActivateButton(true);
-
       }
       else if (e.NewTextValue.Trim() == string.Empty)
       {
