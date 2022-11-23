@@ -19,43 +19,25 @@ public partial class MainPage : ContentPage
 	{
 		_username = e.NewTextValue;
 		if (string.IsNullOrEmpty(_password) || string.IsNullOrEmpty(_username))
-		{
-			MainLoginButton.IsEnabled = false;
-         if (_appColors.TryGetValue("Gray100", out var color))
-         {
-            MainLoginButton.BackgroundColor = (Color)color;
-         }
-         EmailEntry.Placeholder = "Please enter your email";
-		} 
-		else
-		{
-			MainLoginButton.IsEnabled = true;
-			if (_appColors.TryGetValue("OpenPos-Yellow", out var color))
-			{
-				MainLoginButton.BackgroundColor = (Color)color;
-			}
-		}
-	}
+      {
+         ActivateButton(false);
+      }
+      else
+      {
+         ActivateButton(true);
+      }
+   }
 
 	private void OnTextFilledPassword(object sender, TextChangedEventArgs e)
 	{
 		_password = e.NewTextValue;
 		if (string.IsNullOrEmpty(_password) || string.IsNullOrEmpty(_username))
 		{
-			MainLoginButton.IsEnabled = false;
-         if (_appColors.TryGetValue("Gray100", out var color))
-         {
-            MainLoginButton.BackgroundColor = (Color)color;
-         }
-         PasswordEntry.Placeholder = "Please enter your password";
+			ActivateButton(false);
 		}
 		else
 		{
-			MainLoginButton.IsEnabled = true;
-			if (_appColors.TryGetValue("OpenPos-Yellow", out var color))
-			{
-				MainLoginButton.BackgroundColor = (Color)color;
-			}
+			ActivateButton(true);
 		}
 	}
 
@@ -96,6 +78,25 @@ public partial class MainPage : ContentPage
 		} else { return false; }
 	}
 
-    
+   private void ActivateButton(bool active)
+   {
+      if (active)
+      {
+         MainLoginButton.IsEnabled = true;
+         if (_appColors.TryGetValue("OpenPos-Yellow", out var color))
+         {
+            MainLoginButton.BackgroundColor = (Color)color;
+         }
+      }
+      else
+      {
+         MainLoginButton.IsEnabled = false;
+         if (_appColors.TryGetValue("Gray100", out var color))
+         {
+            MainLoginButton.BackgroundColor = (Color)color;
+         }
+      }
+   }
+
 }
 

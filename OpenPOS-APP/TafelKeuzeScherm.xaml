@@ -12,11 +12,13 @@
     <VerticalStackLayout
         Spacing="25"
         Padding="30,0"
-        VerticalOptions="Center">
+        VerticalOptions="Center"
+        HorizontalOptions="Center">
         <Label 
             Text="Welcome! Please enter your table number."
-            
-            VerticalOptions="Center" 
+            FontFamily="LeagueSpartan-Meduim"
+            FontSize="20"
+            VerticalOptions="Center"
             HorizontalOptions="Center" />
         <Entry
             x:Name="TableNumberEntry"
@@ -26,15 +28,24 @@
             TextChanged="OnTableNumberEntryChanged"
             TextColor="Black"
             WidthRequest="250"
-            MaxLength="50"
+            MaxLength="10"
             SelectionLength="50"
+            ReturnType="Next"
+            />
+        <Label
+            x:Name="ErrorDisplayLabel"
+            IsVisible="false"
+            TextColor="Red"
+            Text="Placeholder"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
             />
         <Button
-                x:Name="Submit"
+                x:Name="SubmitButton"
                 Text="Something"
                 SemanticProperties.Hint="Press to login"
                 IsEnabled="true"
-                Clicked="OnLoginButtonClicked"
+                Clicked="OnSubmitButtonClicked"
                 HorizontalOptions="Center"
                 TextColor="Black"
                 BackgroundColor="{StaticResource OpenPos-Green}" 

@@ -36,8 +36,10 @@
                 WidthRequest="250"
                 MaxLength="50"
                 SelectionLength="50"
+                Keyboard="Email"
                 ClearButtonVisibility="WhileEditing"
                 HorizontalOptions="Center"
+                ReturnType="Next"
             />
 
             <Entry
@@ -51,7 +53,9 @@
                 MaxLength="50"
                 SelectionLength="50"
                 ClearButtonVisibility="WhileEditing"
-                HorizontalOptions="Center"/>
+                HorizontalOptions="Center"
+                ReturnType="Send"
+                />
             
             <Button
                 x:Name="MainLoginButton"
@@ -62,7 +66,7 @@
                 HorizontalOptions="Center"
                 TextColor="Black"
                 BackgroundColor="{StaticResource Gray100}" 
-                CornerRadius="10"   
+                CornerRadius="10"
              />
             
             <Label 
