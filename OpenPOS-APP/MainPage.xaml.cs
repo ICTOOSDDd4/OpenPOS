@@ -48,7 +48,7 @@ public partial class MainPage : ContentPage
       if (UserAuth(_username, _password)) 
 		{
 			//TODO: ROUING
-			await Shell.Current.GoToAsync(nameof(TafelKeuzeScherm));
+			await Shell.Current.GoToAsync(nameof(TablePickerScreen));
 			
 			// If you want to save the user inputs when they press the back button
 			// Remove this block of code.

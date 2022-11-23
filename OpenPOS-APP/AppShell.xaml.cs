@@ -1,4 +1,6 @@
-﻿namespace OpenPOS_APP;
+﻿using OpenPOS_APP.Views.Onboarding;
+
+namespace OpenPOS_APP;
 
 public partial class AppShell : Shell
 {
@@ -6,6 +8,7 @@ public partial class AppShell : Shell
 	{
 		InitializeComponent();
 
-		Routing.RegisterRoute(nameof(TafelKeuzeScherm), typeof(TafelKeuzeScherm));
+		Routing.RegisterRoute(nameof(TablePickerScreen), typeof(TablePickerScreen));
+		Routing.RegisterRoute(nameof(LoginScreen), typeof(LoginScreen));
 	}
 }

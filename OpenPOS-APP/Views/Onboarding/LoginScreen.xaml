@@ -1,9 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="OpenPOS_APP.MainPage"
+             x:Class="OpenPOS_APP.Views.Onboarding.LoginScreen"
+             Title="LoginScreen"
              Shell.NavBarIsVisible="False">
-             
+
     <ContentPage.Resources>
         <ResourceDictionary Source="Resources/Styles/Colors.xaml"></ResourceDictionary>
     </ContentPage.Resources>
@@ -56,7 +57,7 @@
                 HorizontalOptions="Center"
                 ReturnType="Send"
                 />
-            
+
             <Button
                 x:Name="MainLoginButton"
                 Text="LOGIN"
@@ -68,7 +69,7 @@
                 BackgroundColor="{StaticResource Gray100}" 
                 CornerRadius="10"
              />
-            
+
             <Label 
                 VerticalOptions="Center" 
                 HorizontalOptions="Center" >

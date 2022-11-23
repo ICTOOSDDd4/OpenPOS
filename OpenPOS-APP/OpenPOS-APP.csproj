@@ -66,6 +66,7 @@
 
 	<ItemGroup>
 	  <Folder Include="Models\" />
+	  <Folder Include="NewFolder\NewFolder\" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -73,13 +74,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="TafelKeuzeScherm.xaml.cs">
-	    <DependentUpon>TafelKeuzeScherm.xaml</DependentUpon>
+	  <Compile Update="TablePickerScreen.xaml.cs">
+	    <DependentUpon>TablePickerScreen.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="TafelKeuzeScherm.xaml">
+	  <MauiXaml Update="StartWaitingScreen.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="TablePickerScreen.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

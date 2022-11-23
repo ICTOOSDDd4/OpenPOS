@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="OpenPOS_APP.TafelKeuzeScherm"
-             Title="TafelKeuzeScherm"
+             x:Class="OpenPOS_APP.TablePickerScreen"
+             Title="TablePickerScreen"
              Shell.NavBarIsVisible="False">
 
     <ContentPage.Resources>
@@ -14,12 +14,20 @@
         Padding="30,0"
         VerticalOptions="Center"
         HorizontalOptions="Center">
+
+        <Image 
+                Source="openpos_transparent_black.png"
+                SemanticProperties.Description="Cute dot net bot waving hi to you!"
+                HeightRequest="200"
+                HorizontalOptions="Center"/>
+
         <Label 
             Text="Welcome! Please enter your table number."
             FontFamily="LeagueSpartan-Meduim"
             FontSize="20"
             VerticalOptions="Center"
             HorizontalOptions="Center" />
+        
         <Entry
             x:Name="TableNumberEntry"
             SemanticProperties.Description="Enter your table number"
@@ -28,10 +36,12 @@
             TextChanged="OnTableNumberEntryChanged"
             TextColor="Black"
             WidthRequest="250"
-            MaxLength="10"
+            MaxLength="3"
+            HorizontalTextAlignment="Center"
             SelectionLength="50"
             ReturnType="Next"
             />
+        
         <Label
             x:Name="ErrorDisplayLabel"
             IsVisible="false"
@@ -40,10 +50,11 @@
             VerticalOptions="Center"
             HorizontalOptions="Center"
             />
+        
         <Button
                 x:Name="SubmitButton"
-                Text="Something"
-                SemanticProperties.Hint="Press to login"
+                Text="Sumbit"
+                SemanticProperties.Hint="Press to continue"
                 IsEnabled="true"
                 Clicked="OnSubmitButtonClicked"
                 HorizontalOptions="Center"
