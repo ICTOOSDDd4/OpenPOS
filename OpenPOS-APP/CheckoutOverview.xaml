@@ -4,9 +4,12 @@
              x:Class="OpenPOS_APP.CheckoutOverview"
              Title="CheckoutOverview"
              Shell.NavBarIsVisible="False">
-
+    <HorizontalStackLayout  >
+        
+    
     <VerticalStackLayout HorizontalOptions="Start"
                          Margin="100, 100, 0, 0">
+
 
         <ListView x:Name="CheckoutListView"
                   ItemsSource="{Binding CheckoutItems}"
@@ -30,22 +33,37 @@
                                Aspect="AspectFit"
                                HeightRequest="120"
                                WidthRequest="120" />
-                        <Label Grid.Column="1"
+                        
+                            
+
+                            <Label Grid.Row="3"
+                               Grid.Column="1"
                                Text="{Binding Name}"
                                HorizontalOptions="Start"
                                HorizontalTextAlignment="End"
                                WidthRequest="460"/>
-                        <Label Grid.Row="1"
-                           Grid.Column="1"
-                           Text="{Binding Price, StringFormat='€{0}'}"
-                           VerticalOptions="End"
-                           HorizontalTextAlignment="End"
-                           WidthRequest="460"/>
+
+                            <Label Grid.Row="3"
+                               Grid.Column="2"
+                               Text="{Binding Price, StringFormat='€{0}'}"
+                               VerticalOptions="End"
+                               HorizontalTextAlignment="End"
+                               WidthRequest="460"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
+        
+
     </VerticalStackLayout>
+
+    <VerticalStackLayout HorizontalOptions="Center" 
+                         Margin=" 0, 100, 100 ,0">
+        <Button Text="Betalen"/>
+        <Button Text="Betaling splitten"/>
+        <Button Text="Producten splitten"/>
+    </VerticalStackLayout>
+    </HorizontalStackLayout>
 </ContentPage>

@@ -61,9 +61,20 @@ public partial class MainPage : ContentPage
 
 	private async void OnLoginButtonClicked(object sender, EventArgs e)
 	{
-		//Dit maakt testen makkelijker, moet eruit
-		
-		await Shell.Current.GoToAsync(nameof(CheckoutOverview));
+		//Test Besteloverzicht
+		ApplicationSettings.CheckoutList = new List<Product>();
+        for (int i = 0; i < 10; i++)
+        {
+            ApplicationSettings.CheckoutList.Add(new Product()
+            {
+                Name = "Product " + i,
+                Price = i + 0.99,
+                Description = "Dit is product " + i
+            });
+        }
+        //Dit maakt testen makkelijker, moet eruit
+
+        await Shell.Current.GoToAsync(nameof(CheckoutOverview));
 		//TODO: Login auth with DB
 		//await DisplayAlert("Test", "Logging in...", "OK");
       if (UserAuth(_username, _password)) 
