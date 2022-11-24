@@ -1,48 +1,45 @@
 
+using Microsoft.Maui.Controls;
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Models;
 using OpenPOS_APP.Settings;
+using OpenPOS_APP.Views.Onboarding;
 using System.Reflection;
 namespace OpenPOS_APP;
 
 public partial class MainPage : ContentPage
 {
-	private string _username;
-	private string _password;
 	private ResourceDictionary _appColors = new();
 	public MainPage()
 	{
 		InitializeComponent();
 		_appColors.SetAndLoadSource(new Uri("Resources/Styles/Colors.xaml", UriKind.RelativeOrAbsolute), "Resources/Styles/Colors.xaml", this.GetType().GetTypeInfo().Assembly, null );
-    }
-	private void OnTextFilledUsername(object sender, TextChangedEventArgs e)
+      OnIconLoaded();
+   }
+
+   private async void OnIconLoaded()
+   {
+      await openposicon.RelRotateTo(360, 4000);
+   }
+
+	private async void OnLoginButtonClicked(object sender, EventArgs e)
 	{
-		_username = e.NewTextValue;
-		if (string.IsNullOrEmpty(_password) || string.IsNullOrEmpty(_username))
-		{
-			MainLoginButton.IsEnabled = false;
-         if (_appColors.TryGetValue("Gray100", out var color))
+      await Shell.Current.GoToAsync(nameof(LoginScreen));
+   }
+
+   private void ActivateButton(bool active)
+   {
+      if (active)
+      {
+         MainLoginButton.IsEnabled = true;
+         if (_appColors.TryGetValue("OpenPos-Yellow", out var color))
          {
             MainLoginButton.BackgroundColor = (Color)color;
          }
-         EmailEntry.Placeholder = "Please enter your email";
-		} 
-		else
-		{
-			MainLoginButton.IsEnabled = true;
-			if (_appColors.TryGetValue("OpenPos-Yellow", out var color))
-			{
-				MainLoginButton.BackgroundColor = (Color)color;
-			}
-		}
-	}
-
-	private void OnTextFilledPassword(object sender, TextChangedEventArgs e)
-	{
-		_password = e.NewTextValue;
-		if (string.IsNullOrEmpty(_password) || string.IsNullOrEmpty(_username))
-		{
-			MainLoginButton.IsEnabled = false;
+      }
+      else
+      {
+         MainLoginButton.IsEnabled = false;
          if (_appColors.TryGetValue("Gray100", out var color))
          {
             MainLoginButton.BackgroundColor = (Color)color;

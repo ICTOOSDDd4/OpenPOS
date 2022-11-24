@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OpenPOS_APP.ProductView">
+    <VerticalStackLayout
+        x:Name="MainVerticalLayout"
+        WidthRequest="200"
+        BackgroundColor="{ StaticResource White}"
+        >
+        <VerticalStackLayout
+            BackgroundColor="{ StaticResource OpenPos-Blue }"
+            WidthRequest="200"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            IsVisible="true"
+            >
+            <HorizontalStackLayout
+                HorizontalOptions="Center"
+                x:Name="AmountLabel"
+                IsVisible="false"
+                VerticalOptions="Center">
+                <Label
+                    Padding="5"
+                    TextColor="Black"
+                    VerticalTextAlignment="Center"
+                    HorizontalTextAlignment="Center"
+                    Text="Aantal:"/>
+                <Label
+                    Padding="5"
+                    VerticalTextAlignment="Center"
+                    HorizontalTextAlignment="Center"
+                    TextColor="Black"
+                    x:Name="AmountCount"
+                    PropertyChanged="AmountCount_PropertyChanged"
+                    Text="{ Binding Amount }"/>
+            </HorizontalStackLayout>
+            
+        </VerticalStackLayout>
+        <VerticalStackLayout 
+            HeightRequest="175"
+            Padding="0">
+            <Image  x:Name="ProductImage"
+                    Source="placeholder_product_image.png"
+                    HeightRequest="175"/>
+        </VerticalStackLayout>
+        <VerticalStackLayout
+           Padding="10,10,10,10"
+           VerticalOptions="Center"
+           HorizontalOptions="Center"
+        >
+            <Label x:Name="ProductName"
+                   FontSize="16"
+                   FontFamily="LeagueSpartan-Medium"
+                   HorizontalTextAlignment="Center"
+                   Text="Product Name"/>
+            <Label x:Name="ProductInfo"
+                   Padding="0,5,0,0"
+                   FontSize="12"
+                   FontFamily="LeagueSpartan-Regular"
+                   HorizontalTextAlignment="Center"
+                   Text="Product Info"/>
+        </VerticalStackLayout>
+        <VerticalStackLayout>
+            <Button
+                HorizontalOptions="Fill"
+                Text="Add"
+                CornerRadius="0"
+                Clicked="OnClickedToevoegen"
+                TextColor="Black"
+                BackgroundColor="{ StaticResource OpenPos-Green}"
+                    />
+            <Button
+                HorizontalOptions="Fill"
+                Text="Delete"
+                Clicked="OnClickedVerwijderen"
+                CornerRadius="0"
+                x:Name="DeleteButton"
+                TextColor="Black"
+                IsVisible="false"
+                BackgroundColor="#FF5245"
+            />
+        </VerticalStackLayout>
+    </VerticalStackLayout>
+</ContentView>
