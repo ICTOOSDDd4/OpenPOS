@@ -5,21 +5,43 @@
     <VerticalStackLayout
         x:Name="MainVerticalLayout"
         WidthRequest="200"
-        BackgroundColor="{ StaticResource Gray100}"
+        BackgroundColor="{ StaticResource White}"
         >
+        <VerticalStackLayout
+            BackgroundColor="{ StaticResource OpenPos-Blue }"
+            WidthRequest="200"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            IsVisible="true"
+            >
+            <HorizontalStackLayout
+                HorizontalOptions="Center"
+                x:Name="AmountLabel"
+                IsVisible="false"
+                VerticalOptions="Center">
+                <Label
+                    Padding="5"
+                    TextColor="Black"
+                    VerticalTextAlignment="Center"
+                    HorizontalTextAlignment="Center"
+                    Text="Aantal:"/>
+                <Label
+                    Padding="5"
+                    VerticalTextAlignment="Center"
+                    HorizontalTextAlignment="Center"
+                    TextColor="Black"
+                    x:Name="AmountCount"
+                    PropertyChanged="AmountCount_PropertyChanged"
+                    Text="{ Binding Amount }"/>
+            </HorizontalStackLayout>
+            
+        </VerticalStackLayout>
         <VerticalStackLayout 
             HeightRequest="175"
             Padding="0">
-            <AbsoluteLayout>
-                <Image  x:Name="ProductImage"
+            <Image  x:Name="ProductImage"
                     Source="placeholder_product_image.png"
                     HeightRequest="175"/>
-                <Label 
-                    Text="1"
-                    FontSize="20"
-                    FontFamily="LeagueSpartan-Regular"
-                />
-            </AbsoluteLayout>
         </VerticalStackLayout>
         <VerticalStackLayout
            Padding="10,10,10,10"
@@ -41,15 +63,18 @@
         <VerticalStackLayout>
             <Button
                 HorizontalOptions="Fill"
-                Text="Toevoegen"
+                Text="Add"
                 CornerRadius="0"
+                Clicked="OnClickedToevoegen"
                 TextColor="Black"
                 BackgroundColor="{ StaticResource OpenPos-Green}"
                     />
             <Button
                 HorizontalOptions="Fill"
-                Text="Verwijder"
+                Text="Delete"
+                Clicked="OnClickedVerwijderen"
                 CornerRadius="0"
+                x:Name="DeleteButton"
                 TextColor="Black"
                 IsVisible="false"
                 BackgroundColor="#FF5245"
