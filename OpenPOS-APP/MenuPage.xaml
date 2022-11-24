@@ -4,7 +4,7 @@
              x:Class="OpenPOS_APP.MenuPage"
              Title="MenuPage">
     <VerticalStackLayout>
-        <HorizontalStackLayout>
+        <HorizontalStackLayout x:Name="hLayout">
             
         </HorizontalStackLayout>
     </VerticalStackLayout>

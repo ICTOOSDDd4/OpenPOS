@@ -87,7 +87,6 @@ namespace OpenPOS_APP.Services
             {
                 foreach (var prop in type.GetProperties())
                 {
-                    Console.WriteLine(prop.PropertyType);
                     var propType = prop.PropertyType;
                     try
                     {
