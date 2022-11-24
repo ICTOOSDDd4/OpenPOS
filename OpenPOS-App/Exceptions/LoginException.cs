@@ -19,6 +19,8 @@ namespace OpenPOS_APP.Exceptions
         {
             Errors = new List<string>();
 
+            
+
             var user = UserService.Authenticate(email, password);
             if (user != null)
             {

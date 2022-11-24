@@ -12,9 +12,14 @@ namespace OpenPOS_APP.Exceptions
     {
         public List<string> Errors { get; }
 
+        public bool WriteToLog { get; }
+
         public RegisterException(string name, string email, string password, string repeatPassword) 
         { 
-        CheckEmail(email);
+            WriteToLog = false;
+
+            CheckEmail(email);
+            CheckPassword(password);
         }
 
         private void CheckEmail(string email)
@@ -29,10 +34,7 @@ namespace OpenPOS_APP.Exceptions
 
         private void CheckPassword(string password) 
         {
-        if (password.Length > 6)
-            {
-
-            }
+        
         }
     }
 }

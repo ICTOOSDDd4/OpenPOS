@@ -5,9 +5,10 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace OpenPOS_APP.Exceptions
 {
-    public static class ExceptionHandler
+    public static class WriteToLog
     {
         public static void WriteToLog(string message)
         {
@@ -18,6 +19,6 @@ namespace OpenPOS_APP.Exceptions
                    DateTime.Now.ToString() + $" {message}" + Environment.NewLine);
         }
 
-
     }
+
 }
