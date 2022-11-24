@@ -5,6 +5,8 @@ using OpenPOS_APP.Services.Models;
 using OpenPOS_APP.Settings;
 using OpenPOS_APP.Views.Onboarding;
 using System.Reflection;
+using Windows.UI.ViewManagement;
+
 namespace OpenPOS_APP;
 
 public partial class MainPage : ContentPage
@@ -12,8 +14,9 @@ public partial class MainPage : ContentPage
 	private ResourceDictionary _appColors = new();
 	public MainPage()
 	{
-		InitializeComponent();
-		_appColors.SetAndLoadSource(new Uri("Resources/Styles/Colors.xaml", UriKind.RelativeOrAbsolute), "Resources/Styles/Colors.xaml", this.GetType().GetTypeInfo().Assembly, null );
+      InitializeComponent();
+      DeviceDisplay.Current.MainDisplayInfo
+      _appColors.SetAndLoadSource(new Uri("Resources/Styles/Colors.xaml", UriKind.RelativeOrAbsolute), "Resources/Styles/Colors.xaml", this.GetType().GetTypeInfo().Assembly, null );
       OnIconLoaded();
    }
 

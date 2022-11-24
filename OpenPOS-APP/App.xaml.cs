@@ -1,13 +1,14 @@
-﻿namespace OpenPOS_APP;
+﻿using Windows.UI.ViewManagement;
+
+namespace OpenPOS_APP;
 
 public partial class App : Application
 {
     public string ControlTemplate { get; }
     public App()
-	{
-		InitializeComponent();
-        ControlTemplate = "{StaticResource MyControlTemplate}";
-        MainPage = new AppShell();
+	 {
+      InitializeComponent();
+      MainPage = new AppShell();
     }
 
    private void OnSearch(object sender, TextChangedEventArgs e)
