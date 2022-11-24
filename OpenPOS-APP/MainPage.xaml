@@ -18,20 +18,10 @@
                 HorizontalOptions="Center"
                 Grid.Column="1"/>
             <Label x:Name="Table" Grid.Column="2" Text="TAFEL" VerticalTextAlignment="Center" Padding="30" FontSize="24"></Label>
-            <Entry
-                x:Name="Search"
-                Placeholder="Zoeken"
-                TextChanged="OnSearch"
-                TextColor="Black"
-                WidthRequest="350"
-                MaxLength="50"
-                SelectionLength="50"
-                ClearButtonVisibility="WhileEditing"
-                HorizontalOptions="Center"
+            <SearchBar
                 Grid.ColumnSpan="2"
-                Grid.Column="3"
-                MinimumWidthRequest="900"
-            />
+                Grid.Column="3" 
+                Placeholder="Search items..." />
             <ImageButton Grid.Column="5" Source="cart.png" Padding="10" BackgroundColor="#e1e1e1"></ImageButton>
             <ImageButton Grid.Column="6" Source="account.png" Padding="10" BackgroundColor="#e1e1e1"></ImageButton>
         </Grid>
