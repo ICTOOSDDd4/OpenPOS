@@ -61,26 +61,41 @@
                    HorizontalTextAlignment="Center"
                    Text="Product Info"/>
         </VerticalStackLayout>
-        <VerticalStackLayout>
+        <HorizontalStackLayout
+            HorizontalOptions="CenterAndExpand"
+            >
             <Button
                 HorizontalOptions="Fill"
                 Text="Add"
+                WidthRequest="65"
                 CornerRadius="0"
                 Clicked="OnClickedToevoegen"
                 TextColor="Black"
                 BackgroundColor="{ StaticResource OpenPos-Green}"
                     />
             <Button
+                Text="Info"
+                Clicked="OnClickedInfo"
+                CornerRadius="0"
+                x:Name="InfoButton"
+                TextColor="Black"
+                IsVisible="true"
+                WidthRequest="70"
                 HorizontalOptions="Fill"
+                BackgroundColor="#49C9F5"
+            />
+            <Button
                 Text="Delete"
                 Clicked="OnClickedVerwijderen"
                 CornerRadius="0"
                 x:Name="DeleteButton"
+                WidthRequest="65"
                 TextColor="Black"
-                IsVisible="false"
+                IsVisible="true"
+                HorizontalOptions="Fill"
                 BackgroundColor="#FF5245"
             />
-        </VerticalStackLayout>
+        </HorizontalStackLayout>
     </VerticalStackLayout>
     </VerticalStackLayout>
 </ContentView>

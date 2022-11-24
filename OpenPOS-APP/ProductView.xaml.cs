@@ -40,6 +40,11 @@ public partial class ProductView : ContentView
       _menuPage.SelectedProducts.Add(_product);
    }
 
+   private void OnClickedInfo(object sender, EventArgs e)
+   {
+
+   }
+
    private void OnClickedVerwijderen(object sender, EventArgs e)
    {
       Amount--;
