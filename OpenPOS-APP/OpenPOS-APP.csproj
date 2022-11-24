@@ -17,7 +17,7 @@
 		<ApplicationTitle>OpenPOS-APP</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.openpos_app</ApplicationId>
+		<ApplicationId>com.openpos.openpos_app</ApplicationId>
 		<ApplicationIdGuid>9204c2df-dbba-4d50-8218-c5f6d5113fb9</ApplicationIdGuid>
 
 		<!-- Versions -->
