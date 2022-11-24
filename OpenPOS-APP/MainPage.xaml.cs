@@ -14,7 +14,7 @@ public partial class MainPage : ContentPage
 	{
 		InitializeComponent();
 		_appColors.SetAndLoadSource(new Uri("Resources/Styles/Colors.xaml", UriKind.RelativeOrAbsolute), "Resources/Styles/Colors.xaml", this.GetType().GetTypeInfo().Assembly, null );
-	}
+    }
 	private void OnTextFilledUsername(object sender, TextChangedEventArgs e)
 	{
 		_username = e.NewTextValue;
@@ -87,7 +87,8 @@ public partial class MainPage : ContentPage
 			return true;
 		} else { return false; }
 	}
-
-    
+    private void OnSearch(object sender, TextChangedEventArgs e)
+    {
+    }
 }
 

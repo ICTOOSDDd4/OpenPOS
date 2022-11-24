@@ -2,24 +2,52 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="OpenPOS_APP.MainPage"
-             Shell.NavBarIsVisible="False">
-             
+             Shell.NavBarIsVisible="False"
+             Title="OPENPOS">
     <ContentPage.Resources>
         <ResourceDictionary Source="Resources/Styles/Colors.xaml"></ResourceDictionary>
     </ContentPage.Resources>
+    <Grid ColumnDefinitions="33*, 33*, 33*"
+          RowDefinitions="65, 1*">
+        <BoxView Grid.Row="0" Grid.ColumnSpan="3" Color="DarkGray"/>
+        <Grid Grid.Column="0" Grid.ColumnSpan="3" BackgroundColor="#e1e1e1" ColumnDefinitions="100, 150, auto, 1*, auto, 150, 150, 100">
+            <Image 
+                Source="openpos_transparent_black.png"
+                SemanticProperties.Description="Cute dot net bot waving hi to you!"
+                HeightRequest="100"
+                HorizontalOptions="Center"
+                Grid.Column="1"/>
+            <Label x:Name="Table" Grid.Column="2" Text="TAFEL" VerticalTextAlignment="Center" Padding="30" FontSize="24"></Label>
+            <Entry
+                x:Name="Search"
+                Placeholder="Zoeken"
+                TextChanged="OnSearch"
+                TextColor="Black"
+                WidthRequest="350"
+                MaxLength="50"
+                SelectionLength="50"
+                ClearButtonVisibility="WhileEditing"
+                HorizontalOptions="Center"
+                Grid.ColumnSpan="2"
+                Grid.Column="3"
+                MinimumWidthRequest="900"
+            />
+            <Button Text="Cart" Grid.Column="5" BackgroundColor="Gray" FontSize="22" CornerRadius="8"></Button>
+            <Button Text="Account" Grid.Column="6" BackgroundColor="Gray" FontSize="22" CornerRadius="8"></Button>
+        </Grid>
 
-    <ScrollView>
-        <VerticalStackLayout
+        <ScrollView Grid.ColumnSpan="3" Grid.Row="2">
+            <VerticalStackLayout
             Spacing="25"
             Padding="30,0"
             VerticalOptions="Center">
-            <Image 
+                <Image 
                 Source="openpos_transparent_black.png"
                 SemanticProperties.Description="Cute dot net bot waving hi to you!"
                 HeightRequest="200"
                 HorizontalOptions="Center"/>
 
-            <Label
+                <Label
                 Text="Login to get access to your OpenPOS Experience"
                 SemanticProperties.HeadingLevel="Level2"
                 SemanticProperties.Description="The way to access your OpenPOS Experience"
@@ -27,7 +55,7 @@
                 FontSize="18"
                 HorizontalOptions="Center" />
 
-            <Entry
+                <Entry
                 x:Name="EmailEntry"
                 Placeholder="Email"
                 TextChanged="OnTextFilledUsername"
@@ -40,7 +68,7 @@
                 HorizontalOptions="Center"
             />
 
-            <Entry
+                <Entry
                 x:Name="PasswordEntry"
                 Placeholder="Password"
                 IsPassword="True"
@@ -52,8 +80,8 @@
                 SelectionLength="50"
                 ClearButtonVisibility="WhileEditing"
                 HorizontalOptions="Center"/>
-            
-            <Button
+
+                <Button
                 x:Name="MainLoginButton"
                 Text="LOGIN"
                 SemanticProperties.Hint="Press to login"
@@ -64,23 +92,24 @@
                 BackgroundColor="{StaticResource Gray100}" 
                 CornerRadius="10"   
              />
-            
-            <Label 
+
+                <Label 
                 VerticalOptions="Center" 
                 HorizontalOptions="Center" >
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="Don't have an account? " />
-                        <Span 
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Don't have an account? " />
+                            <Span 
                             Text="Create one here." 
                             TextColor="Blue" 
                             TextDecorations="Underline"  />
-                    </FormattedString>
-                </Label.FormattedText>
-                <Label.GestureRecognizers>
+                        </FormattedString>
+                    </Label.FormattedText>
+                    <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="CreateNewAccount_Tapped"/>
                     </Label.GestureRecognizers>
-            </Label>
-        </VerticalStackLayout>
-    </ScrollView>
+                </Label>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>
