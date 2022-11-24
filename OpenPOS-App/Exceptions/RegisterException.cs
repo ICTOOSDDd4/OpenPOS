@@ -12,12 +12,8 @@ namespace OpenPOS_APP.Exceptions
     {
         public List<string> Errors { get; }
 
-        public bool WriteToLog { get; }
-
         public RegisterException(string name, string email, string password, string repeatPassword) 
         { 
-            WriteToLog = false;
-
             CheckEmail(email);
             CheckPassword(password);
         }

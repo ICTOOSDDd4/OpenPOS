@@ -10,7 +10,5 @@ namespace OpenPOS_APP.Exceptions.Interfaces
     {
         List<string> Errors { get; }
 
-        bool WriteToLog { get; }
-
     }
 }
