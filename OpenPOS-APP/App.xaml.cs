@@ -9,8 +9,4 @@ public partial class App : Application
         ControlTemplate = "{StaticResource MyControlTemplate}";
         MainPage = new AppShell();
     }
-
-    private void OnSearch(object sender, TextChangedEventArgs e)
-    {
-    }
 }

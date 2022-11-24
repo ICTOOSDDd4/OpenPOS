@@ -87,5 +87,8 @@ public partial class MainPage : ContentPage
 			return true;
 		} else { return false; }
 	}
+    private void OnSearch(object sender, TextChangedEventArgs e)
+    {
+    }
 }
 
