@@ -60,6 +60,7 @@ public partial class LoginScreen : ContentPage
 
    private async void CreateNewAccount_Tapped(object sender, EventArgs e)
    {
+
       await DisplayAlert("Work in Progress", "This feature is still under development try agian later.", "Alright");
    }
    protected override void OnNavigatedTo(NavigatedToEventArgs args)

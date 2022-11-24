@@ -23,7 +23,7 @@ public partial class TablePickerScreen : ContentPage
 
    private async void OnSubmitButtonClicked(object sender, EventArgs e)
    {
-      await DisplayAlert("Oops", "Hahaha, That didn't work.", "Try again");
+      await Shell.Current.GoToAsync(nameof(MenuPage));
    }
 
    private void OnTableNumberEntryChanged(object sender, TextChangedEventArgs e)
