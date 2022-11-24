@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net7.0-maccatalyst;net7.0;</TargetFrameworks>
-<!--		<TargetFrameworks></TargetFrameworks>-->
+		<!--<TargetFrameworks>net7.0-maccatalyst;net7.0;</TargetFrameworks>-->
+		<TargetFrameworks></TargetFrameworks>
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
 		
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
@@ -17,7 +17,7 @@
 		<ApplicationTitle>OpenPOS-APP</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.openpos_app</ApplicationId>
+		<ApplicationId>com.openpos.openpos_app</ApplicationId>
 		<ApplicationIdGuid>9204c2df-dbba-4d50-8218-c5f6d5113fb9</ApplicationIdGuid>
 
 		<!-- Versions -->
@@ -37,7 +37,7 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#FFFFFF" />
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
 
 		<!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
@@ -70,24 +70,16 @@
 
 	<ItemGroup>
 	  <None Remove="appsettings.json" />
-	  <None Remove="Resources\AppIcon\appicon.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiImage Include="Resources\AppIcon\appicon.svg" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Compile Update="TablePickerScreen.xaml.cs">
-	    <DependentUpon>TablePickerScreen.xaml</DependentUpon>
-	  </Compile>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiXaml Update="LoginScreen.xaml">
+	  <MauiXaml Update="CheckoutItemCardView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="TablePickerScreen.xaml">
+	  <MauiXaml Update="ProductView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="RealisatieMenu.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
