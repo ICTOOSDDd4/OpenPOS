@@ -10,7 +10,7 @@ public partial class LoginScreen : ContentPage
    private string _username;
    private string _password;
    private ResourceDictionary _appColors = new();
-   CheckoutItemCardView card;
+   ProductView card;
    public LoginScreen()
    {
       InitializeComponent();
@@ -74,7 +74,7 @@ public partial class LoginScreen : ContentPage
 
    private void NewCard()
    {
-      card = new CheckoutItemCardView();
+      card = new ProductView();
    }
 
    private bool UserAuth(string username, string password)
