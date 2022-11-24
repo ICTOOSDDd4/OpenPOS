@@ -10,7 +10,7 @@ namespace OpenPOS_APP.Exceptions
 {
     public static class WriteToLog
     {
-        public static void WriteToLog(string message)
+        public static void WriteLog(string message)
         {
             var path = AppDomain.CurrentDomain.BaseDirectory + "Logs";
             Directory.CreateDirectory(path);
