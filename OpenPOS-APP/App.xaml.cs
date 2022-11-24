@@ -2,10 +2,15 @@
 
 public partial class App : Application
 {
-	public App()
+    public string ControlTemplate { get; }
+    public App()
 	{
 		InitializeComponent();
-
+        ControlTemplate = "{StaticResource MyControlTemplate}";
         MainPage = new AppShell();
+    }
+
+    private void OnSearch(object sender, TextChangedEventArgs e)
+    {
     }
 }

@@ -27,8 +27,7 @@ public static class MauiProgram
 				fonts.AddFont("LeagueSpartan-Light.ttf", "LeagueSpartanLight");
 				fonts.AddFont("LeagueSpartan-Thin.ttf", "LeagueSpartanThin");
 			});
-		
-		Initialize();
+            Initialize();
 
 #if DEBUG
       builder.Logging.AddDebug();

@@ -32,8 +32,8 @@
                 Grid.Column="3"
                 MinimumWidthRequest="900"
             />
-            <Button Text="Cart" Grid.Column="5" BackgroundColor="Gray" FontSize="22" CornerRadius="8"></Button>
-            <Button Text="Account" Grid.Column="6" BackgroundColor="Gray" FontSize="22" CornerRadius="8"></Button>
+            <ImageButton Grid.Column="5" Source="cart.png" Padding="10" BackgroundColor="#e1e1e1"></ImageButton>
+            <ImageButton Grid.Column="6" Source="account.png" Padding="10" BackgroundColor="#e1e1e1"></ImageButton>
         </Grid>
 
         <ScrollView Grid.ColumnSpan="3" Grid.Row="2">

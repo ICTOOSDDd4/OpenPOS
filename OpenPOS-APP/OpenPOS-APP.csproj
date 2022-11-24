@@ -70,5 +70,7 @@
 
 	<ItemGroup>
 	  <None Remove="appsettings.json" />
+	  <None Remove="Resources\Images\account.svg" />
+	  <None Remove="Resources\Images\cart.svg" />
 	</ItemGroup>
 </Project>
