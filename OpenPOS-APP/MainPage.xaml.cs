@@ -15,7 +15,6 @@ public partial class MainPage : ContentPage
 	public MainPage()
 	{
       InitializeComponent();
-      DeviceDisplay.Current.MainDisplayInfo
       _appColors.SetAndLoadSource(new Uri("Resources/Styles/Colors.xaml", UriKind.RelativeOrAbsolute), "Resources/Styles/Colors.xaml", this.GetType().GetTypeInfo().Assembly, null );
       OnIconLoaded();
    }
