@@ -13,7 +13,6 @@ public partial class ProductView : ContentView
       MainVerticalLayout.Shadow = new Shadow
       {
          Offset = new Point(10, 10),
-         //Radius = 10,
          Brush = Brush.Black,
          Opacity = 0.12f,
       };
