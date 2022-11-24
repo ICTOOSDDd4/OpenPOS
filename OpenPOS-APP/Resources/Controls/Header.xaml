@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<StackLayout xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Name="this"
+             x:Class="OpenPOS_APP.Resources.Controls.Header">
+    <Frame
+        Padding="0,0,0,0"
+        BindingContext="{x:Reference this}"
+        BackgroundColor="#e1e1e1"
+        HeightRequest="70"
+        CornerRadius="0"
+        >
+    <HorizontalStackLayout
+        HorizontalOptions="Center"
+        >
+        <HorizontalStackLayout
+            Margin="10"
+            Spacing="40"
+            Padding="30,0,30,0"
+            HorizontalOptions="Center"
+            >
+                <Image
+                Source="openpos_logo_v1.png"
+                HeightRequest="40"/>
+                <Label
+                x:Name="TableNumber"
+                Text="TAFEL"
+                VerticalTextAlignment="Center"
+                FontSize="24"/>
+                <SearchBar
+                SearchButtonPressed="OnSearch"
+                TextChanged="OnSearchTextChanged"
+                Placeholder="Search items..."
+                WidthRequest="400"
+                HeightRequest="50"
+                />
+                <ImageButton
+                Source="cart.png"
+                Padding="10"
+                BackgroundColor="#e1e1e1"
+                />
+                <ImageButton
+                Source="account.png"
+                Padding="10"
+                BackgroundColor="#e1e1e1"
+                />
+            </HorizontalStackLayout>
+    </HorizontalStackLayout>
+    </Frame>
+</StackLayout>

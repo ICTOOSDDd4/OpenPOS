@@ -9,4 +9,19 @@ public partial class App : Application
         ControlTemplate = "{StaticResource MyControlTemplate}";
         MainPage = new AppShell();
     }
+
+   private void OnSearch(object sender, TextChangedEventArgs e)
+   {
+
+   }
+
+    private void SearchBar_SearchButtonPressed(object sender, EventArgs e)
+    {
+
+   }
+
+    private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+    {
+
+   }
 }

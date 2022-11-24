@@ -7,37 +7,20 @@
     <ContentPage.Resources>
         <ResourceDictionary Source="Resources/Styles/Colors.xaml"></ResourceDictionary>
     </ContentPage.Resources>
-    <Grid ColumnDefinitions="33*, 33*, 33*"
-          RowDefinitions="65, 1*">
-        <BoxView Grid.Row="0" Grid.ColumnSpan="3" Color="DarkGray"/>
-        <Grid Grid.Column="0" Grid.ColumnSpan="3" BackgroundColor="#e1e1e1" ColumnDefinitions="100, 150, auto, 1*, auto, 150, 150, 100">
-            <Image 
-                Source="openpos_transparent_black.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="100"
-                HorizontalOptions="Center"
-                Grid.Column="1"/>
-            <Label x:Name="Table" Grid.Column="2" Text="TAFEL" VerticalTextAlignment="Center" Padding="30" FontSize="24"></Label>
-            <SearchBar
-                Grid.ColumnSpan="2"
-                Grid.Column="3" 
-                Placeholder="Search items..." />
-            <ImageButton Grid.Column="5" Source="cart.png" Padding="10" BackgroundColor="#e1e1e1"></ImageButton>
-            <ImageButton Grid.Column="6" Source="account.png" Padding="10" BackgroundColor="#e1e1e1"></ImageButton>
-        </Grid>
-            <VerticalStackLayout
+    <VerticalStackLayout
                 Spacing="25"
-                Padding="30,0"
+                Padding="30,100,30,100"
                 Grid.ColumnSpan="3" Grid.Row="2"
                 VerticalOptions="Center">
-                <Image 
+
+        <Image 
                     x:Name="openposicon"
                     Source="openpos_icon.png"
                     SemanticProperties.Description="Hello, this is OpenPOS"
                     HeightRequest="200"
                     HorizontalOptions="Center"/>
 
-                <Label
+        <Label
                     Text="Weclome to OpenPOS!"
                     SemanticProperties.HeadingLevel="Level1"
                     FontFamily="LeagueSpartan-SemiBold"
@@ -46,7 +29,7 @@
                     FontSize="24"
                     HorizontalOptions="Center" />
 
-                <Button
+        <Button
                     x:Name="MainLoginButton"
                     Text="START YOUR EXPERIENCE"
                     SemanticProperties.Hint="Press to login"
@@ -55,6 +38,5 @@
                     TextColor="Black"
                     BackgroundColor="{StaticResource OpenPos-Yellow}" 
                     CornerRadius="10" />
-            </VerticalStackLayout>
-        </Grid>
+    </VerticalStackLayout>
 </ContentPage>
