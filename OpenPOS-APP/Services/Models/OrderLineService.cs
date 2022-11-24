@@ -12,12 +12,32 @@ namespace OpenPOS_APP.Services.Models
 {
     public class OrderLineService
     {
+        public static List<OrderLine> GetAll()
+        {
+            SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[order_product]");
+
+            return DatabaseService.Execute<OrderLine>(query);
+        }
+
         public static List<OrderLine> GetAllById(int id)
         {
             SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[order_product] WHERE [order_id] = @ID");
 
             query.Parameters.Add("@ID", SqlDbType.Int);
             query.Parameters["@ID"].Value = id;
+
+            List<OrderLine> resultList = DatabaseService.Execute<OrderLine>(query);
+
+            return resultList;
+        }
+        public static List<OrderLine> GetByIds(int Order_id, int Product_id)
+        {
+            SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[order_product] WHERE [order_id] = @OrderId AND [product_id] = @ProductId");
+
+            query.Parameters.Add("@OrderId", SqlDbType.Int);
+            query.Parameters["@OrderId"].Value = Order_id;
+            query.Parameters.Add("@ProductId", SqlDbType.Int);
+            query.Parameters["@ProductId"].Value = Product_id;
 
             List<OrderLine> resultList = DatabaseService.Execute<OrderLine>(query);
 
@@ -37,19 +57,20 @@ namespace OpenPOS_APP.Services.Models
 
         public static bool Delete(OrderLine obj)
         {
-            SqlCommand query = new SqlCommand("DELETE FROM [dbo].[order] WHERE [order_id] = @OrderId AND [product_id] = @ProductId");
-
+            SqlCommand query = new SqlCommand("DELETE FROM [dbo].[order_product] WHERE [order_id] = @OrderId AND [product_id] = @ProductId");
+            
             query.Parameters.Add("@OrderId", SqlDbType.Int);
             query.Parameters["@OrderId"].Value = obj.Order_id;
             query.Parameters.Add("@ProductId", SqlDbType.Int);
             query.Parameters["@ProductId"].Value = obj.Product_id;
-
+            Console.WriteLine(obj.Order_id);
+            
             return DatabaseService.Execute(query);
         }
 
         public static OrderLine Create(OrderLine obj)
         {
-            SqlCommand query = new SqlCommand("INSERT INTO [dbo].[order_product] ([order_id], [product_id], [amount] [comment])  OUTPUT  inserted.*  VALUES (@OrderId, @ProductId, @Amount, @Comment)");
+            SqlCommand query = new SqlCommand("INSERT INTO [dbo].[order_product] ([order_id], [product_id], [amount], [comment])  OUTPUT  inserted.*  VALUES (@OrderId, @ProductId, @Amount, @Comment)");
 
             query.Parameters.Add("@OrderId", SqlDbType.Int);
             query.Parameters["@OrderId"].Value = obj.Order_id;

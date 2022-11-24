@@ -69,11 +69,6 @@ public class OrderService : IModelService<Order>
 
         var result = DatabaseService.ExecuteSingle<Order>(query);
 
-        foreach (var line in result.Lines)
-        {
-            OrderLineService.Create(line);
-        }
-
         return result;
     }
 }

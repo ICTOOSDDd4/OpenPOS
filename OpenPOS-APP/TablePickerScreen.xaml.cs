@@ -1,7 +1,6 @@
 using Microsoft.Maui;
 using System.Reflection;
 using System.Text.RegularExpressions;
-using Windows.Security.Authentication.OnlineId;
 
 namespace OpenPOS_APP;
 
