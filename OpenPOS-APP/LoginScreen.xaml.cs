@@ -10,12 +10,10 @@ public partial class LoginScreen : ContentPage
    private string _username;
    private string _password;
    private ResourceDictionary _appColors = new();
-   ProductView card;
    public LoginScreen()
    {
       InitializeComponent();
       _appColors.SetAndLoadSource(new Uri("Resources/Styles/Colors.xaml", UriKind.RelativeOrAbsolute), "Resources/Styles/Colors.xaml", this.GetType().GetTypeInfo().Assembly, null);
-      Vertical.Add(card);
    }
    private void OnTextFilledUsername(object sender, TextChangedEventArgs e)
    {
@@ -62,19 +60,11 @@ public partial class LoginScreen : ContentPage
 
    private async void CreateNewAccount_Tapped(object sender, EventArgs e)
    {
-      Vertical.Remove(card);
-      NewCard();
-      Vertical.Add(card);
       await DisplayAlert("Work in Progress", "This feature is still under development try agian later.", "Alright");
    }
    protected override void OnNavigatedTo(NavigatedToEventArgs args)
    {
       base.OnNavigatedTo(args);
-   }
-
-   private void NewCard()
-   {
-      card = new ProductView();
    }
 
    private bool UserAuth(string username, string password)
