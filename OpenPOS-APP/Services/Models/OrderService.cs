@@ -67,6 +67,13 @@ public class OrderService : IModelService<Order>
         query.Parameters.Add("@updated_at", SqlDbType.DateTime);
         query.Parameters["@updated_at"].Value = obj.Updated_At;
 
-        return DatabaseService.ExecuteSingle<Order>(query);
+        var result = DatabaseService.ExecuteSingle<Order>(query);
+
+        foreach (var line in result.Lines)
+        {
+            OrderLineService.Create(line);
+        }
+
+        return result;
     }
 }
