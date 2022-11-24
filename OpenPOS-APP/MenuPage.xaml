@@ -4,9 +4,8 @@
              x:Class="OpenPOS_APP.MenuPage"
              Title="MenuPage">
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <HorizontalStackLayout>
+            
+        </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>
