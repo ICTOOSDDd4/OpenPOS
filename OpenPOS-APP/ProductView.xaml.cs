@@ -1,11 +1,13 @@
 using Microsoft.Maui.Controls.Platform;
+using OpenPOS_APP.Models;
 
 namespace OpenPOS_APP;
 
 public partial class ProductView : ContentView
 {
    public int Amount { get; set; }
-
+   private MenuPage _menuPage;
+   private Product _product;
 
    public ProductView()
    {
@@ -18,23 +20,32 @@ public partial class ProductView : ContentView
       };
    }
 
-   public void SetPoductValues(string name, string desc, string imagePath)
+   public void SetProductValues(MenuPage page, Product product)
    {
-      ProductName.Text = name;
-      ProductInfo.Text = desc;
-      ProductImage.Source = imagePath;
+      _menuPage = page;
+      _product = product;
+      
+      //TODO: Add price to product
+      
+      ProductName.Text = product.Name;
+      ProductInfo.Text = product.Price + ", " + product.Description;
+      // ProductImage.Source = imagePath; --Needs to be implemented in DB
    }
 
    private void OnClickedToevoegen(object sender, EventArgs e)
    {
       Amount++;
       AmountCount.Text = Amount.ToString();
+      
+      _menuPage.SelectedProducts.Add(_product);
    }
 
    private void OnClickedVerwijderen(object sender, EventArgs e)
    {
       Amount--;
       AmountCount.Text = Amount.ToString();
+      
+      _menuPage.SelectedProducts.Remove(_product);
    }
 
     private void AmountCount_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

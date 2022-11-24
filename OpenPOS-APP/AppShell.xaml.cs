@@ -10,5 +10,6 @@ public partial class AppShell : Shell
 
 		Routing.RegisterRoute(nameof(TablePickerScreen), typeof(TablePickerScreen));
 		Routing.RegisterRoute(nameof(LoginScreen), typeof(LoginScreen));
+		Routing.RegisterRoute(nameof(MenuPage), typeof(MenuPage));
 	}
 }
