@@ -21,8 +21,7 @@ public partial class CheckoutOverview : ContentPage
 	{
         InitializeComponent();
 
-        
-		AddToCheckOut(ApplicationSettings.CheckoutList);
+		   AddToCheckOut(ApplicationSettings.CheckoutList);
 
 	}
 

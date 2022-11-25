@@ -39,8 +39,15 @@ public partial class ProductView : ContentView
    {
       Amount++;
       AmountCount.Text = Amount.ToString();
-      
-      _menuPage.SelectedProducts.Add(_product);
+
+      if (ApplicationSettings.CheckoutList.ContainsKey(_product))
+      {
+         ApplicationSettings.CheckoutList[_product] = Amount;
+      } else
+      {
+         ApplicationSettings.CheckoutList.Add(_product, Amount);
+      }
+
    }
 
    private void OnClickedInfo(object sender, EventArgs e)
@@ -52,8 +59,18 @@ public partial class ProductView : ContentView
    {
       Amount--;
       AmountCount.Text = Amount.ToString();
-      
-      _menuPage.SelectedProducts.Remove(_product);
+
+      if (ApplicationSettings.CheckoutList.ContainsKey(_product))
+      {
+         if(ApplicationSettings.CheckoutList[_product] > 1)
+         {
+            ApplicationSettings.CheckoutList[_product]--;
+
+         } else
+         {
+            ApplicationSettings.CheckoutList.Remove(_product);
+         }
+      }
    }
 
     private void AmountCount_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
