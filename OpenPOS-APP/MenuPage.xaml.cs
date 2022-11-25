@@ -29,35 +29,10 @@ public partial class MenuPage : ContentPage
 		}
 	}
 
-	protected override void OnSizeAllocated(double width, double height)
-	{
-		base.OnSizeAllocated(width, height);
-
-
-		if (width != _width)
-		{
-			_width = width;
-			foreach (var VARIABLE in MainVerticalLayout.ToList())
-			{
-				//remove all
-				MainVerticalLayout.Remove(VARIABLE);
-				AddAllProducts();
-			}
-		}
-		
-		if (height != _height)
-		{
-			height = height;
-			ScrView.HeightRequest = height - 200;
-		}
-
-	}
-
 
 	public void AddProductToLayout(Product product)
 	{
-		int modNumber = 0;
-      if (HorizontalLayout == null || HorizontalLayout.Children.Count % 8 == 0)
+		if (HorizontalLayout == null || HorizontalLayout.Children.Count % 8 == 0)
       {
 			AddHorizontalLayout();
       }
