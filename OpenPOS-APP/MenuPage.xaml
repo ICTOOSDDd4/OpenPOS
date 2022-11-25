@@ -8,6 +8,7 @@
     <VerticalStackLayout>
         <customControls:Header/>
         <ScrollView
+            x:Name="ScrView"
             Orientation="Vertical"
             VerticalScrollBarVisibility="Always"
             VerticalOptions="FillAndExpand"
@@ -28,6 +29,7 @@
             FontSize="35"
             Padding="0,0,10,0"
             Margin="0,30,0,10"
+            Clicked="OrderButton_OnClicked"
         />
     </VerticalStackLayout>
 </ContentPage>

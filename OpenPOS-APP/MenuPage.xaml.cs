@@ -8,26 +8,55 @@ public partial class MenuPage : ContentPage
 	public List<Product> Products { get; set; }
 	public List<Product> SelectedProducts { get; set; }
 	private HorizontalStackLayout HorizontalLayout;
+
+	private double _width;
+	private double _height;
 	public MenuPage()
 	{
 		Products = ProductService.GetAll();
 		InitializeComponent();
 		SelectedProducts = new List<Product>();
+		AddAllProducts();
+		
 
-		for (int j = 0; j < 3; j++)
+	}
+
+	void AddAllProducts()
+	{
+		for (int i = 0; i < Products.Count; i++)
 		{
-			for (int i = 0; i < Products.Count; i++)
+			AddProductToLayout(Products[i]);
+		}
+	}
+
+	protected override void OnSizeAllocated(double width, double height)
+	{
+		base.OnSizeAllocated(width, height);
+
+
+		if (width != _width)
+		{
+			_width = width;
+			foreach (var VARIABLE in MainVerticalLayout.ToList())
 			{
-				AddProductToLayout(Products[i]);
+				//remove all
+				MainVerticalLayout.Remove(VARIABLE);
+				AddAllProducts();
 			}
 		}
-
-	
 		
+		if (height != _height)
+		{
+			height = height;
+			ScrView.HeightRequest = height - 200;
+		}
+
 	}
+
 
 	public void AddProductToLayout(Product product)
 	{
+		int modNumber = 0;
       if (HorizontalLayout == null || HorizontalLayout.Children.Count % 8 == 0)
       {
 			AddHorizontalLayout();
@@ -45,7 +74,14 @@ public partial class MenuPage : ContentPage
 		MainVerticalLayout.Add(hLayout);
 		HorizontalLayout = hLayout;
    }
-	
-	
-	
+
+
+	private void OrderButton_OnClicked(object sender, EventArgs e)
+	{
+		foreach (var VARIABLE in MainVerticalLayout.ToList())
+		{
+			//remove all
+			MainVerticalLayout.Remove(VARIABLE);
+		}
+	}
 }
