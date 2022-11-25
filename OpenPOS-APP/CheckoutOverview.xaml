@@ -4,12 +4,18 @@
              x:Class="OpenPOS_APP.CheckoutOverview"
              Title="CheckoutOverview"
              Shell.NavBarIsVisible="False">
-    <Grid ColumnDefinitions="2">
-
-
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        
         <HorizontalStackLayout HorizontalOptions="Start"
                          Margin="100, 100, 0, 0"
-                         Grid.Column="1">
+                         Grid.Column="0">
 
 
         <ListView x:Name="CheckoutListView"
@@ -59,10 +65,11 @@
         
 
     </HorizontalStackLayout>
-        <HorizontalStackLayout Grid.Column="2">
+        <HorizontalStackLayout Grid.Column="1"
+                               VerticalOptions="Center" 
+                             HorizontalOptions="Center">
 
-            <VerticalStackLayout VerticalOptions="Center" 
-                             HorizontalOptions="Center"
+            <VerticalStackLayout 
                              Margin=" 0, 100, 100 ,0">
             <Button Text="Betalen"/>
             <Button Text="Betaling splitten"/>
