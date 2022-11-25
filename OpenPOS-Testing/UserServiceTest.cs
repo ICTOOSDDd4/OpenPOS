@@ -10,7 +10,14 @@ namespace OpenPOS_Testing;
 [TestFixture]
 public class UserServiceTest
 {
-    private User _user;
+    User user = new User
+    {
+        Name = "Voornaam",
+        Last_name = "Achternaam",
+        Email = "email",
+        Password = "TestPassword"
+    };
+    
     [SetUp]
     public void SetUp()
     {
@@ -24,6 +31,7 @@ public class UserServiceTest
                 .Build();
             
             ApplicationSettings.DbSett = config.GetRequiredSection("DATABASE_CONNECTION").Get<DatabaseSettings>();
+            
             if (ApplicationSettings.DbSett != null)
             {
                 System.Diagnostics.Debug.WriteLine(ApplicationSettings.DbSett.connection_string);
@@ -31,64 +39,98 @@ public class UserServiceTest
         }
         else throw new Exception();
         
-      DatabaseService.Initialize();
+        DatabaseService.Initialize();
     }
+    
+    
+    
 
     [Test]
     public void UserService_GetAllUsers_ReturnsAllUsers()
     {
+        var user = this.user;
+        var result = UserService.Create(user);
         var users = UserService.GetAll();
-        Assert.Greater(users.Count, 1);
+        
+        Assert.Greater(users.Count, 0);
+        
+        UserService.Delete(result);
     }
 
     [Test]
     public void UserService_CreateUser_ReturnsObject()
     {
 
-        var user = new User
-        {
-            Name = "Voornaam",
-            Last_name = "Achternaam",
-            Email = "email",
-            Password = "TestPassword"
-        };
-
+        var user = this.user;
         var result = UserService.Create(user);
         
-        _user = result;
-        Assert.That(user.Email, Is.EqualTo(_user.Email));
+        Assert.That(user.Email, Is.EqualTo(result.Email));
+       
+        UserService.Delete(result);
     }
     
     [Test]
     public void UserService_FindUser_ReturnsUser()
     {
-        UserService_CreateUser_ReturnsObject();
-        var user = UserService.FindByID(_user.Id);
-        Assert.That(user.Email, Is.EqualTo(_user.Email));
-        UserService_DeleteUser_ReturnsTrue();
+        var user = this.user;
+        var createdUser = UserService.Create(user);
+        var result = UserService.FindByID(createdUser.Id);
+        
+        Assert.That(user.Email, Is.EqualTo(result.Email));
+        
+        UserService.Delete(result);
     }
 
     [Test]
     public void UserService_UpdateUser_ReturnsTrue()
     {
-        UserService_CreateUser_ReturnsObject();
-
-        var user = UserService.FindByID(_user.Id);
-        Assert.That(user.Name, Is.Not.EqualTo("Gerard"));
-        user.Name = "Gerard";
-        user.Last_name = "Joling";
-        var result = UserService.Update(user);
+        var user = this.user;
+        var createdUser = UserService.Create(user);
+        
+        Assert.That(createdUser.Name, Is.Not.EqualTo("Gerard"));
+        createdUser.Name = "Gerard";
+        createdUser.Last_name = "Joling";
+        
+        var result = UserService.Update(createdUser);
+        
         Assert.IsTrue(result);
-        Assert.That(UserService.FindByID(_user.Id).Name, Is.EqualTo("Gerard"));
-        UserService_DeleteUser_ReturnsTrue();
+        Assert.That(UserService.FindByID(createdUser.Id).Name, Is.EqualTo("Gerard"));
+        
+        UserService.Delete(createdUser);
     }
 
     [Test]
     public void UserService_DeleteUser_ReturnsTrue()
     {
-        var user = UserService.FindByID(_user.Id);
-        var result = UserService.Delete(user);
+        var user = this.user;
+        var createdUser = UserService.Create(user);
+        var result = UserService.Delete(createdUser);
+        
         Assert.IsTrue(result);
-        Assert.IsNull(UserService.FindByID(_user.Id).Name);
+        Assert.IsNull(UserService.FindByID(createdUser.Id).Name);
+    }
+
+    [Test]
+    public void UserService_LoginUser_ReturnsUserObject()
+    {
+        //Deze user is al aangemaakt in de database
+        string email = "unittest@openpos.org";
+        string password = "unittest";
+        
+        User user = UserService.Authenticate(email, password);
+        
+        Assert.That(user.Email, Is.EqualTo(email));
+    }
+    
+    
+    [Test]
+    public void UserService_LoginUser_ReturnsNull()
+    {
+        string email = "unittest@openpos.org";
+        string password = "wrongpassword";
+       
+        User user = UserService.Authenticate(email, password);
+        
+        Assert.IsNull(user);
     }
 }

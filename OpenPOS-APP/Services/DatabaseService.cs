@@ -1,5 +1,5 @@
 ﻿using System.Data.SqlClient;
-using Microsoft.Maui.Controls;
+using System.Diagnostics;
 using OpenPOS_APP.Settings;
 
 namespace OpenPOS_APP.Services
@@ -49,6 +49,7 @@ namespace OpenPOS_APP.Services
                 {
                    result = getObject<T>(reader);
                 }
+
                 finally
                 {
                     reader.Close();
@@ -86,7 +87,16 @@ namespace OpenPOS_APP.Services
                 foreach (var prop in type.GetProperties())
                 {
                     var propType = prop.PropertyType;
-                    prop.SetValue(obj, Convert.ChangeType(reader[prop.Name].ToString(), propType));
+                    try
+                    {
+                        prop.SetValue(obj, Convert.ChangeType(reader[prop.Name].ToString(), propType));
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                        Debug.WriteLine(e);
+                        throw;
+                    }
                 }
             }
 

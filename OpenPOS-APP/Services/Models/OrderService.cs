@@ -30,15 +30,15 @@ public class OrderService : IModelService<Order>
     {
         SqlCommand query = new SqlCommand("DELETE FROM [dbo].[order] WHERE [ID] = @OrderId");
         
-        query.Parameters.Add("@@OrderId", SqlDbType.Int);
-        query.Parameters["@@OrderId"].Value = obj.Id;
+        query.Parameters.Add("@OrderId", SqlDbType.Int);
+        query.Parameters["@OrderId"].Value = obj.Id;
         
         return DatabaseService.Execute(query);
     }
 
     public static bool Update(Order obj)
     {
-        SqlCommand query = new SqlCommand("UPDATE [dbo].[order] SET [status] = @status, [user_id] = @userid, [bill_id] = @billId = @id");
+        SqlCommand query = new SqlCommand("UPDATE [dbo].[order] SET [status] = @status, [user_id] = @userid, [bill_id] = @billId WHERE [id] = @id");
 
         query.Parameters.Add("@status", SqlDbType.TinyInt);
         query.Parameters["@status"].Value = obj.Status;
@@ -46,6 +46,8 @@ public class OrderService : IModelService<Order>
         query.Parameters["@userid"].Value = obj.User_id;
         query.Parameters.Add("@billId", SqlDbType.Int);
         query.Parameters["@billId"].Value = obj.Bill_id;
+        query.Parameters.Add("@id", SqlDbType.Int);
+        query.Parameters["@id"].Value = obj.Id;
 
         return DatabaseService.Execute(query);
     }
@@ -61,10 +63,12 @@ public class OrderService : IModelService<Order>
         query.Parameters.Add("@billId", SqlDbType.Int);
         query.Parameters["@billId"].Value = obj.Bill_id;
         query.Parameters.Add("@created_at", SqlDbType.DateTime);
-        query.Parameters["@created_at"].Value = obj.CreatedAt;
+        query.Parameters["@created_at"].Value = obj.Created_At;
         query.Parameters.Add("@updated_at", SqlDbType.DateTime);
-        query.Parameters["@updated_at"].Value = obj.UpdatedAt;
+        query.Parameters["@updated_at"].Value = obj.Updated_At;
 
-        return DatabaseService.ExecuteSingle<Order>(query);
+        var result = DatabaseService.ExecuteSingle<Order>(query);
+
+        return result;
     }
 }

@@ -65,9 +65,25 @@ public class UserService : IModelService<User>
         query.Parameters["@Email"].Value = obj.Email;
         query.Parameters.Add("@Password", SqlDbType.VarChar);
         query.Parameters["@Password"].Value = obj.Password;
-        
-        Console.WriteLine(query.ToString());
-        
+
         return DatabaseService.ExecuteSingle<User>(query);
+    }
+
+    public static User Authenticate(string email, string password)
+    {
+        SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[user] WHERE [email] = @Email AND [password] = @Password");
+        
+        query.Parameters.Add("@Email", SqlDbType.VarChar);
+        query.Parameters["@Email"].Value = email;
+        query.Parameters.Add("@Password", SqlDbType.VarChar);
+        query.Parameters["@Password"].Value = password;
+        
+        User user = DatabaseService.ExecuteSingle<User>(query);
+        
+        if (user.Email == null)
+        {
+            return null;
+        }
+        return user;
     }
 }

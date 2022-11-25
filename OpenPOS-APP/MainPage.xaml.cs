@@ -1,30 +1,41 @@
-﻿using OpenPOS_APP.Services.Models;
+
+using Microsoft.Maui.Controls;
+using OpenPOS_APP.Models;
+using OpenPOS_APP.Services.Models;
+using OpenPOS_APP.Settings;
+using OpenPOS_APP.Views.Onboarding;
+using System.Reflection;
 
 namespace OpenPOS_APP;
 
 public partial class MainPage : ContentPage
 {
-	private int _count;
-
+	private ResourceDictionary _appColors = new();
 	public MainPage()
-
 	{
-		InitializeComponent();
-		_count = UserService.GetAll().Count();
-	}
+      InitializeComponent();
+      _appColors.SetAndLoadSource(new Uri("Resources/Styles/Colors.xaml", UriKind.RelativeOrAbsolute), "Resources/Styles/Colors.xaml", this.GetType().GetTypeInfo().Assembly, null );
+      OnIconLoaded();
+   }
 
-	private void OnCounterClicked(object sender, EventArgs e)
+   private async void OnIconLoaded()
+   {
+      await openposicon.RelRotateTo(360, 4000);
+   }
+
+	private async void OnLoginButtonClicked(object sender, EventArgs e)
 	{
-		_count++;
+      await Shell.Current.GoToAsync(nameof(LoginScreen));
+   }
+	
+	private async void CreateNewAccount_Tapped(object sender, EventArgs e)
+	{
+		// Navigation.PushAsync();
+		await DisplayAlert("Test", "Creating account...", "OK");
 
-		if (_count == 1)
-			CounterBtn.Text = $"Clicked {_count} time";
-		else
-			CounterBtn.Text = $"Clicked {_count} times";
-
-		SemanticScreenReader.Announce(CounterBtn.Text);
 	}
-
-    
+    private void OnSearch(object sender, TextChangedEventArgs e)
+    {
+    }
 }
 

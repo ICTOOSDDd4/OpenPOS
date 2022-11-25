@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OpenPOS_APP.MenuPage"
+             Shell.NavBarIsVisible="False"
+             xmlns:customControls="clr-namespace:OpenPOS_APP.Resources.Controls"
+             Title="MenuPage">
+    <VerticalStackLayout>
+        <customControls:Header/>
+        <ScrollView
+            x:Name="ScrView"
+            Orientation="Vertical"
+            VerticalScrollBarVisibility="Always"
+            VerticalOptions="FillAndExpand"
+            HeightRequest="900"
+            >
+            
+            <VerticalStackLayout
+            HorizontalOptions="Center"
+            x:Name="MainVerticalLayout">
+
+            </VerticalStackLayout>
+        </ScrollView>
+                <Button
+            x:Name="OrderButton"
+            Text="Place your Order"
+            WidthRequest="350"
+            HeightRequest="60"
+            FontSize="35"
+            Padding="0,0,10,0"
+            Margin="0,30,0,10"
+            Clicked="OrderButton_OnClicked"
+        />
+    </VerticalStackLayout>
+</ContentPage>
