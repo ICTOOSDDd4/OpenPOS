@@ -3,127 +3,130 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:openPosApp="using:OpenPOS_APP"
              xmlns:openPosApp1="clr-namespace:OpenPOS_APP"
+             xmlns:customControls="clr-namespace:OpenPOS_APP.Resources.Controls"
              x:Class="OpenPOS_APP.CheckoutOverview"
              Title="CheckoutOverview"
              Shell.NavBarIsVisible="False">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        
-        <HorizontalStackLayout HorizontalOptions="Start"
+    <VerticalStackLayout>
+        <customControls:Header/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <HorizontalStackLayout HorizontalOptions="Start"
                          Margin="100, 100, 0, 0"
                          Grid.Column="0">
-            <VerticalStackLayout>
-            <Label Text="Besteloverzicht"
+                <VerticalStackLayout>
+                    <Label Text="Besteloverzicht"
                    FontSize="32"
                    HorizontalTextAlignment="Center"></Label>
-            <Border >
-                <ListView x:Name="CheckoutListView"
+                    <Border >
+                        <ListView x:Name="CheckoutListView"
                           ItemsSource="{Binding CheckoutItems}"
                           WidthRequest="600"
                           HeightRequest="650"
                   
                 >
-            <ListView.ItemTemplate >
-                <DataTemplate>
-                                <ViewCell>
-                    <Grid Padding="10">
-                        <Grid.Resources>
-                            <openPosApp1:ProductAmountConvert x:Name="ProductAmountConverter" x:Key="ProductAmountConvert" />
-                            <openPosApp1:TotalPriceConvert x:Name="TotalPriceConverter" x:Key="TotalPriceConvert" />
-                                        </Grid.Resources>
-                        <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                        
-                                        <Image Grid.RowSpan="3"
+                            <ListView.ItemTemplate >
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid Padding="10">
+                                            <Grid.Resources>
+                                                <openPosApp1:ProductAmountConvert x:Name="ProductAmountConverter" x:Key="ProductAmountConvert" />
+                                                <openPosApp1:TotalPriceConvert x:Name="TotalPriceConverter" x:Key="TotalPriceConvert" />
+                                            </Grid.Resources>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Image Grid.RowSpan="3"
                                Source="dotnet_bot.png"
                                Aspect="AspectFit"
                                HeightRequest="120"
                                WidthRequest="120" />
-                        
-                            
 
-                            <Label Grid.Row="0"
+
+
+                                            <Label Grid.Row="0"
                                Grid.Column="1"
                                Text="{Binding Name}"
                                VerticalTextAlignment="Start"
                                WidthRequest="230"
                                FontFamily="LeagueSpartan-Medium"/>
-                            <Label Grid.Row="1"
+                                            <Label Grid.Row="1"
                                    Grid.RowSpan="2"
                                Grid.Column="1"
                                Text="{Binding Description}"
                                VerticalTextAlignment="Start"
                                WidthRequest="230"/>
-                        
-                            <Label Grid.Row="0"
+
+                                            <Label Grid.Row="0"
                                Grid.Column="2"
                                Text="{Binding Price, StringFormat='€{0}'}"
                                HorizontalTextAlignment="End"
                                WidthRequest="230"/>
-                            <Label Grid.Row="1"
+                                            <Label Grid.Row="1"
                                Grid.Column="2"
                                Text="{Binding Converter={StaticResource ProductAmountConvert}, ConverterParameter={Binding Name} ,StringFormat='Aantal: {0}'}"
                                HorizontalTextAlignment="End"
                                WidthRequest="230"/>
-                        <Label
+                                            <Label
                                Grid.Row="2"
                                Grid.Column="2"
                                Text="{Binding Converter={StaticResource TotalPriceConvert}, ConverterParameter={Binding Name}}"
                                HorizontalTextAlignment="End"
                                WidthRequest="230"/>
 
-                    </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-            </Border>
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Border>
                 </VerticalStackLayout>
 
 
 
-        </HorizontalStackLayout>
-        <HorizontalStackLayout Grid.Column="1"
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Grid.Column="1"
                                VerticalOptions="Center" 
                              HorizontalOptions="Center">
 
-            <VerticalStackLayout 
+                <VerticalStackLayout 
                              Margin=" 0, 100, 100 ,0"
                              Spacing="25">
-                <Label x:Name="TotalPriceLabel"
+                    <Label x:Name="TotalPriceLabel"
                        FontSize="32"
                        HorizontalTextAlignment="Center"></Label>
-                <Button Text="Pay"
+                    <Button Text="Pay"
                         WidthRequest="300"
                         HeightRequest="100"
                         FontSize="36"
                         Clicked="OnClickedPay"/>
-                <Button Text="Split Payment"
+                    <Button Text="Split Payment"
                         WidthRequest="300"
                         HeightRequest="100"
                         FontSize="36"
                         Clicked="OnClickedSplitPay"/>
-                <Button Text="Split Products"
+                    <Button Text="Split Products"
                         WidthRequest="300"
                         HeightRequest="100"
                         FontSize="36"
                         Clicked="OnClickedSplitProducts"/>
-        </VerticalStackLayout>
+                </VerticalStackLayout>
 
-        </HorizontalStackLayout>
-    </Grid>
+            </HorizontalStackLayout>
+        </Grid>
+    </VerticalStackLayout>
 </ContentPage>

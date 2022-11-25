@@ -1,5 +1,6 @@
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Models;
+using OpenPOS_APP.Settings;
 
 namespace OpenPOS_APP;
 
@@ -68,9 +69,36 @@ public partial class MenuPage : ContentPage
 		HorizontalLayout = hLayout;
    }
 
-
 	private async void OrderButton_OnClicked(object sender, EventArgs e)
 	{
-		await Shell.Current.GoToAsync(nameof(CheckoutOverview));
+		if (SelectedProducts.Count > 0)
+		{
+         await DisplayAlert("Please don't", "You forgot to add products to your order!", "Oh I forgot thanks");
+
+      }
+      else
+		{
+         if (await DisplayAlert("You sure?", "Wanna place this order", "Yes", "no"))
+         {
+            Order order = new Order(1, false, ApplicationSettings.LoggedinUser.Id, ApplicationSettings.CurrentBill.Id, DateTime.Now, DateTime.Now);
+            order = OrderService.Create(order);
+
+            if (order == null)
+            {
+               await DisplayAlert("Oops", "Something went wrong please try again.", "Alright");
+            }
+            else
+            {
+               await DisplayAlert("Order Placed", "You placed your order, our staff is gonna prepair it right away!", "Thank you");
+               await Shell.Current.GoToAsync(nameof(MenuPage));
+            }
+         }
+         else
+         {
+				// Empty for now, DOING NOTHING!
+         }
+      }
+		
+		//await Shell.Current.GoToAsync(nameof(CheckoutOverview));
 	}
 }
