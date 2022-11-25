@@ -1,6 +1,4 @@
-﻿using Windows.UI.ViewManagement;
-
-namespace OpenPOS_APP;
+﻿namespace OpenPOS_APP;
 
 public partial class App : Application
 {

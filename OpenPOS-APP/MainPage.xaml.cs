@@ -5,7 +5,6 @@ using OpenPOS_APP.Services.Models;
 using OpenPOS_APP.Settings;
 using OpenPOS_APP.Views.Onboarding;
 using System.Reflection;
-using Windows.UI.ViewManagement;
 
 namespace OpenPOS_APP;
 
