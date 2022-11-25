@@ -62,15 +62,15 @@ public partial class MainPage : ContentPage
 	private async void OnLoginButtonClicked(object sender, EventArgs e)
 	{
 		//Test Besteloverzicht
-		ApplicationSettings.CheckoutList = new List<Product>();
+		ApplicationSettings.CheckoutList = new Dictionary<Product, int>();
         for (int i = 0; i < 10; i++)
         {
-            ApplicationSettings.CheckoutList.Add(new Product()
-            {
-                Name = "Product " + (i + 1),
-                Price = i + 0.99,
-                Description = "Dit is product " + (i + 1)
-            });
+            ApplicationSettings.CheckoutList.Add(new Product(
+                i,
+                "Product " + (i + 1),
+                i + 0.99,
+                "Dit is product " + (i + 1)
+            ), i);
         }
         //Dit maakt testen makkelijker, moet eruit
 

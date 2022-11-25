@@ -8,5 +8,5 @@ public static class ApplicationSettings
     public static TikkieSettings TikkieSet { get; set; }
     public static User LoggedinUser { get; set; }
 
-    public static List<Product> CheckoutList { get; set; }
+    public static Dictionary<Product, int> CheckoutList { get; set; }
 }

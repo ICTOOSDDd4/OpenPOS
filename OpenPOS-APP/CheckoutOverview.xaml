@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:openPosApp="using:OpenPOS_APP"
              x:Class="OpenPOS_APP.CheckoutOverview"
              Title="CheckoutOverview"
              Shell.NavBarIsVisible="False">
@@ -27,10 +28,14 @@
                           HeightRequest="650"
                   
                 >
-            <ListView.ItemTemplate>
+            <ListView.ItemTemplate >
                 <DataTemplate>
-                    <ViewCell>
+                                <ViewCell>
                     <Grid Padding="10">
+                        <Grid.Resources>
+                            <openPosApp:ProductAmountConvert x:Name="ProductAmountConverter" x:Key="ProductAmountConvert" />
+                            <openPosApp:TotalPriceConvert x:Name="TotalPriceConverter" x:Key="TotalPriceConvert" />
+                                        </Grid.Resources>
                         <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -41,7 +46,8 @@
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                        <Image Grid.RowSpan="3"
+                        
+                                        <Image Grid.RowSpan="3"
                                Source="dotnet_bot.png"
                                Aspect="AspectFit"
                                HeightRequest="120"
@@ -56,6 +62,7 @@
                                WidthRequest="230"
                                FontFamily="LeagueSpartan-Medium"/>
                             <Label Grid.Row="1"
+                                   Grid.RowSpan="2"
                                Grid.Column="1"
                                Text="{Binding Description}"
                                VerticalTextAlignment="Start"
@@ -68,12 +75,13 @@
                                WidthRequest="230"/>
                             <Label Grid.Row="1"
                                Grid.Column="2"
-                               Text="[Aantal] Stuk(s)"
+                               Text="{Binding Converter={StaticResource ProductAmountConvert}, ConverterParameter={Binding Name} ,StringFormat='Aantal: {0}'}"
                                HorizontalTextAlignment="End"
                                WidthRequest="230"/>
-                            <Label Grid.Row="2"
+                        <Label
+                               Grid.Row="2"
                                Grid.Column="2"
-                               Text="[Totaalprijs product]"
+                               Text="{Binding Converter={StaticResource TotalPriceConvert}, ConverterParameter={Binding Name}}"
                                HorizontalTextAlignment="End"
                                WidthRequest="230"/>
 
@@ -95,7 +103,7 @@
             <VerticalStackLayout 
                              Margin=" 0, 100, 100 ,0"
                              Spacing="25">
-                <Label Text="[Totaalbedrag]"
+                <Label x:Name="TotalPriceLabel"
                        FontSize="32"
                        HorizontalTextAlignment="Center"></Label>
                 <Button Text="Betalen"
