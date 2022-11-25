@@ -20,6 +20,11 @@ public partial class CheckoutOverview : ContentPage
         CheckoutItems = products;
 		CheckoutListView.ItemsSource = CheckoutItems;
     }
+
+	public async void OnClicked(Object obj, EventArgs args)
+    {
+        await DisplayAlert("Test", "AAAAAH", "Ok");
+    }
 	
 
 	protected override void OnNavigatedTo(NavigatedToEventArgs args)

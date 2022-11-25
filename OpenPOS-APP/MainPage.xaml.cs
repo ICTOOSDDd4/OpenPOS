@@ -67,9 +67,9 @@ public partial class MainPage : ContentPage
         {
             ApplicationSettings.CheckoutList.Add(new Product()
             {
-                Name = "Product " + i,
+                Name = "Product " + (i + 1),
                 Price = i + 0.99,
-                Description = "Dit is product " + i
+                Description = "Dit is product " + (i + 1)
             });
         }
         //Dit maakt testen makkelijker, moet eruit

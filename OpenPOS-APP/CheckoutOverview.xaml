@@ -16,13 +16,17 @@
         <HorizontalStackLayout HorizontalOptions="Start"
                          Margin="100, 100, 0, 0"
                          Grid.Column="0">
-
-
-        <ListView x:Name="CheckoutListView"
-                  ItemsSource="{Binding CheckoutItems}"
-                  WidthRequest="600"
-                  HeightRequest="650"
-        >
+            <VerticalStackLayout>
+            <Label Text="Besteloverzicht"
+                   FontSize="32"
+                   HorizontalTextAlignment="Center"></Label>
+            <Border >
+                <ListView x:Name="CheckoutListView"
+                          ItemsSource="{Binding CheckoutItems}"
+                          WidthRequest="600"
+                          HeightRequest="650"
+                  
+                >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -30,12 +34,14 @@
                         <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                        <Image Grid.RowSpan="2"
+                        <Image Grid.RowSpan="3"
                                Source="dotnet_bot.png"
                                Aspect="AspectFit"
                                HeightRequest="120"
@@ -43,37 +49,70 @@
                         
                             
 
-                            <Label Grid.Row="3"
+                            <Label Grid.Row="0"
                                Grid.Column="1"
                                Text="{Binding Name}"
-                               HorizontalOptions="Start"
-                               HorizontalTextAlignment="End"
-                               WidthRequest="460"/>
-
-                            <Label Grid.Row="3"
+                               VerticalTextAlignment="Start"
+                               WidthRequest="230"
+                               FontFamily="LeagueSpartan-Medium"/>
+                            <Label Grid.Row="1"
+                               Grid.Column="1"
+                               Text="{Binding Description}"
+                               VerticalTextAlignment="Start"
+                               WidthRequest="230"/>
+                        
+                            <Label Grid.Row="0"
                                Grid.Column="2"
                                Text="{Binding Price, StringFormat='€{0}'}"
-                               VerticalOptions="End"
                                HorizontalTextAlignment="End"
-                               WidthRequest="460"/>
-                        </Grid>
+                               WidthRequest="230"/>
+                            <Label Grid.Row="1"
+                               Grid.Column="2"
+                               Text="[Aantal] Stuk(s)"
+                               HorizontalTextAlignment="End"
+                               WidthRequest="230"/>
+                            <Label Grid.Row="2"
+                               Grid.Column="2"
+                               Text="[Totaalprijs product]"
+                               HorizontalTextAlignment="End"
+                               WidthRequest="230"/>
+
+                    </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+            </Border>
+                </VerticalStackLayout>
 
-        
 
-    </HorizontalStackLayout>
+
+        </HorizontalStackLayout>
         <HorizontalStackLayout Grid.Column="1"
                                VerticalOptions="Center" 
                              HorizontalOptions="Center">
 
             <VerticalStackLayout 
-                             Margin=" 0, 100, 100 ,0">
-            <Button Text="Betalen"/>
-            <Button Text="Betaling splitten"/>
-            <Button Text="Producten splitten"/>
+                             Margin=" 0, 100, 100 ,0"
+                             Spacing="25">
+                <Label Text="[Totaalbedrag]"
+                       FontSize="32"
+                       HorizontalTextAlignment="Center"></Label>
+                <Button Text="Betalen"
+                        WidthRequest="300"
+                        HeightRequest="100"
+                        FontSize="36"
+                        Clicked="OnClicked"/>
+                <Button Text="Betaling splitten"
+                        WidthRequest="300"
+                        HeightRequest="100"
+                        FontSize="36"
+                        Clicked="OnClicked"/>
+                <Button Text="Producten splitten"
+                        WidthRequest="300"
+                        HeightRequest="100"
+                        FontSize="36"
+                        Clicked="OnClicked"/>
         </VerticalStackLayout>
 
         </HorizontalStackLayout>
