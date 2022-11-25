@@ -8,5 +8,4 @@ public partial class App : Application
 
       MainPage = new AppShell();
   }
-
 }

@@ -47,12 +47,8 @@ public partial class MenuPage : ContentPage
    }
 
 
-	private void OrderButton_OnClicked(object sender, EventArgs e)
+	private async void OrderButton_OnClicked(object sender, EventArgs e)
 	{
-		foreach (var VARIABLE in MainVerticalLayout.ToList())
-		{
-			//remove all
-			MainVerticalLayout.Remove(VARIABLE);
-		}
+		await Shell.Current.GoToAsync(nameof(CheckoutOverview));
 	}
 }

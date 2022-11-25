@@ -26,7 +26,7 @@ public partial class MainPage : ContentPage
 	private async void OnLoginButtonClicked(object sender, EventArgs e)
 	{
       await Shell.Current.GoToAsync(nameof(LoginScreen));
-   }
+	}
 	
 	private async void CreateNewAccount_Tapped(object sender, EventArgs e)
 	{
