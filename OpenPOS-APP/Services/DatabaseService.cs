@@ -1,6 +1,5 @@
 ﻿using System.Data.SqlClient;
 using System.Diagnostics;
-using Microsoft.Maui.Controls;
 using OpenPOS_APP.Settings;
 
 namespace OpenPOS_APP.Services
@@ -87,7 +86,6 @@ namespace OpenPOS_APP.Services
             {
                 foreach (var prop in type.GetProperties())
                 {
-                    Console.WriteLine(prop.PropertyType);
                     var propType = prop.PropertyType;
                     try
                     {

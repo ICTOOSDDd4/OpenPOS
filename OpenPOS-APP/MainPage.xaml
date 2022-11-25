@@ -2,85 +2,41 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="OpenPOS_APP.MainPage"
-             Shell.NavBarIsVisible="False">
-             
+             Shell.NavBarIsVisible="False"
+             Title="OPENPOS">
     <ContentPage.Resources>
         <ResourceDictionary Source="Resources/Styles/Colors.xaml"></ResourceDictionary>
     </ContentPage.Resources>
+    <VerticalStackLayout
+                Spacing="25"
+                Padding="30,100,30,100"
+                Grid.ColumnSpan="3" Grid.Row="2"
+                VerticalOptions="Center">
 
-    <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
-            <Image 
-                Source="openpos_transparent_black.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center"/>
+        <Image 
+                    x:Name="openposicon"
+                    Source="openpos_icon.png"
+                    SemanticProperties.Description="Hello, this is OpenPOS"
+                    HeightRequest="200"
+                    HorizontalOptions="Center"/>
 
-            <Label
-                Text="Login to get access to your OpenPOS Experience"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="The way to access your OpenPOS Experience"
-                TextColor="Black"
-                FontSize="18"
-                HorizontalOptions="Center" />
+        <Label
+                    Text="Weclome to OpenPOS!"
+                    SemanticProperties.HeadingLevel="Level1"
+                    FontFamily="LeagueSpartan-SemiBold"
+                    SemanticProperties.Description="The way to access your OpenPOS Experience"
+                    TextColor="Black"
+                    FontSize="24"
+                    HorizontalOptions="Center" />
 
-            <Entry
-                x:Name="EmailEntry"
-                Placeholder="Email"
-                TextChanged="OnTextFilledUsername"
-                SemanticProperties.Description="Email"
-                TextColor="Black"
-                WidthRequest="250"
-                MaxLength="50"
-                SelectionLength="50"
-                ClearButtonVisibility="WhileEditing"
-                HorizontalOptions="Center"
-            />
-
-            <Entry
-                x:Name="PasswordEntry"
-                Placeholder="Password"
-                IsPassword="True"
-                TextChanged="OnTextFilledPassword"
-                SemanticProperties.Description="Password"
-                TextColor="Black"
-                WidthRequest="250"
-                MaxLength="50"
-                SelectionLength="50"
-                ClearButtonVisibility="WhileEditing"
-                HorizontalOptions="Center"/>
-            
-            <Button
-                x:Name="MainLoginButton"
-                Text="LOGIN"
-                SemanticProperties.Hint="Press to login"
-                IsEnabled="False"
-                Clicked="OnLoginButtonClicked"
-                HorizontalOptions="Center"
-                TextColor="Black"
-                BackgroundColor="{StaticResource Gray100}" 
-                CornerRadius="10"   
-             />
-            
-            <Label 
-                VerticalOptions="Center" 
-                HorizontalOptions="Center" >
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="Don't have an account? " />
-                        <Span 
-                            Text="Create one here." 
-                            TextColor="Blue" 
-                            TextDecorations="Underline"  />
-                    </FormattedString>
-                </Label.FormattedText>
-                <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="CreateNewAccount_Tapped"/>
-                    </Label.GestureRecognizers>
-            </Label>
-        </VerticalStackLayout>
-    </ScrollView>
+        <Button
+                    x:Name="MainLoginButton"
+                    Text="START YOUR EXPERIENCE"
+                    SemanticProperties.Hint="Press to login"
+                    Clicked="OnLoginButtonClicked"
+                    HorizontalOptions="Center"
+                    TextColor="Black"
+                    BackgroundColor="{StaticResource OpenPos-Yellow}" 
+                    CornerRadius="10" />
+    </VerticalStackLayout>
 </ContentPage>

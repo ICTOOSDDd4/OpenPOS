@@ -17,7 +17,7 @@
 		<ApplicationTitle>OpenPOS-APP</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.openpos_app</ApplicationId>
+		<ApplicationId>com.openpos.openpos_app</ApplicationId>
 		<ApplicationIdGuid>9204c2df-dbba-4d50-8218-c5f6d5113fb9</ApplicationIdGuid>
 
 		<!-- Versions -->
@@ -58,6 +58,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Maui" Version="3.0.0" />
+		<PackageReference Include="CommunityToolkit.Maui.Core" Version="3.0.0" />
+		<PackageReference Include="CommunityToolkit.Maui.Markup" Version="2.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.0" />
@@ -70,6 +73,26 @@
 	<ItemGroup>
 	  <MauiXaml Update="CheckoutOverview.xaml">
 	    <SubType></SubType>
+	  <None Remove="appsettings.json" />
+	  <None Remove="Resources\Images\account.svg" />
+	  <None Remove="Resources\Images\cart.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="CheckoutItemCardView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="ProductView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="RealisatieMenu.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Resources\Controls\Header.xaml">
+	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
 </Project>
