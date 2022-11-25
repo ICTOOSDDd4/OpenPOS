@@ -13,11 +13,10 @@ public partial class MenuPage : ContentPage
 	private double _height;
 	public MenuPage()
 	{
-		Products = ProductService.GetAll();
+		Thread thread = new Thread(StartEverything);
+		thread.Start();
 		InitializeComponent();
 		SelectedProducts = new List<Product>();
-		AddAllProducts();
-		
 
 	}
 
@@ -29,8 +28,13 @@ public partial class MenuPage : ContentPage
 		}
 	}
 
+	private void StartEverything()
+	{
+      Products = ProductService.GetAll();
+      AddAllProducts();
+   }
 
-	public void AddProductToLayout(Product product)
+   public void AddProductToLayout(Product product)
 	{
 		if (HorizontalLayout == null || HorizontalLayout.Children.Count % 8 == 0)
       {

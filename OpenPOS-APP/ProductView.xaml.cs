@@ -1,4 +1,5 @@
 using OpenPOS_APP.Models;
+using OpenPOS_APP.Settings;
 using System.Reflection;
 
 namespace OpenPOS_APP;
@@ -9,12 +10,10 @@ public partial class ProductView : ContentView
    public EventHandler ClickedMoreInfo;
    private MenuPage _menuPage;
    private Product _product;
-   private ResourceDictionary _appColors = new();
 
    public ProductView()
    {
       InitializeComponent();
-      _appColors.SetAndLoadSource(new Uri("Resources/Styles/Colors.xaml", UriKind.RelativeOrAbsolute), "Resources/Styles/Colors.xaml", this.GetType().GetTypeInfo().Assembly, null);
       MainVerticalLayout.Shadow = new Shadow
       {
          Offset = new Point(5, 5),
@@ -79,7 +78,7 @@ public partial class ProductView : ContentView
       if (active)
       {
          DeleteButton.IsEnabled = true;
-         if (_appColors.TryGetValue("DeleteRed", out var color))
+         if (ApplicationSettings.UIElements.AppColors.TryGetValue("DeleteRed", out var color))
          {
             DeleteButton.BackgroundColor = (Color)color;
          }
@@ -87,7 +86,7 @@ public partial class ProductView : ContentView
       else
       {
          DeleteButton.IsEnabled = false;
-         if (_appColors.TryGetValue("Gray100", out var color))
+         if (ApplicationSettings.UIElements.AppColors.TryGetValue("Gray100", out var color))
          {
             DeleteButton.BackgroundColor = (Color)color;
          }

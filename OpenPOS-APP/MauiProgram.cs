@@ -59,5 +59,8 @@ public static class MauiProgram
             var result = BillService.Update(bill);
 			System.Diagnostics.Debug.WriteLine(result);
         } else throw new ApplicationException("Can't find appsettings.json file");
+		
+		ApplicationSettings.UIElements = new UIElements();
+   
 	}
 }
