@@ -5,6 +5,7 @@ using System.Reflection;
 using OpenPOS_APP.Settings;
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Models;
+using CommunityToolkit.Maui;
 
 namespace OpenPOS_APP;
 
@@ -15,6 +16,7 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
+			.UseMauiCommunityToolkit()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("LeagueSpartan-Black.ttf", "LeagueSpartanBlack");
