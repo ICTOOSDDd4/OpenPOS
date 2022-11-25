@@ -43,12 +43,9 @@ namespace OpenPOS_APP.Services.Models
 
             return resultList;
         }
-        public static List<OrderLine> GetAllUnfinished(int id)
+        public static List<OrderLine> GetAllUnfinished()
         {
             SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[order_product] JOIN [dbo].[order] ON [order].[id] = [order_product].[order_id] WHERE [status] = 0");
-
-            query.Parameters.Add("@ID", SqlDbType.Int);
-            query.Parameters["@ID"].Value = id;
 
             List<OrderLine> resultList = DatabaseService.Execute<OrderLine>(query);
 

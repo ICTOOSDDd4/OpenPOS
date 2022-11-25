@@ -91,4 +91,13 @@ public class OrderLineServiceTest
         Assert.IsTrue(result);
         Assert.IsEmpty(OrderLineService.GetByIds(createdOrderLine.Order_id, createdOrderLine.Product_id));
     }
+
+    [Test]
+    public void OrderService_GetAllUnfinishedOrders_ReturnsAllUnfinishedOrders()
+    {
+        var OrderLine = this.OrderLine;
+        var OrderLines = OrderLineService.GetAllUnfinished();
+
+        Assert.Greater(OrderLineService.GetAll().Count, OrderLines.Count);
+    }
 }
