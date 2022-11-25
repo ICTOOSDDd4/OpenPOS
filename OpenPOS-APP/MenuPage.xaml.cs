@@ -90,7 +90,6 @@ public partial class MenuPage : ContentPage
                {
                   OrderLine line = new OrderLine(order.Id, entry.Key.Id, entry.Value, "In Development");
                }
-					
 				}
 
             if (order == null)
