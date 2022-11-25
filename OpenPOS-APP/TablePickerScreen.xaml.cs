@@ -30,7 +30,7 @@ public partial class TablePickerScreen : ContentPage
       {
          _tableNumber = value;
          Table table = TableService.FindByTableNumber(_tableNumber);
-         if (table != null)
+         if (table == null)
          {
             ErrorDisplayLabel.Text = "This isn't a valid table.";
             ErrorDisplayLabel.IsVisible = true;
@@ -39,7 +39,7 @@ public partial class TablePickerScreen : ContentPage
          {
             Bill bill = new Bill(value, ApplicationSettings.LoggedinUser.Id, false, DateTime.Now, DateTime.Now);
             ApplicationSettings.CurrentBill = BillService.Create(bill);
-            table.Bill_id = bill.Id;
+            table.Bill_id = ApplicationSettings.CurrentBill.Id;
             if (TableService.Update(table))
             {
                await Shell.Current.GoToAsync(nameof(MenuPage));

@@ -87,16 +87,38 @@ namespace OpenPOS_APP.Services
                 foreach (var prop in type.GetProperties())
                 {
                     var propType = prop.PropertyType;
-                    try
-                    {
-                        prop.SetValue(obj, Convert.ChangeType(reader[prop.Name].ToString(), propType));
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e);
-                        Debug.WriteLine(e);
-                        throw;
-                    }
+               try
+               {
+                  if (propType.IsGenericType && propType.GetGenericTypeDefinition().Equals(typeof(Nullable<>)))
+                  {
+                     if (reader[prop.Name] == null)
+                     {
+                        prop.SetValue(obj, null, null);
+                     }
+
+                     propType = Nullable.GetUnderlyingType(propType);
+                  }
+                  else
+                  {
+                     prop.SetValue(obj, Convert.ChangeType(reader[prop.Name].ToString(), propType));
+                  }
+               }
+
+
+               //if (reader[prop.Name] == System.)
+               //      {
+               //         prop.SetValue(obj, propType, null);
+               //      } else
+               //      {
+
+               //      }
+               //  }
+               catch (Exception e)
+               {
+                  Console.WriteLine(e);
+                  Debug.WriteLine(e);
+                  throw;
+               }
                 }
             }
 
