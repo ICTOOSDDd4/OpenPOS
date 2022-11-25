@@ -10,6 +10,13 @@ namespace OpenPOS_APP.Controllers
 {
     public class OrderController
     {
-        
+        public void CreateOrder(Order order, List<OrderLine> lines)
+        {
+            OrderService.Create(order);
+            foreach(var line in lines)
+            {
+                OrderLineService.Create(line);
+            }
+        }
     }
 }
