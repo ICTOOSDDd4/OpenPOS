@@ -9,30 +9,22 @@ public partial class MenuPage : ContentPage
 	public List<Product> SelectedProducts { get; set; }
 	private HorizontalStackLayout HorizontalLayout;
 
-	private double _width;
-	private double _height;
 	public MenuPage()
 	{
-		Thread thread = new Thread(StartEverything);
-		thread.Start();
-		InitializeComponent();
+      Products = ProductService.GetAll();
+      InitializeComponent();
 		SelectedProducts = new List<Product>();
+      AddAllProducts();
 
-	}
+   }
 
-	void AddAllProducts()
+   void AddAllProducts()
 	{
 		for (int i = 0; i < Products.Count; i++)
 		{
 			AddProductToLayout(Products[i]);
 		}
 	}
-
-	private void StartEverything()
-	{
-      Products = ProductService.GetAll();
-      AddAllProducts();
-   }
 
    public void AddProductToLayout(Product product)
 	{
