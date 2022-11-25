@@ -1,10 +1,17 @@
+using OpenPOS_APP.Models;
+using OpenPOS_APP.Services.Models;
+using Windows.ApplicationModel.Activation;
+
 namespace OpenPOS_APP.Resources.Controls;
 
 public partial class Header : StackLayout
 {
    public bool Showing { get; set; }
 
-   private static readonly BindableProperty headerProperty = BindableProperty.Create(
+    public delegate void OnSearchEventHandler(object source, EventArgs args, List<Product> products);
+    public static event OnSearchEventHandler Searched;
+
+    private static readonly BindableProperty headerProperty = BindableProperty.Create(
         propertyName: nameof(Showing),
         returnType: typeof(bool),
         defaultValue: true,
@@ -18,7 +25,9 @@ public partial class Header : StackLayout
 
    private void OnSearch(object sender, EventArgs e)
    {
-
+        var result = ProductService.GetAllByFilter(((SearchBar)sender).Text);
+        throw new Exception(result.ToString());
+        Searched(this, EventArgs.Empty, result);
    }
 
    private void OnSearchTextChanged(object sender, EventArgs e) { }

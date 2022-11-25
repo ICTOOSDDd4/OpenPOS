@@ -14,6 +14,16 @@ public class ProductService : IModelService<Product>
         return resultList;
     }
 
+    public static List<Product> GetAllByFilter(string filter)
+    {
+        SqlCommand query = new SqlCommand("SELECT [name] FROM [dbo].[product] WHERE [name] LIKE '%@Filter%'");
+       
+        query.Parameters.Add("@Filter", SqlDbType.VarChar);
+        query.Parameters["@Filter"].Value = filter;
+
+        return DatabaseService.Execute<Product>(query);
+    }
+
     public static Product FindByID(int id)
     {
         SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[Product] WHERE [ID] = @ID");
