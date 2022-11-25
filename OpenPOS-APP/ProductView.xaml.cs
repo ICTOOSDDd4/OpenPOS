@@ -32,7 +32,7 @@ public partial class ProductView : ContentView
       
       ProductName.Text = product.Name;
       ProductInfo.Text = product.Description;
-      ProductPrice.Text = $"€{ product.Price }";
+      ProductPrice.Text = $"â‚¬ { product.Price }";
       // ProductImage.Source = imagePath; --Needs to be implemented in DB
    }
 
