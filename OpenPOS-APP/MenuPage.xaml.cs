@@ -8,22 +8,27 @@ public partial class MenuPage : ContentPage
 	public List<Product> Products { get; set; }
 	public List<Product> SelectedProducts { get; set; }
 	private HorizontalStackLayout HorizontalLayout;
+
 	public MenuPage()
 	{
-		Products = ProductService.GetAll();
-		InitializeComponent();
+      Products = ProductService.GetAll();
+      InitializeComponent();
 		SelectedProducts = new List<Product>();
+      AddAllProducts();
 
+   }
+
+   void AddAllProducts()
+	{
 		for (int i = 0; i < Products.Count; i++)
 		{
 			AddProductToLayout(Products[i]);
 		}
-		
 	}
 
-	public void AddProductToLayout(Product product)
+   public void AddProductToLayout(Product product)
 	{
-      if (HorizontalLayout == null || HorizontalLayout.Children.Count % 8 == 0)
+		if (HorizontalLayout == null || HorizontalLayout.Children.Count % 8 == 0)
       {
 			AddHorizontalLayout();
       }
@@ -40,7 +45,14 @@ public partial class MenuPage : ContentPage
 		MainVerticalLayout.Add(hLayout);
 		HorizontalLayout = hLayout;
    }
-	
-	
-	
+
+
+	private void OrderButton_OnClicked(object sender, EventArgs e)
+	{
+		foreach (var VARIABLE in MainVerticalLayout.ToList())
+		{
+			//remove all
+			MainVerticalLayout.Remove(VARIABLE);
+		}
+	}
 }

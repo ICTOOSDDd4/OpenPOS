@@ -34,6 +34,7 @@
             SemanticProperties.Description="Enter your table number"
             SemanticProperties.Hint="Enter your table numbers"
             Keyboard="Numeric"
+            Placeholder="Tablenumber"
             TextChanged="OnTableNumberEntryChanged"
             TextColor="Black"
             WidthRequest="250"

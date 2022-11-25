@@ -29,8 +29,7 @@ public static class MauiProgram
 				fonts.AddFont("LeagueSpartan-Light.ttf", "LeagueSpartanLight");
 				fonts.AddFont("LeagueSpartan-Thin.ttf", "LeagueSpartanThin");
 			});
-		
-		Initialize();
+            Initialize();
 
 #if DEBUG
       builder.Logging.AddDebug();
@@ -60,5 +59,8 @@ public static class MauiProgram
             var result = BillService.Update(bill);
 			System.Diagnostics.Debug.WriteLine(result);
         } else throw new ApplicationException("Can't find appsettings.json file");
+		
+		ApplicationSettings.UIElements = new UIElements();
+   
 	}
 }
