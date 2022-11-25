@@ -31,7 +31,8 @@ public partial class ProductView : ContentView
       //TODO: Add price to product
       
       ProductName.Text = product.Name;
-      ProductInfo.Text = product.Price + ", " + product.Description;
+      ProductInfo.Text = product.Description;
+      ProductPrice.Text = $"€{ product.Price }";
       // ProductImage.Source = imagePath; --Needs to be implemented in DB
    }
 

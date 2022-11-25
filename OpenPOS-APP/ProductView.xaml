@@ -15,7 +15,7 @@
             HorizontalOptions="Center"
             VerticalOptions="Start"
             IsVisible="true"
-             ZIndex="2"
+            ZIndex="2"
             >
                 <HorizontalStackLayout
                 HorizontalOptions="Center"
@@ -49,6 +49,7 @@
         <VerticalStackLayout
            Padding="10,10,10,10"
            VerticalOptions="Center"
+           MinimumHeightRequest="85"
            HorizontalOptions="Center"
         >
             <Label x:Name="ProductName"
@@ -63,6 +64,12 @@
                    FontFamily="LeagueSpartan-Regular"
                    HorizontalTextAlignment="Center"
                    Text="Product Info"/>
+            <Label x:Name="ProductPrice"
+                   Padding="0,5,0,0"
+                   FontSize="11"
+                   FontFamily="LeagueSpartan-Regular"
+                   HorizontalTextAlignment="Center"
+                   Text="€100"/>
         </VerticalStackLayout>
         <HorizontalStackLayout
             HorizontalOptions="EndAndExpand"
