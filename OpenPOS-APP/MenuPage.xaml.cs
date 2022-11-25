@@ -8,17 +8,37 @@ public partial class MenuPage : ContentPage
 	public List<Product> Products { get; set; }
 	public List<Product> SelectedProducts { get; set; }
 	private HorizontalStackLayout HorizontalLayout;
+	
+	private bool _isInitialized;
+	private double _width;
 
 	public MenuPage()
 	{
       Products = ProductService.GetAll();
       InitializeComponent();
-		SelectedProducts = new List<Product>();
-      AddAllProducts();
+      SelectedProducts = new List<Product>();
+	}
 
-   }
+	protected override void OnSizeAllocated(double width, double height)
+	{
+		base.OnSizeAllocated(width, height);
+		if (!_isInitialized)
+		{
+			_isInitialized = true;
+			SetWindowScaling(width,height);
+		}
+		
+	}
 
-   void AddAllProducts()
+	private void SetWindowScaling(double width, double height)
+	{
+		ScrView.HeightRequest = height - 300;
+		_width = width;
+		AddAllProducts();
+
+	}
+
+	void AddAllProducts()
 	{
 		for (int i = 0; i < Products.Count; i++)
 		{
@@ -27,14 +47,16 @@ public partial class MenuPage : ContentPage
 	}
 
    public void AddProductToLayout(Product product)
-	{
-		if (HorizontalLayout == null || HorizontalLayout.Children.Count % 8 == 0)
-      {
+   {
+	   int moduloNumber = ((int)_width / 200);
+	   Console.WriteLine(moduloNumber + " " + _width);
+		if (HorizontalLayout == null || HorizontalLayout.Children.Count % moduloNumber == 0) 
+		{
 			AddHorizontalLayout();
-      }
-      ProductView productView = new ProductView();
+		}
+		ProductView productView = new ProductView();
 		productView.SetProductValues(this,product);
-      HorizontalLayout.Add(productView);
+		HorizontalLayout.Add(productView);
 	}
 
 	private void AddHorizontalLayout()
