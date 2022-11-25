@@ -7,7 +7,7 @@ namespace OpenPOS_APP;
 public partial class MenuPage : ContentPage
 {
 	public List<Product> Products { get; set; }
-	public List<Product> SelectedProducts { get; set; }
+	public Dictionary<Product, int> SelectedProducts { get; set; }
 	private HorizontalStackLayout HorizontalLayout;
 	
 	private bool _isInitialized;
@@ -17,7 +17,7 @@ public partial class MenuPage : ContentPage
 	{
       Products = ProductService.GetAll();
       InitializeComponent();
-      SelectedProducts = new List<Product>();
+      SelectedProducts = new Dictionary<Product, int>();
 	}
 
 	protected override void OnSizeAllocated(double width, double height)
@@ -71,7 +71,7 @@ public partial class MenuPage : ContentPage
 
 	private async void OrderButton_OnClicked(object sender, EventArgs e)
 	{
-		if (SelectedProducts.Count > 0)
+		if (SelectedProducts.Count == 0)
 		{
          await DisplayAlert("Please don't", "You forgot to add products to your order!", "Oh I forgot thanks");
 
@@ -82,6 +82,16 @@ public partial class MenuPage : ContentPage
          {
             Order order = new Order(1, false, ApplicationSettings.LoggedinUser.Id, ApplicationSettings.CurrentBill.Id, DateTime.Now, DateTime.Now);
             order = OrderService.Create(order);
+
+				for (int i = 0; i < SelectedProducts.Keys.Count; i++)
+				{
+               // Get current product from selected products
+               foreach (KeyValuePair<Product, int> entry in SelectedProducts)
+               {
+                  OrderLine line = new OrderLine(order.Id, entry.Key.Id, entry.Value, "In Development");
+               }
+					
+				}
 
             if (order == null)
             {

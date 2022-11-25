@@ -29,6 +29,7 @@ public partial class TablePickerScreen : ContentPage
       if (int.TryParse(entryString.ToString().Trim(), out int value))
       {
          _tableNumber = value;
+         ApplicationSettings.TableNumber = _tableNumber;
          Table table = TableService.FindByTableNumber(_tableNumber);
          if (table == null)
          {

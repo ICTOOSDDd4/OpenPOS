@@ -1,6 +1,5 @@
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Settings;
-using System.Reflection;
 
 namespace OpenPOS_APP;
 
@@ -39,7 +38,18 @@ public partial class ProductView : ContentView
    {
       Amount++;
       AmountCount.Text = Amount.ToString();
+      
+      // Add to current selected products
+      if (_menuPage.SelectedProducts.ContainsKey(_product))
+      {
+         _menuPage.SelectedProducts[_product] = Amount;
+      }
+      else
+      {
+         _menuPage.SelectedProducts.Add(_product, Amount);
+      }
 
+      // Add to over checkoutlist
       if (ApplicationSettings.CheckoutList.ContainsKey(_product))
       {
          ApplicationSettings.CheckoutList[_product] = Amount;
@@ -60,6 +70,21 @@ public partial class ProductView : ContentView
       Amount--;
       AmountCount.Text = Amount.ToString();
 
+      // Remove from currently selected products
+      if (_menuPage.SelectedProducts.ContainsKey(_product))
+      {
+         if (_menuPage.SelectedProducts[_product] > 1)
+         {
+            _menuPage.SelectedProducts[_product]--;
+
+         }
+         else
+         {
+            _menuPage.SelectedProducts.Remove(_product);
+         }
+      }
+
+      // Remove from overall checkoutlist
       if (ApplicationSettings.CheckoutList.ContainsKey(_product))
       {
          if(ApplicationSettings.CheckoutList[_product] > 1)

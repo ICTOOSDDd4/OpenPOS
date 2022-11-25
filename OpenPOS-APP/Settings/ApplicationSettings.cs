@@ -1,4 +1,5 @@
 ﻿using OpenPOS_APP.Models;
+using Windows.Networking.NetworkOperators;
 
 namespace OpenPOS_APP.Settings;
 
@@ -10,5 +11,5 @@ public static class ApplicationSettings
    public static User LoggedinUser { get; set; }
    public static UIElements UIElements { get; set; }
    public static Bill CurrentBill { get; set; }
-
+   public static int TableNumber { get; set; }
 }

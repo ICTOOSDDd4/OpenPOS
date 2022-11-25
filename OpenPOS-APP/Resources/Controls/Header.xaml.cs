@@ -1,3 +1,5 @@
+using OpenPOS_APP.Settings;
+
 namespace OpenPOS_APP.Resources.Controls;
 
 public partial class Header : StackLayout
@@ -14,7 +16,9 @@ public partial class Header : StackLayout
     public Header()
 	{
 		InitializeComponent();
-	}
+      TableNumber.Text = $"Tafel: { ApplicationSettings.TableNumber }";
+
+   }
 
    private void OnSearch(object sender, EventArgs e)
    {
