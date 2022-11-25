@@ -1,6 +1,5 @@
 ﻿using System.Data.SqlClient;
 using System.Diagnostics;
-using Microsoft.Maui.Controls;
 using OpenPOS_APP.Settings;
 
 namespace OpenPOS_APP.Services
