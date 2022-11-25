@@ -21,6 +21,7 @@ public partial class CheckoutOverview : ContentPage
 	{
         InitializeComponent();
 
+        
 		AddToCheckOut(ApplicationSettings.CheckoutList);
 
 	}
@@ -46,7 +47,5 @@ public partial class CheckoutOverview : ContentPage
 	protected override void OnNavigatedTo(NavigatedToEventArgs args)
 	{
 		base.OnNavigatedTo(args);
-		
-
 	}
 }

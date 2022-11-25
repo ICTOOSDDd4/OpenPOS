@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:openPosApp="using:OpenPOS_APP"
+             xmlns:openPosApp1="clr-namespace:OpenPOS_APP"
              x:Class="OpenPOS_APP.CheckoutOverview"
              Title="CheckoutOverview"
              Shell.NavBarIsVisible="False">
@@ -33,8 +34,8 @@
                                 <ViewCell>
                     <Grid Padding="10">
                         <Grid.Resources>
-                            <openPosApp:ProductAmountConvert x:Name="ProductAmountConverter" x:Key="ProductAmountConvert" />
-                            <openPosApp:TotalPriceConvert x:Name="TotalPriceConverter" x:Key="TotalPriceConvert" />
+                            <openPosApp1:ProductAmountConvert x:Name="ProductAmountConverter" x:Key="ProductAmountConvert" />
+                            <openPosApp1:TotalPriceConvert x:Name="TotalPriceConverter" x:Key="TotalPriceConvert" />
                                         </Grid.Resources>
                         <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
