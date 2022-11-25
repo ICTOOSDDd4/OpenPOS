@@ -22,4 +22,14 @@ public partial class Header : StackLayout
    }
 
    private void OnSearchTextChanged(object sender, EventArgs e) { }
+
+
+   private async void OnClickedAccount(object sender, EventArgs e)
+   {
+      await Shell.Current.DisplayAlert("Work In Progress", "This feature will be released soon, thank you for your patience.", "Understood");
+   }
+   private async void OnClickedCard(object sender, EventArgs e) 
+   {
+      await Shell.Current.GoToAsync(nameof(CheckoutOverview));
+   }
 }

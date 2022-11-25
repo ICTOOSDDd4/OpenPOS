@@ -107,21 +107,21 @@
                 <Label x:Name="TotalPriceLabel"
                        FontSize="32"
                        HorizontalTextAlignment="Center"></Label>
-                <Button Text="Betalen"
+                <Button Text="Pay"
                         WidthRequest="300"
                         HeightRequest="100"
                         FontSize="36"
-                        Clicked="OnClicked"/>
-                <Button Text="Betaling splitten"
+                        Clicked="OnClickedPay"/>
+                <Button Text="Split Payment"
                         WidthRequest="300"
                         HeightRequest="100"
                         FontSize="36"
-                        Clicked="OnClicked"/>
-                <Button Text="Producten splitten"
+                        Clicked="OnClickedSplitPay"/>
+                <Button Text="Split Products"
                         WidthRequest="300"
                         HeightRequest="100"
                         FontSize="36"
-                        Clicked="OnClicked"/>
+                        Clicked="OnClickedSplitProducts"/>
         </VerticalStackLayout>
 
         </HorizontalStackLayout>
