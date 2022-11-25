@@ -48,7 +48,7 @@ public partial class MenuPage : ContentPage
 
    public void AddProductToLayout(Product product)
    {
-	   int moduloNumber = ((int)_width / 200);
+	   int moduloNumber = ((int)_width / 300);
 	   Console.WriteLine(moduloNumber + " " + _width);
 		if (HorizontalLayout == null || HorizontalLayout.Children.Count % moduloNumber == 0) 
 		{
