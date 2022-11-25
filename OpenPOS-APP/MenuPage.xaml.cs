@@ -14,10 +14,15 @@ public partial class MenuPage : ContentPage
 		InitializeComponent();
 		SelectedProducts = new List<Product>();
 
-		for (int i = 0; i < Products.Count; i++)
+		for (int j = 0; j < 3; j++)
 		{
-			AddProductToLayout(Products[i]);
+			for (int i = 0; i < Products.Count; i++)
+			{
+				AddProductToLayout(Products[i]);
+			}
 		}
+
+	
 		
 	}
 
