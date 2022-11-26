@@ -95,7 +95,6 @@ namespace OpenPOS_APP.Services
                      {
                         prop.SetValue(obj, null, null);
                      }
-
                      propType = Nullable.GetUnderlyingType(propType);
                   }
                   else
@@ -103,16 +102,6 @@ namespace OpenPOS_APP.Services
                      prop.SetValue(obj, Convert.ChangeType(reader[prop.Name].ToString(), propType));
                   }
                }
-
-
-               //if (reader[prop.Name] == System.)
-               //      {
-               //         prop.SetValue(obj, propType, null);
-               //      } else
-               //      {
-
-               //      }
-               //  }
                catch (Exception e)
                {
                   Console.WriteLine(e);

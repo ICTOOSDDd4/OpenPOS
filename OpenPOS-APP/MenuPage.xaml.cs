@@ -98,7 +98,7 @@ public partial class MenuPage : ContentPage
             }
             else
             {
-               await DisplayAlert("Order Placed", "You placed your order, our staff is gonna prepair it right away!", "Thank you");
+               await DisplayAlert("Order Placed", "You placed your order, our staff will prepair it right away!", "Thank you");
                await Shell.Current.GoToAsync(nameof(MenuPage));
             }
          }
