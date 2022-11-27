@@ -1,6 +1,7 @@
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Models;
 using OpenPOS_APP.Settings;
+using System.Diagnostics;
 
 namespace OpenPOS_APP;
 
@@ -83,16 +84,18 @@ public partial class MenuPage : ContentPage
             Order order = new Order(1, false, ApplicationSettings.LoggedinUser.Id, ApplicationSettings.CurrentBill.Id, DateTime.Now, DateTime.Now);
             order = OrderService.Create(order);
 
-				for (int i = 0; i < SelectedProducts.Keys.Count; i++)
-				{
-               // Get current product from selected products
-               foreach (KeyValuePair<Product, int> entry in SelectedProducts)
-               {
-                  OrderLine line = new OrderLine(order.Id, entry.Key.Id, entry.Value, "In Development");
-               }
-				}
+					// Get current product from selected products
+				foreach (KeyValuePair<Product, int> entry in SelectedProducts)
+            {
+					Debug.WriteLine(entry.Key.Id);
+					Debug.WriteLine(order.Id);
+               Debug.WriteLine("+++++++++++++");
 
-            if (order == null)
+               OrderLine line = new OrderLine(order.Id, entry.Key.Id, entry.Value, "In Development");
+					OrderLineService.Create(line);
+            }
+
+				if (order == null)
             {
                await DisplayAlert("Oops", "Something went wrong please try again.", "Alright");
             }

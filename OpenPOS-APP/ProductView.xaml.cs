@@ -52,7 +52,7 @@ public partial class ProductView : ContentView
       // Add to over checkoutlist
       if (ApplicationSettings.CheckoutList.ContainsKey(_product))
       {
-         ApplicationSettings.CheckoutList[_product] = Amount;
+         ApplicationSettings.CheckoutList[_product]++;
       } else
       {
          ApplicationSettings.CheckoutList.Add(_product, Amount);
