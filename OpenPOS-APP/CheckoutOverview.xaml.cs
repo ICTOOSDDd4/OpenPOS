@@ -2,7 +2,6 @@
 using OpenPOS_APP.Services.Models;
 using OpenPOS_APP.Settings;
 using System.Globalization;
-using WinRT;
 
 namespace OpenPOS_APP;
 

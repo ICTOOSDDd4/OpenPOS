@@ -73,7 +73,8 @@ public partial class MenuPage : ContentPage
 
 	private async void OnInfoButtonClicked(object sender, EventArgs e)
 	{
-		await DisplayAlert("Work In Progress", "This will display more about the product and allergy information", "Understood")
+		await DisplayAlert("Work In Progress", "This will display more about the product and allergy information",
+			"Understood");
 	}
 
 	private async void OrderButton_OnClicked(object sender, EventArgs e)

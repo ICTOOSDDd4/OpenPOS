@@ -1,5 +1,4 @@
 ﻿using OpenPOS_APP.Models;
-using Windows.Networking.NetworkOperators;
 
 namespace OpenPOS_APP.Settings;
 
