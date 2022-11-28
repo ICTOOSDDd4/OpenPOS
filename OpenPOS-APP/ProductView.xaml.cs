@@ -6,7 +6,7 @@ namespace OpenPOS_APP;
 public partial class ProductView : ContentView
 {
    public int Amount { get; set; }
-   public EventHandler ClickedMoreInfo;
+   public event EventHandler ClickedMoreInfo;
    private MenuPage _menuPage;
    private Product _product;
 
@@ -60,7 +60,7 @@ public partial class ProductView : ContentView
 
    }
 
-   private void OnClickedInfo(object sender, EventArgs e)
+   private async void OnClickedInfo(object sender, EventArgs e)
    {
       ClickedMoreInfo?.Invoke(this, e);
    }
