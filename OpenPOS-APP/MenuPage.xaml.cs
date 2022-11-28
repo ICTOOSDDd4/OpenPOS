@@ -115,8 +115,6 @@ public partial class MenuPage : ContentPage
          {
 				// Empty for now, DOING NOTHING!
          }
-      }
-		
-		//await Shell.Current.GoToAsync(nameof(CheckoutOverview));
+      }		
 	}
 }
