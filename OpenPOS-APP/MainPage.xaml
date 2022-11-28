@@ -21,7 +21,7 @@
                     HorizontalOptions="Center"/>
 
         <Label
-                    Text="Weclome to OpenPOS!"
+                    Text="Welcome to OpenPOS!"
                     SemanticProperties.HeadingLevel="Level1"
                     FontFamily="LeagueSpartan-SemiBold"
                     SemanticProperties.Description="The way to access your OpenPOS Experience"
