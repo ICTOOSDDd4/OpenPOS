@@ -18,7 +18,7 @@ public class ProductService : IModelService<Product>
    public static List<Product> GetAllByFilter(string filter)
    {
       string searchTerm = string.Format("%{0}%", filter);
-      SqlCommand query = new SqlCommand("SELECT [name] FROM [dbo].[product] WHERE [name] LIKE '@Filter'");
+      SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[product] WHERE [name] LIKE @Filter");
 
       query.Parameters.Add("@Filter", SqlDbType.VarChar);
       query.Parameters["@Filter"].Value = searchTerm;
@@ -26,10 +26,6 @@ public class ProductService : IModelService<Product>
       Debug.WriteLine(query.ToString());
 
       var result = DatabaseService.Execute<Product>(query);
-      for (int i = 0; i < result.Count(); i++)
-      {
-         Debug.WriteLine(result);
-      }
       return result;
     }
 

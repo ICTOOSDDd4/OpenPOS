@@ -62,8 +62,8 @@ public partial class MenuPage : ContentPage
 
 	public virtual void OnSearch(object sender, EventArgs e) {
 		MainVerticalLayout.Clear();
-      Products = ProductService.GetAllByFilter(((SearchBar)sender).Text);
-		Debug.WriteLine(((SearchBar)sender).Text);
+		Products = ProductService.GetAllByFilter(((SearchBar)sender).Text);
+		System.Diagnostics.Debug.WriteLine(((SearchBar)sender).Text);
 		AddAllProducts();
 	}
 }
