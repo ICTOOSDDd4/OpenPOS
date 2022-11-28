@@ -51,7 +51,7 @@
                                             </Grid.ColumnDefinitions>
 
                                             <Image Grid.RowSpan="3"
-                               Source="dotnet_bot.png"
+                               Source="placeholder_product_image.png"
                                Aspect="AspectFit"
                                HeightRequest="120"
                                WidthRequest="120" />

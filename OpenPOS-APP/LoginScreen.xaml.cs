@@ -54,7 +54,7 @@ public partial class LoginScreen : ContentPage
          PasswordEntry.Text = string.Empty;
 
       }
-      else { await DisplayAlert("Oops", "You got it wrong", "Try again"); }
+      else { await DisplayAlert("Invalid credentials", "This username and/or password are not correct.", "Try again"); }
 
    }
 
