@@ -13,7 +13,7 @@ on:
       - "master"
 #       - "development/**"
 #       - "feature/**"
-#       - "bug-fix/**"
+      - "bug-fix/**"
   
   workflow_dispatch:
 
@@ -29,6 +29,13 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: ${{ env.DOTNETVERSION }}
+
+    - uses: microsoft/variable-substitution@v1
+        with:
+            files: 'OpenPOS\OpenPOS-APP\*.json'
+        env:
+            TIKKIE_API.Key: ${{ secrets.TIKKIE_API_KEY }}
+            DATABASE_CONNECTION.connection_string: ${{ secrets.DB_CONN_STRING }}
     
     - name: Install .NET MAUI
       shell: bash
