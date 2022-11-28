@@ -1,6 +1,7 @@
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Resources.Controls;
 using OpenPOS_APP.Services.Models;
+using System.Diagnostics;
 
 namespace OpenPOS_APP;
 
@@ -59,10 +60,10 @@ public partial class MenuPage : ContentPage
 		}
 	}
 
-	public virtual void OnSearch(object sender, EventArgs e, List<Product> products) {
-		SelectedProducts.Clear();
-		SelectedProducts = products;
-		
+	public virtual void OnSearch(object sender, EventArgs e) {
+		MainVerticalLayout.Clear();
+      Products = ProductService.GetAllByFilter(((SearchBar)sender).Text);
+		Debug.WriteLine(((SearchBar)sender).Text);
 		AddAllProducts();
 	}
 }

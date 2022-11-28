@@ -8,8 +8,7 @@ public partial class Header : StackLayout
 {
    public bool Showing { get; set; }
 
-    public delegate void OnSearchEventHandler(object source, EventArgs args, List<Product> products);
-    public static event OnSearchEventHandler Searched;
+    public static event EventHandler Searched;
 
     private static readonly BindableProperty headerProperty = BindableProperty.Create(
         propertyName: nameof(Showing),
@@ -25,9 +24,7 @@ public partial class Header : StackLayout
 
    private void OnSearch(object sender, EventArgs e)
    {
-        var result = ProductService.GetAllByFilter(((SearchBar)sender).Text);
-        throw new Exception(result.ToString());
-        Searched(this, EventArgs.Empty, result);
+      Searched.Invoke(sender, e);
    }
 
    private void OnSearchTextChanged(object sender, EventArgs e) { }
