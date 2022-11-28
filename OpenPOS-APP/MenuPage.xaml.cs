@@ -30,6 +30,7 @@ public partial class MenuPage : ContentPage
 		}
 	}
 
+	// something goes wrong with displaying the right products on search
    public void AddProductToLayout(Product product)
 	{
 		if (HorizontalLayout == null || HorizontalLayout.Children.Count % 8 == 0)
