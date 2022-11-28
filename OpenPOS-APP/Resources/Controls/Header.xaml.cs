@@ -1,5 +1,6 @@
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Models;
+using System.Diagnostics;
 using Windows.ApplicationModel.Activation;
 
 namespace OpenPOS_APP.Resources.Controls;
@@ -24,6 +25,7 @@ public partial class Header : StackLayout
 
    private void OnSearch(object sender, EventArgs e)
    {
+        Debug.WriteLine("Invoked Search");
       Searched.Invoke(sender, e);
    }
 

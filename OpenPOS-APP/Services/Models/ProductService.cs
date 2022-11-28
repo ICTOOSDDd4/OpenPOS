@@ -26,6 +26,10 @@ public class ProductService : IModelService<Product>
       Debug.WriteLine(query.ToString());
 
       var result = DatabaseService.Execute<Product>(query);
+        foreach (Product prod in result)
+        {
+            System.Diagnostics.Debug.WriteLine(prod.Name);
+        }
       return result;
     }
 

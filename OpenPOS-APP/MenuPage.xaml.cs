@@ -33,12 +33,12 @@ public partial class MenuPage : ContentPage
    public void AddProductToLayout(Product product)
 	{
 		if (HorizontalLayout == null || HorizontalLayout.Children.Count % 8 == 0)
-      {
+		{
 			AddHorizontalLayout();
-      }
-      ProductView productView = new ProductView();
+		}
+		ProductView productView = new ProductView();
 		productView.SetProductValues(this,product);
-      HorizontalLayout.Add(productView);
+		HorizontalLayout.Add(productView);
 	}
 
 	private void AddHorizontalLayout()
@@ -62,8 +62,14 @@ public partial class MenuPage : ContentPage
 
 	public virtual void OnSearch(object sender, EventArgs e) {
 		MainVerticalLayout.Clear();
-		Products = ProductService.GetAllByFilter(((SearchBar)sender).Text);
-		System.Diagnostics.Debug.WriteLine(((SearchBar)sender).Text);
+		Debug.WriteLine(((SearchBar)sender).Text);
+		if (String.IsNullOrWhiteSpace(((SearchBar)sender).Text) || String.IsNullOrEmpty(((SearchBar)sender).Text))
+		{
+			Products = ProductService.GetAll();
+		} else
+		{
+            Products = ProductService.GetAllByFilter(((SearchBar)sender).Text);
+        }
 		AddAllProducts();
 	}
 }
