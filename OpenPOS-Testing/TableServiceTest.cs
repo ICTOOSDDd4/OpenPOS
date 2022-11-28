@@ -117,4 +117,13 @@ public class TableServiceTest
         TableService.Delete(createdTable);
 
     }
+    
+    [Test]
+    public void TableService_FindByTableNumber_ReturnsNull()
+    {
+        var result = TableService.FindByTableNumber(679);
+        
+        Assert.IsNull(result);
+
+    }
 }

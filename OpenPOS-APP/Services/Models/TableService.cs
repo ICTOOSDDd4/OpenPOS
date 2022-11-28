@@ -35,6 +35,11 @@ public class TableService : IModelService<Table>
 
       Table result = DatabaseService.ExecuteSingle<Table>(query);
 
+      if (result.Table_number == 0)
+      {
+          return null;
+      }
+      
       return result;
    }
 
