@@ -34,7 +34,7 @@ jobs:
     - name: Add Appsettings
       uses: microsoft/variable-substitution@v1
       with:
-          files: '${{env.DOTNET_ROOT}}/OpenPOS/OpenPOS-APP/appsettings.json'
+          files: 'OpenPOS/OpenPOS-APP/**.json'
       env:
           TIKKIE_API.Key: ${{ secrets.TIKKIE_API_KEY }}
           DATABASE_CONNECTION.connection_string: ${{ secrets.DB_CONN_STRING }}
