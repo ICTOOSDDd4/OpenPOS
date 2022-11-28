@@ -1,4 +1,6 @@
-using Microsoft.Maui;
+using OpenPOS_APP.Models;
+using OpenPOS_APP.Services.Models;
+using OpenPOS_APP.Settings;
 using System.Reflection;
 using System.Text.RegularExpressions;
 
@@ -23,7 +25,29 @@ public partial class TablePickerScreen : ContentPage
 
    private async void OnSubmitButtonClicked(object sender, EventArgs e)
    {
-      await Shell.Current.GoToAsync(nameof(MenuPage));
+      string entryString = TableNumberEntry.Text;
+      if (int.TryParse(entryString.ToString().Trim(), out int value))
+      {
+         _tableNumber = value;
+         ApplicationSettings.TableNumber = _tableNumber;
+         Table table = TableService.FindByTableNumber(_tableNumber);
+         if (table == null)
+         {
+            ErrorDisplayLabel.Text = "This isn't a valid table.";
+            ErrorDisplayLabel.IsVisible = true;
+            ActivateButton(false);
+         } else
+         {
+            Bill bill = new Bill(value, ApplicationSettings.LoggedinUser.Id, false, DateTime.Now, DateTime.Now);
+            ApplicationSettings.CurrentBill = BillService.Create(bill);
+            table.Bill_id = ApplicationSettings.CurrentBill.Id;
+            if (TableService.Update(table))
+            {
+               await Shell.Current.GoToAsync(nameof(MenuPage));
+            }
+         }
+      }
+      
    }
 
    private void OnTableNumberEntryChanged(object sender, TextChangedEventArgs e)
@@ -68,17 +92,19 @@ public partial class TablePickerScreen : ContentPage
    {
       if (active)
       {
-         SubmitButton.IsEnabled = true;
+         
          if (_appColors.TryGetValue("OpenPos-Green", out var color)) {
             SubmitButton.BackgroundColor = (Color)color;
-        }
+            SubmitButton.IsEnabled = true;
+         }
       } 
       else
       {
-         SubmitButton.IsEnabled = false;
+         
          if (_appColors.TryGetValue("Gray100", out var color))
          {
             SubmitButton.BackgroundColor = (Color)color;
+            SubmitButton.IsEnabled = false;
          }
       }
    }

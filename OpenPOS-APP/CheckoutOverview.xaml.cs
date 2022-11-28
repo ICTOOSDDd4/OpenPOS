@@ -3,7 +3,6 @@ using OpenPOS_APP.Services.Models;
 using OpenPOS_APP.Settings;
 using System.Globalization;
 
-
 namespace OpenPOS_APP;
 
 public partial class CheckoutOverview : ContentPage
@@ -37,13 +36,22 @@ public partial class CheckoutOverview : ContentPage
         TotalPriceLabel.Text = "€" + TotalPrice.ToString(CultureInfo.InvariantCulture);
     }
 
-	public async void OnClicked(Object obj, EventArgs args)
+	public async void OnClickedSplitPay(object sender, EventArgs args)
     {
-        await DisplayAlert("Test", "AAAAAH", "Ok");
+        await DisplayAlert("Work In Progress", "This feature is still under development.", "Understood");
     }
 	
+   private async void OnClickedPay(object sender, EventArgs args)
+   {
+      await DisplayAlert("Work In Progress", "This feature is still under development.", "Understood");
+   }
 
-	protected override void OnNavigatedTo(NavigatedToEventArgs args)
+   private async void OnClickedSplitProducts(object sender, EventArgs args)
+   {
+      await DisplayAlert("Work In Progress", "This feature is still under development.", "Understood");
+   }
+
+   protected override void OnNavigatedTo(NavigatedToEventArgs args)
 	{
 		base.OnNavigatedTo(args);
 	}

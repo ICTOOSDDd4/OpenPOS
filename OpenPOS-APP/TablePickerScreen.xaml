@@ -57,11 +57,11 @@
                 x:Name="SubmitButton"
                 Text="Sumbit"
                 SemanticProperties.Hint="Press to continue"
-                IsEnabled="true"
+                IsEnabled="false"
                 Clicked="OnSubmitButtonClicked"
                 HorizontalOptions="Center"
                 TextColor="Black"
-                BackgroundColor="{StaticResource OpenPos-Green}" 
+                BackgroundColor="{StaticResource Gray100}" 
                 CornerRadius="10"   
              />
 

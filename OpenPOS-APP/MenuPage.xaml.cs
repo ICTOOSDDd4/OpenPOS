@@ -1,12 +1,14 @@
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Models;
+using OpenPOS_APP.Settings;
+using System.Diagnostics;
 
 namespace OpenPOS_APP;
 
 public partial class MenuPage : ContentPage
 {
 	public List<Product> Products { get; set; }
-	public List<Product> SelectedProducts { get; set; }
+	public Dictionary<Product, int> SelectedProducts { get; set; }
 	private HorizontalStackLayout HorizontalLayout;
 	
 	private bool _isInitialized;
@@ -16,7 +18,7 @@ public partial class MenuPage : ContentPage
 	{
       Products = ProductService.GetAll();
       InitializeComponent();
-      SelectedProducts = new List<Product>();
+      SelectedProducts = new Dictionary<Product, int>();
 	}
 
 	protected override void OnSizeAllocated(double width, double height)
@@ -56,6 +58,7 @@ public partial class MenuPage : ContentPage
 		}
 		ProductView productView = new ProductView();
 		productView.SetProductValues(this,product);
+		productView.ClickedMoreInfo += OnInfoButtonClicked;
 		HorizontalLayout.Add(productView);
 	}
 
@@ -68,9 +71,47 @@ public partial class MenuPage : ContentPage
 		HorizontalLayout = hLayout;
    }
 
+	private async void OnInfoButtonClicked(object sender, EventArgs e)
+	{
+		await DisplayAlert("Work In Progress", "This will display more about the product and allergy information",
+			"Understood");
+	}
 
 	private async void OrderButton_OnClicked(object sender, EventArgs e)
 	{
-		await Shell.Current.GoToAsync(nameof(CheckoutOverview));
+		if (SelectedProducts.Count == 0)
+		{
+         await DisplayAlert("Please don't", "You forgot to add products to your order!", "Oh I forgot thanks");
+
+      }
+      else
+		{
+         if (await DisplayAlert("You sure?", "Wanna place this order", "Yes", "no"))
+         {
+            Order order = new Order(1, false, ApplicationSettings.LoggedinUser.Id, ApplicationSettings.CurrentBill.Id, DateTime.Now, DateTime.Now);
+            order = OrderService.Create(order);
+
+					// Get current product from selected products
+				foreach (KeyValuePair<Product, int> entry in SelectedProducts)
+            {
+					OrderLine line = new OrderLine(order.Id, entry.Key.Id, entry.Value, "In Development");
+					OrderLineService.Create(line);
+            }
+
+				if (order == null)
+            {
+               await DisplayAlert("Oops", "Something went wrong please try again.", "Alright");
+            }
+            else
+            {
+               await DisplayAlert("Order Placed", "You placed your order, our staff will prepair it right away!", "Thank you");
+               await Shell.Current.GoToAsync(nameof(MenuPage));
+            }
+         }
+         else
+         {
+				// Empty for now, DOING NOTHING!
+         }
+      }		
 	}
 }

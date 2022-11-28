@@ -41,6 +41,7 @@
                 <ImageButton
                 Source="cart.png"
                 Padding="10"
+                Clicked="OnClickedCard"
                 BackgroundColor="#e1e1e1"
                 />
                 <ImageButton

@@ -26,7 +26,19 @@ public class TableService : IModelService<Table>
         return result;
     }
 
-    public static bool Delete(Table obj)
+   public static Table FindByTableNumber(int tableNumber) 
+   {
+      SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[restaurant_table] WHERE [table_number] = @TableNumber");
+
+      query.Parameters.Add("@TableNumber", SqlDbType.Int);
+      query.Parameters["@TableNumber"].Value = tableNumber;
+
+      Table result = DatabaseService.ExecuteSingle<Table>(query);
+
+      return result;
+   }
+
+   public static bool Delete(Table obj)
     {
         SqlCommand query = new SqlCommand("DELETE FROM [dbo].[restaurant_table] WHERE [ID] = @ID");
         
