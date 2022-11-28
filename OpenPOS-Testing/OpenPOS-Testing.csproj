@@ -5,7 +5,7 @@
     <RootNamespace>OpenPOS_Testing</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-
+	<useMaui>true</useMaui>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
