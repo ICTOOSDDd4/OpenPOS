@@ -25,9 +25,7 @@ public partial class ProductView : ContentView
    {
       _menuPage = page;
       _product = product;
-      
-      //TODO: Add price to product
-      
+            
       ProductName.Text = product.Name;
       ProductInfo.Text = product.Description;
       ProductPrice.Text = $"€ { product.Price }";
