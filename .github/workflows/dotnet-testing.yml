@@ -8,11 +8,11 @@ on:
     branches: 
       - "master"
       - "development/**"
-      - "bug-fix/**"
+#       - "bug-fix/**"
   pull_request:
     branches: 
       - "master"
-#       - "development/**"
+      - "development/**"
 #       - "feature/**"
 #       - "bug-fix/**"
   
@@ -31,9 +31,10 @@ jobs:
       with:
         dotnet-version: ${{ env.DOTNETVERSION }}
 
-    - uses: microsoft/variable-substitution@v1
+    - name: Setting Appsettings
+      uses: microsoft/variable-substitution@v1
       with:
-          files: 'OpenPOS\OpenPOS-APP\*.json'
+          files: 'Application/*.json'
       env:
           TIKKIE_API.Key: ${{ secrets.TIKKIE_API_KEY }}
           DATABASE_CONNECTION.connection_string: ${{ secrets.DB_CONN_STRING }}
