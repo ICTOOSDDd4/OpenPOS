@@ -93,11 +93,7 @@ public partial class MenuPage : ContentPage
 					// Get current product from selected products
 				foreach (KeyValuePair<Product, int> entry in SelectedProducts)
             {
-					Debug.WriteLine(entry.Key.Id);
-					Debug.WriteLine(order.Id);
-               Debug.WriteLine("+++++++++++++");
-
-               OrderLine line = new OrderLine(order.Id, entry.Key.Id, entry.Value, "In Development");
+					OrderLine line = new OrderLine(order.Id, entry.Key.Id, entry.Value, "In Development");
 					OrderLineService.Create(line);
             }
 
