@@ -33,12 +33,20 @@ jobs:
 
 
     - name: Create appsettings.json
-    id: appsettings
-    uses: jsdaniell/create-json@v1.2.1
-    with:
-        name: "appsettings.json"
-        json: ${{ secrets.APPSETTINGS }}
-        dir: 'OpenPOS-APP\'
+      id: appsettings
+      uses: jsdaniell/create-json@v1.2.1
+      with:
+          name: "appsettings.json"
+          json: ${{ secrets.APPSETTINGS }}
+          dir: 'OpenPOS-APP\'
+
+    - name: Create appsettings.test.json
+      id: appsettings
+      uses: jsdaniell/create-json@v1.2.1
+      with:
+          name: "appsettings.test.json"
+          json: ${{ secrets.APPSETTINGS }}
+          dir: 'OpenPOS-Testing\'
 
     - name: Install .NET MAUI
       shell: bash
