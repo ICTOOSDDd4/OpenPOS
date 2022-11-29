@@ -31,22 +31,15 @@ jobs:
       with:
         dotnet-version: ${{ env.DOTNETVERSION }}
 
-    - name: Add Appsettings
-      uses: microsoft/variable-substitution@v1
-      with:
-          files: 'D:\a\OpenPOS\OpenPOS\OpenPOS-APP\appsettings.json'
-      env:
-          TIKKIE_API.Key: ${{ secrets.TIKKIE_API_KEY }}
-          DATABASE_CONNECTION.connection_string: ${{ secrets.DB_CONN_STRING }
 
-    - name: Add Appsettings
-      uses: microsoft/variable-substitution@v1
-      with:
-          files: 'D:\a\OpenPOS\OpenPOS\OpenPOS-Testing\appsettings.test.json'
-      env:
-          TIKKIE_API.Key: ${{ secrets.TIKKIE_API_KEY }}
-          DATABASE_CONNECTION.connection_string: ${{ secrets.DB_CONN_STRING }}
-    
+    - name: Create appsettings.json
+    id: appsettings
+    uses: jsdaniell/create-json@v1.2.1
+    with:
+        name: "appsettings.json"
+        json: ${{ secrets.APPSETTINGS }}
+        dir: 'OpenPOS-APP\'
+
     - name: Install .NET MAUI
       shell: bash
       run: |
