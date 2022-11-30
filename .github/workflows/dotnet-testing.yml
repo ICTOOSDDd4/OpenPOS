@@ -112,7 +112,7 @@ jobs:
       with:
           name: "appsettings.json"
           json: ${{ secrets.APPSETTINGS }}
-          dir: 'OpenPOS-APP\'
+          dir: 'OpenPOS-APP/'
 
     - name: Create appsettings.test.json
       id: testappsettings
@@ -120,7 +120,7 @@ jobs:
       with:
           name: "appsettings.test.json"
           json: ${{ secrets.APPSETTINGS }}
-          dir: 'OpenPOS-Testing\'
+          dir: 'OpenPOS-Testing/'
 
     - name: Restore nuget packages
       run: dotnet restore OpenPOS.sln
