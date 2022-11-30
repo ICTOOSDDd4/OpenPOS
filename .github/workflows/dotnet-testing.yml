@@ -126,11 +126,10 @@ jobs:
       run: dotnet restore OpenPOS.sln
 
     - name: Build with .NET
-      run: |
-          dotnet publish -f net7.0-maccatalyst
+    run: dotnet build --configuration Release
 
     - name: Test with .NET
-      run: dotnet test --configuration Release --no-build --verbosity normal
+    run: dotnet test --configuration Release --no-build --verbosity normal
       
   # iOSWorkflow:
   #   runs-on: macos-latest
