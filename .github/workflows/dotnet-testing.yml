@@ -42,7 +42,7 @@ jobs:
           dir: 'OpenPOS-APP\'
 
     - name: Create appsettings.test.json
-      id: appsettings
+      id: testappsettings
       uses: jsdaniell/create-json@v1.2.1
       with:
           name: "appsettings.test.json"
