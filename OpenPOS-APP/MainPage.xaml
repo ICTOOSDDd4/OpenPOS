@@ -1,41 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="OpenPOS_APP.MainPage">
+             x:Class="OpenPOS_APP.MainPage"
+             Shell.NavBarIsVisible="False"
+             Title="OPENPOS">
+    <ContentPage.Resources>
+        <ResourceDictionary Source="Resources/Styles/Colors.xaml"></ResourceDictionary>
+    </ContentPage.Resources>
+    <VerticalStackLayout
+                Spacing="25"
+                Padding="30,100,30,100"
+                Grid.ColumnSpan="3" Grid.Row="2"
+                VerticalOptions="Center">
 
-    <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
+        <Image 
+                    x:Name="openposicon"
+                    Source="openpos_icon.png"
+                    SemanticProperties.Description="Hello, this is OpenPOS"
+                    HeightRequest="200"
+                    HorizontalOptions="Center"/>
 
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
+        <Label
+                    Text="Weclome to OpenPOS!"
+                    SemanticProperties.HeadingLevel="Level1"
+                    FontFamily="LeagueSpartan-SemiBold"
+                    SemanticProperties.Description="The way to access your OpenPOS Experience"
+                    TextColor="Black"
+                    FontSize="24"
+                    HorizontalOptions="Center" />
 
-            <Label
-                Text="Hello, World!"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
-
-            <Label
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
-
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
-
-        </VerticalStackLayout>
-    </ScrollView>
-
+        <Button
+                    x:Name="MainLoginButton"
+                    Text="START YOUR EXPERIENCE"
+                    SemanticProperties.Hint="Press to login"
+                    Clicked="OnLoginButtonClicked"
+                    HorizontalOptions="Center"
+                    TextColor="Black"
+                    BackgroundColor="{StaticResource OpenPos-Yellow}" 
+                    CornerRadius="10" />
+    </VerticalStackLayout>
 </ContentPage>

@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31611.283
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenPOS-APP", "OpenPOS-APP\OpenPOS-APP.csproj", "{14F60B2B-1E2E-4C75-BAA5-CCDB70F7D9FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenPOS-Testing", "OpenPOS-Testing\OpenPOS-Testing.csproj", "{D64584AB-9F5D-4F8A-879B-549B14654CFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenPOS-Testing", "OpenPOS-Testing\OpenPOS-Testing.csproj", "{D64584AB-9F5D-4F8A-879B-549B14654CFB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

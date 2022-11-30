@@ -6,8 +6,6 @@
 # Welcome to OpenPOS
 Welcome to OpenPOS, a new Open Source Point of Sale system. We want to offer entrepreneurs a modern and up to date Point of Sale system that lets them focus on what what is important!.
 
-![OpenPOS Logo](https://drive.google.com/file/d/17JA4snI9kI4w0z5RPhh6UdqWhs2n7PPU/view?usp=sharing "OpenPOS- The Open Source POS solution")
-
 ## Repository Rules
 - When creating a branch for a new feature, feature/ is required in the branch name.
 ```
