@@ -8,12 +8,12 @@ on:
   push:
     branches: 
       - "master"
-       - "development/**"
-       - "bug-fix/**"
+      - "development/**"
+#      - "bug-fix/**"
   pull_request:
     branches: 
       - "master"
-       - "development/**"
+      - "development/**"
 #       - "feature/**"
 #       - "bug-fix/**"
   
