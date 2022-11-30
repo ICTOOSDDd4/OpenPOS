@@ -50,6 +50,14 @@ public static class MauiProgram
 			ApplicationSettings.DbSett = config.GetRequiredSection("DATABASE_CONNECTION").Get<DatabaseSettings>();
 			ApplicationSettings.TikkieSet = config.GetRequiredSection("TIKKIE_API").Get<TikkieSettings>();
 			
+			// Creating API link
+			if (ApplicationSettings.TikkieSet != null)
+			{
+				PaymentService.PayMethod = new PaymentMethod();
+			}
+			
+			else throw new ApplicationException("Missing Tikkie settings");
+
 			if (ApplicationSettings.DbSett != null)
 			{
 				DatabaseService.Initialize();
