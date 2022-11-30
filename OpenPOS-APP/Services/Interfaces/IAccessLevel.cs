@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OpenPOS_APP.Services.Interfaces
 {
-    internal interface IRoleService
+    public interface IAccessLevel
     {
         public bool IsAuthorized(User user, Role role);
     }
