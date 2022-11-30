@@ -58,7 +58,7 @@ public partial class ProductView : ContentView
 
    }
 
-   private async void OnClickedInfo(object sender, EventArgs e)
+   private void OnClickedInfo(object sender, EventArgs e)
    {
       ClickedMoreInfo?.Invoke(this, e);
    }
