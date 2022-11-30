@@ -32,7 +32,6 @@ jobs:
       with:
         dotnet-version: ${{ env.DOTNETVERSION }}
 
-
     - name: Create appsettings.json
       id: appsettings
       uses: jsdaniell/create-json@v1.2.1
@@ -91,31 +90,47 @@ jobs:
 #     - name: Test with .NET
 #       run: dotnet test --configuration Release --no-build --verbosity normal
 #
-#   MacOSWorkflow:
-#     runs-on: macos-latest
-#     steps:
-#     - uses: actions/checkout@v2
-#     - name: Setup .NET
-#       uses: actions/setup-dotnet@v1
-#       with:
-#         dotnet-version: ${{ env.DOTNETVERSION }}
-#
-#     - name: Install .NET MAUI
-#       shell: bash
-#       run: |
-#           dotnet nuget locals all --clear
-#           dotnet workload install maui
-#           dotnet workload install maccatalyst macos maui wasm-tools
-#
-#     - name: Restore nuget packages
-#       run: dotnet restore OpenPOS.sln
-#
-#     - name: Build with .NET
-#       run: |
-#           dotnet publish -f net7.0-maccatalyst
-#
-#     - name: Test with .NET
-#       run: dotnet test --configuration Release --no-build --verbosity normal
+  MacOSWorkflow:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ env.DOTNETVERSION }}
+
+    - name: Install .NET MAUI
+      shell: bash
+      run: |
+          dotnet nuget locals all --clear
+          dotnet workload install maui
+          dotnet workload install maccatalyst macos maui wasm-tools
+
+    - name: Create appsettings.json
+      id: appsettings
+      uses: jsdaniell/create-json@v1.2.1
+      with:
+          name: "appsettings.json"
+          json: ${{ secrets.APPSETTINGS }}
+          dir: 'OpenPOS-APP\'
+
+    - name: Create appsettings.test.json
+      id: testappsettings
+      uses: jsdaniell/create-json@v1.2.1
+      with:
+          name: "appsettings.test.json"
+          json: ${{ secrets.APPSETTINGS }}
+          dir: 'OpenPOS-Testing\'
+
+    - name: Restore nuget packages
+      run: dotnet restore OpenPOS.sln
+
+    - name: Build with .NET
+      run: |
+          dotnet publish -f net7.0-maccatalyst
+
+    - name: Test with .NET
+      run: dotnet test --configuration Release --no-build --verbosity normal
       
   # iOSWorkflow:
   #   runs-on: macos-latest
