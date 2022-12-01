@@ -89,6 +89,9 @@
 		<MauiXaml Update="RealisatieMenu.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+		<MauiXaml Update="PaymentPage.xaml">
+		  <SubType></SubType>
+		</MauiXaml>
 	</ItemGroup>
 
 	<ItemGroup>
