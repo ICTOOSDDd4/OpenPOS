@@ -13,9 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="appsettings.test.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
+    <EmbeddedResource Include="appsettings.test.json" />
   </ItemGroup>
 
   <ItemGroup>
