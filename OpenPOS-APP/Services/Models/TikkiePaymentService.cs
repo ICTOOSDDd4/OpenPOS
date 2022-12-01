@@ -14,27 +14,51 @@ using RestSharp;
 
 namespace OpenPOS_APP.Services.Models
 {
-    public static class PaymentService
+    public static class TikkiePayementService
     {
-        public static PaymentMethod PayMethod;
-        
-        
-        public static string GetPaymentLink(int amountInCents, int transactionId, string desc)
+        private static string _tikkieAppToken;
+        public static void CreateTikkieAppToken()
+        {
+            var client = new RestClient(ApplicationSettings.TikkieSet.BaseUrl);
+				
+            var request = new RestRequest("/sandboxapps", Method.Post);
+            request.AddHeader("Accept", "application/json");
+            request.AddHeader("API-Key", ApplicationSettings.TikkieSet.Key);
+            RestResponse response = client.Execute(request);
+            var content = response.Content;
+				
+            if (content != null)
+            {
+                var obj = JObject.Parse(content);
+            _tikkieAppToken = obj["appToken"]?.ToString();
+            } else Debug.WriteLine("No content");
+        }
+        public static Transaction CreatePaymentRequest(int amountInCents, int transactionId, string desc)
         {
             var client = new RestClient(ApplicationSettings.TikkieSet.BaseUrl);
             var request = new RestRequest("/paymentrequests", Method.Post);
-            request.AddHeader("X-App-Token", PayMethod.TikkieAppToken);
+            request.AddHeader("X-App-Token", _tikkieAppToken);
             request.AddHeader("Content-Type", "application/json");
             request.AddHeader("Accept", "application/json");
             request.AddHeader("API-Key", ApplicationSettings.TikkieSet.Key);
             request.AddJsonBody(new
             {
-                description = desc,
-                amountInCents = amountInCents,
-                expiryDate = DateTime.Today.AddDays(1).ToString("yyyy-MM-dd"),
-                referenceId = transactionId,
+               description = desc,
+               amountInCents = amountInCents,
+               expiryDate = DateTime.Today.AddDays(1).ToString("yyyy-MM-dd"),
+               referenceId = transactionId.ToString(),
             });
-            RestResponse response = client.Execute(request);
+
+         //var body = @"{" + "\n" +
+         //@"  ""description"": ""Test betaling""," + "\n" +
+         //@"  ""amountInCents"": 9," + "\n" +
+         //@"  ""expiryDate"": ""2022-12-02""," + "\n" +
+         //@"  ""referenceId"": ""10000""" + "\n" +
+         //@"}";
+
+         //request.AddParameter("application/json", body, ParameterType.RequestBody);
+
+         RestResponse response = client.Execute(request);
             if (response.Content != null)
             {
                 var obj = JObject.Parse(response.Content);
@@ -42,7 +66,19 @@ namespace OpenPOS_APP.Services.Models
                 {
                     throw new Exception($"Error: {obj["errors"][0]?["message"]} ");
                 }
-                return obj["url"]?.ToString();
+                return new Transaction
+                {
+                    PaymentRequestToken = obj["paymentRequestToken"]?.ToString(),
+                    AmountInCents = (int)obj["amountInCents"]?.ToObject<int>(),
+                    TransactionId = obj["referenceId"]?.ToString(),
+                    Description = obj["description"]?.ToString(),
+                    Url = obj["url"]?.ToString(),
+                    ExpiryDate = (DateTime)obj["expiryDate"]?.ToObject<DateTime>(),
+                    CreatedDateTime = (DateTime)obj["createdDateTime"]?.ToObject<DateTime>(),
+                    Status = obj["status"]?.ToString(),
+                    NumberOfPayments = (int)obj["numberOfPayments"]?.ToObject<int>(),
+                    TotalAmountPayed = (int)obj["totalAmountPaidInCents"]?.ToObject<int>(),
+                };
             }
 
             return null;
@@ -52,7 +88,7 @@ namespace OpenPOS_APP.Services.Models
         {
             var client = new RestClient(ApplicationSettings.TikkieSet.BaseUrl);
             var request = new RestRequest($"/paymentrequests/{paymentRequestToken}");
-            request.AddHeader("X-App-Token", PayMethod.TikkieAppToken);
+            request.AddHeader("X-App-Token", _tikkieAppToken);
             request.AddHeader("Accept", "application/json");
             request.AddHeader("API-Key", ApplicationSettings.TikkieSet.Key);
             
@@ -77,6 +113,7 @@ namespace OpenPOS_APP.Services.Models
                     NumberOfPayments = (int)obj["numberOfPayments"]?.ToObject<int>(),
                     TotalAmountPayed = (int)obj["totalAmountPaidInCents"]?.ToObject<int>(),
                 };
+                
             }
 
             return null;

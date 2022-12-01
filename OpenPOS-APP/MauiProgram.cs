@@ -6,6 +6,7 @@ using OpenPOS_APP.Settings;
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Models;
 using CommunityToolkit.Maui;
+using System.Diagnostics;
 
 namespace OpenPOS_APP;
 
@@ -53,7 +54,12 @@ public static class MauiProgram
 			// Creating API link
 			if (ApplicationSettings.TikkieSet != null)
 			{
-				PaymentService.PayMethod = new PaymentMethod();
+				if (ApplicationSettings.TikkieSet.BaseUrl != null)
+				{
+               TikkiePayementService.CreateTikkieAppToken();
+               Transaction t = TikkiePayementService.CreatePaymentRequest(1000, 65433432, "HalloHallo");
+               Debug.WriteLine(t.Url);
+            }			
 			}
 			
 			else throw new ApplicationException("Missing Tikkie settings");
