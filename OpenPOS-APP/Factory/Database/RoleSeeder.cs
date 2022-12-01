@@ -5,7 +5,7 @@ namespace OpenPOS_APP.Factory.Database
 {
     public class RoleSeeder
     {
-        private static string[] _roles = {"Owner", "Admin", "Crew", "cook"};
+        private static string[] _roles = {"Owner", "Admin", "Crew", "cook", "guest"};
         private static List<Role> _dbRoles;
 
         public static void Seed()
