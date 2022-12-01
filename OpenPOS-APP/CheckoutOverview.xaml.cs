@@ -1,4 +1,6 @@
-﻿using OpenPOS_APP.Models;
+﻿using CommunityToolkit.Maui.Views;
+using OpenPOS_APP.Models;
+using OpenPOS_APP.Resources.Controls.PopUps;
 using OpenPOS_APP.Services.Models;
 using OpenPOS_APP.Settings;
 using System.Globalization;
@@ -65,8 +67,6 @@ public partial class CheckoutOverview : ContentPage
          await DisplayAlert("Oops", "You can only input a number.", "Try Again");
          continue;
       }
-          
-
    }
 
    private async void OnClickedPay(object sender, EventArgs args)
@@ -78,7 +78,9 @@ public partial class CheckoutOverview : ContentPage
 
    private async void OnClickedAddaTip(object sender, EventArgs args)
    {
-      await DisplayAlert("Work In Progress", "This feature is still under development.", "Understood");
+      TipPopUp popUp = new TipPopUp();
+      this.ShowPopup(popUp);
+
    }
 
    protected override void OnNavigatedTo(NavigatedToEventArgs args)

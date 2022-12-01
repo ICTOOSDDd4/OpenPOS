@@ -71,7 +71,6 @@
 
 	<ItemGroup>
 		<Folder Include="Models\" />
-		<Folder Include="Resources\Controls\PopUps\" />
 	</ItemGroup>
 	<ItemGroup>
 
@@ -92,6 +91,9 @@
 	<ItemGroup>
 		<MauiXaml Update="Resources\Controls\Header.xaml">
 			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Resources\Controls\PopUps\TipPopUp.xaml">
+		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 	</ItemGroup>
 </Project>

@@ -10,7 +10,7 @@ public partial class PaymentPage : ContentPage
     public static Transaction CurrentTransaction { get; set; }
     public static int RequiredPayments { get; set; }
 
-    public PaymentPage()
+   public PaymentPage()
 	{
 		InitializeComponent();
 
