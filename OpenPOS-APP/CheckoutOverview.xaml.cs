@@ -50,7 +50,9 @@ public partial class CheckoutOverview : ContentPage
                int splitamount = TotalPrice / count;
                Transaction transaction = TikkiePayementService.CreatePaymentRequest(splitamount, ApplicationSettings.CurrentBill.Id, $"OpenPOS Tikkie Payment: {ApplicationSettings.CurrentBill.Id}");
                PaymentPage.SetTransaction(transaction, count);
+               loop = false;
                await Shell.Current.GoToAsync(nameof(PaymentPage));
+               continue;
             }
             await DisplayAlert("Oops", "You can't split a bill with a negative amount of people!", "Try Again");
             continue;

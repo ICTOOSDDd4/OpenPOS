@@ -13,13 +13,19 @@ public partial class PaymentPage : ContentPage
     public PaymentPage()
 	{
 		InitializeComponent();
-		
-		QRCode.Source = UtilityService.GenerateQrCodeFromUrl("https://www.google.com"); //TODO: PLACE TIKKIE URL HERE
-	}
+
+      QRCode.Source = UtilityService.GenerateQrCodeFromUrl(CurrentTransaction.Url);
+
+   }
 
    public static void SetTransaction(Transaction transaction, int numberOfRequiredPayments)
    {
       CurrentTransaction = transaction;
       RequiredPayments = numberOfRequiredPayments;
+   }
+
+   public void RemoveQRCodeFile()
+   {
+      File.Delete($"{UtilityService.GetRootDirectory()}/qr-{ApplicationSettings.CurrentBill.Id}.png");
    }
 }

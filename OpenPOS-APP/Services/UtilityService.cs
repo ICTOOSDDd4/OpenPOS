@@ -13,7 +13,7 @@ public class UtilityService
         
         using (WebClient client = new WebClient())
         {
-               client.DownloadFile(new Uri(apiUrl), $"{ GetRootDirectory() }/qr.png");
+               client.DownloadFile(new Uri(apiUrl), $"{ GetRootDirectory() }/qr-{ApplicationSettings.CurrentBill.Id}.png");
         }
 		
         return ImageSource.FromFile("qr.png");
