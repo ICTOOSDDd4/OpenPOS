@@ -43,7 +43,8 @@ public partial class CheckoutOverview : ContentPage
 	
    private async void OnClickedPay(object sender, EventArgs args)
    {
-      await DisplayAlert("Work In Progress", "This feature is still under development.", "Understood");
+       await Shell.Current.GoToAsync(nameof(PaymentPage));
+       // await DisplayAlert("Work In Progress", "This feature is still under development.", "Understood");
    }
 
    private async void OnClickedSplitProducts(object sender, EventArgs args)
