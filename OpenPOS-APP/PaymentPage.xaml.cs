@@ -28,4 +28,9 @@ public partial class PaymentPage : ContentPage
    {
       File.Delete($"{UtilityService.GetRootDirectory()}/qr-{ApplicationSettings.CurrentBill.Id}.png");
    }
+
+   protected override void OnNavigatedTo(NavigatedToEventArgs args)
+   {
+      base.OnNavigatedTo(args);
+   }
 }

@@ -7,9 +7,6 @@
              x:Class="OpenPOS_APP.CheckoutOverview"
              Title="CheckoutOverview"
              Shell.NavBarIsVisible="False">
-    <Shell.BackButtonBehavior>
-        <BackButtonBehavior IsVisible="False" IsEnabled="False" />
-    </Shell.BackButtonBehavior>
     <VerticalStackLayout>
         <customControls:Header/>
         <Grid>
