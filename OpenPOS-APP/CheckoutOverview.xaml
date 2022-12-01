@@ -119,11 +119,11 @@
                         HeightRequest="100"
                         FontSize="36"
                         Clicked="OnClickedSplitPay"/>
-                    <Button Text="Split Products"
+                    <Button Text="Add a tip"
                         WidthRequest="300"
                         HeightRequest="100"
                         FontSize="36"
-                        Clicked="OnClickedSplitProducts"/>
+                        Clicked="OnClickedAddaTip"/>
                 </VerticalStackLayout>
 
             </HorizontalStackLayout>

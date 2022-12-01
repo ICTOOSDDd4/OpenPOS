@@ -38,16 +38,43 @@ public partial class CheckoutOverview : ContentPage
 
 	public async void OnClickedSplitPay(object sender, EventArgs args)
     {
-        await DisplayAlert("Work In Progress", "This feature is still under development.", "Understood");
-    }
-	
-   private async void OnClickedPay(object sender, EventArgs args)
-   {
-       await Shell.Current.GoToAsync(nameof(PaymentPage));
-       // await DisplayAlert("Work In Progress", "This feature is still under development.", "Understood");
+      bool loop = true;
+
+      while(loop)
+      {
+         var result = await DisplayPromptAsync("Going Dutch!", "With how many people do you wanna split the bill?", maxLength: 2, placeholder: "Enter the number of people.", keyboard: Keyboard.Numeric);
+         if (int.TryParse(result, out var count))
+         {
+            if (!int.IsNegative(count))
+            {
+               int splitamount = TotalPrice / count;
+               Transaction transaction = TikkiePayementService.CreatePaymentRequest(splitamount, ApplicationSettings.CurrentBill.Id, $"OpenPOS Tikkie Payment: {ApplicationSettings.CurrentBill.Id}");
+               PaymentPage.SetTransaction(transaction, count);
+               await Shell.Current.GoToAsync(nameof(PaymentPage));
+            }
+            await DisplayAlert("Oops", "You can't split a bill with a negative amount of people!", "Try Again");
+            continue;
+         }
+         else if (result == null)
+         {
+            loop = false;
+            continue;
+         }
+         await DisplayAlert("Oops", "You can only input a number.", "Try Again");
+         continue;
+      }
+          
+
    }
 
-   private async void OnClickedSplitProducts(object sender, EventArgs args)
+   private async void OnClickedPay(object sender, EventArgs args)
+   {
+      Transaction transaction = TikkiePayementService.CreatePaymentRequest(TotalPrice, ApplicationSettings.CurrentBill.Id, $"OpenPOS Tikkie Payment: {ApplicationSettings.CurrentBill.Id}");
+      PaymentPage.SetTransaction(transaction, 1);
+      await Shell.Current.GoToAsync(nameof(PaymentPage));
+   }
+
+   private async void OnClickedAddaTip(object sender, EventArgs args)
    {
       await DisplayAlert("Work In Progress", "This feature is still under development.", "Understood");
    }

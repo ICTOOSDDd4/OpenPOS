@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>net7.0-maccatalyst;net7.0;</TargetFrameworks>
-		<!--<TargetFrameworks></TargetFrameworks>-->
+		<TargetFrameworks></TargetFrameworks>
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
 
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
@@ -71,6 +71,7 @@
 
 	<ItemGroup>
 		<Folder Include="Models\" />
+		<Folder Include="Resources\Controls\PopUps\" />
 	</ItemGroup>
 	<ItemGroup>
 
@@ -83,14 +84,8 @@
 		<MauiXaml Update="CheckoutItemCardView.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="ProductView.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
 		<MauiXaml Update="RealisatieMenu.xaml">
 			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="PaymentPage.xaml">
-		  <SubType></SubType>
 		</MauiXaml>
 	</ItemGroup>
 

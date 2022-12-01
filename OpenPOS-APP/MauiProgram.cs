@@ -58,8 +58,6 @@ public static class MauiProgram
 				if (ApplicationSettings.TikkieSet.BaseUrl != null)
 				{
                TikkiePayementService.CreateTikkieAppToken();
-               Transaction t = TikkiePayementService.CreatePaymentRequest(1000, 65433432, "HalloHallo");
-               Debug.WriteLine(t.Url);
             }			
 			}
 			

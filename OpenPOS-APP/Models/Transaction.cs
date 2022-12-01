@@ -12,4 +12,7 @@ public class Transaction
     public string Status { get; set; }
     public int NumberOfPayments { get; set; }
     public int TotalAmountPayed { get; set; }
+
+
+
 }
