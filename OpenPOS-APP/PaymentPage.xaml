@@ -6,5 +6,7 @@
     <VerticalStackLayout>
         <Image x:Name="QRCode">
         </Image>
+        
+        <Button Clicked="OnPaymentStatusCheck_Clicked" />
     </VerticalStackLayout>
 </ContentPage>
