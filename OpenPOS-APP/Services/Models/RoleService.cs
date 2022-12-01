@@ -57,4 +57,22 @@ public class RoleService : IModelService<Role>
         
         return DatabaseService.ExecuteSingle<Role>(query);
     }
+
+    public static Role FindUserRole(int id)
+    {
+        SqlCommand query = new SqlCommand("SELECT r.id, r.title " +
+                                          "FROM [OpenPOS_dev].[dbo].[user_role] as ur " +
+                                          "INNER JOIN [dbo].[user] as u " +
+                                          "ON ur.user_id = u.id " +
+                                          "INNER JOIN role as r " +
+                                          "ON ur.role_id = r.id " +
+                                          "WHERE u.id = @ID");
+
+        query.Parameters.Add("@ID", SqlDbType.Int);
+        query.Parameters["@ID"].Value = id;
+
+        Role result = DatabaseService.ExecuteSingle<Role>(query);
+
+        return result;
+    }
 }
