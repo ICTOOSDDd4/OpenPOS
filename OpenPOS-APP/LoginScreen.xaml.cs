@@ -47,30 +47,31 @@ public partial class LoginScreen : ContentPage
    {
       if (UserAuth(_username, _password))
       {
-          if (AccessLevelService.IsAuthorized(UserService.Authenticate(_username, _password), "Owner"))
-          {
-              await Shell.Current.GoToAsync(nameof(OwnerOverview));
-          }
-          else if (AccessLevelService.IsAuthorized(UserService.Authenticate(_username, _password), "Admin"))
-          {
-              await Shell.Current.GoToAsync(nameof(AdminOverview));
-          }
-          else if (AccessLevelService.IsAuthorized(UserService.Authenticate(_username, _password), "Kitchen"))
-          {
-              await Shell.Current.GoToAsync(nameof(KitchenOverview));
-          }
-          else if (AccessLevelService.IsAuthorized(UserService.Authenticate(_username, _password), "Bar"))
-          {
-              await Shell.Current.GoToAsync(nameof(BarOverview));
-          }
-          else if (AccessLevelService.IsAuthorized(UserService.Authenticate(_username, _password), "Guest"))
-          {
-                await Shell.Current.GoToAsync(nameof(TablePickerScreen));
-          }
-          else
-          {
-              await Shell.Current.GoToAsync(nameof(TablePickerScreen));
-          }
+            var role = RoleService.FindUserRole(UserService.Authenticate(_username, _password).Id).Title;
+            switch (role)
+            {
+                case ("Owner"):
+                    await Shell.Current.GoToAsync(nameof(OwnerOverview));
+                    break;
+                case ("Admin"):
+                    await Shell.Current.GoToAsync(nameof(AdminOverview));
+                    break;
+                case ("Crew"):
+                    await Shell.Current.GoToAsync(nameof(CrewOverview));
+                    break;
+                case ("Kitchen"):
+                    await Shell.Current.GoToAsync(nameof(KitchenOverview));
+                    break;
+                case ("Bar"):
+                    await Shell.Current.GoToAsync(nameof(BarOverview));
+                    break;
+                case ("Guest"):
+                    await Shell.Current.GoToAsync(nameof(TablePickerScreen));
+                    break;
+                default:
+                    await DisplayAlert("Error 403", "Forbidden: You are not authorized", "Understood");
+                    break;
+            }
 
 
             // If you want to save the user inputs when they press the back button

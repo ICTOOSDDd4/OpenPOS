@@ -13,11 +13,9 @@ namespace OpenPOS_APP.Services
     {
         public static bool IsAuthorized(User user, string role)
         {
-            if (RoleService.FindUserRole(user.Id).Title != null)
-            {
-                return RoleService.FindUserRole(user.Id).Title.Equals(role);
-            }
-            return false;
+            var result = RoleService.FindUserRole(user.Id).Title.Equals(role);
+
+            return result;
         }
     }
 }

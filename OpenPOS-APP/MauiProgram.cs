@@ -30,15 +30,7 @@ public static class MauiProgram
 				fonts.AddFont("LeagueSpartan-Thin.ttf", "LeagueSpartanThin");
 			});
             Initialize();
-            if (AccessLevelService.IsAuthorized(UserService.FindByID(11), "Admin"))
-            {
-                System.Diagnostics.Debug.WriteLine("Access granted");
-            }
-            else
-            {
-                System.Diagnostics.Debug.WriteLine("Access denied");
-            }
-        
+
 
 
 #if DEBUG
