@@ -3,6 +3,8 @@ using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Models;
 using OpenPOS_APP.Settings;
 using System.Reflection;
+using OpenPOS_APP.Services;
+
 namespace OpenPOS_APP.Views.Onboarding;
 
 public partial class LoginScreen : ContentPage
@@ -45,13 +47,38 @@ public partial class LoginScreen : ContentPage
    {
       if (UserAuth(_username, _password))
       {
-         await Shell.Current.GoToAsync(nameof(TablePickerScreen));
+            var role = RoleService.FindUserRole(UserService.Authenticate(_username, _password).Id).Title;
+            switch (role)
+            {
+                case ("Owner"):
+                    await Shell.Current.GoToAsync(nameof(OwnerOverview));
+                    break;
+                case ("Admin"):
+                    await Shell.Current.GoToAsync(nameof(AdminOverview));
+                    break;
+                case ("Crew"):
+                    await Shell.Current.GoToAsync(nameof(CrewOverview));
+                    break;
+                case ("Kitchen"):
+                    await Shell.Current.GoToAsync(nameof(KitchenOverview));
+                    break;
+                case ("Bar"):
+                    await Shell.Current.GoToAsync(nameof(BarOverview));
+                    break;
+                case ("Guest"):
+                    await Shell.Current.GoToAsync(nameof(TablePickerScreen));
+                    break;
+                default:
+                    await DisplayAlert("Error 403", "Forbidden: You are not authorized", "Understood");
+                    break;
+            }
 
-         // If you want to save the user inputs when they press the back button
-         // Remove this block of code.
-         _password = string.Empty; _username = string.Empty;
-         EmailEntry.Text = string.Empty;
-         PasswordEntry.Text = string.Empty;
+
+            // If you want to save the user inputs when they press the back button
+            // Remove this block of code.
+            _password = string.Empty; _username = string.Empty;
+          EmailEntry.Text = string.Empty;
+          PasswordEntry.Text = string.Empty;
 
       }
       else { await DisplayAlert("Invalid credentials", "This username and/or password are not correct.", "Try again"); }
