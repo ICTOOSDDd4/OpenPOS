@@ -14,6 +14,7 @@ namespace OpenPOS_APP.Factory.Database
             { RolesEnum.Crew, "Crew" },
             { RolesEnum.Guest, "Guest" }
         };
+
         private static List<Role> _dbRoles;
 
         public static void Seed()
