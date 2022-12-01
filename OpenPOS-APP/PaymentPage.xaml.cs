@@ -16,18 +16,29 @@ public partial class PaymentPage : ContentPage
 	{
 		InitializeComponent();
 		
-		QRCode.Source = UtilityService.GenerateQrCodeFromUrl("https://www.google.com"); //TODO: PLACE TIKKIE URL HERE
+		QRCode.Source = UtilityService.GenerateQrCodeFromUrl(CurrentTransaction.Url);
 	}
 
 	public static void SetTransaction(Transaction transaction, int numberOfRequiredPayments)
 	{
 		CurrentTransaction = transaction;
 		RequiredPayments = numberOfRequiredPayments;
+		
 	}
 
 	private async void OnPaymentStatusCheck_Clicked(object sender, EventArgs e)
 	{ 
+		PaymentStatus.Text = "Checking payment status...";
 		bool status = IsPaymentComplete();
+
+		if (status)
+		{
+			PaymentStatus.Text = $"Payment complete! {CurrentlyPaid} / {RequiredPayments} payments received.";
+		}
+		else
+		{
+			PaymentStatus.Text = $"Payment incomplete! {CurrentlyPaid} out of {RequiredPayments}";
+		}
 	}
 	
 	private bool IsPaymentComplete()
