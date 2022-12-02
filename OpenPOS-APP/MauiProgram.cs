@@ -7,6 +7,7 @@ using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Models;
 using CommunityToolkit.Maui;
 using System.Diagnostics;
+using OpenPOS_APP.WinUI;
 
 namespace OpenPOS_APP;
 
@@ -31,12 +32,10 @@ public static class MauiProgram
 				fonts.AddFont("LeagueSpartan-Thin.ttf", "LeagueSpartanThin");
 			});
             Initialize();
-
 #if DEBUG
       builder.Logging.AddDebug();
 #endif
-
-		return builder.Build();
+      return builder.Build();
 	}
 	private static void Initialize()
 	{

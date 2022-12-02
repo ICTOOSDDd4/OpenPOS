@@ -51,10 +51,14 @@ public partial class CheckoutOverview : ContentPage
             {
                int splitamount = TotalPrice / count;
                Transaction transaction = TikkiePayementService.CreatePaymentRequest(splitamount, ApplicationSettings.CurrentBill.Id, $"OpenPOS Tikkie Payment: {ApplicationSettings.CurrentBill.Id}");
-               PaymentPage.SetTransaction(transaction, count);
-               loop = false;
-               await Shell.Current.GoToAsync(nameof(PaymentPage));
-               continue;
+               if (transaction.Url != null)
+               {
+                  PaymentPage.SetTransaction(transaction, count);
+                  loop = false;
+                  await Shell.Current.GoToAsync(nameof(PaymentPage));
+                  continue;
+               }
+               else throw new Exception($"Payment Error: {splitamount} isn't compatible with the API.");
             }
             await DisplayAlert("Oops", "You can't split a bill with a negative amount of people!", "Try Again");
             continue;
@@ -78,7 +82,7 @@ public partial class CheckoutOverview : ContentPage
 
    private async void OnClickedAddaTip(object sender, EventArgs args)
    {
-      TipPopUp popUp = new TipPopUp();
+      TipPopUp popUp = new TipPopUp(TotalPrice);
       this.ShowPopup(popUp);
 
    }

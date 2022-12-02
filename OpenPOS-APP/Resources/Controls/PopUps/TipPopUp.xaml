@@ -3,12 +3,24 @@
            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
            xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
            x:Class="OpenPOS_APP.Resources.Controls.PopUps.TipPopUp"
-           CanBeDismissedByTappingOutsideOfPopup="False">
-    <VerticalStackLayout BackgroundColor="White">
+           CanBeDismissedByTappingOutsideOfPopup="False"
+           Size="300,300">
+    <VerticalStackLayout WidthRequest="300" HeightRequest="300" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="White" Padding="10" Spacing="10" Margin="10">
         <Label 
-            Text="Welcome to .NET MAUI!"
+            Text="Leave a Tip!"
+            FontSize="20"
+            FontFamily="LeagueSpartan-Bold"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
-        <Button Text="Close" Clicked="Button_Clicked" />
+        <Label
+            x:Name="MoneyLabel"
+            Text="PLACEHOLDER"
+            Margin="20"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            />
+        <Slider Maximum="100" ValueChanged="Slider_ValueChanged" WidthRequest="200"/>
+        <Button WidthRequest="200" Text="Custom Tip" Clicked="CustomTip_Button_Clicked" VerticalOptions="End" />
+        <Button WidthRequest="200" Text="Close" Clicked="Closing_Button_Clicked" VerticalOptions="End" />
     </VerticalStackLayout>
 </mct:Popup>
