@@ -12,6 +12,7 @@ namespace OpenPOS_APP.Enums
         Admin,
         Crew,
         Cook,
+        Bar,
         Guest
     }
 }

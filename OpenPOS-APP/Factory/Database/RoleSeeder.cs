@@ -12,6 +12,7 @@ namespace OpenPOS_APP.Factory.Database
             { RolesEnum.Admin, "Admin" },
             { RolesEnum.Cook, "Cook" },
             { RolesEnum.Crew, "Crew" },
+            { RolesEnum.Bar, "Bar" },
             { RolesEnum.Guest, "Guest" }
         };
 
