@@ -13,6 +13,8 @@ public partial class CheckoutOverview : ContentPage
 
     public double TotalPrice;
 
+    private double _tip = 0;
+
     public static Dictionary<Product,int> GetCheckoutItems()
     {
         return ApplicationSettings.CheckoutList;
@@ -35,10 +37,13 @@ public partial class CheckoutOverview : ContentPage
         {
             TotalPrice += (products.ElementAt(i).Key.Price * products.ElementAt(i).Value);
         }
-        TotalPriceLabel.Text = "€" + TotalPrice.ToString(CultureInfo.InvariantCulture);
-    }
+        string value = String.Format(((Math.Round(TotalPrice) == TotalPrice) ? "{0:0}" : "{0:0.00}"), TotalPrice);
 
-	public async void OnClickedSplitPay(object sender, EventArgs args)
+        TotalPriceLabel.Text = $"€{value}";
+
+   }
+
+   public async void OnClickedSplitPay(object sender, EventArgs args)
     {
       bool loop = true;
 
@@ -49,7 +54,9 @@ public partial class CheckoutOverview : ContentPage
          {
             if (!int.IsNegative(count))
             {
-               int totalInCents = (int)(TotalPrice * 100);
+               int totalInCents = (int)Math.Round(TotalPrice * 100);
+               int tipInCents = (int)Math.Round(_tip * 100);
+               int total = totalInCents + tipInCents;
                int splitamount = totalInCents / count;
                Transaction transaction = TikkiePayementService.CreatePaymentRequest(splitamount, ApplicationSettings.CurrentBill.Id, $"OpenPOS Tikkie Payment: {ApplicationSettings.CurrentBill.Id}");
                if (transaction.Url != null)
@@ -77,16 +84,31 @@ public partial class CheckoutOverview : ContentPage
    private async void OnClickedPay(object sender, EventArgs args)
    {
       int totalInCents = (int)Math.Round(TotalPrice * 100);
-      Transaction transaction = TikkiePayementService.CreatePaymentRequest(totalInCents, ApplicationSettings.CurrentBill.Id, $"OpenPOS Tikkie Payment: {ApplicationSettings.CurrentBill.Id}");
+      int tipInCents = (int)Math.Round(_tip * 100);
+      int total = totalInCents + tipInCents;
+      Transaction transaction = TikkiePayementService.CreatePaymentRequest(total, ApplicationSettings.CurrentBill.Id, $"OpenPOS Tikkie Payment: {ApplicationSettings.CurrentBill.Id}");
       PaymentPage.SetTransaction(transaction, 1);
       await Shell.Current.GoToAsync(nameof(PaymentPage));
    }
 
    private void OnClickedAddaTip(object sender, EventArgs args)
    {
-      TipPopUp popUp = new TipPopUp(TotalPrice);
+      TipPopUp popUp = new TipPopUp(TotalPrice, this);
       this.ShowPopup(popUp);
 
+   }
+
+   public void OnTipAdded(object sender, EventArgs args)
+   {
+      if (sender is TipPopUp)
+      {
+         TipPopUp pop = (TipPopUp)sender;
+         _tip = pop.tip;
+      } else if (sender is InputCustomTipPopUp)
+      {
+         InputCustomTipPopUp pop = (InputCustomTipPopUp)sender;
+         _tip = pop.tip;
+      }
    }
 
    protected override void OnNavigatedTo(NavigatedToEventArgs args)
