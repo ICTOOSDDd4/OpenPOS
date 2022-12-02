@@ -1,11 +1,7 @@
-﻿using System.Net;
-using Microsoft.UI.Windowing;
-using OpenPOS_APP.Models;
+﻿using OpenPOS_APP.Models;
 using OpenPOS_APP.Services;
 using OpenPOS_APP.Services.Models;
 using OpenPOS_APP.Settings;
-using OpenPOS_APP.WinUI;
-using Windows.UI.WindowManagement;
 
 namespace OpenPOS_APP;
 

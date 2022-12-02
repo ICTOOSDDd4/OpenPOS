@@ -2,28 +2,20 @@
 <mct:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
            xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
-           x:Class="OpenPOS_APP.Resources.Controls.PopUps.TipPopUp"
+           x:Class="OpenPOS_APP.Resources.Controls.PopUps.InputCustomTipPopUp"
            CanBeDismissedByTappingOutsideOfPopup="False"
            Size="300,300">
     <VerticalStackLayout>
         <VerticalStackLayout WidthRequest="300" HeightRequest="300" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="White" Padding="10" Spacing="10" Margin="10">
             <Label 
-            Text="Leave a Tip!"
+            Text="Add a custom tip"
             FontSize="20"
             FontFamily="LeagueSpartan-Bold"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
-            <Label
-            x:Name="MoneyLabel"
-            Text="PLACEHOLDER"
-            Margin="20"
-            HorizontalOptions="Center"
-            VerticalOptions="Center"
-            />
-            <Slider Maximum="100" ValueChanged="Slider_ValueChanged" WidthRequest="200"/>
-            <Button WidthRequest="200" Text="Custom Tip" Clicked="CustomTip_Button_Clicked" VerticalOptions="End" />
-            <Button WidthRequest="200" Text="Close" Clicked="Closing_Button_Clicked" VerticalOptions="End" />
+            <Entry Placeholder="Enter the amount you want to tip"/>
+            <Button WidthRequest="200" Text="Add" Clicked="Closing_Button_Clicked" VerticalOptions="End" />
         </VerticalStackLayout>
     </VerticalStackLayout>
-    
+
 </mct:Popup>

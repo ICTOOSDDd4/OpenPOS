@@ -11,7 +11,7 @@ public partial class CheckoutOverview : ContentPage
 {
     public Dictionary<Product, int> CheckoutItems { get; set; }
 
-    public int TotalPrice;
+    public double TotalPrice;
 
     public static Dictionary<Product,int> GetCheckoutItems()
     {
@@ -33,7 +33,7 @@ public partial class CheckoutOverview : ContentPage
         CheckoutListView.ItemsSource = CheckoutItems.Keys;
         for (int i = 0; i < products.Count; i++)
         {
-            TotalPrice += (int)(products.ElementAt(i).Key.Price * products.ElementAt(i).Value);
+            TotalPrice += (products.ElementAt(i).Key.Price * products.ElementAt(i).Value);
         }
         TotalPriceLabel.Text = "€" + TotalPrice.ToString(CultureInfo.InvariantCulture);
     }
@@ -49,7 +49,8 @@ public partial class CheckoutOverview : ContentPage
          {
             if (!int.IsNegative(count))
             {
-               int splitamount = TotalPrice / count;
+               int totalInCents = (int)(TotalPrice * 100);
+               int splitamount = totalInCents / count;
                Transaction transaction = TikkiePayementService.CreatePaymentRequest(splitamount, ApplicationSettings.CurrentBill.Id, $"OpenPOS Tikkie Payment: {ApplicationSettings.CurrentBill.Id}");
                if (transaction.Url != null)
                {
@@ -75,12 +76,13 @@ public partial class CheckoutOverview : ContentPage
 
    private async void OnClickedPay(object sender, EventArgs args)
    {
-      Transaction transaction = TikkiePayementService.CreatePaymentRequest(TotalPrice, ApplicationSettings.CurrentBill.Id, $"OpenPOS Tikkie Payment: {ApplicationSettings.CurrentBill.Id}");
+      int totalInCents = (int)Math.Round(TotalPrice * 100);
+      Transaction transaction = TikkiePayementService.CreatePaymentRequest(totalInCents, ApplicationSettings.CurrentBill.Id, $"OpenPOS Tikkie Payment: {ApplicationSettings.CurrentBill.Id}");
       PaymentPage.SetTransaction(transaction, 1);
       await Shell.Current.GoToAsync(nameof(PaymentPage));
    }
 
-   private async void OnClickedAddaTip(object sender, EventArgs args)
+   private void OnClickedAddaTip(object sender, EventArgs args)
    {
       TipPopUp popUp = new TipPopUp(TotalPrice);
       this.ShowPopup(popUp);
