@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Maui.Views;
+using Microsoft.Maui;
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Resources.Controls.PopUps;
 using OpenPOS_APP.Services.Models;
@@ -24,7 +25,6 @@ public partial class CheckoutOverview : ContentPage
     public CheckoutOverview()
 	{
         InitializeComponent();
-
 		   AddToCheckOut(ApplicationSettings.CheckoutList);
 
 	}
@@ -105,23 +105,37 @@ public partial class CheckoutOverview : ContentPage
       {
          TipPopUp pop = (TipPopUp)sender;
          _tip = pop.tip;
+         AddTipOnButton();
+
       } else if (sender is InputCustomTipPopUp)
       {
          InputCustomTipPopUp pop = (InputCustomTipPopUp)sender;
          _tip = pop.tip;
+         AddTipOnButton();
       }
    }
 
    public async void OnEditTip(object sender, EventArgs args)
    {
-      var result = await DisplayAlert("Editing Tip", "Are you sure you want to edit the tip you added?", "Yes", "No");
-      if (result == true)
+      string[] options = { "Change tip", "Remove Tip" };
+      var result = await DisplayActionSheet("Test 1", "Return to checkout", "Destruct", options);
+      if (result == "Change tip")
       {
-         Debug.WriteLine("Edit2");
-      } else if (result == false)
+         OnClickedAddaTip(this, args);
+         Debug.WriteLine("Change");
+      } else if (result == "Remove Tip")
       {
-         Debug.WriteLine("Edit1");
+         _tip = 0;
+         TipButton.Text = "Add a tip";
+         Debug.WriteLine("Remove");
       }
+   }
+
+   private void AddTipOnButton()
+   {
+      string value = String.Format(((Math.Round(_tip) == _tip) ? "{0:0}" : "{0:0.00}"), _tip);
+
+      TipButton.Text = $"Tip: €{value}";
    }
 
    protected override void OnNavigatedTo(NavigatedToEventArgs args)
