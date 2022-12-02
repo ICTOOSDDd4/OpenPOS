@@ -3,6 +3,7 @@ using OpenPOS_APP.Models;
 using OpenPOS_APP.Resources.Controls.PopUps;
 using OpenPOS_APP.Services.Models;
 using OpenPOS_APP.Settings;
+using System.Diagnostics;
 using System.Globalization;
 
 namespace OpenPOS_APP;
@@ -108,6 +109,18 @@ public partial class CheckoutOverview : ContentPage
       {
          InputCustomTipPopUp pop = (InputCustomTipPopUp)sender;
          _tip = pop.tip;
+      }
+   }
+
+   public async void OnEditTip(object sender, EventArgs args)
+   {
+      var result = await DisplayAlert("Editing Tip", "Are you sure you want to edit the tip you added?", "Yes", "No");
+      if (result == true)
+      {
+         Debug.WriteLine("Edit2");
+      } else if (result == false)
+      {
+         Debug.WriteLine("Edit1");
       }
    }
 
