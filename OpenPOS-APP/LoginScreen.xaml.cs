@@ -60,7 +60,7 @@ public partial class LoginScreen : ContentPage
                     await Shell.Current.GoToAsync(nameof(CrewOverview));
                     break;
                 case ("Kitchen"):
-                    await Shell.Current.GoToAsync(nameof(KitchenOverview));
+                    await Shell.Current.GoToAsync(nameof(OrderOverviewPage));
                     break;
                 case ("Bar"):
                     await Shell.Current.GoToAsync(nameof(BarOverview));
