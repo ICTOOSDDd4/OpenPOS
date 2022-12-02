@@ -139,9 +139,13 @@ public partial class CheckoutOverview : ContentPage
 
    private void AddTipOnButton()
    {
-      string value = String.Format(((Math.Round(_tip) == _tip) ? "{0:0}" : "{0:0.00}"), _tip);
+      string tipValue = String.Format(((Math.Round(_tip) == _tip) ? "{0:0}" : "{0:0.00}"), _tip);
 
-      TipButton.Text = $"Tip: €{value}";
+      TipButton.Text = $"Tip: €{tipValue}";
+
+      string totalValue = String.Format(((Math.Round(TotalPrice + _tip) == TotalPrice + _tip) ? "{0:0}" : "{0:0.00}"), TotalPrice + _tip);
+
+      TotalPriceLabel.Text = $"€{totalValue}";
    }
 
    protected override void OnNavigatedTo(NavigatedToEventArgs args)
