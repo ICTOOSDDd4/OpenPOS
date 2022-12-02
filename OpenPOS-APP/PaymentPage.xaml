@@ -10,5 +10,10 @@
     <VerticalStackLayout>
         <Image x:Name="QRCode">
         </Image>
+        
+        <Button Clicked="OnPaymentStatusCheck_Clicked" Text="Check payment status" WidthRequest="300" />
+        
+        <Label x:Name="PaymentStatus" 
+               Text="Payment status"/>
     </VerticalStackLayout>
 </ContentPage>

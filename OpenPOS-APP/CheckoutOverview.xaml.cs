@@ -65,8 +65,6 @@ public partial class CheckoutOverview : ContentPage
          await DisplayAlert("Oops", "You can only input a number.", "Try Again");
          continue;
       }
-          
-
    }
 
    private async void OnClickedPay(object sender, EventArgs args)
