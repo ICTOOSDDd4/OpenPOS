@@ -15,11 +15,12 @@ public partial class PaymentPage : ContentPage
 
 
    public PaymentPage()
-	{
-		InitializeComponent();     
+   {
+      InitializeComponent();
 
       QRCode.Source = UtilityService.GenerateQrCodeFromUrl(CurrentTransaction.Url);
-      Application.Current.
+
+   }
 
    public static void SetTransaction(Transaction transaction, int numberOfRequiredPayments)
    {
