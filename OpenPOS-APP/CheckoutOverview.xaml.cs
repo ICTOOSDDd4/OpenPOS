@@ -40,15 +40,7 @@ public partial class CheckoutOverview : ContentPage
     {
         await DisplayAlert("Work In Progress", "This feature is still under development.", "Understood");
     }
-	
-   private async void OnClickedPay(object sender, EventArgs args)
-   {
-       //TODO: REMOVE FOR TESTING
-       var tikkie = TikkiePayementService.CreatePaymentRequest(2730, 4357098, "Payment Request");
-       PaymentPage.SetTransaction(tikkie,2);
-       await Shell.Current.GoToAsync(nameof(PaymentPage));
-       // await DisplayAlert("Work In Progress", "This feature is still under development.", "Understood");
-   }
+    
 
    private async void OnClickedSplitProducts(object sender, EventArgs args)
    {
