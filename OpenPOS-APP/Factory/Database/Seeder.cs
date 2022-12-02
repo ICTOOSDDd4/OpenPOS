@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OpenPOS_APP.Factory.Database
 {
-    internal class Seeder
+    public class Seeder
     {
         public static void Initialize()
         {
