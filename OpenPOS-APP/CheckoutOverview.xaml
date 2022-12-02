@@ -8,7 +8,7 @@
              Title="CheckoutOverview"
              Shell.NavBarIsVisible="False">
     <VerticalStackLayout>
-        <customControls:Header/>
+        <customControls:Header x:Name="Header"/>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition/>

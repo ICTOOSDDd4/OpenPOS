@@ -14,18 +14,25 @@ public partial class InputCustomTipPopUp : Popup
     private void Add_Button_Clicked(object sender, EventArgs e)
     {
       string entryString = TipAmount.Text;
-      if (double.TryParse(entryString.ToString().Trim(), out double value))
+      if (!entryString.Contains('.'))
       {
-         if (!double.IsNegative(value))
+         if (double.TryParse(entryString.ToString().Trim(), out double value))
          {
-            if (value != 0)
+            if (!double.IsNegative(value))
             {
-               tip = value;
-               TipAdded.Invoke(this, e);   
-               Close();
-            } else { Change_Error_Label(true, "You can't enter zero."); }
-         } else { Change_Error_Label(true, "You can't enter a negative number.");  }
-      } else { Change_Error_Label(true, "You need to give a valid number"); }
+               if (value != 0)
+               {
+                  tip = value;
+                  TipAdded.Invoke(this, e);
+                  Close();
+               }
+               else { Change_Error_Label(true, "You can't enter zero."); }
+            }
+            else { Change_Error_Label(true, "You can't enter a negative number."); }
+         }
+         else { Change_Error_Label(true, "You need to give a valid number"); }
+      } else { Change_Error_Label(true, "You need to use a comma instead of a dot."); }
+      
    }
 
    private void Closing_Button_Clicked(object sender, EventArgs e)

@@ -6,6 +6,7 @@ using OpenPOS_APP.Services.Models;
 using OpenPOS_APP.Settings;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
 
 namespace OpenPOS_APP;
 
@@ -23,11 +24,10 @@ public partial class CheckoutOverview : ContentPage
     }
 
     public CheckoutOverview()
-	{
+	 {
         InitializeComponent();
-		   AddToCheckOut(ApplicationSettings.CheckoutList);
-
-	}
+		  AddToCheckOut(ApplicationSettings.CheckoutList);
+    }
 
 
     public void AddToCheckOut(Dictionary<Product, int> products)
@@ -38,7 +38,7 @@ public partial class CheckoutOverview : ContentPage
         {
             TotalPrice += (products.ElementAt(i).Key.Price * products.ElementAt(i).Value);
         }
-        string value = String.Format(((Math.Round(TotalPrice) == TotalPrice) ? "{0:0}" : "{0:0.00}"), TotalPrice);
+        string value = String.Format(((Math.Round(TotalPrice + _tip) == TotalPrice + _tip) ? "{0:0}" : "{0:0.00}"), TotalPrice + _tip);
 
         TotalPriceLabel.Text = $"€{value}";
 

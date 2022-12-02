@@ -40,12 +40,14 @@
                 />
                 <ImageButton
                 Source="cart.png"
+                x:Name="CartButton"
                 Padding="10"
                 Clicked="OnClickedCard"
                 BackgroundColor="#e1e1e1"
                 />
                 <ImageButton
                 Source="account.png"
+                x:Name="AccountButton"
                 Padding="10"
                 BackgroundColor="#e1e1e1"
                 />
