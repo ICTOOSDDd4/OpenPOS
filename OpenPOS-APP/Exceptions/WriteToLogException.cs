@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace OpenPOS_APP.Exceptions
 {
-    public static class WriteToLog
+    public class WriteToLogException : Exception
     {
-        public static void WriteLog(string message)
+        public WriteToLogException(object sender, WriteToLogEventArgs e)
         {
             var path = AppDomain.CurrentDomain.BaseDirectory + "Logs";
             Directory.CreateDirectory(path);
             
             File.AppendAllText(path + "/log.txt",
-                   DateTime.Now.ToString() + $" {message}" + Environment.NewLine);
+                   DateTime.Now.ToString() + $" {e.message}" + Environment.NewLine);
         }
 
     }
