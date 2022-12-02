@@ -13,7 +13,7 @@
             FontFamily="LeagueSpartan-Bold"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
-        <Entry Placeholder="Enter the amount you want to tip" WidthRequest="125"/>
+        <Entry Placeholder="Enter Tip" WidthRequest="125" x:Name="TipAmount"/>
         <Label
             x:Name="ErrorDisplayLabel"
             IsVisible="false"
@@ -23,7 +23,7 @@
             HorizontalOptions="Center"
             />
         <Button x:Name="Add_Button" WidthRequest="125" Text="Add Tip" Clicked="Add_Button_Clicked" VerticalOptions="End" />
-        <Button WidthRequest="125" Text="Close" Clicked="Closing_Button_Clicked" VerticalOptions="End" />
+        <Button WidthRequest="125" Text="Return" Clicked="Closing_Button_Clicked" VerticalOptions="End" />
     </VerticalStackLayout>
 
 </mct:Popup>

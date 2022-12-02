@@ -105,12 +105,16 @@ public partial class CheckoutOverview : ContentPage
       {
          TipPopUp pop = (TipPopUp)sender;
          _tip = pop.tip;
+         TipButton.Clicked -= OnClickedAddaTip;
+         TipButton.Clicked += OnEditTip;
          AddTipOnButton();
 
       } else if (sender is InputCustomTipPopUp)
       {
          InputCustomTipPopUp pop = (InputCustomTipPopUp)sender;
          _tip = pop.tip;
+         TipButton.Clicked -= OnClickedAddaTip;
+         TipButton.Clicked += OnEditTip;
          AddTipOnButton();
       }
    }
@@ -118,7 +122,7 @@ public partial class CheckoutOverview : ContentPage
    public async void OnEditTip(object sender, EventArgs args)
    {
       string[] options = { "Change tip", "Remove Tip" };
-      var result = await DisplayActionSheet("Test 1", "Return to checkout", "Destruct", options);
+      var result = await DisplayActionSheet("Edit your tip", null , "Cancel", options);
       if (result == "Change tip")
       {
          OnClickedAddaTip(this, args);
@@ -127,6 +131,8 @@ public partial class CheckoutOverview : ContentPage
       {
          _tip = 0;
          TipButton.Text = "Add a tip";
+         TipButton.Clicked -= OnEditTip;
+         TipButton.Clicked += OnClickedAddaTip;
          Debug.WriteLine("Remove");
       }
    }

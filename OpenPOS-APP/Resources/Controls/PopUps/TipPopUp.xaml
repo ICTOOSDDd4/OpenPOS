@@ -21,6 +21,14 @@
             VerticalOptions="Center"
             />
         <Slider Maximum="100" ValueChanged="Slider_ValueChanged" WidthRequest="200"/>
+        <Label
+            x:Name="ErrorDisplayLabel"
+            IsVisible="false"
+            TextColor="Red"
+            Text="Placeholder"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            />
         <Button WidthRequest="200" Text="Custom Tip" Clicked="CustomTip_Button_Clicked" VerticalOptions="End" />
         <Button x:Name="Add_Button" WidthRequest="200" Text="Add Tip" Clicked="Add_Button_Clicked" VerticalOptions="End" />
         <Button WidthRequest="200" Text="Close" Clicked="Closing_Button_Clicked" VerticalOptions="End" />
