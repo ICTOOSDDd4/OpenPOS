@@ -1,6 +1,7 @@
 ﻿using System.Data.SqlClient;
 using System.Diagnostics;
 using Microsoft.Maui.Controls;
+using OpenPOS_APP.Exceptions;
 using OpenPOS_APP.Settings;
 
 namespace OpenPOS_APP.Services
@@ -33,6 +34,7 @@ namespace OpenPOS_APP.Services
             {
                 Console.WriteLine(ex.Message);
                 System.Diagnostics.Debug.WriteLine(ex.Message);
+                WriteToLogHandler.WriteToLog(ex);
                 CloseConnection();
                 return false;
             }
