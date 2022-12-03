@@ -8,7 +8,7 @@
              Title="CheckoutOverview"
              Shell.NavBarIsVisible="False">
     <VerticalStackLayout>
-        <customControls:Header/>
+        <customControls:Header x:Name="Header"/>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition/>
@@ -119,11 +119,12 @@
                         HeightRequest="100"
                         FontSize="36"
                         Clicked="OnClickedSplitPay"/>
-                    <Button Text="Split Products"
+                    <Button  x:Name="TipButton"
+                        Text="Add a tip"
                         WidthRequest="300"
                         HeightRequest="100"
                         FontSize="36"
-                        Clicked="OnClickedSplitProducts"/>
+                        Clicked="OnClickedAddaTip"/>
                 </VerticalStackLayout>
 
             </HorizontalStackLayout>

@@ -1,5 +1,4 @@
-﻿using System.Net;
-using OpenPOS_APP.Models;
+﻿using OpenPOS_APP.Models;
 using OpenPOS_APP.Services;
 using OpenPOS_APP.Services.Models;
 using OpenPOS_APP.Settings;
@@ -25,7 +24,18 @@ public partial class PaymentPage : ContentPage
 		RequiredPayments = numberOfRequiredPayments;
 		
 	}
+  
+  public void RemoveQRCodeFile()
+   {
+      File.Delete($"{UtilityService.GetRootDirectory()}/qr-{ApplicationSettings.CurrentBill.Id}.png");
+   }
 
+
+   protected override void OnNavigatedTo(NavigatedToEventArgs args)
+   {
+      base.OnNavigatedTo(args);
+   }
+   
 	private async void OnPaymentStatusCheck_Clicked(object sender, EventArgs e)
 	{ 
 		PaymentStatus.Text = "Checking payment status...";
