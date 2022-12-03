@@ -16,7 +16,7 @@ public class UtilityService
                client.DownloadFile(new Uri(apiUrl), $"{ GetRootDirectory() }/qr-{ApplicationSettings.CurrentBill.Id}.png");
         }
 		
-        return ImageSource.FromFile("qr.png");
+        return ImageSource.FromFile($"qr-{ApplicationSettings.CurrentBill.Id}.png");
     }
 
    public static string GetRootDirectory()
