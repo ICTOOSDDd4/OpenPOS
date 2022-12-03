@@ -31,12 +31,10 @@ public static class MauiProgram
 				fonts.AddFont("LeagueSpartan-Thin.ttf", "LeagueSpartanThin");
 			});
             Initialize();
-
 #if DEBUG
       builder.Logging.AddDebug();
 #endif
-
-		return builder.Build();
+      return builder.Build();
 	}
 	private static void Initialize()
 	{

@@ -7,11 +7,8 @@
              x:Class="OpenPOS_APP.CheckoutOverview"
              Title="CheckoutOverview"
              Shell.NavBarIsVisible="False">
-    <Shell.BackButtonBehavior>
-        <BackButtonBehavior IsVisible="False" IsEnabled="False" />
-    </Shell.BackButtonBehavior>
     <VerticalStackLayout>
-        <customControls:Header/>
+        <customControls:Header x:Name="Header"/>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition/>
@@ -122,7 +119,8 @@
                         HeightRequest="100"
                         FontSize="36"
                         Clicked="OnClickedSplitPay"/>
-                    <Button Text="Add a tip"
+                    <Button  x:Name="TipButton"
+                        Text="Add a tip"
                         WidthRequest="300"
                         HeightRequest="100"
                         FontSize="36"
