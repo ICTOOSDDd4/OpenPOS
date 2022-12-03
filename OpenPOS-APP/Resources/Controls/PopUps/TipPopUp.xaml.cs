@@ -17,8 +17,10 @@ public partial class TipPopUp : Popup
 		InitializeComponent();
       _price = price;
       _overview = sender;
-      string value = String.Format(((Math.Round(price) == price) ? "{0:0}" : "{0:0.00}"), price);
-      MoneyLabel.Text = $"New Total: €{value}";
+      string total = String.Format(((Math.Round(price) == price) ? "{0:0}" : "{0:0.00}"), price);
+      TotalLabel.Text = $"New Total: €{total}";
+      double percentage = 0;
+      TipLabel.Text = $"Tip Percentage {percentage}%";
    }
 
    private void CustomTip_Button_Clicked(object sender, EventArgs e)
@@ -36,13 +38,14 @@ public partial class TipPopUp : Popup
 
    private void Slider_ValueChanged(object sender, ValueChangedEventArgs e)
    {
-      double t = e.NewValue / 100;
-      double factor = 1 + t;
+      double percentage = e.NewValue / 100;
+      double factor = 1 + percentage;
       double newPrice = _price * factor;
       newPrice = Math.Round(newPrice, 2);
       tip = newPrice - _price;
-      string value = String.Format(((Math.Round(newPrice) == newPrice) ? "{0:0}" : "{0:0.00}"), newPrice);
-      MoneyLabel.Text = $"New Total: €{value}";
+      string start = String.Format(((Math.Round(newPrice) == newPrice) ? "{0:0}" : "{0:0.00}"), newPrice);
+      TotalLabel.Text = $"New Total: €{start}";
+      TipLabel.Text = $"Tip Percentage {Math.Round(e.NewValue)}%";
    }
 
    private void Add_Button_Clicked(object sender, EventArgs e)

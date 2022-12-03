@@ -40,7 +40,7 @@ public partial class CheckoutOverview : ContentPage
         }
         string value = String.Format(((Math.Round(TotalPrice + _tip) == TotalPrice + _tip) ? "{0:0}" : "{0:0.00}"), TotalPrice + _tip);
 
-        TotalPriceLabel.Text = $"€{value}";
+        TotalPriceLabel.Text = $"Total: €{value}";
 
    }
 
@@ -63,7 +63,7 @@ public partial class CheckoutOverview : ContentPage
                if (transaction.Url != null)
                {
                   PaymentPage.SetTransaction(transaction, count);
-                  loop = false;
+                  loop = false; 
                   await Shell.Current.GoToAsync(nameof(PaymentPage));
                   continue;
                }
@@ -154,4 +154,9 @@ public partial class CheckoutOverview : ContentPage
 	{
 		base.OnNavigatedTo(args);
 	}
+
+   private async void CreatingPayment()
+   {
+      await DisplayAlert("Payment", "Creating Payment...", null);
+   }
 }

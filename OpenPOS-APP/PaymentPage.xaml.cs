@@ -35,23 +35,23 @@ public partial class PaymentPage : ContentPage
    {
       base.OnNavigatedTo(args);
    }
-   
-	private async void OnPaymentStatusCheck_Clicked(object sender, EventArgs e)
-	{ 
-		PaymentStatus.Text = "Checking payment status...";
-		bool status = IsPaymentComplete();
 
-		if (status)
-		{
-			PaymentStatus.Text = $"Payment complete! {CurrentlyPaid} / {RequiredPayments} payments received.";
-		}
-		else
-		{
-			PaymentStatus.Text = $"Payment incomplete! {CurrentlyPaid} out of {RequiredPayments}";
-		}
-	}
-	
-	private bool IsPaymentComplete()
+   private void OnPaymentStatusCheck_Clicked(object sender, EventArgs e)
+   {
+       PaymentStatus.Text = "Checking payment status...";
+       bool status = IsPaymentComplete();
+
+       if (status)
+       {
+           PaymentStatus.Text = $"Payment complete! {CurrentlyPaid} / {RequiredPayments} payments received.";
+       }
+       else
+       {
+           PaymentStatus.Text = $"Payment incomplete! {CurrentlyPaid} out of {RequiredPayments}";
+       }
+   }
+
+   private bool IsPaymentComplete()
 	{
 		var transactionInformation = TikkiePayementService.GetTransactionInformation(CurrentTransaction.PaymentRequestToken);
 		

@@ -14,9 +14,16 @@
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
         <Label
-            x:Name="MoneyLabel"
+            x:Name="TotalLabel"
             Text="PLACEHOLDER"
-            Margin="20"
+            Margin="20,20,20,5"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            />
+        <Label
+            x:Name="TipLabel"
+            Text="PLACEHOLDER"
+            Margin="20,5,20,10"
             HorizontalOptions="Center"
             VerticalOptions="Center"
             />
