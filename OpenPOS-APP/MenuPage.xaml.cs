@@ -2,6 +2,9 @@ using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Models;
 using OpenPOS_APP.Settings;
 using System.Diagnostics;
+using Microsoft.AspNetCore.SignalR.Client;
+using OpenPOS_APP.NewFolder;
+using OpenPOS_APP.Services;
 
 namespace OpenPOS_APP;
 
@@ -14,7 +17,7 @@ public partial class MenuPage : ContentPage
 	private bool _isInitialized;
 	private double _width;
 
-	public MenuPage()
+    public MenuPage()
 	{
       Products = ProductService.GetAll();
       InitializeComponent();
@@ -76,7 +79,24 @@ public partial class MenuPage : ContentPage
 			"Understood");
 	}
 
-	private async void OrderButton_OnClicked(object sender, EventArgs e)
+	// Temporary function to test Eventlisteners
+    private async void ConnectButton_OnClicked(object sender, EventArgs e)
+    {
+        EventHubService eventHubService = new EventHubService();
+        eventHubService.newOrder += newOrder;
+        if (!eventHubService._isConnected)
+        {
+            eventHubService.ConnectToServer();
+        }
+        
+    }
+
+    // Temporary function to test Eventlisteners
+    private void newOrder(object sender, OrderEventArgs orderEvent)
+    {
+		System.Diagnostics.Debug.WriteLine("NewEvent");
+    }
+    private async void OrderButton_OnClicked(object sender, EventArgs e)
 	{
 		if (SelectedProducts.Count == 0)
 		{
