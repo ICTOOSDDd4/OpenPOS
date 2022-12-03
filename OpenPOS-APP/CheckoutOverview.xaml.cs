@@ -133,6 +133,8 @@ public partial class CheckoutOverview : ContentPage
          TipButton.Text = "Add a tip";
          TipButton.Clicked -= OnEditTip;
          TipButton.Clicked += OnClickedAddaTip;
+         string totalValue = String.Format(((Math.Round(TotalPrice + _tip) == TotalPrice + _tip) ? "{0:0}" : "{0:0.00}"), TotalPrice + _tip);
+         TotalPriceLabel.Text = $"€{totalValue}";
          Debug.WriteLine("Remove");
       }
    }
