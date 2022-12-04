@@ -20,7 +20,7 @@ namespace OpenPOS_APP.Settings
             set
             {
                 ArgumentNullException.ThrowIfNullOrEmpty(nameof(value));
-                _base_url = value;
+                _secret = value;
             }
         }
         public string base_url

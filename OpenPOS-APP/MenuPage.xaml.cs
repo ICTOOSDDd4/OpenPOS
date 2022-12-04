@@ -86,12 +86,12 @@ public partial class MenuPage : ContentPage
         {
 			_eventHubService = new EventHubService();
         }
+
         if (!_eventHubService._isConnected)
         {
             _eventHubService.newOrder += newOrder;
             _eventHubService.ConnectToServer();
         }
-        
     }
 
     // Temporary function to test Eventlisteners

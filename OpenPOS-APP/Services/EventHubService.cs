@@ -24,6 +24,7 @@ namespace OpenPOS_APP.Services
 
         public async Task ConnectToServer()
         {
+            System.Diagnostics.Debug.WriteLine(_secret);
             _connection = new HubConnectionBuilder()
                 .WithUrl(_url + "/event_hub", (conn) =>
                 {
