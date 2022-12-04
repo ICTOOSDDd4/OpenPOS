@@ -49,9 +49,10 @@ public static class MauiProgram
 			ApplicationSettings.DbSett = config.GetRequiredSection("DATABASE_CONNECTION").Get<DatabaseSettings>();
 			ApplicationSettings.TikkieSet = config.GetRequiredSection("TIKKIE_API").Get<TikkieSettings>();
 			ApplicationSettings.QRCodeGeneratorSet = config.GetRequiredSection("QR_CODE_GENERATOR").Get<QRCodeGeneratorSettings>();
-			
-			// Creating API link
-			if (ApplicationSettings.TikkieSet != null)
+         ApplicationSettings.ApiSet = config.GetRequiredSection("OPENPOS_API").Get<ApiSettings>();
+
+         // Creating API link
+         if (ApplicationSettings.TikkieSet != null)
 			{
 				if (ApplicationSettings.TikkieSet.BaseUrl != null)
 				{

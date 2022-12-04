@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR.Client;
-using OpenPOS_APP.EventArgs;
+using OpenPOS_APP.EventArgsClasses;
 using OpenPOS_APP.Models;
-using OpenPOS_APP.NewFolder;
 using OpenPOS_APP.Settings;
 
 namespace OpenPOS_APP.Services
@@ -27,7 +26,7 @@ namespace OpenPOS_APP.Services
       {
          System.Diagnostics.Debug.WriteLine(_secret);
          _connection = new HubConnectionBuilder()
-             .WithUrl(_url + "/event_hub", (conn) =>
+             .WithUrl(_url + "/order_event", (conn) =>
              {
                 conn.Headers.Add("secret", _secret);
              })
@@ -55,6 +54,39 @@ namespace OpenPOS_APP.Services
 
          _connection.On<Tikkie>("PaymentConformation", async (Tikkie t) => { OnNewPayment(t); });
         }
+
+
+      public async Task ConnectToServerPayment()
+      {
+         System.Diagnostics.Debug.WriteLine(_secret);
+         _connection = new HubConnectionBuilder()
+             .WithUrl(_url + "/tikkie_event", (conn) =>
+             {
+                conn.Headers.Add("secret", _secret);
+             })
+             .Build();
+         try
+         {
+            await _connection.StartAsync();
+            _isConnected = true;
+            _connectionStatus = "Connected";
+         }
+         catch (Exception ex)
+         {
+            System.Diagnostics.Debug.WriteLine(ex);
+         }
+
+         _connection.Closed += async (s) =>
+         {
+            _isConnected = false;
+            _connectionStatus = "Disconnected";
+            await _connection.StartAsync();
+            _isConnected = true;
+         };
+
+         _connection.On<Tikkie>("PaymentConformation", async (Tikkie t) => { OnNewPayment(t); });
+      }
+   
 
       protected void OnNewOrder(Order order)
       {

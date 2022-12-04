@@ -1,8 +1,9 @@
-﻿using OpenPOS_APP.EventArgs;
+﻿using OpenPOS_APP.EventArgsClasses;
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Services;
 using OpenPOS_APP.Services.Models;
 using OpenPOS_APP.Settings;
+using System;
 using System.Diagnostics;
 
 namespace OpenPOS_APP;
@@ -11,28 +12,40 @@ public partial class PaymentPage : ContentPage
 {
 	public static Transaction CurrentTransaction { get; set; }
 	public static int RequiredPayments { get; set; }
-	private EventHubService _eventHubService = new EventHubService();
+	private static EventHubService _eventHubService = new EventHubService();
 	private int CurrentlyPaid { get; set; }
 	public PaymentPage()
 	{
 		InitializeComponent();
-		_eventHubService.ConnectToServer();
-		_eventHubService.newPayent += OnPaymentPayed;
-		QRCode.Source = UtilityService.GenerateQrCodeFromUrl(CurrentTransaction.Url);
+      _eventHubService.newPayent += OnPaymentPayed;
+      QRCode.Source = UtilityService.GenerateQrCodeFromUrl(CurrentTransaction.Url);
 	}
 
 	public void OnPaymentPayed(object sender, PaymentEventArgs e)
 	{
-		Debug.WriteLine("Payed");
-		CurrentlyPaid++;
+      CurrentlyPaid++;
+      Debug.WriteLine("Payed");
+      if (CurrentlyPaid == RequiredPayments)
+		{
+         PaymentStatus.Text = $"Payment complete! {CurrentlyPaid} / {RequiredPayments} payments received.";
+      } else
+		{
+         PaymentStatus.Text = $"Almost there! {CurrentlyPaid} out of {RequiredPayments}";
+      }
 	}
 
-	public static void SetTransaction(Transaction transaction, int numberOfRequiredPayments)
+	public static async Task SetTransaction(Transaction transaction, int numberOfRequiredPayments)
 	{
 		CurrentTransaction = transaction;
 		RequiredPayments = numberOfRequiredPayments;
-		
+		await ApiConnentAsync();
 	}
+
+	private static async Task ApiConnentAsync()
+	{
+      await _eventHubService.ConnectToServerPayment();
+   }
+
   
   public void RemoveQRCodeFile()
    {
@@ -47,25 +60,10 @@ public partial class PaymentPage : ContentPage
 
    private void OnPaymentStatusCheck_Clicked(object sender, EventArgs e)
    {
-       PaymentStatus.Text = "Checking payment status...";
-       bool status = IsPaymentComplete();
+       //PaymentStatus.Text = "Checking payment status...";
+       //bool status = IsPaymentComplete();
 
-       if (status)
-       {
-           PaymentStatus.Text = $"Payment complete! {CurrentlyPaid} / {RequiredPayments} payments received.";
-       }
-       else
-       {
-           PaymentStatus.Text = $"Payment incomplete! {CurrentlyPaid} out of {RequiredPayments}";
-       }
+       
    }
 
-   private bool IsPaymentComplete()
-	{
-		var transactionInformation = TikkiePayementService.GetTransactionInformation(CurrentTransaction.PaymentRequestToken);
-		
-		CurrentlyPaid = transactionInformation.NumberOfPayments;
-		
-		return transactionInformation.NumberOfPayments >= RequiredPayments;
-	}
 }

@@ -88,7 +88,7 @@ public partial class CheckoutOverview : ContentPage
       int tipInCents = (int)Math.Round(_tip * 100);
       int total = totalInCents + tipInCents;
       Transaction transaction = TikkiePayementService.CreatePaymentRequest(total, ApplicationSettings.CurrentBill.Id, $"OpenPOS Tikkie Payment: {ApplicationSettings.CurrentBill.Id}");
-      PaymentPage.SetTransaction(transaction, 1);
+      await PaymentPage.SetTransaction(transaction, 1);
       await Shell.Current.GoToAsync(nameof(PaymentPage));
    }
 

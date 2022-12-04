@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenPOS_APP.EventArgs
+namespace OpenPOS_APP.EventArgsClasses
 {
     public class PaymentEventArgs : EventArgs
     {

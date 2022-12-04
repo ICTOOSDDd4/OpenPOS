@@ -49,15 +49,6 @@ namespace OpenPOS_APP.Services.Models
                referenceId = transactionId.ToString(),
             });
 
-         //var body = @"{" + "\n" +
-         //@"  ""description"": ""Test betaling""," + "\n" +
-         //@"  ""amountInCents"": 9," + "\n" +
-         //@"  ""expiryDate"": ""2022-12-02""," + "\n" +
-         //@"  ""referenceId"": ""10000""" + "\n" +
-         //@"}";
-
-         //request.AddParameter("application/json", body, ParameterType.RequestBody);
-
          RestResponse response = client.Execute(request);
             if (response.Content != null)
             {
