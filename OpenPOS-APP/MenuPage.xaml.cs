@@ -16,7 +16,7 @@ public partial class MenuPage : ContentPage
 	
 	private bool _isInitialized;
 	private double _width;
-
+    private EventHubService _eventHubService;
     public MenuPage()
 	{
       Products = ProductService.GetAll();
@@ -82,11 +82,14 @@ public partial class MenuPage : ContentPage
 	// Temporary function to test Eventlisteners
     private async void ConnectButton_OnClicked(object sender, EventArgs e)
     {
-        EventHubService eventHubService = new EventHubService();
-        eventHubService.newOrder += newOrder;
-        if (!eventHubService._isConnected)
+        if (_eventHubService == null)
         {
-            eventHubService.ConnectToServer();
+			_eventHubService = new EventHubService();
+        }
+        if (!_eventHubService._isConnected)
+        {
+            _eventHubService.newOrder += newOrder;
+            _eventHubService.ConnectToServer();
         }
         
     }

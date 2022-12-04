@@ -12,7 +12,9 @@ namespace OpenPOS_APP.Services
 {
     public class EventHubService
     {
-        private string url = ApplicationSettings.ApiSet.base_url;
+        private readonly string _url = ApplicationSettings.ApiSet.base_url;
+        private readonly string _secret = ApplicationSettings.ApiSet.secret;
+
         private HubConnection _connection = null;
         public bool _isConnected = false;
         public string _connectionStatus = "Closed";
@@ -23,7 +25,10 @@ namespace OpenPOS_APP.Services
         public async Task ConnectToServer()
         {
             _connection = new HubConnectionBuilder()
-                .WithUrl(url + "/event_hub")
+                .WithUrl(_url + "/event_hub", (conn) =>
+                {
+                    conn.Headers.Add("secret", _secret);
+                })
                 .Build();
             try
             {

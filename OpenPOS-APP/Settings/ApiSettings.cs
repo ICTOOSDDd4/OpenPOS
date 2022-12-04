@@ -9,6 +9,20 @@ namespace OpenPOS_APP.Settings
     public class ApiSettings
     {
         private string _base_url;
+        private string _secret;
+
+        public string secret
+        {
+            get
+            {
+                return _secret;
+            }
+            set
+            {
+                ArgumentNullException.ThrowIfNullOrEmpty(nameof(value));
+                _base_url = value;
+            }
+        }
         public string base_url
         {
             get
