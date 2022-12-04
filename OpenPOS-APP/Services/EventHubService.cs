@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR.Client;
+using OpenPOS_APP.EventArgs;
 using OpenPOS_APP.Models;
 using OpenPOS_APP.NewFolder;
 using OpenPOS_APP.Settings;
@@ -20,6 +21,7 @@ namespace OpenPOS_APP.Services
       private List<Order> TestOrder = new List<Order>();
 
       public event EventHandler<OrderEventArgs> newOrder;
+      public event EventHandler<PaymentEventArgs> newPayent;
 
       public async Task ConnectToServer()
       {
@@ -54,11 +56,6 @@ namespace OpenPOS_APP.Services
          _connection.On<Tikkie>("PaymentConformation", async (Tikkie t) => { OnNewPayment(t); });
         }
 
-      public async Task ConnectForPaymentNotification()
-      {
-
-      }
-
       protected void OnNewOrder(Order order)
       {
          newOrder?.Invoke(this, new OrderEventArgs() { order = order });
@@ -66,7 +63,7 @@ namespace OpenPOS_APP.Services
 
       protected void OnNewPayment(Tikkie tikkie)
       {
-
+         newPayent?.Invoke(this, new PaymentEventArgs() { Tikkie = tikkie });
       }
 
 

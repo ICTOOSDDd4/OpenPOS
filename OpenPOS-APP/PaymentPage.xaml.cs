@@ -1,7 +1,9 @@
-﻿using OpenPOS_APP.Models;
+﻿using OpenPOS_APP.EventArgs;
+using OpenPOS_APP.Models;
 using OpenPOS_APP.Services;
 using OpenPOS_APP.Services.Models;
 using OpenPOS_APP.Settings;
+using System.Diagnostics;
 
 namespace OpenPOS_APP;
 
@@ -9,13 +11,20 @@ public partial class PaymentPage : ContentPage
 {
 	public static Transaction CurrentTransaction { get; set; }
 	public static int RequiredPayments { get; set; }
-	
+	private EventHubService _eventHubService = new EventHubService();
 	private int CurrentlyPaid { get; set; }
 	public PaymentPage()
 	{
 		InitializeComponent();
-		
+		_eventHubService.ConnectToServer();
+		_eventHubService.newPayent += OnPaymentPayed;
 		QRCode.Source = UtilityService.GenerateQrCodeFromUrl(CurrentTransaction.Url);
+	}
+
+	public void OnPaymentPayed(object sender, PaymentEventArgs e)
+	{
+		Debug.WriteLine("Payed");
+		CurrentlyPaid++;
 	}
 
 	public static void SetTransaction(Transaction transaction, int numberOfRequiredPayments)
