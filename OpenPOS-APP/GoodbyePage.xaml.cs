@@ -1,4 +1,6 @@
-﻿namespace OpenPOS_APP;
+﻿using OpenPOS_APP.Settings;
+
+namespace OpenPOS_APP;
 
 public partial class GoodbyePage : ContentPage
 {
@@ -6,6 +8,7 @@ public partial class GoodbyePage : ContentPage
 	public GoodbyePage()
 	{
 		InitializeComponent();
+		ApplicationSettings.LoggedinUser = null;
 		_timer.Elapsed += Timer_Tick;
 		_timer.Start();
 	}

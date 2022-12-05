@@ -69,8 +69,6 @@ public partial class PaymentPage : ContentPage
    {
        //PaymentStatus.Text = "Checking payment status...";
        //bool status = IsPaymentComplete();
-
-       
    }
 
 }
