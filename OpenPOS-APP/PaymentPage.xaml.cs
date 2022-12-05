@@ -26,12 +26,12 @@ public partial class PaymentPage : ContentPage
 	{
       CurrentlyPaid++;
       Debug.WriteLine("Payed");
-      if (CurrentlyPaid >= RequiredPayments)
+      if (CurrentlyPaid >= getRequiredPayment())
 		{
-         PaymentStatus.Text = $"Payment complete! {CurrentlyPaid} / {RequiredPayments} payments received.";
+         PaymentStatus.Text = $"Payment complete! {getRequiredPayment()}";
       } else
 		{
-         PaymentStatus.Text = $"Almost there! {CurrentlyPaid} out of {RequiredPayments}";
+         PaymentStatus.Text = $"Almost there! {CurrentlyPaid} out of {getRequiredPayment()}";
       }
 	}
 
@@ -56,6 +56,11 @@ public partial class PaymentPage : ContentPage
    public void RemoveQRCodeFile()
    {
       File.Delete($"{UtilityService.GetRootDirectory()}/qr-{ApplicationSettings.CurrentBill.Id}.png");
+   }
+
+   public int getRequiredPayment()
+   {
+      return RequiredPayments;
    }
 
 
