@@ -1,5 +1,6 @@
 ﻿using System.Data.SqlClient;
 using System.Diagnostics;
+using OpenPOS_APP.Factory.Database;
 using OpenPOS_APP.Settings;
 
 namespace OpenPOS_APP.Services
@@ -10,13 +11,18 @@ namespace OpenPOS_APP.Services
         public static SqlConnection Dbcontext { get; private set; }
         public static void Initialize()
         {
+            SetConnectionString();
+            Seeder.Initialize();
+        }
+
+        public static void SetConnectionString()
+        {
             _connectionString = ApplicationSettings.DbSett.connection_string;
             Dbcontext = new SqlConnection
             {
                 ConnectionString = _connectionString
             };
         }
-
         public static bool Execute(SqlCommand command)
         {
             try
