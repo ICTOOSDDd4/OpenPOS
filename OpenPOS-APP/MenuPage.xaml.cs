@@ -52,13 +52,13 @@ public partial class MenuPage : ContentPage
    {
 	   int moduloNumber = ((int)_width / 300);
 	   if (HorizontalLayout == null || HorizontalLayout.Children.Count % moduloNumber == 0) 
-		{
+       {
 			AddHorizontalLayout();
-		}
-		ProductView productView = new ProductView();
-		productView.SetProductValues(this,product);
-		productView.ClickedMoreInfo += OnInfoButtonClicked;
-		HorizontalLayout.Add(productView);
+       }
+       ProductView productView = new ProductView();
+       productView.SetProductValues(this,product);
+       productView.ClickedMoreInfo += OnInfoButtonClicked;
+       HorizontalLayout.Add(productView);
 	}
 
 	private void AddHorizontalLayout()

@@ -30,6 +30,7 @@ public static class MauiProgram
 				fonts.AddFont("LeagueSpartan-Thin.ttf", "LeagueSpartanThin");
 			});
             Initialize();
+			
 
 
 
