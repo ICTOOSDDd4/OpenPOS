@@ -28,10 +28,17 @@ public partial class PaymentPage : ContentPage
       if (CurrentlyPaid >= RequiredPayments)
 		{
          PaymentStatus.Text = $"Payment complete! {CurrentlyPaid} / {RequiredPayments} payments received.";
+         //redirect to GoodbyePage
+         
       } else
 		{
          PaymentStatus.Text = $"Almost there! {CurrentlyPaid} out of {RequiredPayments}";
       }
+	}
+
+	private async void ToGoodbyePage()
+	{
+		await Shell.Current.GoToAsync(nameof(GoodbyePage));
 	}
 
 	public static async Task SetTransaction(Transaction transaction, int numberOfRequiredPayments)

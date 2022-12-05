@@ -8,10 +8,10 @@ using System.Reflection;
 
 namespace OpenPOS_APP;
 
-public partial class MainPage : ContentPage
+public partial class Onboarding : ContentPage
 {
 	private ResourceDictionary _appColors = new();
-	public MainPage()
+	public Onboarding()
 	{
       InitializeComponent();
       _appColors.SetAndLoadSource(new Uri("Resources/Styles/Colors.xaml", UriKind.RelativeOrAbsolute), "Resources/Styles/Colors.xaml", this.GetType().GetTypeInfo().Assembly, null );
@@ -25,7 +25,9 @@ public partial class MainPage : ContentPage
 
 	private async void OnLoginButtonClicked(object sender, EventArgs e)
 	{
-		await Shell.Current.GoToAsync(nameof(LoginScreen)); 
+		//TODO: REMOVE!
+      await Shell.Current.GoToAsync(nameof(GoodbyePage));
+      // await Shell.Current.GoToAsync(nameof(LoginScreen));
 	}
 	
 	private async void CreateNewAccount_Tapped(object sender, EventArgs e)
