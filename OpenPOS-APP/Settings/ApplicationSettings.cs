@@ -1,5 +1,4 @@
 ﻿using OpenPOS_APP.Models;
-using Windows.UI.ViewManagement;
 
 namespace OpenPOS_APP.Settings;
 
