@@ -16,28 +16,11 @@ namespace OpenPOS_APP.Services.Models
 {
     public static class TikkiePayementService
     {
-        private static string _tikkieAppToken;
-        public static void CreateTikkieAppToken()
-        {
-            var client = new RestClient(ApplicationSettings.TikkieSet.BaseUrl);
-				
-            var request = new RestRequest("/sandboxapps", Method.Post);
-            request.AddHeader("Accept", "application/json");
-            request.AddHeader("API-Key", ApplicationSettings.TikkieSet.Key);
-            RestResponse response = client.Execute(request);
-            var content = response.Content;
-				
-            if (content != null)
-            {
-                var obj = JObject.Parse(content);
-               _tikkieAppToken = obj["appToken"]?.ToString();
-            } else Debug.WriteLine("No content");
-        }
         public static Transaction CreatePaymentRequest(int amountInCents, int transactionId, string desc)
         {
             var client = new RestClient(ApplicationSettings.TikkieSet.BaseUrl);
             var request = new RestRequest("/paymentrequests", Method.Post);
-            request.AddHeader("X-App-Token", _tikkieAppToken);
+            request.AddHeader("X-App-Token", ApplicationSettings.TikkieSet.AppToken);
             request.AddHeader("Content-Type", "application/json");
             request.AddHeader("Accept", "application/json");
             request.AddHeader("API-Key", ApplicationSettings.TikkieSet.Key);
@@ -79,7 +62,7 @@ namespace OpenPOS_APP.Services.Models
         {
             var client = new RestClient(ApplicationSettings.TikkieSet.BaseUrl);
             var request = new RestRequest($"/paymentrequests/{paymentRequestToken}");
-            request.AddHeader("X-App-Token", _tikkieAppToken);
+            request.AddHeader("X-App-Token", ApplicationSettings.TikkieSet.AppToken);
             request.AddHeader("Accept", "application/json");
             request.AddHeader("API-Key", ApplicationSettings.TikkieSet.Key);
             

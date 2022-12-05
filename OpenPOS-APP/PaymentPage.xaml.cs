@@ -5,6 +5,7 @@ using OpenPOS_APP.Services.Models;
 using OpenPOS_APP.Settings;
 using System;
 using System.Diagnostics;
+using System.Reflection.Metadata;
 
 namespace OpenPOS_APP;
 
@@ -38,16 +39,18 @@ public partial class PaymentPage : ContentPage
 	{
 		CurrentTransaction = transaction;
 		RequiredPayments = numberOfRequiredPayments;
-		await ApiConnentAsync();
-	}
+      await ApiConnentAsync();
+      Debug.WriteLine(transaction.PaymentRequestToken);
+      OpenPosAPIService.AddToPaymentListener(_eventHubService.GetConnectionID(), transaction.PaymentRequestToken);
+   }
 
-	private static async Task ApiConnentAsync()
+   private static async Task ApiConnentAsync()
 	{
       await _eventHubService.ConnectToServerPayment();
    }
 
-  
-  public void RemoveQRCodeFile()
+
+   public void RemoveQRCodeFile()
    {
       File.Delete($"{UtilityService.GetRootDirectory()}/qr-{ApplicationSettings.CurrentBill.Id}.png");
    }
@@ -56,14 +59,6 @@ public partial class PaymentPage : ContentPage
    protected override void OnNavigatedTo(NavigatedToEventArgs args)
    {
       base.OnNavigatedTo(args);
-   }
-
-   private void OnPaymentStatusCheck_Clicked(object sender, EventArgs e)
-   {
-       //PaymentStatus.Text = "Checking payment status...";
-       //bool status = IsPaymentComplete();
-
-       
    }
 
 }
