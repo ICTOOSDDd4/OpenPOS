@@ -51,8 +51,6 @@ namespace OpenPOS_APP.Services
          };
 
          _connection.On<Order>("newOrder", async (Order m) =>  {  OnNewOrder(m); });
-
-         _connection.On<Tikkie>("PaymentConformation", async (Tikkie t) => { OnNewPayment(t); });
         }
 
 

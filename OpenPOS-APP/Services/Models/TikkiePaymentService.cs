@@ -30,7 +30,7 @@ namespace OpenPOS_APP.Services.Models
             if (content != null)
             {
                 var obj = JObject.Parse(content);
-            _tikkieAppToken = obj["appToken"]?.ToString();
+               _tikkieAppToken = obj["appToken"]?.ToString();
             } else Debug.WriteLine("No content");
         }
         public static Transaction CreatePaymentRequest(int amountInCents, int transactionId, string desc)

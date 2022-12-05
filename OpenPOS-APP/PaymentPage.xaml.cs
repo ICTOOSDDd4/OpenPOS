@@ -25,7 +25,7 @@ public partial class PaymentPage : ContentPage
 	{
       CurrentlyPaid++;
       Debug.WriteLine("Payed");
-      if (CurrentlyPaid == RequiredPayments)
+      if (CurrentlyPaid >= RequiredPayments)
 		{
          PaymentStatus.Text = $"Payment complete! {CurrentlyPaid} / {RequiredPayments} payments received.";
       } else
