@@ -44,7 +44,7 @@ namespace OpenPOS_APP.Services.Models
         }
         public static List<OrderLineProduct> GetAllUnfinished()
         {
-            SqlCommand query = new SqlCommand("SELECT m.order_id, o.bill_id, o.status, m.amount, p.name, m.comment, o.created_at FROM [OpenPOS_dev].[dbo].[order_product] as m INNER JOIN [dbo].[order] as o ON m.order_id = o.id INNER JOIN product as p ON m.product_id = p.id WHERE o.[status] = 0");
+            SqlCommand query = new SqlCommand("SELECT m.order_id, m.product_id, o.status, m.amount, p.name, m.comment, o.created_at FROM [OpenPOS_dev].[dbo].[order_product] as m INNER JOIN [dbo].[order] as o ON m.order_id = o.id INNER JOIN product as p ON m.product_id = p.id WHERE o.[status] = 0");
 
             List<OrderLineProduct> resultList = DatabaseService.Execute<OrderLineProduct>(query);
 
@@ -53,7 +53,7 @@ namespace OpenPOS_APP.Services.Models
 
         public static bool Delete(OrderLineProduct obj)
         {
-            SqlCommand query = new SqlCommand("DELETE FROM [dbo].[order] WHERE [order_id] = @OrderId AND [product_id] = @ProductId");
+            SqlCommand query = new SqlCommand("DELETE FROM [dbo].[order_product] WHERE [order_id] = @OrderId AND [product_id] = @ProductId");
 
             query.Parameters.Add("@OrderId", SqlDbType.Int);
             query.Parameters["@OrderId"].Value = obj.Order_id;
@@ -65,7 +65,7 @@ namespace OpenPOS_APP.Services.Models
 
         public static bool Delete(OrderLine obj)
         {
-            SqlCommand query = new SqlCommand("DELETE FROM [dbo].[order] WHERE [order_id] = @OrderId AND [product_id] = @ProductId");
+            SqlCommand query = new SqlCommand("DELETE FROM [dbo].[order_product] WHERE [order_id] = @OrderId AND [product_id] = @ProductId");
 
             query.Parameters.Add("@OrderId", SqlDbType.Int);
             query.Parameters["@OrderId"].Value = obj.Order_id;
