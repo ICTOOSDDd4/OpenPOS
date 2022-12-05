@@ -41,7 +41,10 @@ public partial class PaymentPage : ContentPage
 		RequiredPayments = numberOfRequiredPayments;
       await ApiConnentAsync();
       Debug.WriteLine(transaction.PaymentRequestToken);
-      OpenPosAPIService.AddToPaymentListener(_eventHubService.GetConnectionID(), transaction.PaymentRequestToken);
+      if (!OpenPosAPIService.AddToPaymentListener(_eventHubService.GetConnectionID(), transaction.PaymentRequestToken))
+      {
+         throw new Exception("Oopsie");
+      }
    }
 
    private static async Task ApiConnentAsync()
