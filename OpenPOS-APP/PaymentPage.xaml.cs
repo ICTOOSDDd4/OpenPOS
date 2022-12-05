@@ -26,13 +26,13 @@ public partial class PaymentPage : ContentPage
       CurrentlyPaid++;
       Debug.WriteLine("Payed");
       if (CurrentlyPaid >= RequiredPayments)
-		{
-         PaymentStatus.Text = $"Payment complete! {CurrentlyPaid} / {RequiredPayments} payments received.";
-         //redirect to GoodbyePage
-         
+      {
+	      PaymentStatus.Text = $"Payment complete! {CurrentlyPaid} / {RequiredPayments} payments received.";
+	      //redirect to GoodbyePage
+         ToGoodbyePage();
       } else
-		{
-         PaymentStatus.Text = $"Almost there! {CurrentlyPaid} out of {RequiredPayments}";
+      {
+	      PaymentStatus.Text = $"Almost there! {CurrentlyPaid} out of {RequiredPayments}";
       }
 	}
 
