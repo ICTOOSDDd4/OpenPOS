@@ -14,6 +14,23 @@ public class ProductService : IModelService<Product>
         return resultList;
     }
 
+    public static List<Product> GetAllByCategoryId(int categoryId)
+    {
+        List<Product> result;
+        if (categoryId != 0)
+        {
+            SqlCommand query = new SqlCommand("SELECT p.* FROM [dbo].[Category_product] AS C JOIN [dbo].[product] AS p ON C.productid = p.id WHERE C.Categoryid = @ID");
+
+            query.Parameters.Add("@ID", SqlDbType.Int);
+            query.Parameters["@ID"].Value = categoryId;
+            result = DatabaseService.Execute<Product>(query);
+        } else
+        {
+            result = GetAll();
+        }
+        return result;
+    }
+
     public static Product FindByID(int id)
     {
         SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[Product] WHERE [ID] = @ID");
