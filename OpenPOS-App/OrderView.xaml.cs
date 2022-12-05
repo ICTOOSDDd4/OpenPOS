@@ -43,7 +43,7 @@ public partial class OrderView : ContentView
 
    private void AddOrderLinesToLayout()
    {
-      foreach(OrderLine line in order.GetLines(order.Id)) 
+      foreach(OrderLineProduct line in order.GetLines(order.Id)) 
       {
          // Setting up layout
          HorizontalStackLayout layout = new HorizontalStackLayout();

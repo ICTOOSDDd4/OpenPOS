@@ -21,10 +21,10 @@ namespace OpenPOS_APP.Models
             Created_At = createdAt;
         }
 
-        public List<OrderLine> GetLines(int id)
+        public List<OrderLineProduct> GetLines(int id)
         {
 
-            List<OrderLine> lines = OrderLineService.GetAllById(id);
+            List<OrderLineProduct> lines = OrderLineService.GetAllById(id);
 
             return lines;
         }
