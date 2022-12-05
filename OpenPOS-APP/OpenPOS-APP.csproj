@@ -77,9 +77,6 @@
 		<MauiXaml Update="AdminOverview.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="BarOverview.xaml">
-		  <Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
 		<MauiXaml Update="CheckoutItemCardView.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
@@ -90,9 +87,6 @@
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="OrderView.xaml">
-		  <Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="OwnerOverview.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="ProductView.xaml">
