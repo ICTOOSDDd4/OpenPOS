@@ -31,15 +31,5 @@
             Margin="0,30,0,10"
             Clicked="OrderButton_OnClicked"
         />
-        <Button
-            x:Name="Connect"
-            Text="Connect"
-            WidthRequest="350"
-            HeightRequest="60"
-            FontSize="35"
-            Padding="0,0,10,0"
-            Margin="0,30,0,10"
-            Clicked="ConnectButton_OnClicked"
-        />
     </VerticalStackLayout>
 </ContentPage>
