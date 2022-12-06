@@ -24,10 +24,7 @@ public class PaymentServiceTest
             
             ApplicationSettings.DbSett = config.GetRequiredSection("DATABASE_CONNECTION").Get<DatabaseSettings>();
             ApplicationSettings.TikkieSet = config.GetRequiredSection("TIKKIE_API").Get<TikkieSettings>();
-            if (ApplicationSettings.TikkieSet != null)
-            {
-                TikkiePayementService.CreateTikkieAppToken();
-            }
+
         }
         else throw new Exception();
     }

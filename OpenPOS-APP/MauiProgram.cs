@@ -40,12 +40,7 @@ public static class MauiProgram
 				fonts.AddFont("LeagueSpartan-Thin.ttf", "LeagueSpartanThin");
 			});
             Initialize();
-		// MacCatalyst specifc window settings
-#if MACCATALYST
-                 var size = new CoreGraphics.CGSize(1920, 1080);
-                 handler.PlatformView.WindowScene.SizeRestrictions.MinimumSize = size;
-                 handler.PlatformView.WindowScene.SizeRestrictions.MaximumSize = size;
-#endif
+
       // Windows specific window size settings
 #if WINDOWS
       builder.ConfigureLifecycleEvents(events =>
@@ -76,10 +71,20 @@ public static class MauiProgram
 						});
 					});
 				});
-		#endif 
+#endif
+      // MacCatalyst specifc window settings
+#if MACCATALYST
+      //var size = new CoreGraphics.CGSize(1920, 1080);
+      //handler.PlatformView.WindowScene.SizeRestrictions.MinimumSize = size;
+      //handler.PlatformView.WindowScene.SizeRestrictions.MaximumSize = size;
+#endif
+//#if MACCATALYST
+		
+//#endif
+
 
 #if DEBUG
-        builder.Logging.AddDebug();
+      builder.Logging.AddDebug();
 #endif
       return builder.Build();
 	}
@@ -99,9 +104,6 @@ public static class MauiProgram
          ApplicationSettings.ApiSet = config.GetRequiredSection("OPENPOS_API").Get<ApiSettings>();
 			
 			if (ApplicationSettings.DbSett != null) 
-      {
-            ApplicationSettings.ApiSet = config.GetRequiredSection("OPENPOS_API").Get<ApiSettings>();
-            if (ApplicationSettings.DbSett != null)
 			{
 				DatabaseService.Initialize();
 			}
