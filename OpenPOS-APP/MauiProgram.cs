@@ -77,8 +77,9 @@ public static class MauiProgram
 					});
 				});
 		#endif 
+
 #if DEBUG
-      builder.Logging.AddDebug();
+        builder.Logging.AddDebug();
 #endif
       return builder.Build();
 	}
@@ -97,7 +98,10 @@ public static class MauiProgram
 			ApplicationSettings.QRCodeGeneratorSet = config.GetRequiredSection("QR_CODE_GENERATOR").Get<QRCodeGeneratorSettings>();
          ApplicationSettings.ApiSet = config.GetRequiredSection("OPENPOS_API").Get<ApiSettings>();
 			
-			if (ApplicationSettings.DbSett != null)
+			if (ApplicationSettings.DbSett != null) 
+      {
+            ApplicationSettings.ApiSet = config.GetRequiredSection("OPENPOS_API").Get<ApiSettings>();
+            if (ApplicationSettings.DbSett != null)
 			{
 				DatabaseService.Initialize();
 			}

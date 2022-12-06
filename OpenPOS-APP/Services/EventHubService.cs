@@ -9,11 +9,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR.Client;
 using OpenPOS_APP.EventArgsClasses;
 using OpenPOS_APP.Models;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.SignalR.Client;
+using OpenPOS_APP.Models;
+
 using OpenPOS_APP.Settings;
 
 namespace OpenPOS_APP.Services
-{
-   
+{   
    public class EventHubService
    {
       private readonly CancellationTokenSource _cancelToken = new CancellationTokenSource();

@@ -51,12 +51,6 @@
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 
 	</ItemGroup>
-	<ItemGroup>
-		<None Remove="appsettings.json" />
-	</ItemGroup>
-	<ItemGroup>
-		<EmbeddedResource Include="appsettings.json" />
-	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="3.0.0" />
@@ -71,21 +65,37 @@
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
 	</ItemGroup>
 	<ItemGroup>
-
 		<None Remove="appsettings.json" />
 		<None Remove="Resources\Images\account.svg" />
 		<None Remove="Resources\Images\cart.svg" />
 	</ItemGroup>
+	<ItemGroup>
+	  <EmbeddedResource Include="appsettings.json" />
+	</ItemGroup>
 
 	<ItemGroup>
+		<MauiXaml Update="AdminOverview.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="CheckoutItemCardView.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="CrewOverview.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="OrderOverviewPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="OrderView.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="ProductView.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="RealisatieMenu.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 	</ItemGroup>
-
 	<ItemGroup>
 		<MauiXaml Update="Resources\Controls\Header.xaml">
 			<Generator>MSBuild:Compile</Generator>
