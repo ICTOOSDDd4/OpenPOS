@@ -7,6 +7,9 @@
     <ContentPage.Resources>
         <ResourceDictionary Source="Resources/Styles/Colors.xaml"></ResourceDictionary>
     </ContentPage.Resources>
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False" IsEnabled="False" />
+    </Shell.BackButtonBehavior>
     <VerticalStackLayout
                 Spacing="25"
                 Padding="30,100,30,100"

@@ -7,6 +7,9 @@
     <ContentPage.Resources>
         <ResourceDictionary Source="Resources/Styles/Colors.xaml"></ResourceDictionary>
     </ContentPage.Resources>
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False" IsEnabled="False" />
+    </Shell.BackButtonBehavior>
     <VerticalStackLayout
         
         Spacing="25"
@@ -38,6 +41,7 @@
             FontSize="24"
             HorizontalOptions="Center" />
         <Label
+            x:Name="Countdown"
             Text="You will be signed out and redirected in 5 seconds"
             SemanticProperties.HeadingLevel="Level7"
             FontFamily="LeagueSpartan-Light"

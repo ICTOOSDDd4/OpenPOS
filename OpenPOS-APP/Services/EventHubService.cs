@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR.Client;
@@ -10,17 +13,27 @@ using OpenPOS_APP.Settings;
 
 namespace OpenPOS_APP.Services
 {
+   
    public class EventHubService
    {
+      private readonly CancellationTokenSource _cancelToken = new CancellationTokenSource();
       private readonly string _url = ApplicationSettings.ApiSet.base_url;
       private readonly string _secret = ApplicationSettings.ApiSet.secret;
       private HubConnection _connection = null;
-      public bool _isConnected = false;
+      private bool _isConnected = false;
+      private bool iWantItToStop = true;
       public string _connectionStatus = "Closed";
       private List<Order> TestOrder = new List<Order>();
 
       public event EventHandler<OrderEventArgs> newOrder;
       public event EventHandler<PaymentEventArgs> newPayent;
+
+      public async Task Stop()
+      {
+         iWantItToStop = false;
+         _connectionStatus = "Disconnected";
+         await _connection.StopAsync();
+      }
 
       public async Task ConnectToServer()
       {
@@ -44,10 +57,16 @@ namespace OpenPOS_APP.Services
 
          _connection.Closed += async (s) =>
          {
-            _isConnected = false;
-            _connectionStatus = "Disconnected";
-            await _connection.StartAsync();
-            _isConnected = true;
+            if (!iWantItToStop)
+            {
+               _isConnected = false;
+               _connectionStatus = "Disconnected";
+               await _connection.StartAsync();
+               _isConnected = true;
+            } else
+            {
+               _cancelToken.Cancel();
+            }
          };
 
          _connection.On<Order>("newOrder", async (Order m) =>  {  OnNewOrder(m); });
@@ -76,10 +95,17 @@ namespace OpenPOS_APP.Services
 
          _connection.Closed += async (s) =>
          {
-            _isConnected = false;
-            _connectionStatus = "Disconnected";
-            await _connection.StartAsync();
-            _isConnected = true;
+            if (!iWantItToStop)
+            {
+               _isConnected = false;
+               _connectionStatus = "Disconnected";
+               await _connection.StartAsync();
+               _isConnected = true;
+            }
+            else
+            {
+               _cancelToken.Cancel();
+            }
          };
 
          _connection.On<Tikkie>("PaymentConformation", async (Tikkie t) => { OnNewPayment(t); });
