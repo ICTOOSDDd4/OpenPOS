@@ -26,7 +26,7 @@ namespace OpenPOS_APP.Services
         {
             System.Diagnostics.Debug.WriteLine(_secret);
             _connection = new HubConnectionBuilder()
-                .WithUrl(_url + "/event_hub", (conn) =>
+                .WithUrl(_url + "/order_event", (conn) =>
                 {
                     conn.Headers.Add("secret", _secret);
                 })

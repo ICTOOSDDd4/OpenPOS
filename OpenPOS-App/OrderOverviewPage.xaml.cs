@@ -1,25 +1,47 @@
+using System.Diagnostics;
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Models;
 using System.Runtime.CompilerServices;
+using OpenPOS_APP.NewFolder;
+using OpenPOS_APP.Services;
 
 namespace OpenPOS_APP;
 
 public partial class OrderOverviewPage : ContentPage
 {
 	public List<Order> Orders { get; set; }
-	private HorizontalStackLayout HorizontalLayout;
+    private HorizontalStackLayout HorizontalLayout;
+    private EventHubService _eventHubService = new();
 
-   private bool _isInitialized;
+    private bool _isInitialized;
    private double _width;
 
    public OrderOverviewPage()
 	{
 		InitializeComponent();
       Orders = OrderService.GetAllOpenOrders();
+      Debug.WriteLine(Orders.Count);
+        Initialize();
+    }
 
-   }
+    private async void Initialize()
+    {
+        _eventHubService.newOrder += newOrder;
+        await _eventHubService.ConnectToServer();
+    }
 
-   protected override void OnSizeAllocated(double width, double height)
+    private async void newOrder(object sender, OrderEventArgs orderEvent)
+   {
+
+       System.Diagnostics.Debug.WriteLine("NewEvent");
+       await Dispatcher.DispatchAsync(() =>
+       { 
+           Orders.Add(orderEvent.order); 
+           AddOrderToLayout(orderEvent.order);
+        });
+    }
+
+    protected override void OnSizeAllocated(double width, double height)
    {
       base.OnSizeAllocated(width, height);
       if (!_isInitialized)
@@ -83,8 +105,8 @@ public partial class OrderOverviewPage : ContentPage
 			AddHorizontalLayout();
       }
 
-		OrderView orderview = new OrderView();
-		orderview.AddBinds(order, HorizontalLayout);
+		OrderView orderview = new OrderView(); 
+        orderview.AddBinds(order, HorizontalLayout);
       orderview.OrderDone += OrderDone;
       orderview.OrderCanceled += OrderCanceled;
       HorizontalLayout.Add(orderview);      

@@ -2,6 +2,7 @@
 using OpenPOS_APP.Services.Models;
 using OpenPOS_APP.Settings;
 using System.Globalization;
+using OpenPOS_APP.Services;
 
 namespace OpenPOS_APP;
 
@@ -10,6 +11,7 @@ public partial class CheckoutOverview : ContentPage
     public Dictionary<Product, int> CheckoutItems { get; set; }
 
     public int TotalPrice;
+
 
     public static Dictionary<Product,int> GetCheckoutItems()
     {
@@ -22,7 +24,8 @@ public partial class CheckoutOverview : ContentPage
 
 		   AddToCheckOut(ApplicationSettings.CheckoutList);
 
-	}
+        
+    }
 
 
     public void AddToCheckOut(Dictionary<Product, int> products)
