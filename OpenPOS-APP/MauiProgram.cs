@@ -7,6 +7,15 @@ using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Models;
 using CommunityToolkit.Maui;
 using System.Diagnostics;
+using Microsoft.Maui.LifecycleEvents;
+
+// Specific WinUI elements.
+#if WINDOWS
+using Microsoft.UI;
+using Microsoft.UI.Windowing;
+using Windows.Graphics;
+#endif
+
 
 namespace OpenPOS_APP;
 
@@ -31,6 +40,43 @@ public static class MauiProgram
 				fonts.AddFont("LeagueSpartan-Thin.ttf", "LeagueSpartanThin");
 			});
             Initialize();
+		// MacCatalyst specifc window settings
+#if MACCATALYST
+                 var size = new CoreGraphics.CGSize(1920, 1080);
+                 handler.PlatformView.WindowScene.SizeRestrictions.MinimumSize = size;
+                 handler.PlatformView.WindowScene.SizeRestrictions.MaximumSize = size;
+#endif
+      // Windows specific window size settings
+#if WINDOWS
+      builder.ConfigureLifecycleEvents(events =>
+				{
+					events.AddWindows(windows => windows.OnClosed((window, args) => args.Handled = true));
+					events.AddWindows(wndLifeCycleBuilder =>
+					{
+						wndLifeCycleBuilder.OnWindowCreated(window =>
+						{
+							IntPtr nativeWindowHandle = WinRT.Interop.WindowNative.GetWindowHandle(window);
+							WindowId win32WindowsId = Win32Interop.GetWindowIdFromWindow(nativeWindowHandle);
+							AppWindow winuiAppWindow = AppWindow.GetFromWindowId(win32WindowsId);
+							if (winuiAppWindow.Presenter is OverlappedPresenter p)
+							{
+								p.Maximize(); // Does work
+                        p.IsMaximizable = false; // Does not work
+                        //p.IsAlwaysOnTop = true; // Does work // COMMENT OUT FOR DEV!
+								p.IsResizable = false; // Does not work
+								p.IsMinimizable = false; // Does not work
+								p.IsModal = false;
+							}
+							else
+							{
+								winuiAppWindow.Resize(new SizeInt32(1920, 1080));
+								winuiAppWindow.MoveAndResize(new RectInt32(0, 0, 1920, 1080));
+								//winuiAppWindow.MoveAndResize(new RectInt32(1920 / 2 - width / 2, 1080 / 2 - height / 2, width, height));
+							}
+						});
+					});
+				});
+		#endif 
 #if DEBUG
       builder.Logging.AddDebug();
 #endif
@@ -58,7 +104,7 @@ public static class MauiProgram
             Bill bill = BillService.FindByID(12);
             bill.Paid = false;
             var result = BillService.Update(bill);
-			System.Diagnostics.Debug.WriteLine(result);
+			Debug.WriteLine(result);
         } else throw new ApplicationException("Can't find appsettings.json file");
 		
 		ApplicationSettings.UIElements = new UIElements();

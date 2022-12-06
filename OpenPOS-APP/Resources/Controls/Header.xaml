@@ -46,8 +46,9 @@
                 BackgroundColor="#e1e1e1"
                 />
                 <ImageButton
-                Source="account.png"
+                Source="logouticon.png"
                 x:Name="AccountButton"
+                Clicked="OnClickedLogout"
                 Padding="10"
                 BackgroundColor="#e1e1e1"
                 />

@@ -90,6 +90,9 @@
 		<MauiXaml Update="Resources\Controls\Header.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+		<MauiXaml Update="Resources\Controls\PopUps\CreatingPaymentStatusPopUp.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="Resources\Controls\PopUps\InputCustomTipPopUp.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>

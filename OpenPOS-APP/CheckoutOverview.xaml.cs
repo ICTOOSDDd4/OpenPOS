@@ -27,6 +27,7 @@ public partial class CheckoutOverview : ContentPage
 	 {
         InitializeComponent();
 		  AddToCheckOut(ApplicationSettings.CheckoutList);
+        Header.currentPage = this;
     }
 
 
@@ -90,6 +91,7 @@ public partial class CheckoutOverview : ContentPage
       Transaction transaction = TikkiePayementService.CreatePaymentRequest(total, ApplicationSettings.CurrentBill.Id, $"OpenPOS Tikkie Payment: {ApplicationSettings.CurrentBill.Id}");
       PaymentPage.SetTransaction(transaction, 1);
       await Shell.Current.GoToAsync(nameof(PaymentPage));
+      
    }
 
    private void OnClickedAddaTip(object sender, EventArgs args)
@@ -154,9 +156,4 @@ public partial class CheckoutOverview : ContentPage
 	{
 		base.OnNavigatedTo(args);
 	}
-
-   private async void CreatingPayment()
-   {
-      await DisplayAlert("Payment", "Creating Payment...", null);
-   }
 }

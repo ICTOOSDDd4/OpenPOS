@@ -10,6 +10,7 @@ public partial class MenuPage : ContentPage
 	public List<Product> Products { get; set; }
 	public Dictionary<Product, int> SelectedProducts { get; set; }
 	private HorizontalStackLayout HorizontalLayout;
+	private int _ProductCardViewWidth = 300;
 	
 	private bool _isInitialized;
 	private double _width;
@@ -19,10 +20,11 @@ public partial class MenuPage : ContentPage
       Products = ProductService.GetAll();
       InitializeComponent();
       SelectedProducts = new Dictionary<Product, int>();
+		Header.currentPage = this;
 	}
 
 	protected override void OnSizeAllocated(double width, double height)
-	{
+	{ // Gets called by MAUI
 		base.OnSizeAllocated(width, height);
 		if (!_isInitialized)
 		{
@@ -34,7 +36,7 @@ public partial class MenuPage : ContentPage
 
 	private void SetWindowScaling(double width, double height)
 	{
-		ScrView.HeightRequest = height - 300;
+		ScrView.HeightRequest = height - 200;
 		_width = width;
 		AddAllProducts();
 
@@ -50,7 +52,7 @@ public partial class MenuPage : ContentPage
 
    public void AddProductToLayout(Product product)
    {
-	   int moduloNumber = ((int)_width / 300);
+	   int moduloNumber = ((int)_width / _ProductCardViewWidth);
 	   if (HorizontalLayout == null || HorizontalLayout.Children.Count % moduloNumber == 0) 
 		{
 			AddHorizontalLayout();

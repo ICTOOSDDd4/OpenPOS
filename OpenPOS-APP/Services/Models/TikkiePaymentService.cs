@@ -1,13 +1,4 @@
-﻿using OpenPOS_APP.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Runtime.InteropServices.JavaScript;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Settings;
 using RestSharp;

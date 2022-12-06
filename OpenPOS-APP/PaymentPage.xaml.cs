@@ -1,14 +1,11 @@
-﻿using OpenPOS_APP.EventArgsClasses;
+﻿using ABI.Windows.UI.WebUI;
+using OpenPOS_APP.EventArgsClasses;
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Services;
 using OpenPOS_APP.Services.Models;
 using OpenPOS_APP.Settings;
-using System.Threading;
 using System.Diagnostics;
-using System.Reflection.Metadata;
-using Windows.UI.StartScreen;
-using Windows.UI.Core;
-using Microsoft.Maui.Dispatching;
+
 
 namespace OpenPOS_APP;
 
@@ -18,15 +15,25 @@ public partial class PaymentPage : ContentPage
 	public static int RequiredPayments { get; set; }
 	private EventHubService _eventHubService = new EventHubService();
    private EventHandler<EventArgs> _eventHandler;
-	private int CurrentlyPaid { get; set; }
+   private Thread thread;
+   private delegate void EventMethod(object sender, EventArgs e);
+   private string paymentStatusString;
+   System.Timers.Timer _timer = new System.Timers.Timer(500);
+   private int CurrentlyPaid { get; set; }
 	public PaymentPage()
 	{
       InitializeComponent();
       Connect();
       QRCode.Source = UtilityService.GenerateQrCodeFromUrl(CurrentTransaction.Url);
 
-   }
+      if (RequiredPayments == 1)
+      {
+         paymentStatusString = "payment";
+      } else { paymentStatusString = "payments"; }
 
+      thread = new Thread(new ThreadStart(StartStatusLabel));
+      thread.Start();
+   }
    private async void Connect()
    {
       await _eventHubService.ConnectToServerPayment();
@@ -35,28 +42,53 @@ public partial class PaymentPage : ContentPage
          throw new Exception("Oopsie");
       }
       _eventHubService.newPayent += OnPaymentPayed;
+        
    }
-
-	public async void OnPaymentPayed(object sender, PaymentEventArgs e)
+   private void StartStatusLabel()
+   {
+      _timer.Elapsed += ChangeStatusLabel;
+      _timer.Start();
+   }
+	public void OnPaymentPayed(object sender, PaymentEventArgs e)
 	{
-      await Dispatcher.DispatchAsync(async () =>
+      _timer.Stop();
+      Dispatcher.DispatchAsync(async () =>
       {
          CurrentlyPaid++;
          Debug.WriteLine("Payed");
          if (CurrentlyPaid >= getRequiredPayment())
          {
             await _eventHubService.Stop();
-            //_eventHubService = null;
-            PaymentStatus.Text = $"Payment complete! {getRequiredPayment()}";
+            PaymentStatusLabel.Text = $"Payment complete! {getRequiredPayment()}";
             ToGoodbyePage();
          }
          else
          {
-            PaymentStatus.Text = $"Almost there! {CurrentlyPaid} out of {getRequiredPayment()}";
+            PaymentStatusLabel.Text = $"Almost there! {CurrentlyPaid} out of {getRequiredPayment()}";
          }
       });
       
 	}
+
+   public void ChangeStatusLabel(object sender, object e)
+   {
+      string newString = "";
+      Dispatcher.DispatchAsync(async () =>
+      {
+         if (PaymentStatusLabel.Text.Contains("..."))
+         {
+            newString = $"Waiting for {paymentStatusString}.";
+         } else if (PaymentStatusLabel.Text.Contains(".."))
+         {
+            newString = $"Waiting for {paymentStatusString}...";
+         } else if (PaymentStatusLabel.Text.Contains("."))
+         {
+            newString = $"Waiting for {paymentStatusString}..";
+         }
+
+         PaymentStatusLabel.Text = newString;
+      });
+   }
 
 	private async void ToGoodbyePage()
 	{
