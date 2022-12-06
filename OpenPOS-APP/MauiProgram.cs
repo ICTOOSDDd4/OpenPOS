@@ -50,18 +50,7 @@ public static class MauiProgram
 			ApplicationSettings.TikkieSet = config.GetRequiredSection("TIKKIE_API").Get<TikkieSettings>();
 			ApplicationSettings.QRCodeGeneratorSet = config.GetRequiredSection("QR_CODE_GENERATOR").Get<QRCodeGeneratorSettings>();
          ApplicationSettings.ApiSet = config.GetRequiredSection("OPENPOS_API").Get<ApiSettings>();
-
-         // Creating API link
-         if (ApplicationSettings.TikkieSet != null)
-			{
-				if (ApplicationSettings.TikkieSet.BaseUrl != null)
-				{
-               TikkiePayementService.CreateTikkieAppToken();
-            }			
-			}
 			
-			else throw new ApplicationException("Missing Tikkie settings");
-
 			if (ApplicationSettings.DbSett != null)
 			{
 				DatabaseService.Initialize();
