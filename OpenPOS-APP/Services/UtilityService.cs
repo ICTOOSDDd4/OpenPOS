@@ -8,15 +8,15 @@ public class UtilityService
 {
     public static ImageSource GenerateQrCodeFromUrl(string url)
     {
+        string filename = $"{GetRootDirectory()}/qr.png";
         string apiUrl = ApplicationSettings.QRCodeGeneratorSet.Base_url + url;
-        
         
         using (WebClient client = new WebClient())
         {
-               client.DownloadFile(new Uri(apiUrl), $"{ GetRootDirectory() }/qr.png");
+               client.DownloadFile(new Uri(apiUrl), filename);
         }
 		
-        return ImageSource.FromFile($"qr.png");
+        return ImageSource.FromFile(filename);
     }
 
    public static string GetRootDirectory()

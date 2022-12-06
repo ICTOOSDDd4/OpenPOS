@@ -29,10 +29,16 @@ public partial class PaymentPage : ContentPage
       if (CurrentlyPaid >= getRequiredPayment())
 		{
          PaymentStatus.Text = $"Payment complete! {getRequiredPayment()}";
+         ToGoodbyePage();
       } else
 		{
          PaymentStatus.Text = $"Almost there! {CurrentlyPaid} out of {getRequiredPayment()}";
       }
+	}
+
+	private async void ToGoodbyePage()
+	{
+		await Shell.Current.GoToAsync(nameof(GoodbyePage));
 	}
 
 	public static async Task SetTransaction(Transaction transaction, int numberOfRequiredPayments)
@@ -62,8 +68,7 @@ public partial class PaymentPage : ContentPage
    {
       return RequiredPayments;
    }
-
-
+   
    protected override void OnNavigatedTo(NavigatedToEventArgs args)
    {
       base.OnNavigatedTo(args);
