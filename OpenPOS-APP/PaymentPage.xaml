@@ -3,17 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="OpenPOS_APP.PaymentPage"
              Shell.NavBarIsVisible="False"
+
              Title="PaymentPage">
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsVisible="False" IsEnabled="False" />
     </Shell.BackButtonBehavior>
-    
+   
     <VerticalStackLayout HeightRequest="300" WidthRequest="300">
-        <Image x:Name="QRCode">
-        </Image>
-        
-        <Button Clicked="OnPaymentStatusCheck_Clicked" Text="Check payment status" WidthRequest="300" />
-        
+        <Image x:Name="QRCode"/>
+
         <Label x:Name="PaymentStatus" 
                Text="Payment status"/>
     </VerticalStackLayout>

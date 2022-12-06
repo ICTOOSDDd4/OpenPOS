@@ -85,6 +85,10 @@ namespace OpenPOS_APP.Services
          _connection.On<Tikkie>("PaymentConformation", async (Tikkie t) => { OnNewPayment(t); });
       }
    
+      public string GetConnectionID()
+      {
+         return _connection.ConnectionId;
+      }
 
       protected void OnNewOrder(Order order)
       {
