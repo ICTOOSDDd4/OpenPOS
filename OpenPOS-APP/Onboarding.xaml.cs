@@ -25,9 +25,7 @@ public partial class Onboarding : ContentPage
 
 	private async void OnLoginButtonClicked(object sender, EventArgs e)
 	{
-		//TODO: REMOVE!
-      await Shell.Current.GoToAsync(nameof(GoodbyePage));
-      // await Shell.Current.GoToAsync(nameof(LoginScreen));
+		await Shell.Current.GoToAsync(nameof(LoginScreen));
 	}
 	
 	private async void CreateNewAccount_Tapped(object sender, EventArgs e)
