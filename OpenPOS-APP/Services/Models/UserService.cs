@@ -86,4 +86,20 @@ public class UserService : IModelService<User>
         }
         return user;
     }
+
+    public static User FindByEmail(string email)
+    {
+        SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[user] WHERE [email] = @Email");
+        
+        query.Parameters.Add("@Email", SqlDbType.VarChar);
+        query.Parameters["@Email"].Value = email;
+        
+        User user = DatabaseService.ExecuteSingle<User>(query);
+        
+        if (user.Email == null)
+        {
+            return null;
+        }
+        return user;
+    }
 }

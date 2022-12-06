@@ -1,5 +1,8 @@
 ﻿using System.Reflection;
 using System.Text.RegularExpressions;
+using OpenPOS_APP.Models;
+using OpenPOS_APP.Services.Models;
+using OpenPOS_APP.Settings;
 
 namespace OpenPOS_APP;
 
@@ -105,13 +108,32 @@ public partial class CreateAccountPage : ContentPage
 	{
 		if (CheckAllFieldsValid())
 		{
-			Console.WriteLine("Account created");
-			//TODO: Check for email in database
-			//TODO: Create account if not found in DB
+			if (UserService.FindByEmail(EmailEntry.Text) == null)
+			{
+				//TODO: Encrypt passwords (OPENPOS-11)
+				User currentUser = UserService.Create(new User
+				{
+					Name = FirstName.Text,
+					Last_name = LastName.Text,
+					Email = EmailEntry.Text,
+					Password = PasswordEntry.Text
+				});
+				
+				ApplicationSettings.LoggedinUser = currentUser;
+				RedirectToMainPage();
+				
+				//TODO: Add the role to the created user
+				
+			}
+			else
+			{
+				SetErrorLabel("Email already in use");
+			}
 		}
-		else
-		{
-			Console.WriteLine("Not allowed!");
-		}
+	}
+
+	private async void RedirectToMainPage()
+	{
+		await Shell.Current.GoToAsync(nameof(TablePickerScreen));
 	}
 }
