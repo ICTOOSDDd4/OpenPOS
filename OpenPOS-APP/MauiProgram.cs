@@ -52,8 +52,10 @@ public static class MauiProgram
 
 			ApplicationSettings.DbSett = config.GetRequiredSection("DATABASE_CONNECTION").Get<DatabaseSettings>();
 			ApplicationSettings.TikkieSet = config.GetRequiredSection("TIKKIE_API").Get<TikkieSettings>();
-			
-			if (ApplicationSettings.DbSett != null)
+            ApplicationSettings.ApiSet = config.GetRequiredSection("OPENPOS_API").Get<ApiSettings>();
+
+
+            if (ApplicationSettings.DbSett != null)
 			{
 				DatabaseService.Initialize();
 			}

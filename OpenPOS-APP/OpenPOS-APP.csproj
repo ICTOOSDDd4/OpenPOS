@@ -55,14 +55,11 @@
 		<PackageReference Include="CommunityToolkit.Maui" Version="3.0.0" />
 		<PackageReference Include="CommunityToolkit.Maui.Core" Version="3.0.0" />
 		<PackageReference Include="CommunityToolkit.Maui.Markup" Version="2.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Folder Include="Models\" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Remove="appsettings.json" />
@@ -77,19 +74,16 @@
 		<MauiXaml Update="AdminOverview.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="BarOverview.xaml">
-		  <Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
 		<MauiXaml Update="CheckoutItemCardView.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="CrewOverview.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="KitchenOverview.xaml">
+		<MauiXaml Update="OrderOverviewPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="OwnerOverview.xaml">
+		<MauiXaml Update="OrderView.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="ProductView.xaml">
