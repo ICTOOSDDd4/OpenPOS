@@ -16,7 +16,6 @@ public partial class MenuPage : ContentPage
 	
 	private bool _isInitialized;
 	private double _width;
-    private EventHubService _eventHubService;
     public MenuPage()
 	{
       Products = ProductService.GetAll();
