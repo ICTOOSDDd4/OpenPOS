@@ -35,9 +35,6 @@
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-maccatalyst|AnyCPU'">
 		<CreatePackage>false</CreatePackage>
 	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-maccatalyst|AnyCPU'">
-	  <CreatePackage>false</CreatePackage>
-	</PropertyGroup>
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
@@ -64,6 +61,10 @@
 		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
 	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="Models\" />
+	</ItemGroup>
 	<ItemGroup>
 		<None Remove="appsettings.json" />
 		<None Remove="Resources\Images\account.svg" />
@@ -89,10 +90,10 @@
 		<MauiXaml Update="CrewOverview.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="OrderOverviewPage.xaml">
+		<MauiXaml Update="KitchenOverview.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="OrderView.xaml">
+		<MauiXaml Update="OwnerOverview.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="ProductView.xaml">
@@ -100,9 +101,6 @@
 		</MauiXaml>
 		<MauiXaml Update="RealisatieMenu.xaml">
 			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="CreateAccountPage.xaml">
-		  <SubType></SubType>
 		</MauiXaml>
 	</ItemGroup>
 
