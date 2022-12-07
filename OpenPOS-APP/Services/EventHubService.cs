@@ -1,18 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.SignalR.Client;
+﻿using Microsoft.AspNetCore.SignalR.Client;
 using OpenPOS_APP.EventArgsClasses;
-using OpenPOS_APP.Models;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.SignalR.Client;
 using OpenPOS_APP.Models;
 
 using OpenPOS_APP.Settings;
@@ -26,7 +13,7 @@ namespace OpenPOS_APP.Services
       private readonly string _secret = ApplicationSettings.ApiSet.secret;
       private HubConnection _connection = null;
       private bool _isConnected = false;
-      private bool iWantItToStop = true;
+      private bool _iWantItToStop = true;
       public string _connectionStatus = "Closed";
       private List<Order> TestOrder = new List<Order>();
 
@@ -35,7 +22,7 @@ namespace OpenPOS_APP.Services
 
       public async Task Stop()
       {
-         iWantItToStop = false;
+         _iWantItToStop = false;
          _connectionStatus = "Disconnected";
          await _connection.StopAsync();
       }
@@ -62,7 +49,7 @@ namespace OpenPOS_APP.Services
 
          _connection.Closed += async (s) =>
          {
-            if (!iWantItToStop)
+            if (!_iWantItToStop)
             {
                _isConnected = false;
                _connectionStatus = "Disconnected";
@@ -100,7 +87,7 @@ namespace OpenPOS_APP.Services
 
          _connection.Closed += async (s) =>
          {
-            if (!iWantItToStop)
+            if (!_iWantItToStop)
             {
                _isConnected = false;
                _connectionStatus = "Disconnected";

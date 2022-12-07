@@ -73,7 +73,6 @@ public static class MauiProgram
 				});
 #endif
 
-
 #if DEBUG
       builder.Logging.AddDebug();
 #endif

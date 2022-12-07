@@ -1,9 +1,7 @@
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Models;
 using OpenPOS_APP.Settings;
-using System.Diagnostics;
-using Microsoft.AspNetCore.SignalR.Client;
-using OpenPOS_APP.NewFolder;
+using OpenPOS_APP.EventArgsClasses;
 using OpenPOS_APP.Services;
 
 namespace OpenPOS_APP;
@@ -17,7 +15,6 @@ public partial class MenuPage : ContentPage
 	
 	private bool _isInitialized;
 	private double _width;
-   private EventHubService _eventHubService;
     public MenuPage()
 	{
       Products = ProductService.GetAll();

@@ -94,7 +94,7 @@ public partial class CheckoutOverview : ContentPage
       
    }
 
-   private void OnClickedAddaTip(object sender, EventArgs args)
+   private void OnClickedAddATip(object sender, EventArgs args)
    {
       TipPopUp popUp = new TipPopUp(TotalPrice, this);
       this.ShowPopup(popUp);
@@ -107,7 +107,7 @@ public partial class CheckoutOverview : ContentPage
       {
          TipPopUp pop = (TipPopUp)sender;
          _tip = pop.tip;
-         TipButton.Clicked -= OnClickedAddaTip;
+         TipButton.Clicked -= OnClickedAddATip;
          TipButton.Clicked += OnEditTip;
          AddTipOnButton();
 
@@ -115,7 +115,7 @@ public partial class CheckoutOverview : ContentPage
       {
          InputCustomTipPopUp pop = (InputCustomTipPopUp)sender;
          _tip = pop.tip;
-         TipButton.Clicked -= OnClickedAddaTip;
+         TipButton.Clicked -= OnClickedAddATip;
          TipButton.Clicked += OnEditTip;
          AddTipOnButton();
       }
@@ -127,14 +127,14 @@ public partial class CheckoutOverview : ContentPage
       var result = await DisplayActionSheet("Edit your tip", null , "Cancel", options);
       if (result == "Change tip")
       {
-         OnClickedAddaTip(this, args);
+         OnClickedAddATip(this, args);
          Debug.WriteLine("Change");
       } else if (result == "Remove Tip")
       {
          _tip = 0;
          TipButton.Text = "Add a tip";
          TipButton.Clicked -= OnEditTip;
-         TipButton.Clicked += OnClickedAddaTip;
+         TipButton.Clicked += OnClickedAddATip;
          string totalValue = String.Format(((Math.Round(TotalPrice + _tip) == TotalPrice + _tip) ? "{0:0}" : "{0:0.00}"), TotalPrice + _tip);
          TotalPriceLabel.Text = $"€{totalValue}";
          Debug.WriteLine("Remove");
