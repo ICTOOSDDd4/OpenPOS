@@ -72,15 +72,6 @@ public static class MauiProgram
 					});
 				});
 #endif
-      // MacCatalyst specifc window settings
-#if MACCATALYST
-      //var size = new CoreGraphics.CGSize(1920, 1080);
-      //handler.PlatformView.WindowScene.SizeRestrictions.MinimumSize = size;
-      //handler.PlatformView.WindowScene.SizeRestrictions.MaximumSize = size;
-#endif
-//#if MACCATALYST
-		
-//#endif
 
 
 #if DEBUG
