@@ -22,7 +22,7 @@ namespace OpenPOS_APP.Services
 
         public event EventHandler<OrderEventArgs> newOrder;
 
-        public async Task ConnectToServer()
+        public Task ConnectToServer()
         {
             System.Diagnostics.Debug.WriteLine(_secret);
             _connection = new HubConnectionBuilder()
@@ -33,7 +33,7 @@ namespace OpenPOS_APP.Services
                 .Build();
             try
             {
-                await _connection.StartAsync();
+                _connection.StartAsync();
                 _isConnected = true;
                 _connectionStatus = "Connected";
             }
