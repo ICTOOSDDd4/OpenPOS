@@ -60,6 +60,22 @@ jobs:
       with:
         dotnet-version: 7.0.x
     
+    - name: Create appsettings.json
+      id: appsettings
+      uses: jsdaniell/create-json@v1.2.1
+      with:
+          name: "appsettings.json"
+          json: ${{ secrets.APPSETTINGS }}
+          dir: 'OpenPOS-APP\'
+
+    - name: Create appsettings.test.json
+      id: testappsettings
+      uses: jsdaniell/create-json@v1.2.1
+      with:
+          name: "appsettings.test.json"
+          json: ${{ secrets.APPSETTINGS }}
+          dir: 'OpenPOS-Testing\'
+
     - name: Build Application
       run: |
           dotnet nuget locals all --clear 

@@ -1,3 +1,4 @@
+
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Models;
 using System.Diagnostics;
@@ -21,7 +22,9 @@ public partial class Header : StackLayout
     public Header()
 	{
 		InitializeComponent();
-	}
+      TableNumber.Text = $"Tafel: { ApplicationSettings.TableNumber }";
+
+   }
 
    private void OnSearch(object sender, EventArgs e)
    {
@@ -30,4 +33,14 @@ public partial class Header : StackLayout
    }
 
    private void OnSearchTextChanged(object sender, EventArgs e) { }
+
+
+   private async void OnClickedAccount(object sender, EventArgs e)
+   {
+      await Shell.Current.DisplayAlert("Work In Progress", "This feature will be released soon, thank you for your patience.", "Understood");
+   }
+   private async void OnClickedCard(object sender, EventArgs e) 
+   {
+      await Shell.Current.GoToAsync(nameof(CheckoutOverview));
+   }
 }

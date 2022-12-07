@@ -1,13 +1,12 @@
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Settings;
-using System.Reflection;
 
 namespace OpenPOS_APP;
 
 public partial class ProductView : ContentView
 {
    public int Amount { get; set; }
-   public EventHandler ClickedMoreInfo;
+   public event EventHandler ClickedMoreInfo;
    private MenuPage _menuPage;
    private Product _product;
 
@@ -26,9 +25,7 @@ public partial class ProductView : ContentView
    {
       _menuPage = page;
       _product = product;
-      
-      //TODO: Add price to product
-      
+            
       ProductName.Text = product.Name;
       ProductInfo.Text = product.Description;
       ProductPrice.Text = $"€ { product.Price }";
@@ -40,7 +37,25 @@ public partial class ProductView : ContentView
       Amount++;
       AmountCount.Text = Amount.ToString();
       
-      _menuPage.SelectedProducts.Add(_product);
+      // Add to current selected products
+      if (_menuPage.SelectedProducts.ContainsKey(_product))
+      {
+         _menuPage.SelectedProducts[_product] = Amount;
+      }
+      else
+      {
+         _menuPage.SelectedProducts.Add(_product, Amount);
+      }
+
+      // Add to over checkoutlist
+      if (ApplicationSettings.CheckoutList.ContainsKey(_product))
+      {
+         ApplicationSettings.CheckoutList[_product]++;
+      } else
+      {
+         ApplicationSettings.CheckoutList.Add(_product, Amount);
+      }
+
    }
 
    private void OnClickedInfo(object sender, EventArgs e)
@@ -52,8 +67,33 @@ public partial class ProductView : ContentView
    {
       Amount--;
       AmountCount.Text = Amount.ToString();
-      
-      _menuPage.SelectedProducts.Remove(_product);
+
+      // Remove from currently selected products
+      if (_menuPage.SelectedProducts.ContainsKey(_product))
+      {
+         if (_menuPage.SelectedProducts[_product] > 1)
+         {
+            _menuPage.SelectedProducts[_product]--;
+
+         }
+         else
+         {
+            _menuPage.SelectedProducts.Remove(_product);
+         }
+      }
+
+      // Remove from overall checkoutlist
+      if (ApplicationSettings.CheckoutList.ContainsKey(_product))
+      {
+         if(ApplicationSettings.CheckoutList[_product] > 1)
+         {
+            ApplicationSettings.CheckoutList[_product]--;
+
+         } else
+         {
+            ApplicationSettings.CheckoutList.Remove(_product);
+         }
+      }
    }
 
     private void AmountCount_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
