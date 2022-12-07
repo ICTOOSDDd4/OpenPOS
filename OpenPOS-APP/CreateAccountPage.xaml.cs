@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using System.Text.RegularExpressions;
+using OpenPOS_APP.Enums;
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Models;
 using OpenPOS_APP.Settings;
@@ -119,10 +120,16 @@ public partial class CreateAccountPage : ContentPage
 					Password = PasswordEntry.Text
 				});
 				
+				Role guestRole = RoleService.FindOnRoleTitle(RolesEnum.Guest);
+				UserRoleService.Create(new UserRole
+				{
+					User_id = currentUser.Id,
+					Role_id = guestRole.Id
+				});
+				
 				ApplicationSettings.LoggedinUser = currentUser;
 				RedirectToMainPage();
 				
-				//TODO: Add the role to the created user
 				
 			}
 			else
