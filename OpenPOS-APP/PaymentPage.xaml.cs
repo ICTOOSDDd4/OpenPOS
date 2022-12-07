@@ -36,7 +36,8 @@ public partial class PaymentPage : ContentPage
    private async void Connect()
    {
       await _eventHubService.ConnectToServerPayment();
-      if (!OpenPosAPIService.AddToPaymentListener(_eventHubService.GetConnectionID(), CurrentTransaction.PaymentRequestToken))
+      bool AddedToPaymentListener = await OpenPosAPIService.AddToPaymentListener(_eventHubService.GetConnectionID(), CurrentTransaction.PaymentRequestToken);
+      if (!AddedToPaymentListener)
       {
          throw new Exception("Oopsie");
       }

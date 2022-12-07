@@ -35,7 +35,7 @@ public partial class MenuPage : ContentPage
 
 	private void SetWindowScaling(double width, double height)
 	{
-		ScrView.HeightRequest = height - 200;
+		ScrView.HeightRequest = height - _ProductCardViewWidth;
 		_width = width;
 		AddAllCategories(CategoryService.GetAll());
         AddAllProducts();
