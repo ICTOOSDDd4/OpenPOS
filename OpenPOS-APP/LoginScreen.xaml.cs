@@ -52,7 +52,7 @@ public partial class LoginScreen : ContentPage
           switch (role)
             {
                 case (RolesEnum.Owner or RolesEnum.Admin):
-                    await Shell.Current.GoToAsync(nameof(CrewOverview));
+                    await Shell.Current.GoToAsync(nameof(AdminOverview));
                     break;
                 case (RolesEnum.Crew):
                     await Shell.Current.GoToAsync(nameof(CrewOverview));
