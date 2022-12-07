@@ -104,21 +104,6 @@ public partial class MenuPage : ContentPage
 			"Understood");
 	}
 
-	// Temporary function to test Eventlisteners
-    private async void ConnectButton_OnClicked(object sender, EventArgs e)
-    {
-        if (_eventHubService == null)
-        {
-			_eventHubService = new EventHubService();
-        }
-
-        if (!_eventHubService._isConnected)
-        {
-            _eventHubService.newOrder += newOrder;
-            _eventHubService.ConnectToServer();
-        }
-    }
-
     // Temporary function to test Eventlisteners
     private void newOrder(object sender, OrderEventArgs orderEvent)
     {
