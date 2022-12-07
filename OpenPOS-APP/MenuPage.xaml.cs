@@ -103,4 +103,49 @@ public partial class MenuPage : ContentPage
 			"Understood");
 	}
 
+    // Temporary function to test Eventlisteners
+    private void newOrder(object sender, OrderEventArgs orderEvent)
+    {
+        System.Diagnostics.Debug.WriteLine("NewEvent");
+    }
+
+    private async void OrderButton_OnClicked(object sender, EventArgs e)
+    {
+        if (SelectedProducts.Count == 0)
+        {
+            await DisplayAlert("No products selected", "You forgot to add products to your order!", "Back");
+
+        }
+        else
+        {
+            if (await DisplayAlert("Confirm order", "Are you sure you want to place your order?", "Yes", "No"))
+            {
+                Order order = new Order(1, false, ApplicationSettings.LoggedinUser.Id,
+                    ApplicationSettings.CurrentBill.Id, DateTime.Now, DateTime.Now);
+                order = OrderService.Create(order);
+
+                // Get current product from selected products
+                foreach (KeyValuePair<Product, int> entry in SelectedProducts)
+                {
+                    OrderLine line = new OrderLine(order.Id, entry.Key.Id, entry.Value, "In Development");
+                    OrderLineService.Create(line);
+                }
+
+                if (order == null)
+                {
+                    await DisplayAlert("Oops", "Something went wrong please try again.", "Alright");
+                }
+                else
+                {
+                    await DisplayAlert("Order Placed", "Your order was successfully sent to our staff!", "Thank you");
+                    await Shell.Current.GoToAsync(nameof(MenuPage));
+                }
+            }
+            else
+            {
+                // Empty for now, DOING NOTHING!
+            }
+        }
+    }
+
 }

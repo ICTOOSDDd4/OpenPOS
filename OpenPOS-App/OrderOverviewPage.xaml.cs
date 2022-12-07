@@ -7,7 +7,7 @@ namespace OpenPOS_APP;
 public partial class OrderOverviewPage : ContentPage
 {
 	public List<Order> Orders { get; set; }
-	private HorizontalStackLayout HorizontalLayout;
+	private HorizontalStackLayout _horizontalLayout;
 
    private bool _isInitialized;
    private double _width;
@@ -78,16 +78,16 @@ public partial class OrderOverviewPage : ContentPage
 	public void AddOrderToLayout(Order order)
 	{
       int moduloNumber = ((int)_width / 300);
-      if (HorizontalLayout == null || HorizontalLayout.Children.Count % moduloNumber == 0)
+      if (_horizontalLayout == null || _horizontalLayout.Children.Count % moduloNumber == 0)
       {
 			AddHorizontalLayout();
       }
 
 		OrderView orderview = new OrderView();
-		orderview.AddBinds(order, HorizontalLayout);
+		orderview.AddBinds(order, _horizontalLayout);
       orderview.OrderDone += OrderDone;
       orderview.OrderCanceled += OrderCanceled;
-      HorizontalLayout.Add(orderview);      
+      _horizontalLayout.Add(orderview);      
 	}
 
 	private void AddHorizontalLayout()
@@ -96,7 +96,7 @@ public partial class OrderOverviewPage : ContentPage
       hLayout.Spacing = 20;
       hLayout.Margin = new Thickness(10);
       MainVerticalLayout.Add(hLayout);
-      HorizontalLayout = hLayout;
+      _horizontalLayout = hLayout;
    }
 	
 	
