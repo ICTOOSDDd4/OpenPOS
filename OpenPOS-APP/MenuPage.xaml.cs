@@ -23,11 +23,11 @@ public partial class MenuPage : ContentPage
     private EventHubService _eventHubService;
     public MenuPage()
 	{
-      Products = ProductService.GetAll();
-      InitializeComponent();
-      AddAllProducts();
+
+        SelectedProducts = new Dictionary<Product, int>();
+        Products = ProductService.GetAll();
+		InitializeComponent();
 		Header.Searched += OnSearch;
-      SelectedProducts = new Dictionary<Product, int>();
 	}
 
 	protected override void OnSizeAllocated(double width, double height)
@@ -38,8 +38,8 @@ public partial class MenuPage : ContentPage
 			_isInitialized = true;
 			SetWindowScaling(width,height);
 		}
-		
-	}
+        AddAllProducts();
+    }
 
 	private void SetWindowScaling(double width, double height)
 	{
