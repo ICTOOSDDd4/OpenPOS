@@ -50,7 +50,7 @@ namespace OpenPOS_APP.Services
                 _isConnected = true;
             };
 
-            _connection.On<Order>("newOrder", async (Order m) =>
+            _connection.On<Order>("newOrder", (Order m) =>
             {
                 OnNewOrder(m);
             });
