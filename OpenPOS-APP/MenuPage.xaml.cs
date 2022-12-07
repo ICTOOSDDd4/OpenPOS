@@ -2,7 +2,6 @@ using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Models;
 using OpenPOS_APP.Settings;
 using OpenPOS_APP.EventArgsClasses;
-using OpenPOS_APP.Services;
 
 namespace OpenPOS_APP;
 
@@ -78,10 +77,6 @@ public partial class MenuPage : ContentPage
 			"Understood");
 	}
 
-    private void newOrder(object sender, OrderEventArgs orderEvent)
-    {
-		System.Diagnostics.Debug.WriteLine("NewEvent");
-    }
     private async void OrderButton_OnClicked(object sender, EventArgs e)
 	{
 		if (SelectedProducts.Count == 0)

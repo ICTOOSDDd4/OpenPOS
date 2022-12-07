@@ -1,6 +1,4 @@
-﻿using Windows.ApplicationModel.Activation;
-
-namespace OpenPOS_APP.Models;
+﻿namespace OpenPOS_APP.Models;
 
 public class Transaction
 {

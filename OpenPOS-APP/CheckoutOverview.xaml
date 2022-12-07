@@ -129,7 +129,7 @@
                         WidthRequest="300"
                         HeightRequest="100"
                         FontSize="36"
-                        Clicked="OnClickedAddaTip"/>
+                        Clicked="OnClickedAddATip"/>
                 </VerticalStackLayout>
 
             </HorizontalStackLayout>
