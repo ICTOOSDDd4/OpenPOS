@@ -52,13 +52,13 @@ public partial class LoginScreen : ContentPage
           switch (role)
             {
                 case (RolesEnum.Owner or RolesEnum.Admin):
-                    await Shell.Current.GoToAsync(nameof(OwnerOverview));
+                    await Shell.Current.GoToAsync(nameof(AdminOverview));
                     break;
                 case (RolesEnum.Crew):
                     await Shell.Current.GoToAsync(nameof(CrewOverview));
                     break;
                 case (RolesEnum.Cook or RolesEnum.Bar):
-                    await Shell.Current.GoToAsync(nameof(KitchenOverview));
+                    await Shell.Current.GoToAsync(nameof(OrderOverviewPage));
                     break;
                 case (RolesEnum.Guest):
                     await Shell.Current.GoToAsync(nameof(TablePickerScreen));
