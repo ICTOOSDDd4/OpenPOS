@@ -50,20 +50,14 @@ public partial class LoginScreen : ContentPage
             var role = RoleService.FindUserRole(UserService.Authenticate(_username, _password).Id).Title;
             switch (role)
             {
-                case ("Owner"):
-                    await Shell.Current.GoToAsync(nameof(OwnerOverview));
-                    break;
-                case ("Admin"):
+                case ("Owner" or "Admin"):
                     await Shell.Current.GoToAsync(nameof(AdminOverview));
                     break;
                 case ("Crew"):
                     await Shell.Current.GoToAsync(nameof(CrewOverview));
                     break;
-                case ("Cook"):
-                    await Shell.Current.GoToAsync(nameof(KitchenOverview));
-                    break;
-                case ("Bar"):
-                    await Shell.Current.GoToAsync(nameof(BarOverview));
+                case ("Kitchen" or "Bar"):
+                    await Shell.Current.GoToAsync(nameof(OrderOverviewPage));
                     break;
                 case ("Guest"):
                     await Shell.Current.GoToAsync(nameof(TablePickerScreen));
