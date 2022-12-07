@@ -1,23 +1,118 @@
-<mxfile host="app.diagrams.net" modified="2022-12-06T18:23:49.912Z" agent="5.0 (Windows)" version="20.6.0" etag="U73ZYz1Y1e3AyKmhlknU" type="github">
+<mxfile host="app.diagrams.net" modified="2022-12-07T12:12:24.796Z" agent="5.0 (Windows)" etag="RBmyprJ9ZKSeDc301_lm" version="20.6.0" type="github">
   <diagram id="Idi5wzEeITfHmeWHL57_" name="Pagina-1">
-    <mxGraphModel dx="1422" dy="864" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1293" dy="785" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="naVzlve6A-TXn9_YKJXZ-1" value="" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#cce5ff;strokeColor=#36393d;" vertex="1" parent="1">
+        <mxCell id="sz71mxpxCfhScWfcTetH-23" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="60" width="660" height="720" as="geometry" />
+        </mxCell>
+        <mxCell id="sz71mxpxCfhScWfcTetH-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="naVzlve6A-TXn9_YKJXZ-1" target="naVzlve6A-TXn9_YKJXZ-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="naVzlve6A-TXn9_YKJXZ-1" value="" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#cce5ff;strokeColor=#36393d;" parent="1" vertex="1">
           <mxGeometry x="341" y="110" width="146" height="146" as="geometry" />
         </mxCell>
-        <mxCell id="naVzlve6A-TXn9_YKJXZ-2" value="&lt;div align=&quot;center&quot;&gt;&lt;b&gt;POS Customer&lt;/b&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="naVzlve6A-TXn9_YKJXZ-2" value="&lt;div align=&quot;center&quot;&gt;&lt;b&gt;POS Customer&lt;/b&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="351" y="120" width="126" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="naVzlve6A-TXn9_YKJXZ-3" value="(Person)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="naVzlve6A-TXn9_YKJXZ-3" value="(Person)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="384" y="140" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="naVzlve6A-TXn9_YKJXZ-4" value="Customer of the resteaurant" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="naVzlve6A-TXn9_YKJXZ-4" value="Customer of the resteaurant" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="361" y="190" width="106" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="naVzlve6A-TXn9_YKJXZ-5" value="" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
-          <mxGeometry x="374" y="360" width="80" height="80" as="geometry" />
+        <mxCell id="sz71mxpxCfhScWfcTetH-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="naVzlve6A-TXn9_YKJXZ-5" target="sz71mxpxCfhScWfcTetH-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="naVzlve6A-TXn9_YKJXZ-5" value="" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="344" y="343" width="140" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="sz71mxpxCfhScWfcTetH-3" value="&lt;b&gt;POS&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="384" y="343" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sz71mxpxCfhScWfcTetH-4" value="(Software System)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="364" y="363" width="106" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sz71mxpxCfhScWfcTetH-5" value="Allows customers to order products" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="354.5" y="393" width="119" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sz71mxpxCfhScWfcTetH-6" value="Allows Employees to manage orders" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="357.5" y="433" width="119" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sz71mxpxCfhScWfcTetH-8" value="" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#cce5ff;strokeColor=#36393d;" vertex="1" parent="1">
+          <mxGeometry x="90" y="340" width="146" height="146" as="geometry" />
+        </mxCell>
+        <mxCell id="sz71mxpxCfhScWfcTetH-9" value="&lt;div align=&quot;center&quot;&gt;&lt;b&gt;POS Employee&lt;br&gt;&lt;/b&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="100" y="350" width="126" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sz71mxpxCfhScWfcTetH-10" value="(Person)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="133" y="370" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sz71mxpxCfhScWfcTetH-11" value="Manages POS" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="110" y="420" width="106" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sz71mxpxCfhScWfcTetH-14" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="sz71mxpxCfhScWfcTetH-8" target="naVzlve6A-TXn9_YKJXZ-5">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="270" y="620" as="sourcePoint" />
+            <mxPoint x="320" y="570" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sz71mxpxCfhScWfcTetH-15" value="" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="335" y="570" width="157" height="157" as="geometry" />
+        </mxCell>
+        <mxCell id="sz71mxpxCfhScWfcTetH-19" value="&lt;b&gt;Tikkie API&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="379.5" y="580" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sz71mxpxCfhScWfcTetH-20" value="(Software System)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="354" y="610" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sz71mxpxCfhScWfcTetH-21" value="Serves Payment System" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="343" y="660" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sz71mxpxCfhScWfcTetH-24" value="Level 1 System Context Diagram" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="60" y="740" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sz71mxpxCfhScWfcTetH-25" value="" style="curved=1;endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="sz71mxpxCfhScWfcTetH-26">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="170" y="590" as="sourcePoint" />
+            <mxPoint x="300" y="410" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="210" y="565" />
+              <mxPoint x="270" y="550" />
+              <mxPoint x="250" y="490" />
+              <mxPoint x="330" y="480" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sz71mxpxCfhScWfcTetH-26" value="&lt;div&gt;Uses POS to assist users with their orders and payments&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="66" y="550" width="150" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sz71mxpxCfhScWfcTetH-28" value="" style="curved=1;endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="sz71mxpxCfhScWfcTetH-29">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="220" y="290" as="sourcePoint" />
+            <mxPoint x="410" y="280" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="270" y="290" />
+              <mxPoint x="280" y="250" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sz71mxpxCfhScWfcTetH-29" value="Uses POS to order products" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="116" y="226" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sz71mxpxCfhScWfcTetH-30" value="" style="curved=1;endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="sz71mxpxCfhScWfcTetH-32">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="510" y="550" as="sourcePoint" />
+            <mxPoint x="420" y="510" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="610" y="520" />
+              <mxPoint x="530" y="540" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sz71mxpxCfhScWfcTetH-32" value="POS Uses Tikkie to create payments and handle payments" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="540" y="570" width="120" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
