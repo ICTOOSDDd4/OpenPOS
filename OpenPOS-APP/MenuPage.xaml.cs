@@ -12,7 +12,7 @@ public partial class MenuPage : ContentPage
 {
 	public List<Product> Products { get; set; }
 	public Dictionary<Product, int> SelectedProducts { get; set; }
-	private HorizontalStackLayout HorizontalLayout;
+	private HorizontalStackLayout _horizontalLayout;
 	
 	private bool _isInitialized;
 	private double _width;
@@ -45,7 +45,7 @@ public partial class MenuPage : ContentPage
 	public void AddAllProducts()
 	{
 		MainVerticalLayout.Clear();
-        HorizontalLayout = null;
+        _horizontalLayout = null;
 		for (int i = 0; i < Products.Count; i++)
 		{
             Debug.WriteLine(i);
@@ -56,15 +56,15 @@ public partial class MenuPage : ContentPage
     public void AddProductToLayout(Product product)
     {
 	   int moduloNumber = ((int)_width / 300);
-       if (HorizontalLayout == null || HorizontalLayout.Children.Count % moduloNumber == 0)
+       if (_horizontalLayout == null || _horizontalLayout.Children.Count % moduloNumber == 0)
        {
            AddHorizontalLayout();
 
            ProductView productView = new ProductView();
            productView.SetProductValues(this, product);
            productView.ClickedMoreInfo += OnInfoButtonClicked;
-           HorizontalLayout.Add(productView);
-           Debug.WriteLine(HorizontalLayout.Children.Count);
+           _horizontalLayout.Add(productView);
+           Debug.WriteLine(_horizontalLayout.Children.Count);
        }
     }
 
@@ -94,7 +94,7 @@ public partial class MenuPage : ContentPage
 		hLayout.Spacing = 20;
 		hLayout.Margin = new Thickness(10);
 		MainVerticalLayout.Add(hLayout);
-		HorizontalLayout = hLayout;
+		_horizontalLayout = hLayout;
     }
 
 	private async void OnInfoButtonClicked(object sender, EventArgs e)
@@ -102,10 +102,5 @@ public partial class MenuPage : ContentPage
 		await DisplayAlert("Work In Progress", "This will display more about the product and allergy information",
 			"Understood");
 	}
-
-	// Temporary function to test Eventlisteners
-    
-
-    // Temporary function to test Eventlistener
 
 }
