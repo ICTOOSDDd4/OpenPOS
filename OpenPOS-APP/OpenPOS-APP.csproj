@@ -74,14 +74,12 @@
 		<MauiXaml Update="AdminOverview.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-feature/categories
 		<MauiXaml Update="BarOverview.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="CategoryView.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-development/sprint-2
 		<MauiXaml Update="CheckoutItemCardView.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
