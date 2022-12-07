@@ -37,15 +37,18 @@ public partial class MenuPage : ContentPage
 	{
 		ScrView.HeightRequest = height - 200;
 		_width = width;
-		AddAllProducts();
+		AddAllCategories(CategoryService.GetAll());
+        AddAllProducts();
+    }
 
-	}
-
-	void AddAllProducts()
+	public void AddAllProducts()
 	{
+		MainVerticalLayout.Clear();
+        HorizontalLayout = null;
 		for (int i = 0; i < Products.Count; i++)
 		{
-			AddProductToLayout(Products[i]);
+            Debug.WriteLine(i);
+            AddProductToLayout(Products[i]);
 		}
 	}
 
@@ -56,20 +59,42 @@ public partial class MenuPage : ContentPage
 		{
 			AddHorizontalLayout();
 		}
+        
 		ProductView productView = new ProductView();
 		productView.SetProductValues(this,product);
 		productView.ClickedMoreInfo += OnInfoButtonClicked;
 		HorizontalLayout.Add(productView);
-	}
+        Debug.WriteLine(HorizontalLayout.Children.Count);
+    }
 
-	private void AddHorizontalLayout()
+    public void AddAllCategories(List<Category> categories)
+    {
+		//adds an "all" category
+        CategoryView categoryView = new CategoryView();
+        categoryView.SetCategoryValues(this, new Category() { Id = 0, Name = "All"});
+        CategoryHorizontal.Add(categoryView);
+
+        for (int i = 0; i < categories.Count; i++)
+        {
+            AddCategoryToLayout(categories[i]);
+        }
+    }
+
+    public void AddCategoryToLayout(Category category)
+    {
+        CategoryView categoryView = new CategoryView();
+		categoryView.SetCategoryValues(this, category);
+        CategoryHorizontal.Add(categoryView);
+    }
+
+    private void AddHorizontalLayout()
 	{
       HorizontalStackLayout hLayout = new HorizontalStackLayout();
 		hLayout.Spacing = 20;
 		hLayout.Margin = new Thickness(10);
 		MainVerticalLayout.Add(hLayout);
 		HorizontalLayout = hLayout;
-   }
+    }
 
 	private async void OnInfoButtonClicked(object sender, EventArgs e)
 	{
