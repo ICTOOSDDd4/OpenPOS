@@ -6,6 +6,7 @@
     <Color x:Key="OpenPos-Yellow">#ffde59</Color>
     <Color x:Key="OpenPos-Blue">#5ce1e6</Color>
     <Color x:Key="OpenPos-Green">#7ed957</Color>
+    <Color x:Key="DeleteRed">#FF5245</Color>
     <Color x:Key="Primary">#512BD4</Color>
     <Color x:Key="Secondary">#DFD8F7</Color>
     <Color x:Key="Tertiary">#2B0B98</Color>

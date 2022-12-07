@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using Microsoft.Maui.Controls;
 using OpenPOS_APP.Exceptions;
+using OpenPOS_APP.Factory.Database;
 using OpenPOS_APP.Settings;
 
 namespace OpenPOS_APP.Services
@@ -12,13 +13,18 @@ namespace OpenPOS_APP.Services
         public static SqlConnection Dbcontext { get; private set; }
         public static void Initialize()
         {
+            SetConnectionString();
+            Seeder.Initialize();
+        }
+
+        public static void SetConnectionString()
+        {
             _connectionString = ApplicationSettings.DbSett.connection_string;
             Dbcontext = new SqlConnection
             {
                 ConnectionString = _connectionString
             };
         }
-
         public static bool Execute(SqlCommand command)
         {
             try
@@ -88,19 +94,33 @@ namespace OpenPOS_APP.Services
             while (reader.Read())
             {
                 foreach (var prop in type.GetProperties())
-                {
-                    Console.WriteLine(prop.PropertyType);
+                { 
                     var propType = prop.PropertyType;
                     try
-                    {
-                        prop.SetValue(obj, Convert.ChangeType(reader[prop.Name].ToString(), propType));
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e);
-                        Debug.WriteLine(e);
-                        throw;
-                    }
+                   {
+                      if (propType.IsGenericType && propType.GetGenericTypeDefinition().Equals(typeof(Nullable<>)))
+                      {
+                         if (reader[prop.Name] == null)
+                         {
+                            prop.SetValue(obj, null, null);
+                         }
+                         else
+                         {
+                             propType = Nullable.GetUnderlyingType(propType);
+                             prop.SetValue(obj, Convert.ChangeType(reader[prop.Name].ToString(), propType));
+                         }
+                      }
+                      else
+                      {
+                         prop.SetValue(obj, Convert.ChangeType(reader[prop.Name].ToString(), propType));
+                      }
+                   }
+                   catch (Exception e)
+                   {
+                      Console.WriteLine(e);
+                      Debug.WriteLine(e);
+                      throw;
+                   }
                 }
             }
 
@@ -115,9 +135,29 @@ namespace OpenPOS_APP.Services
                 var type = typeof(T);
                 T obj = (T)Activator.CreateInstance(type);
                 foreach (var prop in type.GetProperties())
-                {
+                { 
                     var propType = prop.PropertyType;
-                    prop.SetValue(obj, Convert.ChangeType(reader[prop.Name].ToString(), propType));
+                    try
+                    {
+                        if (propType.IsGenericType && propType.GetGenericTypeDefinition().Equals(typeof(Nullable<>)))
+                        {
+                            if (reader[prop.Name] == null)
+                            {
+                                prop.SetValue(obj, null, null);
+                            }
+                            propType = Nullable.GetUnderlyingType(propType);
+                        }
+                        else
+                        {
+                            prop.SetValue(obj, Convert.ChangeType(reader[prop.Name].ToString(), propType));
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                        Debug.WriteLine(e);
+                        throw;
+                    }
                 }
                 list.Add(obj);
             }

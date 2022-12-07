@@ -5,6 +5,7 @@ using System.Reflection;
 using OpenPOS_APP.Settings;
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Models;
+using CommunityToolkit.Maui;
 
 namespace OpenPOS_APP;
 
@@ -15,6 +16,7 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
+			.UseMauiCommunityToolkit()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("LeagueSpartan-Black.ttf", "LeagueSpartanBlack");
@@ -27,11 +29,12 @@ public static class MauiProgram
 				fonts.AddFont("LeagueSpartan-Light.ttf", "LeagueSpartanLight");
 				fonts.AddFont("LeagueSpartan-Thin.ttf", "LeagueSpartanThin");
 			});
-		
-		Initialize();
+            Initialize();
+
+
 
 #if DEBUG
-      builder.Logging.AddDebug();
+        builder.Logging.AddDebug();
 #endif
 
 		return builder.Build();
@@ -48,8 +51,10 @@ public static class MauiProgram
 
 			ApplicationSettings.DbSett = config.GetRequiredSection("DATABASE_CONNECTION").Get<DatabaseSettings>();
 			ApplicationSettings.TikkieSet = config.GetRequiredSection("TIKKIE_API").Get<TikkieSettings>();
-			
-			if (ApplicationSettings.DbSett != null)
+            ApplicationSettings.ApiSet = config.GetRequiredSection("OPENPOS_API").Get<ApiSettings>();
+
+
+            if (ApplicationSettings.DbSett != null)
 			{
 				DatabaseService.Initialize();
 			}
@@ -58,5 +63,8 @@ public static class MauiProgram
             var result = BillService.Update(bill);
 			System.Diagnostics.Debug.WriteLine(result);
         } else throw new ApplicationException("Can't find appsettings.json file");
+		
+		ApplicationSettings.UIElements = new UIElements();
+   
 	}
 }

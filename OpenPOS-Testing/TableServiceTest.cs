@@ -59,8 +59,8 @@ public class TableServiceTest
 
         var Table = this.Table;
         var result = TableService.Create(Table);
-        
-        Assert.That(Table.Bill_id, Is.EqualTo(result.Bill_id));
+
+        Assert.That(result.Bill_id, Is.EqualTo(Table.Bill_id));
         
         TableService.Delete(result);
     }
@@ -103,5 +103,27 @@ public class TableServiceTest
         
         Assert.IsTrue(result);
         Assert.That(TableService.FindByID(createdTable.Id).Table_number, Is.EqualTo(0));
+    }
+
+    [Test]
+    public void TableService_FindByTableNumber_ReturnsTable()
+    {
+        var Table = this.Table;
+        var createdTable = TableService.Create(Table);
+        var result = TableService.FindByTableNumber(createdTable.Table_number);
+        
+        Assert.That(result.Table_number, Is.EqualTo(createdTable.Table_number));
+
+        TableService.Delete(createdTable);
+
+    }
+    
+    [Test]
+    public void TableService_FindByTableNumber_ReturnsNull()
+    {
+        var result = TableService.FindByTableNumber(679);
+        
+        Assert.IsNull(result);
+
     }
 }

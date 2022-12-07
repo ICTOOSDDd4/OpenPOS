@@ -14,13 +14,22 @@ public class OrderService : IModelService<Order>
         return resultList;
     }
 
+    public static List<Order> GetAllOpenOrders()
+    {
+        SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[Order] WHERE [status] = @status");
+        query.Parameters.Add("@status", SqlDbType.TinyInt);
+        query.Parameters["@status"].Value = false;
+
+        return DatabaseService.Execute<Order>(query);
+    }
+
     public static Order FindByID(int id)
     {
         SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[Order] WHERE [Id] = @ID");
-        
+
         query.Parameters.Add("@ID", SqlDbType.Int);
         query.Parameters["@ID"].Value = id;
-        
+
         Order result = DatabaseService.ExecuteSingle<Order>(query);
 
         return result;
@@ -29,10 +38,10 @@ public class OrderService : IModelService<Order>
     public static bool Delete(Order obj)
     {
         SqlCommand query = new SqlCommand("DELETE FROM [dbo].[order] WHERE [ID] = @OrderId");
-        
+
         query.Parameters.Add("@OrderId", SqlDbType.Int);
         query.Parameters["@OrderId"].Value = obj.Id;
-        
+
         return DatabaseService.Execute(query);
     }
 
@@ -67,6 +76,13 @@ public class OrderService : IModelService<Order>
         query.Parameters.Add("@updated_at", SqlDbType.DateTime);
         query.Parameters["@updated_at"].Value = obj.Updated_At;
 
-        return DatabaseService.ExecuteSingle<Order>(query);
+        var result = DatabaseService.ExecuteSingle<Order>(query);
+
+        //foreach (var line in result.Lines)
+        //{
+        //   OrderLineService.Create(line);
+        //}
+
+        return result;
     }
 }
