@@ -57,15 +57,16 @@ public partial class MenuPage : ContentPage
     public void AddProductToLayout(Product product)
     {
 	   int moduloNumber = ((int)_width / 300);
-	   if (HorizontalLayout == null || HorizontalLayout.Children.Count % moduloNumber == 0) 
+       if (HorizontalLayout == null || HorizontalLayout.Children.Count % moduloNumber == 0)
        {
-			AddHorizontalLayout();
-        
-		ProductView productView = new ProductView();
-		productView.SetProductValues(this,product);
-		productView.ClickedMoreInfo += OnInfoButtonClicked;
-		HorizontalLayout.Add(productView);
-        Debug.WriteLine(HorizontalLayout.Children.Count);
+           AddHorizontalLayout();
+
+           ProductView productView = new ProductView();
+           productView.SetProductValues(this, product);
+           productView.ClickedMoreInfo += OnInfoButtonClicked;
+           HorizontalLayout.Add(productView);
+           Debug.WriteLine(HorizontalLayout.Children.Count);
+       }
     }
 
     public void AddAllCategories(List<Category> categories)
@@ -104,60 +105,8 @@ public partial class MenuPage : ContentPage
 	}
 
 	// Temporary function to test Eventlisteners
-    private async void ConnectButton_OnClicked(object sender, EventArgs e)
-    {
-        if (_eventHubService == null)
-        {
-			_eventHubService = new EventHubService();
-        }
+    
 
-        if (!_eventHubService._isConnected)
-        {
-            _eventHubService.newOrder += newOrder;
-            _eventHubService.ConnectToServer();
-        }
-    }
+    // Temporary function to test Eventlistener
 
-    // Temporary function to test Eventlisteners
-    private void newOrder(object sender, OrderEventArgs orderEvent)
-    {
-		System.Diagnostics.Debug.WriteLine("NewEvent");
-    }
-    private async void OrderButton_OnClicked(object sender, EventArgs e)
-	{
-		if (SelectedProducts.Count == 0)
-		{
-         await DisplayAlert("No products selected", "You forgot to add products to your order!", "Back");
-
-      }
-      else
-		{
-         if (await DisplayAlert("Confirm order", "Are you sure you want to place your order?", "Yes", "No"))
-         {
-            Order order = new Order(1, false, ApplicationSettings.LoggedinUser.Id, ApplicationSettings.CurrentBill.Id, DateTime.Now, DateTime.Now);
-            order = OrderService.Create(order);
-
-					// Get current product from selected products
-				foreach (KeyValuePair<Product, int> entry in SelectedProducts)
-            {
-					OrderLine line = new OrderLine(order.Id, entry.Key.Id, entry.Value, "In Development");
-					OrderLineService.Create(line);
-            }
-
-				if (order == null)
-            {
-               await DisplayAlert("Oops", "Something went wrong please try again.", "Alright");
-            }
-            else
-            {
-               await DisplayAlert("Order Placed", "Your order was successfully sent to our staff!", "Thank you");
-               await Shell.Current.GoToAsync(nameof(MenuPage));
-            }
-         }
-         else
-         {
-				// Empty for now, DOING NOTHING!
-         }
-      }		
-	}
 }
