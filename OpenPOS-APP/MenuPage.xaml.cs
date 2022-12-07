@@ -47,7 +47,6 @@ public partial class MenuPage : ContentPage
         HorizontalLayout = null;
 		for (int i = 0; i < Products.Count; i++)
 		{
-            Debug.WriteLine(i);
             AddProductToLayout(Products[i]);
 		}
 	}
@@ -64,7 +63,6 @@ public partial class MenuPage : ContentPage
 		productView.SetProductValues(this,product);
 		productView.ClickedMoreInfo += OnInfoButtonClicked;
 		HorizontalLayout.Add(productView);
-        Debug.WriteLine(HorizontalLayout.Children.Count);
     }
 
     public void AddAllCategories(List<Category> categories)
