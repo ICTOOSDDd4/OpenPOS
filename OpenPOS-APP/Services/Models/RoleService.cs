@@ -2,6 +2,7 @@ using System.Data;
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Interfaces;
 using System.Data.SqlClient;
+using OpenPOS_APP.Enums;
 
 namespace OpenPOS_APP.Services.Models;
 
@@ -65,6 +66,18 @@ public class RoleService : IModelService<Role>
 
         query.Parameters.Add("@ID", SqlDbType.Int);
         query.Parameters["@ID"].Value = id;
+
+        Role result = DatabaseService.ExecuteSingle<Role>(query);
+
+        return result;
+    }
+    
+    public static Role FindOnRoleTitle(RolesEnum role)
+    {
+        SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[Role] WHERE [title] = @Title");
+
+        query.Parameters.Add("@Title", SqlDbType.VarChar);
+        query.Parameters["@Title"].Value = role.ToString();
 
         Role result = DatabaseService.ExecuteSingle<Role>(query);
 

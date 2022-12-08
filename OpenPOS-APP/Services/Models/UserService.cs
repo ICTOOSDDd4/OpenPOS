@@ -71,12 +71,29 @@ public class UserService : IModelService<User>
 
     public static User Authenticate(string email, string password)
     {
+        string encryptedPassword = HashingService.HashPassword(password);
         SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[user] WHERE [email] = @Email AND [password] = @Password");
         
         query.Parameters.Add("@Email", SqlDbType.VarChar);
         query.Parameters["@Email"].Value = email;
         query.Parameters.Add("@Password", SqlDbType.VarChar);
-        query.Parameters["@Password"].Value = password;
+        query.Parameters["@Password"].Value = encryptedPassword;
+        
+        User user = DatabaseService.ExecuteSingle<User>(query);
+        
+        if (user.Email == null)
+        {
+            return null;
+        }
+        return user;
+    }
+
+    public static User FindByEmail(string email)
+    {
+        SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[user] WHERE [email] = @Email");
+        
+        query.Parameters.Add("@Email", SqlDbType.VarChar);
+        query.Parameters["@Email"].Value = email;
         
         User user = DatabaseService.ExecuteSingle<User>(query);
         

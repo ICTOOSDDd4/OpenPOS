@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+           xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+           x:Class="OpenPOS_APP.Resources.Controls.PopUps.CreatingPaymentStatusPopUp"
+           CanBeDismissedByTappingOutsideOfPopup="False"
+           Color="White"
+           Size="250,100">
+    <VerticalStackLayout WidthRequest="250" HeightRequest="250" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="White" Padding="5" Spacing="5" Margin="5">
+        <Label
+            x:Name="StatusLabel"
+            Text="PLACEHOLDER"
+            FontSize="20"
+            FontFamily="LeagueSpartan-Bold"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+    </VerticalStackLayout>
+
+</mct:Popup>

@@ -26,19 +26,18 @@ public partial class ProductView : ContentView
    {
       _menuPage = page;
       _product = product;
-            
       ProductName.Text = product.Name;
       ProductInfo.Text = product.Description;
-      ProductPrice.Text = $"€ { product.Price }";
-
-        if (_menuPage.SelectedProducts.ContainsKey(_product.Id))
+      string value = String.Format(((Math.Round(product.Price) == product.Price) ? "{0:0}" : "{0:0.00}"), product.Price);
+      ProductPrice.Text = $"€ {value}";
+      // ProductImage.Source = imagePath; --Needs to be implemented in DB
+      if (_menuPage.SelectedProducts.ContainsKey(_product.Id))
         {
             Debug.WriteLine("asdasd");
             Amount = _menuPage.SelectedProducts[_product.Id];
             AmountCount.Text = Amount.ToString();
         }
-        // ProductImage.Source = imagePath; --Needs to be implemented in DB
-    }
+   }
 
    private void OnClickedToevoegen(object sender, EventArgs e)
    {

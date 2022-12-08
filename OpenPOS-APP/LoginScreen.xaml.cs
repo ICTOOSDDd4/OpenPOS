@@ -82,7 +82,8 @@ public partial class LoginScreen : ContentPage
    private async void CreateNewAccount_Tapped(object sender, EventArgs e)
    {
 
-      await DisplayAlert("Work in Progress", "This feature is still under development try agian later.", "Alright");
+      await Shell.Current.GoToAsync(nameof(CreateAccountPage));
+      // await DisplayAlert("Work in Progress", "This feature is still under development try agian later.", "Alright");
    }
    protected override void OnNavigatedTo(NavigatedToEventArgs args)
    {
@@ -91,8 +92,9 @@ public partial class LoginScreen : ContentPage
 
    private bool UserAuth(string username, string password)
    {
-      User user = UserService.Authenticate(_username, _password);
-
+     
+      User user = UserService.Authenticate(username, password);
+      
       if (user != null)
       {
          ApplicationSettings.LoggedinUser = user;
