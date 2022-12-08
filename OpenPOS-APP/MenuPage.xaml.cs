@@ -12,7 +12,7 @@ namespace OpenPOS_APP;
 public partial class MenuPage : ContentPage
 {
 	public List<Product> Products { get; set; }
-	public Dictionary<Product, int> SelectedProducts { get; set; }
+	public Dictionary<int, int> SelectedProducts { get; set; }
 	private HorizontalStackLayout HorizontalLayout;
   
 	public delegate void OnSearchEventHandler(object source, EventArgs args);
@@ -24,7 +24,7 @@ public partial class MenuPage : ContentPage
     public MenuPage()
 	{
 
-        SelectedProducts = new Dictionary<Product, int>();
+        SelectedProducts = new Dictionary<int, int>();
         Products = ProductService.GetAll();
 		InitializeComponent();
 		Header.Searched += OnSearch;
@@ -144,9 +144,9 @@ public partial class MenuPage : ContentPage
             order = OrderService.Create(order);
 
 					// Get current product from selected products
-				foreach (KeyValuePair<Product, int> entry in SelectedProducts)
+				foreach (KeyValuePair<int, int> entry in SelectedProducts)
             {
-					OrderLine line = new OrderLine(order.Id, entry.Key.Id, entry.Value, "In Development");
+					OrderLine line = new OrderLine(order.Id, entry.Key, entry.Value, "In Development");
 					OrderLineService.Create(line);
             }
 
