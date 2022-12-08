@@ -46,7 +46,6 @@ namespace OpenPOS_APP.Services
             System.Diagnostics.Debug.WriteLine(ex);
          }
 
-<<<<<<< feature/KitchenAPI-OpenPOS-151
         public async Task ConnectToServer()
         {
             System.Diagnostics.Debug.WriteLine(_secret);
@@ -57,11 +56,9 @@ namespace OpenPOS_APP.Services
                 })
                 .Build();
             try
-=======
          _connection.Closed += async (s) =>
          {
             if (ConnectionStopped)
->>>>>>> development/sprint-2
             {
                _isConnected = false;
                _connectionStatus = "Disconnected";
@@ -76,10 +73,6 @@ namespace OpenPOS_APP.Services
          _connection.On<Order>("newOrder", async (Order m) =>  {  OnNewOrder(m); });
         }
 
-
-<<<<<<< feature/KitchenAPI-OpenPOS-151
-            _connection.On<Order>("newOrder", (Order m) =>
-=======
       public async Task ConnectToServerPayment()
       {
          System.Diagnostics.Debug.WriteLine(_secret);
@@ -103,7 +96,6 @@ namespace OpenPOS_APP.Services
          _connection.Closed += async (s) =>
          {
             if (ConnectionStopped)
->>>>>>> development/sprint-2
             {
                _isConnected = false;
                _connectionStatus = "Disconnected";
