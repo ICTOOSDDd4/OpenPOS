@@ -69,6 +69,7 @@ public partial class PaymentPage : ContentPage
             await _eventHubService.Stop();
             PaymentStatusLabel.Text = $"Payment complete!";
             await Shell.Current.GoToAsync(nameof(GoodbyePage));
+            await OpenPosAPIService.RemoveFromPaymentListener(CurrentTransaction.PaymentRequestToken);
          }
          else
          {
