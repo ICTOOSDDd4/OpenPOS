@@ -51,7 +51,8 @@
                                             </Grid.ColumnDefinitions>
 
                                             <Image Grid.RowSpan="3"
-                               Source="placeholder_product_image.png"
+                               Source="{ Binding Imagepath }"
+                               Margin="1"
                                Aspect="AspectFit"
                                HeightRequest="120"
                                WidthRequest="120" />
@@ -73,7 +74,7 @@
 
                                             <Label Grid.Row="0"
                                Grid.Column="2"
-                               Text="{Binding Price, StringFormat='€{0}'}"
+                               Text="{Binding Price, StringFormat='€{0:0.00}'}"
                                HorizontalTextAlignment="End"
                                WidthRequest="230"/>
                                             <Label Grid.Row="1"
