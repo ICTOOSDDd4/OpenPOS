@@ -2,6 +2,7 @@ using System.Data;
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Interfaces;
 using System.Data.SqlClient;
+using System.Diagnostics;
 
 namespace OpenPOS_APP.Services.Models;
 
@@ -14,6 +15,24 @@ public class ProductService : IModelService<Product>
         return resultList;
     }
 
+   public static List<Product> GetAllByFilter(string filter)
+   {
+      string searchTerm = string.Format("%{0}%", filter);
+      SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[product] WHERE [name] LIKE @Filter");
+
+      query.Parameters.Add("@Filter", SqlDbType.VarChar);
+      query.Parameters["@Filter"].Value = searchTerm;
+
+      Debug.WriteLine(query.ToString());
+
+      var result = DatabaseService.Execute<Product>(query);
+        foreach (Product prod in result)
+        {
+            System.Diagnostics.Debug.WriteLine(prod.Name);
+        }
+      return result;
+    }
+    
     public static List<Product> GetAllByCategoryId(int categoryId)
     {
         List<Product> result;

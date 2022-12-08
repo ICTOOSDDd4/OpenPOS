@@ -1,4 +1,5 @@
 using OpenPOS_APP.Models;
+using OpenPOS_APP.Resources.Controls;
 using OpenPOS_APP.Services.Models;
 using OpenPOS_APP.Settings;
 using OpenPOS_APP.EventArgsClasses;
@@ -8,17 +9,20 @@ namespace OpenPOS_APP;
 public partial class MenuPage : ContentPage
 {
 	public List<Product> Products { get; set; }
-	public Dictionary<Product, int> SelectedProducts { get; set; }
+	public Dictionary<int, int> SelectedProducts { get; set; }
 	private HorizontalStackLayout HorizontalLayout;
+	public delegate void OnSearchEventHandler(object source, EventArgs args);
+  public static event OnSearchEventHandler Searched;
 	private int _ProductCardViewWidth = 300;
 	
 	private bool _isInitialized;
 	private double _width;
     public MenuPage()
 	{
-      Products = ProductService.GetAll();
-      InitializeComponent();
-      SelectedProducts = new Dictionary<Product, int>();
+        SelectedProducts = new Dictionary<int, int>();
+        Products = ProductService.GetAll();
+		InitializeComponent();
+		Header.Searched += OnSearch;
 		Header.currentPage = this;
 	}
 
@@ -30,8 +34,8 @@ public partial class MenuPage : ContentPage
 			_isInitialized = true;
 			SetWindowScaling(width,height);
 		}
-		
-	}
+        AddAllProducts();
+    }
 
 	private void SetWindowScaling(double width, double height)
 	{
@@ -115,9 +119,9 @@ public partial class MenuPage : ContentPage
             order = OrderService.Create(order);
 
 					// Get current product from selected products
-				foreach (KeyValuePair<Product, int> entry in SelectedProducts)
+				foreach (KeyValuePair<int, int> entry in SelectedProducts)
             {
-					OrderLine line = new OrderLine(order.Id, entry.Key.Id, entry.Value, "In Development");
+					OrderLine line = new OrderLine(order.Id, entry.Key, entry.Value, "In Development");
 					OrderLineService.Create(line);
             }
 
@@ -136,5 +140,17 @@ public partial class MenuPage : ContentPage
 				// Empty for now, DOING NOTHING!
          }
       }		
+	}
+
+	public virtual void OnSearch(object sender, EventArgs e) {
+		MainVerticalLayout.Clear();
+		if (String.IsNullOrWhiteSpace(((SearchBar)sender).Text) || String.IsNullOrEmpty(((SearchBar)sender).Text))
+		{
+			Products = ProductService.GetAll();
+		} else
+		{
+            Products = ProductService.GetAllByFilter(((SearchBar)sender).Text);
+        }
+		AddAllProducts();
 	}
 }
