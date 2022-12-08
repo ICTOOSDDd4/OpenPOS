@@ -2,11 +2,12 @@
 using Microsoft.Maui;
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Resources.Controls.PopUps;
-using OpenPOS_APP.Services.Models;
 using OpenPOS_APP.Settings;
 using System.Diagnostics;
 using System.Globalization;
+using OpenPOS_APP.Services;
 using System.Linq;
+using OpenPOS_APP.Services.Models;
 
 namespace OpenPOS_APP;
 
@@ -18,6 +19,7 @@ public partial class CheckoutOverview : ContentPage
 
     private double _tip = 0;
 
+
     public static Dictionary<Product,int> GetCheckoutItems()
     {
         return ApplicationSettings.CheckoutList;
@@ -26,7 +28,7 @@ public partial class CheckoutOverview : ContentPage
     public CheckoutOverview()
 	 {
         InitializeComponent();
-		  AddToCheckOut(ApplicationSettings.CheckoutList);
+	  AddToCheckOut(ApplicationSettings.CheckoutList);
         Header.currentPage = this;
     }
 

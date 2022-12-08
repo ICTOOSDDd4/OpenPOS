@@ -11,7 +11,6 @@ public class OrderLineModelTest
     {
         int Order_Id = 1;
         int Product_Id = 3;
-        bool Status = false;
         int Amount = 5;
         string Comment = "Test";
         

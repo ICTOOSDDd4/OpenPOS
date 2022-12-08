@@ -14,7 +14,7 @@ namespace OpenPOS_APP.Exceptions
             Directory.CreateDirectory(path);
 
             File.AppendAllText(path + "/log.txt",
-                   DateTime.Now.ToString() + $" {e.Message}. Exception type: {e.GetType}" + Environment.NewLine);
+                   DateTime.Now.ToString() + $" {e.Message}. Exception type: {e.GetType()}" + Environment.NewLine);
         }
     }
 }
