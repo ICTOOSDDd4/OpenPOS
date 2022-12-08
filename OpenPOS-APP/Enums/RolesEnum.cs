@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OpenPOS_APP.Enums
 {
-    internal enum RolesEnum
+    public enum RolesEnum
     {
         Owner,
         Admin,

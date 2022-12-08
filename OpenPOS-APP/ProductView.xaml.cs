@@ -28,7 +28,8 @@ public partial class ProductView : ContentView
             
       ProductName.Text = product.Name;
       ProductInfo.Text = product.Description;
-      ProductPrice.Text = $"€ { product.Price }";
+      string value = String.Format(((Math.Round(product.Price) == product.Price) ? "{0:0}" : "{0:0.00}"), product.Price);
+      ProductPrice.Text = $"€ {value}";
       // ProductImage.Source = imagePath; --Needs to be implemented in DB
    }
 
