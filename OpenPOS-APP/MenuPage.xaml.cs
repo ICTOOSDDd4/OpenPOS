@@ -100,14 +100,6 @@ public partial class MenuPage : ContentPage
 			"Understood");
 	}
 
-<<<<<<< feature/KitchenAPI-OpenPOS-151
-    // Temporary function to test Eventlisteners
-    private void newOrder(object sender, OrderEventArgs orderEvent)
-    {
-		System.Diagnostics.Debug.WriteLine("NewEvent");
-    }
-=======
->>>>>>> development/sprint-2
     private async void OrderButton_OnClicked(object sender, EventArgs e)
 	{
 		if (SelectedProducts.Count == 0)
