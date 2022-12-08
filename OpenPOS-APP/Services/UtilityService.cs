@@ -15,7 +15,6 @@ public class UtilityService
         {
                client.DownloadFile(new Uri(apiUrl), filename);
         }
-		
         return ImageSource.FromFile(filename);
     }
 

@@ -21,7 +21,7 @@ public partial class Header : StackLayout
     public Header()
 	{
 		InitializeComponent();
-      TableNumber.Text = $"Tafel: { ApplicationSettings.TableNumber }";
+      TableNumber.Text = $"Table: { ApplicationSettings.TableNumber }";
 
    }
 

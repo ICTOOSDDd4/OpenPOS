@@ -1,14 +1,17 @@
+using System.Diagnostics;
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Models;
 using System.Runtime.CompilerServices;
+using OpenPOS_APP.EventArgsClasses;
+using OpenPOS_APP.Services;
 
 namespace OpenPOS_APP;
 
 public partial class OrderOverviewPage : ContentPage
 {
 	public List<Order> Orders { get; set; }
-	private HorizontalStackLayout HorizontalLayout;
-
+	private HorizontalStackLayout _horizontalLayout;
+   private EventHubService _eventHubService = new();
    private bool _isInitialized;
    private double _width;
 
@@ -16,10 +19,28 @@ public partial class OrderOverviewPage : ContentPage
 	{
 		InitializeComponent();
       Orders = OrderService.GetAllOpenOrders();
+      Debug.WriteLine(Orders.Count);
+        Initialize();
+    }
 
-   }
+    private async void Initialize()
+    {
+        _eventHubService.newOrder += newOrder;
+        await _eventHubService.ConnectToServer();
+    }
 
-   protected override void OnSizeAllocated(double width, double height)
+    private async void newOrder(object sender, OrderEventArgs orderEvent)
+   {
+
+       Debug.WriteLine("NewEvent");
+       await Dispatcher.DispatchAsync(() =>
+       { 
+           Orders.Add(orderEvent.order); 
+           AddOrderToLayout(orderEvent.order);
+        });
+    }
+
+    protected override void OnSizeAllocated(double width, double height)
    {
       base.OnSizeAllocated(width, height);
       if (!_isInitialized)
@@ -78,16 +99,16 @@ public partial class OrderOverviewPage : ContentPage
 	public void AddOrderToLayout(Order order)
 	{
       int moduloNumber = ((int)_width / 300);
-      if (HorizontalLayout == null || HorizontalLayout.Children.Count % moduloNumber == 0)
+      if (_horizontalLayout == null || _horizontalLayout.Children.Count % moduloNumber == 0)
       {
 			AddHorizontalLayout();
       }
 
-		OrderView orderview = new OrderView();
-		orderview.AddBinds(order, HorizontalLayout);
+      OrderView orderview = new OrderView(); 
+      orderview.AddBinds(order, _horizontalLayout);
       orderview.OrderDone += OrderDone;
       orderview.OrderCanceled += OrderCanceled;
-      HorizontalLayout.Add(orderview);      
+      _horizontalLayout.Add(orderview);      
 	}
 
 	private void AddHorizontalLayout()
@@ -96,7 +117,7 @@ public partial class OrderOverviewPage : ContentPage
       hLayout.Spacing = 20;
       hLayout.Margin = new Thickness(10);
       MainVerticalLayout.Add(hLayout);
-      HorizontalLayout = hLayout;
+      _horizontalLayout = hLayout;
    }
 	
 	

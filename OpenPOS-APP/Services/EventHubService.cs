@@ -63,7 +63,6 @@ namespace OpenPOS_APP.Services
          _connection.On<Order>("newOrder", async (Order m) =>  {  OnNewOrder(m); });
         }
 
-
       public async Task ConnectToServerPayment()
       {
          System.Diagnostics.Debug.WriteLine(_secret);
@@ -116,7 +115,5 @@ namespace OpenPOS_APP.Services
       {
          newPayent?.Invoke(this, new PaymentEventArgs() { Tikkie = tikkie });
       }
-
-
-   }
+      }
 }

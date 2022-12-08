@@ -26,7 +26,7 @@
                 WidthRequest="130"/>
                 <Label
                 x:Name="TableNumber"
-                Text="TAFEL"
+                Text="Table "
                 VerticalTextAlignment="Center"
                 FontSize="24"/>
                 <SearchBar
