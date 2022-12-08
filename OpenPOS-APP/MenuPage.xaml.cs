@@ -144,7 +144,6 @@ public partial class MenuPage : ContentPage
 
 	public virtual void OnSearch(object sender, EventArgs e) {
 		MainVerticalLayout.Clear();
-		Debug.WriteLine(((SearchBar)sender).Text);
 		if (String.IsNullOrWhiteSpace(((SearchBar)sender).Text) || String.IsNullOrEmpty(((SearchBar)sender).Text))
 		{
 			Products = ProductService.GetAll();
