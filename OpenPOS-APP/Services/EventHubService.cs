@@ -13,16 +13,15 @@ namespace OpenPOS_APP.Services
       private readonly string _secret = ApplicationSettings.ApiSet.secret;
       private HubConnection _connection = null;
       private bool _isConnected = false;
-      private bool _iWantItToStop = true;
+      private bool ConnectionStopped = true;
       public string _connectionStatus = "Closed";
-      private List<Order> TestOrder = new List<Order>();
 
       public event EventHandler<OrderEventArgs> newOrder;
       public event EventHandler<PaymentEventArgs> newPayent;
 
       public async Task Stop()
       {
-         _iWantItToStop = false;
+         ConnectionStopped = false;
          _connectionStatus = "Disconnected";
          await _connection.StopAsync();
       }
@@ -49,7 +48,7 @@ namespace OpenPOS_APP.Services
 
          _connection.Closed += async (s) =>
          {
-            if (!_iWantItToStop)
+            if (ConnectionStopped)
             {
                _isConnected = false;
                _connectionStatus = "Disconnected";
@@ -87,7 +86,7 @@ namespace OpenPOS_APP.Services
 
          _connection.Closed += async (s) =>
          {
-            if (!_iWantItToStop)
+            if (ConnectionStopped)
             {
                _isConnected = false;
                _connectionStatus = "Disconnected";

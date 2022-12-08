@@ -33,12 +33,16 @@
                     HorizontalOptions="Center" />
 
         <Button
+                    Margin="20"
                     x:Name="MainLoginButton"
                     Text="START YOUR EXPERIENCE"
                     SemanticProperties.Hint="Press to login"
                     Clicked="OnLoginButtonClicked"
                     HorizontalOptions="Center"
                     TextColor="Black"
+                    HeightRequest="50"
+                    WidthRequest="250"
+                    FontSize="18"
                     BackgroundColor="{StaticResource OpenPos-Yellow}" 
                     CornerRadius="10" />
     </VerticalStackLayout>

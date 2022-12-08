@@ -10,26 +10,36 @@
     </Shell.BackButtonBehavior>
     <VerticalStackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Spacing="20">
         <VerticalStackLayout VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" >
-            <Image
+           <Image
             Source="openpos_logo_v1.png"
             HeightRequest="100"
+            IsVisible="true"
             HorizontalOptions="Center"
             Margin="30,30,30,20"
-        />
+           />
         </VerticalStackLayout>
 
         <VerticalStackLayout Margin="40" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="300" WidthRequest="300">
             <Label
-            FontSize="40"
+            FontSize="50"
             FontFamily="LeagueSpartan-Bold"
             Text="Scan to pay"
             VerticalTextAlignment="Center"
             HorizontalTextAlignment="Center"
             />
-
+            <ActivityIndicator
+            x:Name="Loader"
+            IsVisible="true"
+            IsRunning="True"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Margin="20"
+            Color="{StaticResource OpenPos-Green}"
+            />
             <Image 
             x:Name="QRCode"
             Margin="30"
+            IsVisible="false"
             VerticalOptions="Center"
             HorizontalOptions="Center"
             />
@@ -37,7 +47,7 @@
             <Label 
             x:Name="PaymentStatusLabel" 
             Text="Waiting for payments."
-            FontSize="15"
+            FontSize="20"
             FontFamily="LeagueSpartan-Medium"
             VerticalTextAlignment="Center"
             HorizontalTextAlignment="Center"

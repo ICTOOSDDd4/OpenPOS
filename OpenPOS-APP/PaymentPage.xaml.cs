@@ -12,10 +12,7 @@ public partial class PaymentPage : ContentPage
 {
 	public static Transaction CurrentTransaction { get; set; }
 	public static int RequiredPayments { get; set; } 
-   // Maybe don't set all the transaction data in the code behind and just pull it from some where else.
-   // This way you can also handle the inisiate the event hub service and you can let the page wait before showing the QR code without adding it to the listener.
 	private EventHubService _eventHubService = new EventHubService();
-   private EventHandler<EventArgs> _eventHandler;
    private Thread thread;
    private delegate void EventMethod(object sender, EventArgs e);
    private string paymentStatusString;
@@ -25,15 +22,6 @@ public partial class PaymentPage : ContentPage
 	{
       InitializeComponent();
       Connect();
-      QRCode.Source = UtilityService.GenerateQrCodeFromUrl(CurrentTransaction.Url);
-
-      if (RequiredPayments == 1)
-      {
-         paymentStatusString = "payment";
-      } else { paymentStatusString = "payments"; }
-
-      thread = new Thread(new ThreadStart(StartStatusLabel));
-      thread.Start();
    }
    public async void Connect()
    {
@@ -41,10 +29,27 @@ public partial class PaymentPage : ContentPage
       bool AddedToPaymentListener = await OpenPosAPIService.AddToPaymentListener(_eventHubService.GetConnectionID(), CurrentTransaction.PaymentRequestToken);
       if (!AddedToPaymentListener)
       {
-         throw new Exception("Oopsie");
+         throw new Exception("Can't add the Transaction to the Payment Listener");
       }
       _eventHubService.newPayent += OnPaymentPayed;
-        
+      ImageSource imageSource = UtilityService.GenerateQrCodeFromUrl(CurrentTransaction.Url);
+      
+      // Deleting the loader from the screen.
+      Loader.IsVisible = false;
+      Loader.IsRunning = false;
+
+      // Placing the QR code on the page.
+      QRCode.IsVisible = true;
+      QRCode.Source = imageSource;
+
+      if (RequiredPayments == 1)
+      {
+         paymentStatusString = "payment";
+      }
+      else { paymentStatusString = "payments"; }
+      thread = new Thread(new ThreadStart(StartStatusLabel));
+      thread.Start();
+
    }
    private void StartStatusLabel()
    {
@@ -54,19 +59,20 @@ public partial class PaymentPage : ContentPage
 	public void OnPaymentPayed(object sender, PaymentEventArgs e)
 	{
       _timer.Stop();
+      thread.Interrupt();
       Dispatcher.DispatchAsync(async () =>
       {
          CurrentlyPaid++;
          Debug.WriteLine("Payed");
-         if (CurrentlyPaid >= getRequiredPayment())
+         if (CurrentlyPaid >= RequiredPayments)
          {
             await _eventHubService.Stop();
-            PaymentStatusLabel.Text = $"Payment complete! {getRequiredPayment()}";
-            ToGoodbyePage();
+            PaymentStatusLabel.Text = $"Payment complete!";
+            await Shell.Current.GoToAsync(nameof(GoodbyePage));
          }
          else
          {
-            PaymentStatusLabel.Text = $"Almost there! {CurrentlyPaid} out of {getRequiredPayment()}";
+            PaymentStatusLabel.Text = $"Almost there! {CurrentlyPaid} out of {RequiredPayments}";
          }
       });
       
@@ -92,11 +98,6 @@ public partial class PaymentPage : ContentPage
       });
    }
 
-	private async void ToGoodbyePage()
-	{
-		await Shell.Current.GoToAsync(nameof(GoodbyePage));
-	}
-
 	public static void SetTransaction(Transaction transaction, int numberOfRequiredPayments)
 	{
 		CurrentTransaction = transaction;
@@ -106,11 +107,6 @@ public partial class PaymentPage : ContentPage
    public void RemoveQRCodeFile()
    {
       File.Delete($"{UtilityService.GetRootDirectory()}/qr-{ApplicationSettings.CurrentBill.Id}.png");
-   }
-
-   public int getRequiredPayment()
-   {
-      return RequiredPayments;
    }
    
    protected override void OnNavigatedTo(NavigatedToEventArgs args)
