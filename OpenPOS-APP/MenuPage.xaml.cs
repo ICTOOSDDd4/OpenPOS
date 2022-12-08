@@ -105,59 +105,42 @@ public partial class MenuPage : ContentPage
 			"Understood");
 	}
 
-    private async void OrderButton_OnClicked(object sender, EventArgs e)
+	private async void OrderButton_OnClicked(object sender, EventArgs e)
 	{
 		if (SelectedProducts.Count == 0)
 		{
-         await DisplayAlert("No products selected", "You forgot to add products to your order!", "Back");
+			await DisplayAlert("No products selected", "You forgot to add products to your order!", "Back");
 
-      }
-      else
+		}
+		else
 		{
-         if (await DisplayAlert("Confirm order", "Are you sure you want to place your order?", "Yes", "No"))
-         {
-            Order order = new Order(1, false, ApplicationSettings.LoggedinUser.Id, ApplicationSettings.CurrentBill.Id, DateTime.Now, DateTime.Now);
-            order = OrderService.Create(order);
+			if (await DisplayAlert("Confirm order", "Are you sure you want to place your order?", "Yes", "No"))
+			{
+				Order order = new Order(1, false, ApplicationSettings.LoggedinUser.Id, ApplicationSettings.CurrentBill.Id, DateTime.Now, DateTime.Now);
+				order = OrderService.Create(order);
 
-					// Get current product from selected products
+				// Get current product from selected products
 				foreach (KeyValuePair<int, int> entry in SelectedProducts)
-            {
+				{
 					OrderLine line = new OrderLine(order.Id, entry.Key, entry.Value, "In Development");
 					OrderLineService.Create(line);
-            }
-
-        }
-        else
-        {
-            if (await DisplayAlert("Confirm order", "Are you sure you want to place your order?", "Yes", "No"))
+				}
+            if (order == null)
             {
-                Order order = new Order(1, false, ApplicationSettings.LoggedinUser.Id,
-                    ApplicationSettings.CurrentBill.Id, DateTime.Now, DateTime.Now);
-                order = OrderService.Create(order);
-
-                // Get current product from selected products
-                foreach (KeyValuePair<Product, int> entry in SelectedProducts)
-                {
-                    OrderLine line = new OrderLine(order.Id, entry.Key.Id, entry.Value, "In Development");
-                    OrderLineService.Create(line);
-                }
-
-                if (order == null)
-                {
-                    await DisplayAlert("Oops", "Something went wrong please try again.", "Alright");
-                }
-                else
-                {
-                    await DisplayAlert("Order Placed", "Your order was successfully sent to our staff!", "Thank you");
-                    await Shell.Current.GoToAsync(nameof(MenuPage));
-                }
+               await DisplayAlert("Oops", "Something went wrong please try again.", "Alright");
             }
             else
             {
-                // Empty for now, DOING NOTHING!
+               await DisplayAlert("Order Placed", "Your order was successfully sent to our staff!", "Thank you");
+               await Shell.Current.GoToAsync(nameof(MenuPage));
             }
-      }		
-	}
+         }
+			else
+			{
+					// Empty for now, DOING NOTHING!
+			}
+			}
+		}
 
 	public virtual void OnSearch(object sender, EventArgs e) {
 		MainVerticalLayout.Clear();

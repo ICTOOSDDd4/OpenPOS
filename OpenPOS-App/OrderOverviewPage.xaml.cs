@@ -10,13 +10,8 @@ namespace OpenPOS_APP;
 public partial class OrderOverviewPage : ContentPage
 {
 	public List<Order> Orders { get; set; }
-<<<<<<< feature/Enums-OpenPOS-113
 	private HorizontalStackLayout _horizontalLayout;
-
-=======
-   private HorizontalStackLayout _horizontalLayout;
    private EventHubService _eventHubService = new();
->>>>>>> development/sprint-2
    private bool _isInitialized;
    private double _width;
 
@@ -109,13 +104,8 @@ public partial class OrderOverviewPage : ContentPage
 			AddHorizontalLayout();
       }
 
-<<<<<<< feature/Enums-OpenPOS-113
-		OrderView orderview = new OrderView();
-		orderview.AddBinds(order, _horizontalLayout);
-=======
       OrderView orderview = new OrderView(); 
       orderview.AddBinds(order, _horizontalLayout);
->>>>>>> development/sprint-2
       orderview.OrderDone += OrderDone;
       orderview.OrderCanceled += OrderCanceled;
       _horizontalLayout.Add(orderview);      

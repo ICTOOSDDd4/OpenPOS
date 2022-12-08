@@ -50,14 +50,8 @@ public partial class LoginScreen : ContentPage
    {
       if (UserAuth(_username, _password))
       {
-<<<<<<< feature/Enums-OpenPOS-113
-          var role = Enum.Parse<RolesEnum>(RoleService.FindUserRole(UserService.Authenticate(_username, _password).Id).Title);
-          switch (role)
-=======
             var role = Enum.Parse<RolesEnum>(RoleService.FindUserRole(UserService.Authenticate(_username, _password).Id).Title);
-            switch (role)
->>>>>>> development/sprint-2
-            {
+            switch (role)            {
                 case (RolesEnum.Owner or RolesEnum.Admin):
                     await Shell.Current.GoToAsync(nameof(AdminOverview));
                     break;
