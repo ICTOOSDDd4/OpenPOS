@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenPOS_APP.Models;
 
-namespace OpenPOS_APP.NewFolder
+namespace OpenPOS_APP.EventArgsClasses
 {
-    public class OrderEventArgs : EventArgs
-    {
-        public Order order { get; set; }
-    }
+   public class OrderEventArgs : EventArgs
+   {
+      public Order order { get; set; }
+   }
 }
