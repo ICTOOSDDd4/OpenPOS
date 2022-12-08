@@ -11,17 +11,16 @@ public partial class MenuPage : ContentPage
 	public List<Product> Products { get; set; }
 	private HorizontalStackLayout _horizontalLayout;
 	public Dictionary<int, int> SelectedProducts { get; set; }
-	private HorizontalStackLayout HorizontalLayout;
 	public delegate void OnSearchEventHandler(object source, EventArgs args);
-  public static event OnSearchEventHandler Searched;
+	public static event OnSearchEventHandler Searched;
 	private int _ProductCardViewWidth = 300;
 	
 	private bool _isInitialized;
 	private double _width;
     public MenuPage()
 	{
-        SelectedProducts = new Dictionary<int, int>();
-        Products = ProductService.GetAll();
+      SelectedProducts = new Dictionary<int, int>();
+      Products = ProductService.GetAll();
 		InitializeComponent();
 		Header.Searched += OnSearch;
 		Header.currentPage = this;
@@ -35,7 +34,6 @@ public partial class MenuPage : ContentPage
 			_isInitialized = true;
 			SetWindowScaling(width,height);
 		}
-        AddAllProducts();
     }
 
 	private void SetWindowScaling(double width, double height)
@@ -43,13 +41,13 @@ public partial class MenuPage : ContentPage
 		ScrView.HeightRequest = height - _ProductCardViewWidth;
 		_width = width;
 		AddAllCategories(CategoryService.GetAll());
-        AddAllProducts();
+      AddAllProducts();
     }
 
 	public void AddAllProducts()
 	{
 		MainVerticalLayout.Clear();
-        _horizontalLayout = null;
+      _horizontalLayout = null;
 		for (int i = 0; i < Products.Count; i++)
 		{
             AddProductToLayout(Products[i]);
@@ -59,7 +57,7 @@ public partial class MenuPage : ContentPage
    public void AddProductToLayout(Product product)
    {
 	   int moduloNumber = ((int)_width / _ProductCardViewWidth);
-	   if (HorizontalLayout == null || HorizontalLayout.Children.Count % moduloNumber == 0) 
+	   if (_horizontalLayout == null || _horizontalLayout.Children.Count % moduloNumber == 0) 
 		{
 			AddHorizontalLayout();
 		}
@@ -67,7 +65,7 @@ public partial class MenuPage : ContentPage
 		ProductView productView = new ProductView();
 		productView.SetProductValues(this,product);
 		productView.ClickedMoreInfo += OnInfoButtonClicked;
-		HorizontalLayout.Add(productView);
+      _horizontalLayout.Add(productView);
     }
 
     public void AddAllCategories(List<Category> categories)

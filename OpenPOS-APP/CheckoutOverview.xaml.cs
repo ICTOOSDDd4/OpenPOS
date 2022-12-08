@@ -12,12 +12,12 @@ using OpenPOS_APP.Services.Models;
 namespace OpenPOS_APP;
 
 public partial class CheckoutOverview : ContentPage
-{
-    public Dictionary<Product, int> CheckoutItems { get; set; }
+{ 
+    private Dictionary<Product, int> CheckoutItems { get; set; }
 
-    public double TotalPrice;
+    private double TotalPrice;
 
-    private double _tip = 0;
+    private double _tip;
 
 
     public static Dictionary<Product,int> GetCheckoutItems()
@@ -62,7 +62,7 @@ public partial class CheckoutOverview : ContentPage
                int tipInCents = (int)Math.Round(_tip * 100);
                int total = totalInCents + tipInCents;
                int splitamount = totalInCents / count;
-               Transaction transaction = TikkiePayementService.CreatePaymentRequest(splitamount, ApplicationSettings.CurrentBill.Id, $"OpenPOS Tikkie Payment: {ApplicationSettings.CurrentBill.Id}");
+               Transaction transaction = TikkiePaymentService.CreatePaymentRequest(splitamount, ApplicationSettings.CurrentBill.Id, $"OpenPOS Tikkie Payment: {ApplicationSettings.CurrentBill.Id}");
                if (transaction.Url != null)
                {
                   PaymentPage.SetTransaction(transaction, count);
@@ -90,7 +90,7 @@ public partial class CheckoutOverview : ContentPage
       int totalInCents = (int)Math.Round(TotalPrice * 100);
       int tipInCents = (int)Math.Round(_tip * 100);
       int total = totalInCents + tipInCents;
-      Transaction transaction = TikkiePayementService.CreatePaymentRequest(total, ApplicationSettings.CurrentBill.Id, $"OpenPOS Tikkie Payment: {ApplicationSettings.CurrentBill.Id}");
+      Transaction transaction = TikkiePaymentService.CreatePaymentRequest(total, ApplicationSettings.CurrentBill.Id, $"OpenPOS Tikkie Payment: {ApplicationSettings.CurrentBill.Id}");
       PaymentPage.SetTransaction(transaction, 1);
       await Shell.Current.GoToAsync(nameof(PaymentPage));
       
@@ -130,7 +130,6 @@ public partial class CheckoutOverview : ContentPage
       if (result == "Change tip")
       {
          OnClickedAddATip(this, args);
-         Debug.WriteLine("Change");
       } else if (result == "Remove Tip")
       {
          _tip = 0;
@@ -153,9 +152,4 @@ public partial class CheckoutOverview : ContentPage
 
       TotalPriceLabel.Text = $"€{totalValue}";
    }
-
-   protected override void OnNavigatedTo(NavigatedToEventArgs args)
-	{
-		base.OnNavigatedTo(args);
-	}
 }

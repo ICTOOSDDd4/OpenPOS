@@ -25,7 +25,7 @@ public partial class OrderOverviewPage : ContentPage
 
     private async void Initialize()
     {
-        _eventHubService.newOrder += newOrder;
+        _eventHubService.NewOrder += newOrder;
         await _eventHubService.ConnectToServer();
     }
 

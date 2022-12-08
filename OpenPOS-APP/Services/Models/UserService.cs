@@ -71,7 +71,7 @@ public class UserService : IModelService<User>
 
     public static User Authenticate(string email, string password)
     {
-        string encryptedPassword = HashingService.HashPassword(password);
+        string encryptedPassword = UtilityService.HashPassword(password);
         SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[user] WHERE [email] = @Email AND [password] = @Password");
         
         query.Parameters.Add("@Email", SqlDbType.VarChar);

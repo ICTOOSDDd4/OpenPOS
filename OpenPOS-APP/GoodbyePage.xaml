@@ -14,28 +14,22 @@
         
         Spacing="25"
         Padding="30,100,30,100"
-        Grid.ColumnSpan="3" Grid.Row="2"
         VerticalOptions="Center">
 
-        <Image 
-            x:Name="openposicon"
+        <Image
             Source="openpos_icon.png"
-            SemanticProperties.Description="Hello, this is OpenPOS"
             HeightRequest="200"
             HorizontalOptions="Center"/>
 
         <Label
             Text="Thank you for your visit!"
-            SemanticProperties.HeadingLevel="Level2"
             FontFamily="LeagueSpartan-SemiBold"
-            SemanticProperties.Description="The way to access your OpenPOS Experience"
             TextColor="Black"
             FontSize="24"
             HorizontalOptions="Center" />
         <Label
             
             Text="We hope to see you again soon!"
-            SemanticProperties.HeadingLevel="Level2"
             FontFamily="LeagueSpartan-SemiBold"
             TextColor="Black"
             FontSize="24"
@@ -43,7 +37,6 @@
         <Label
             x:Name="Countdown"
             Text="You will be signed out and redirected in 5 seconds"
-            SemanticProperties.HeadingLevel="Level7"
             FontFamily="LeagueSpartan-Light"
             TextColor="Black"
             FontSize="20"
