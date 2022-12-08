@@ -8,7 +8,7 @@
              Title="CheckoutOverview"
              Shell.NavBarIsVisible="False">
     <VerticalStackLayout>
-        <customControls:Header/>
+        <customControls:Header x:Name="Header"/>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition/>
@@ -109,21 +109,27 @@
                     <Label x:Name="TotalPriceLabel"
                        FontSize="32"
                        HorizontalTextAlignment="Center"></Label>
-                    <Button Text="Pay"
+                    <Button
+                        x:Name="PayButton"
+                        Text="Pay"
                         WidthRequest="300"
                         HeightRequest="100"
                         FontSize="36"
                         Clicked="OnClickedPay"/>
-                    <Button Text="Split Payment"
+                    <Button
+                        x:Name="SplittButton"
+                        Text="Split Payment"
                         WidthRequest="300"
                         HeightRequest="100"
                         FontSize="36"
                         Clicked="OnClickedSplitPay"/>
-                    <Button Text="Split Products"
+                    <Button  
+                        x:Name="TipButton"
+                        Text="Add a tip"
                         WidthRequest="300"
                         HeightRequest="100"
                         FontSize="36"
-                        Clicked="OnClickedSplitProducts"/>
+                        Clicked="OnClickedAddATip"/>
                 </VerticalStackLayout>
 
             </HorizontalStackLayout>

@@ -6,7 +6,13 @@
              xmlns:customControls="clr-namespace:OpenPOS_APP.Resources.Controls"
              Title="MenuPage">
     <VerticalStackLayout>
-        <customControls:Header/>
+        <customControls:Header x:Name="Header"/>
+        <HorizontalStackLayout
+            x:Name="CategoryHorizontal"
+            HeightRequest="50"
+            Margin="30,0,30,0"
+            BackgroundColor="{ StaticResource White}">
+        </HorizontalStackLayout>
         <ScrollView
             x:Name="ScrView"
             Orientation="Vertical"

@@ -28,5 +28,7 @@
 	<string>Assets.xcassets/appicon.appiconset</string>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.openpos.openpos_app</string>
 </dict>
 </plist>

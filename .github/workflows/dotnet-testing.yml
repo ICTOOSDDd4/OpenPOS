@@ -8,7 +8,7 @@ on:
   push:
     branches: 
       - "master"
-      - "development/**"
+#       - "development/**"
 #      - "bug-fix/**"
   pull_request:
     branches: 
