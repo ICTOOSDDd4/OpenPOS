@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OpenPOS_APP.CreateAccountPage"
+             Title="CreateAccountPage"
+             Shell.NavBarIsVisible="False">
+    <ContentPage.Resources>
+        <ResourceDictionary Source="Resources/Styles/Colors.xaml"></ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView x:Name="Scroll">
+        <VerticalStackLayout
+            x:Name="Vertical"
+            Spacing="25"
+            Padding="30,0"
+            VerticalOptions="Center">
+            <Image
+                Source="openpos_logo_v1.png"
+                SemanticProperties.Description="Cute dot net bot waving hi to you!"
+                HeightRequest="100"
+                HorizontalOptions="Center" />
+
+            <Label
+                Text="Create Account"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Create Account"
+                TextColor="Black"
+                FontSize="18"
+                HorizontalOptions="Center" />
+
+            <Entry
+                x:Name="FirstName"
+                Placeholder="First name..."
+                TextChanged="OnTextChanged"
+                SemanticProperties.Description="First name"
+                TextColor="Black"
+                WidthRequest="250"
+                MaxLength="50"
+                SelectionLength="50"
+                Keyboard="Email"
+                ClearButtonVisibility="WhileEditing"
+                HorizontalOptions="Center"
+                ReturnType="Next" />
+
+            <Entry
+                x:Name="LastName"
+                Placeholder="Last name..."
+                TextChanged="OnTextChanged"
+                SemanticProperties.Description="Last name"
+                TextColor="Black"
+                WidthRequest="250"
+                MaxLength="50"
+                SelectionLength="50"
+                Keyboard="Email"
+                ClearButtonVisibility="WhileEditing"
+                HorizontalOptions="Center"
+                ReturnType="Next" />
+
+            <Entry
+                x:Name="EmailEntry"
+                Placeholder="Email..."
+                TextChanged="OnTextChanged"
+                SemanticProperties.Description="Email"
+                TextColor="Black"
+                WidthRequest="250"
+                MaxLength="50"
+                SelectionLength="50"
+                Keyboard="Email"
+                ClearButtonVisibility="WhileEditing"
+                HorizontalOptions="Center"
+                ReturnType="Next" />
+
+            <Entry
+                x:Name="PasswordEntry"
+                Placeholder="Password..."
+                IsPassword="True"
+                TextChanged="OnTextChanged"
+                SemanticProperties.Description="Password"
+                TextColor="Black"
+                WidthRequest="250"
+                MaxLength="50"
+                SelectionLength="50"
+                ClearButtonVisibility="WhileEditing"
+                HorizontalOptions="Center"
+                ReturnType="Next" />
+
+            <Entry
+                x:Name="PasswordEntryVerify"
+                Placeholder="Repeat password..."
+                IsPassword="True"
+                TextChanged="OnTextChanged"
+                SemanticProperties.Description="Repeat Password"
+                TextColor="Black"
+                WidthRequest="250"
+                MaxLength="50"
+                SelectionLength="50"
+                ClearButtonVisibility="WhileEditing"
+                HorizontalOptions="Center"
+                ReturnType="Next" />
+
+            <Button
+                x:Name="CreateAccountButton"
+                Text="CREATE"
+                SemanticProperties.Hint="Create account!"
+                IsEnabled="False"
+                Clicked="OnCreateAccountButtonClicked"
+                HorizontalOptions="Center"
+                TextColor="Black"
+                BackgroundColor="{StaticResource Gray100}"
+                CornerRadius="10" />
+            <Label
+                x:Name="ErrorDisplayLabel"
+                IsVisible="True"
+                TextColor="Red"
+                Text=""
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+            />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
