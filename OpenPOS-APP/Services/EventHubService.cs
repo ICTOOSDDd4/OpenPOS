@@ -28,21 +28,25 @@ namespace OpenPOS_APP.Services
 
       public async Task ConnectToServer()
       {
-          System.Diagnostics.Debug.WriteLine(_secret);
-          _connection = new HubConnectionBuilder()
-              .WithUrl(_url + "/order_event", (conn) => { conn.Headers.Add("secret", _secret); })
-              .Build();
-          try
-          {
-              await _connection.StartAsync();
-              _isConnected = true;
-              _connectionStatus = "Connected";
-          }
-          catch (Exception ex)
-          {
-              System.Diagnostics.Debug.WriteLine(ex);
-          }
-          _connection.Closed += async (s) =>
+         System.Diagnostics.Debug.WriteLine(_secret);
+         _connection = new HubConnectionBuilder()
+             .WithUrl(_url + "/order_event", (conn) =>
+             {
+                conn.Headers.Add("secret", _secret);
+             })
+             .Build();
+         try
+         {
+            await _connection.StartAsync();
+            _isConnected = true;
+            _connectionStatus = "Connected";
+         }
+         catch (Exception ex)
+         {
+            System.Diagnostics.Debug.WriteLine(ex);
+         }
+
+         _connection.Closed += async (s) =>
          {
             if (ConnectionStopped)
             {

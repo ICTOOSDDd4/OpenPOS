@@ -2,7 +2,7 @@ using System.Diagnostics;
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Models;
 using System.Runtime.CompilerServices;
-using OpenPOS_APP.NewFolder;
+using OpenPOS_APP.EventArgsClasses;
 using OpenPOS_APP.Services;
 
 namespace OpenPOS_APP;
@@ -33,7 +33,7 @@ public partial class OrderOverviewPage : ContentPage
     private async void newOrder(object sender, OrderEventArgs orderEvent)
    {
 
-       System.Diagnostics.Debug.WriteLine("NewEvent");
+       Debug.WriteLine("NewEvent");
        await Dispatcher.DispatchAsync(() =>
        { 
            Orders.Add(orderEvent.order); 
