@@ -1,5 +1,6 @@
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Settings;
+using System.Diagnostics;
 
 namespace OpenPOS_APP;
 
@@ -25,12 +26,16 @@ public partial class ProductView : ContentView
    {
       _menuPage = page;
       _product = product;
-            
       ProductName.Text = product.Name;
       ProductInfo.Text = product.Description;
       string value = String.Format(((Math.Round(product.Price) == product.Price) ? "{0:0}" : "{0:0.00}"), product.Price);
       ProductPrice.Text = $"€ {value}";
       // ProductImage.Source = imagePath; --Needs to be implemented in DB
+      if (_menuPage.SelectedProducts.ContainsKey(_product.Id))
+        {
+            Amount = _menuPage.SelectedProducts[_product.Id];
+            AmountCount.Text = Amount.ToString();
+        }
    }
 
    private void OnClickedToevoegen(object sender, EventArgs e)
@@ -39,13 +44,13 @@ public partial class ProductView : ContentView
       AmountCount.Text = Amount.ToString();
       
       // Add to current selected products
-      if (_menuPage.SelectedProducts.ContainsKey(_product))
+      if (_menuPage.SelectedProducts.ContainsKey(_product.Id))
       {
-         _menuPage.SelectedProducts[_product] = Amount;
+         _menuPage.SelectedProducts[_product.Id] = Amount;
       }
       else
       {
-         _menuPage.SelectedProducts.Add(_product, Amount);
+         _menuPage.SelectedProducts.Add(_product.Id, Amount);
       }
 
       // Add to over checkoutlist
@@ -70,16 +75,16 @@ public partial class ProductView : ContentView
       AmountCount.Text = Amount.ToString();
 
       // Remove from currently selected products
-      if (_menuPage.SelectedProducts.ContainsKey(_product))
+      if (_menuPage.SelectedProducts.ContainsKey(_product.Id))
       {
-         if (_menuPage.SelectedProducts[_product] > 1)
+         if (_menuPage.SelectedProducts[_product.Id] > 1)
          {
-            _menuPage.SelectedProducts[_product]--;
+            _menuPage.SelectedProducts[_product.Id]--;
 
          }
          else
          {
-            _menuPage.SelectedProducts.Remove(_product);
+            _menuPage.SelectedProducts.Remove(_product.Id);
          }
       }
 

@@ -1,4 +1,6 @@
 using OpenPOS_APP.Models;
+using OpenPOS_APP.Services.Models;
+using System.Diagnostics;
 using OpenPOS_APP.Settings;
 using System.Diagnostics;
 
@@ -6,6 +8,14 @@ namespace OpenPOS_APP.Resources.Controls;
 
 public partial class Header : StackLayout
 {
+   public bool Showing { get; set; }
+    public static event EventHandler Searched;
+    private static readonly BindableProperty headerProperty = BindableProperty.Create(
+        propertyName: nameof(Showing),
+        returnType: typeof(bool),
+        defaultValue: true,
+        declaringType: typeof(Header),
+        defaultBindingMode: BindingMode.OneWay);
     public ContentPage currentPage { get; set; }
 
     public Header()
@@ -17,7 +27,8 @@ public partial class Header : StackLayout
 
    private void OnSearch(object sender, EventArgs e)
    {
-
+        Debug.WriteLine("Invoked Search");
+      Searched.Invoke(sender, e);
    }
 
    private void OnSearchTextChanged(object sender, EventArgs e) { }

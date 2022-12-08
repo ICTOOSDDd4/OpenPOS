@@ -11,7 +11,8 @@
             x:Name="CategoryHorizontal"
             HeightRequest="50"
             Margin="30,0,30,0"
-            BackgroundColor="{ StaticResource White}">
+            BackgroundColor="{ StaticResource White}"
+            HorizontalOptions="Center">
         </HorizontalStackLayout>
         <ScrollView
             x:Name="ScrView"
