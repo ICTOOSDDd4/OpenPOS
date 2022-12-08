@@ -2,15 +2,11 @@
 using Microsoft.Maui;
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Resources.Controls.PopUps;
-using OpenPOS_APP.Services.Models;
 using OpenPOS_APP.Settings;
 using System.Diagnostics;
 using System.Globalization;
-<<<<<<< feature/KitchenAPI-OpenPOS-151
 using OpenPOS_APP.Services;
-=======
 using System.Linq;
->>>>>>> development/sprint-2
 
 namespace OpenPOS_APP;
 
@@ -31,15 +27,8 @@ public partial class CheckoutOverview : ContentPage
     public CheckoutOverview()
 	 {
         InitializeComponent();
-<<<<<<< feature/KitchenAPI-OpenPOS-151
-
-		   AddToCheckOut(ApplicationSettings.CheckoutList);
-
-        
-=======
-		  AddToCheckOut(ApplicationSettings.CheckoutList);
+	  AddToCheckOut(ApplicationSettings.CheckoutList);
         Header.currentPage = this;
->>>>>>> development/sprint-2
     }
 
 
