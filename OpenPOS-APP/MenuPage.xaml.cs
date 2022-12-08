@@ -9,6 +9,7 @@ namespace OpenPOS_APP;
 public partial class MenuPage : ContentPage
 {
 	public List<Product> Products { get; set; }
+	private HorizontalStackLayout _horizontalLayout;
 	public Dictionary<int, int> SelectedProducts { get; set; }
 	private HorizontalStackLayout HorizontalLayout;
 	public delegate void OnSearchEventHandler(object source, EventArgs args);
@@ -48,7 +49,7 @@ public partial class MenuPage : ContentPage
 	public void AddAllProducts()
 	{
 		MainVerticalLayout.Clear();
-        HorizontalLayout = null;
+        _horizontalLayout = null;
 		for (int i = 0; i < Products.Count; i++)
 		{
             AddProductToLayout(Products[i]);
@@ -95,7 +96,7 @@ public partial class MenuPage : ContentPage
 		hLayout.Spacing = 20;
 		hLayout.Margin = new Thickness(10);
 		MainVerticalLayout.Add(hLayout);
-		HorizontalLayout = hLayout;
+		_horizontalLayout = hLayout;
     }
 
 	private async void OnInfoButtonClicked(object sender, EventArgs e)
@@ -104,28 +105,27 @@ public partial class MenuPage : ContentPage
 			"Understood");
 	}
 
-    private async void OrderButton_OnClicked(object sender, EventArgs e)
+	private async void OrderButton_OnClicked(object sender, EventArgs e)
 	{
 		if (SelectedProducts.Count == 0)
 		{
-         await DisplayAlert("No products selected", "You forgot to add products to your order!", "Back");
+			await DisplayAlert("No products selected", "You forgot to add products to your order!", "Back");
 
-      }
-      else
+		}
+		else
 		{
-         if (await DisplayAlert("Confirm order", "Are you sure you want to place your order?", "Yes", "No"))
-         {
-            Order order = new Order(1, false, ApplicationSettings.LoggedinUser.Id, ApplicationSettings.CurrentBill.Id, DateTime.Now, DateTime.Now);
-            order = OrderService.Create(order);
+			if (await DisplayAlert("Confirm order", "Are you sure you want to place your order?", "Yes", "No"))
+			{
+				Order order = new Order(1, false, ApplicationSettings.LoggedinUser.Id, ApplicationSettings.CurrentBill.Id, DateTime.Now, DateTime.Now);
+				order = OrderService.Create(order);
 
-					// Get current product from selected products
+				// Get current product from selected products
 				foreach (KeyValuePair<int, int> entry in SelectedProducts)
-            {
+				{
 					OrderLine line = new OrderLine(order.Id, entry.Key, entry.Value, "In Development");
 					OrderLineService.Create(line);
-            }
-
-				if (order == null)
+				}
+            if (order == null)
             {
                await DisplayAlert("Oops", "Something went wrong please try again.", "Alright");
             }
@@ -135,12 +135,12 @@ public partial class MenuPage : ContentPage
                await Shell.Current.GoToAsync(nameof(MenuPage));
             }
          }
-         else
-         {
-				// Empty for now, DOING NOTHING!
-         }
-      }		
-	}
+			else
+			{
+					// Empty for now, DOING NOTHING!
+			}
+			}
+		}
 
 	public virtual void OnSearch(object sender, EventArgs e) {
 		MainVerticalLayout.Clear();

@@ -51,8 +51,7 @@ public partial class LoginScreen : ContentPage
       if (UserAuth(_username, _password))
       {
             var role = Enum.Parse<RolesEnum>(RoleService.FindUserRole(UserService.Authenticate(_username, _password).Id).Title);
-            switch (role)
-            {
+            switch (role)            {
                 case (RolesEnum.Owner or RolesEnum.Admin):
                     await Shell.Current.GoToAsync(nameof(AdminOverview));
                     break;

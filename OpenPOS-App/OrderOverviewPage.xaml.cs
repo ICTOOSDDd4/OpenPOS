@@ -10,7 +10,7 @@ namespace OpenPOS_APP;
 public partial class OrderOverviewPage : ContentPage
 {
 	public List<Order> Orders { get; set; }
-   private HorizontalStackLayout _horizontalLayout;
+	private HorizontalStackLayout _horizontalLayout;
    private EventHubService _eventHubService = new();
    private bool _isInitialized;
    private double _width;
