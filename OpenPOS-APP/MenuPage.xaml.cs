@@ -137,9 +137,9 @@ public partial class MenuPage : ContentPage
          }
          else
          {
-				// Empty for now, DOING NOTHING!
+			 //EMPTY FOR NOW: DOING NOTHING
          }
-      }		
+        }		
 	}
 
 	public virtual void OnSearch(object sender, EventArgs e) {

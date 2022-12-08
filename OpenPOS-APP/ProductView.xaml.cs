@@ -1,6 +1,8 @@
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Settings;
 using System.Diagnostics;
+using Brush = Microsoft.Maui.Controls.Brush;
+using Shadow = Microsoft.Maui.Controls.Shadow;
 
 namespace OpenPOS_APP;
 
@@ -30,8 +32,11 @@ public partial class ProductView : ContentView
       ProductInfo.Text = product.Description;
       string value = String.Format(((Math.Round(product.Price) == product.Price) ? "{0:0}" : "{0:0.00}"), product.Price);
       ProductPrice.Text = $"€ {value}";
-      // ProductImage.Source = imagePath; --Needs to be implemented in DB
-      if (_menuPage.SelectedProducts.ContainsKey(_product.Id))
+        if (product.Imagepath != null)
+        {
+            ProductImage.Source = Microsoft.Maui.Controls.ImageSource.FromUri(new Uri(product.Imagepath));
+        }
+        if (_menuPage.SelectedProducts.ContainsKey(_product.Id))
         {
             Amount = _menuPage.SelectedProducts[_product.Id];
             AmountCount.Text = Amount.ToString();
