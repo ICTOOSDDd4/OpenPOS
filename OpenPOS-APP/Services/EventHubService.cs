@@ -62,6 +62,10 @@ namespace OpenPOS_APP.Services
 
          _connection.On<Order>("newOrder", async (Order m) =>  {  OnNewOrder(m); });
         }
+<<<<<<< feature/Enums-OpenPOS-113
+=======
+        
+>>>>>>> development/sprint-2
 
       public async Task ConnectToServerPayment()
       {
@@ -115,7 +119,5 @@ namespace OpenPOS_APP.Services
       {
          newPayent?.Invoke(this, new PaymentEventArgs() { Tikkie = tikkie });
       }
-
-
-   }
+      }
 }
