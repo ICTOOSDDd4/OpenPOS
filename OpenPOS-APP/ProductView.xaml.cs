@@ -33,7 +33,6 @@ public partial class ProductView : ContentView
       // ProductImage.Source = imagePath; --Needs to be implemented in DB
       if (_menuPage.SelectedProducts.ContainsKey(_product.Id))
         {
-            Debug.WriteLine("asdasd");
             Amount = _menuPage.SelectedProducts[_product.Id];
             AmountCount.Text = Amount.ToString();
         }
