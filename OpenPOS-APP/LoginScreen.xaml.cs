@@ -92,8 +92,9 @@ public partial class LoginScreen : ContentPage
 
    private bool UserAuth(string username, string password)
    {
-      User user = UserService.Authenticate(_username, _password);
-
+     
+      User user = UserService.Authenticate(username, password);
+      
       if (user != null)
       {
          ApplicationSettings.LoggedinUser = user;

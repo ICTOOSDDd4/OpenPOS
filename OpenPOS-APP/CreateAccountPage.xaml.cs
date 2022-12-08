@@ -1,7 +1,10 @@
 ﻿using System.Reflection;
+using System.Security.Cryptography;
+using System.Text;
 using System.Text.RegularExpressions;
 using OpenPOS_APP.Enums;
 using OpenPOS_APP.Models;
+using OpenPOS_APP.Services;
 using OpenPOS_APP.Services.Models;
 using OpenPOS_APP.Settings;
 
@@ -9,8 +12,6 @@ namespace OpenPOS_APP;
 
 public partial class CreateAccountPage : ContentPage
 {
-	private string _password;
-	private bool _isValid = false;
 	
 	private ResourceDictionary _appColors = new();
 
@@ -89,13 +90,11 @@ public partial class CreateAccountPage : ContentPage
 	{
 		ErrorDisplayLabel.Text = errorText;
 		ErrorDisplayLabel.IsVisible = true;
-		_isValid = false;
 	}
 	private void ClearErrorLabel()
 	{
 		ErrorDisplayLabel.Text = "";
 		ErrorDisplayLabel.IsVisible = false;
-		_isValid = true;
 	}
 	
 	
@@ -112,12 +111,15 @@ public partial class CreateAccountPage : ContentPage
 			if (UserService.FindByEmail(EmailEntry.Text) == null)
 			{
 				//TODO: Encrypt passwords (OPENPOS-11)
+				string encryptedPassword = HashingService.HashPassword(PasswordEntry.Text);
+
+
 				User currentUser = UserService.Create(new User
 				{
 					Name = FirstName.Text,
 					Last_name = LastName.Text,
 					Email = EmailEntry.Text,
-					Password = PasswordEntry.Text
+					Password = encryptedPassword
 				});
 				
 				Role guestRole = RoleService.FindOnRoleTitle(RolesEnum.Guest);
