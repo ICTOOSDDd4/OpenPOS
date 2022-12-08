@@ -128,8 +128,8 @@ jobs:
     - name: Build with .NET
       run: dotnet build --configuration Release
 
-#     - name: Test with .NET
-#       run: dotnet test --configuration Release --no-build --verbosity normal
+     - name: Test with .NET
+       run: dotnet test --configuration Release --no-build --verbosity normal
       
   # iOSWorkflow:
   #   runs-on: macos-latest
