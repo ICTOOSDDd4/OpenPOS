@@ -135,12 +135,12 @@ public partial class MenuPage : ContentPage
                await Shell.Current.GoToAsync(nameof(MenuPage));
             }
          }
-			else
-			{
-					// Empty for now, DOING NOTHING!
-			}
-			}
-		}
+         else
+         {
+			 //EMPTY FOR NOW: DOING NOTHING
+         }
+        }		
+	}
 
 	public virtual void OnSearch(object sender, EventArgs e) {
 		MainVerticalLayout.Clear();
