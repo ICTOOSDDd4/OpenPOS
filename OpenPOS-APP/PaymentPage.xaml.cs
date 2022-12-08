@@ -11,7 +11,9 @@ namespace OpenPOS_APP;
 public partial class PaymentPage : ContentPage
 {
 	public static Transaction CurrentTransaction { get; set; }
-	public static int RequiredPayments { get; set; }
+	public static int RequiredPayments { get; set; } 
+   // Maybe don't set all the transaction data in the code behind and just pull it from some where else.
+   // This way you can also handle the inisiate the event hub service and you can let the page wait before showing the QR code without adding it to the listener.
 	private EventHubService _eventHubService = new EventHubService();
    private EventHandler<EventArgs> _eventHandler;
    private Thread thread;
@@ -33,7 +35,7 @@ public partial class PaymentPage : ContentPage
       thread = new Thread(new ThreadStart(StartStatusLabel));
       thread.Start();
    }
-   private async void Connect()
+   public async void Connect()
    {
       await _eventHubService.ConnectToServerPayment();
       bool AddedToPaymentListener = await OpenPosAPIService.AddToPaymentListener(_eventHubService.GetConnectionID(), CurrentTransaction.PaymentRequestToken);
