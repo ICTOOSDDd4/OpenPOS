@@ -8,12 +8,12 @@ namespace OpenPOS_APP.Factory.Database
     {
         private static IDictionary<RolesEnum, string> _roles = new Dictionary<RolesEnum, string>()
         {
-            { RolesEnum.Owner, "Owner" },
-            { RolesEnum.Admin, "Admin" },
-            { RolesEnum.Cook, "Cook" },
-            { RolesEnum.Crew, "Crew" },
-            { RolesEnum.Bar, "Bar" },
-            { RolesEnum.Guest, "Guest" }
+            { RolesEnum.Owner, RolesEnum.Owner.ToString() },
+            { RolesEnum.Admin, RolesEnum.Admin.ToString() },
+            { RolesEnum.Cook, RolesEnum.Cook.ToString() },
+            { RolesEnum.Crew, RolesEnum.Crew.ToString() },
+            { RolesEnum.Bar, RolesEnum.Bar.ToString() },
+            { RolesEnum.Guest, RolesEnum.Guest.ToString() }
         };
 
         private static List<Role> _dbRoles;
