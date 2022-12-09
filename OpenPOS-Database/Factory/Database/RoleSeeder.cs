@@ -1,8 +1,8 @@
 ﻿using OpenPOS_APP.Enums;
 using OpenPOS_APP.Models;
-using OpenPOS_APP.Services.Models;
+using OpenPOS_Database.Services.Models;
 
-namespace OpenPOS_APP.Factory.Database
+namespace OpenPOS_Database.Factory.Database
 {
     public class RoleSeeder
     {

@@ -3,7 +3,7 @@ using OpenPOS_APP.Models;
 using OpenPOS_APP.Settings;
 using RestSharp;
 
-namespace OpenPOS_APP.Services.Models
+namespace OpenPOS_Database.Services.Models
 {
     public static class TikkiePaymentService
     {

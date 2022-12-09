@@ -3,9 +3,8 @@ using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Interfaces;
 using System.Data.SqlClient;
 using System.Diagnostics;
-using OpenPOS_Repositories;
 
-namespace OpenPOS_APP.Services.Models;
+namespace OpenPOS_Database.Services.Models;
 
 public class ProductService : IModelService<Product>
 {

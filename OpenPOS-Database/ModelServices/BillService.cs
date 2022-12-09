@@ -3,7 +3,7 @@ using OpenPOS_APP.Services.Interfaces;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace OpenPOS_APP.Services.Models;
+namespace OpenPOS_Database.Services.Models;
 
 public class BillService : IModelService<Bill>
 {

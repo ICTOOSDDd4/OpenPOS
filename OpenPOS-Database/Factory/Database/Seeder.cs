@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenPOS_APP.Factory.Database
+namespace OpenPOS_Database.Factory.Database
 {
     public class Seeder
     {

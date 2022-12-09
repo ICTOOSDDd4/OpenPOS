@@ -1,9 +1,9 @@
 using System.Data.SqlClient;
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Interfaces;
-using OpenPOS_Repositories;
+using OpenPOS_Database;
 
-namespace OpenPOS_APP.Services.Models;
+namespace OpenPOS_Database.Services.Models;
 
 public class UserRoleService: IModelService<UserRole>
 {

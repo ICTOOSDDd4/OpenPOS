@@ -1,10 +1,10 @@
 using System.Data;
 using System.Data.SqlClient;
 using OpenPOS_APP.Models;
+using OpenPOS_APP.Services;
 using OpenPOS_APP.Services.Interfaces;
-using OpenPOS_Repositories;
 
-namespace OpenPOS_APP.Services.Models;
+namespace OpenPOS_Database.Services.Models;
 
 public class UserService : IModelService<User>
 {

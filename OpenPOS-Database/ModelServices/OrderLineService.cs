@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OpenPOS_APP.Models;
-using System.Collections;
-using OpenPOS_Repositories;
 
-namespace OpenPOS_APP.Services.Models
+namespace OpenPOS_Database.Services.Models
 {
     public class OrderLineService
     {

@@ -24,4 +24,8 @@
 	  <ProjectReference Include="..\OpenPOS-Settings\OpenPOS-Settings.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.0" />
+	</ItemGroup>
+
 </Project>

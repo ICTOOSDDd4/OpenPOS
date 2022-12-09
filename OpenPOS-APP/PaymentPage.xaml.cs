@@ -31,7 +31,7 @@ public partial class PaymentPage : ContentPage
       {
          throw new Exception("Can't add the Transaction to the Payment Listener");
       }
-      _eventHubService.NewPayent += OnPaymentPayed;
+      _eventHubService.NewPayment += OnPaymentPayed;
       ImageSource imageSource = UtilityService.GenerateQrCodeFromUrl(CurrentTransaction.Url);
       
       // Deleting the loader from the screen.

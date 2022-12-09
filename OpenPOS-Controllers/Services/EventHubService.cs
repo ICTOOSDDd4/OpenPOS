@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
 using OpenPOS_APP.EventArgsClasses;
 using OpenPOS_APP.Models;
-
 using OpenPOS_APP.Settings;
 
 namespace OpenPOS_APP.Services
@@ -17,7 +16,7 @@ namespace OpenPOS_APP.Services
       public string ConnectionStatus = "Closed"; //Stays public for future possible use.
 
       public event EventHandler<OrderEventArgs> NewOrder;
-      public event EventHandler<PaymentEventArgs> NewPayent;
+      public event EventHandler<PaymentEventArgs> NewPayment;
 
       public async Task Stop()
       {
@@ -30,7 +29,7 @@ namespace OpenPOS_APP.Services
       {
          System.Diagnostics.Debug.WriteLine(_secret);
          _connection = new HubConnectionBuilder()
-             .WithUrl(_url + "/order_event", (conn) =>
+            .WithUrl(_url + "/order_event", (conn) =>
              {
                 conn.Headers.Add("secret", _secret);
              })
@@ -113,7 +112,7 @@ namespace OpenPOS_APP.Services
 
       private void OnNewPayment(Tikkie tikkie)
       {
-         NewPayent?.Invoke(this, new PaymentEventArgs() { Tikkie = tikkie });
+         NewPayment?.Invoke(this, new PaymentEventArgs() { Tikkie = tikkie });
       }
       }
 }
