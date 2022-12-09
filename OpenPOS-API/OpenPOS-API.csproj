@@ -24,6 +24,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.0" />
       <PackageReference Include="RestSharp" Version="109.0.0-preview.1" />
     </ItemGroup>
 
