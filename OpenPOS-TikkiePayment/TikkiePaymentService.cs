@@ -1,14 +1,13 @@
 ﻿using System;
 using Newtonsoft.Json.Linq;
-using OpenPOS_APP.Models;
-using OpenPOS_APP.Settings;
+using OpenPOS_Settings;
 using RestSharp;
 
 namespace OpenPOS_Database.Services.Models
 {
     public class TikkiePaymentService
     {
-        public Transaction CreatePaymentRequest(int amountInCents, int transactionId, string desc)
+        public string CreatePaymentRequest(int amountInCents, int transactionId, string desc)
         {
             var client = new RestClient(ApplicationSettings.TikkieSet.BaseUrl);
             var request = new RestRequest("/paymentrequests", Method.Post);
@@ -24,33 +23,16 @@ namespace OpenPOS_Database.Services.Models
                referenceId = transactionId.ToString(),
             });
 
-         RestResponse response = client.Execute(request);
+            RestResponse response = client.Execute(request);
             if (response.Content != null)
             {
-                var obj = JObject.Parse(response.Content);
-                if (obj["errors"] != null) // If API returns a error.
-                {
-                    throw new Exception($"Error: {obj["errors"][0]?["message"]} ");
-                }
-                return new Transaction
-                {
-                    PaymentRequestToken = obj["paymentRequestToken"]?.ToString(),
-                    AmountInCents = (int)obj["amountInCents"]?.ToObject<int>(),
-                    TransactionId = obj["referenceId"]?.ToString(),
-                    Description = obj["description"]?.ToString(),
-                    Url = obj["url"]?.ToString(),
-                    ExpiryDate = (DateTime)obj["expiryDate"]?.ToObject<DateTime>(),
-                    CreatedDateTime = (DateTime)obj["createdDateTime"]?.ToObject<DateTime>(),
-                    Status = obj["status"]?.ToString(),
-                    NumberOfPayments = (int)obj["numberOfPayments"]?.ToObject<int>(),
-                    TotalAmountPayed = (int)obj["totalAmountPaidInCents"]?.ToObject<int>(),
-                };
+                return response.Content;
             }
 
             return null;
         }
 
-        public Transaction GetTransactionInformation(string paymentRequestToken)
+        public string GetTransactionInformation(string paymentRequestToken)
         {
             var client = new RestClient(ApplicationSettings.TikkieSet.BaseUrl);
             var request = new RestRequest($"/paymentrequests/{paymentRequestToken}");
@@ -61,24 +43,7 @@ namespace OpenPOS_Database.Services.Models
             RestResponse response = client.Execute(request);
             if (response.Content != null)
             {
-                var obj = JObject.Parse(response.Content);
-                if (obj["errors"] != null) // If API returns a error.
-                {
-                    throw new Exception($"Error: {obj["errors"][0]?["message"]} ");
-                }
-                return new Transaction
-                {
-                    PaymentRequestToken = obj["paymentRequestToken"]?.ToString(),
-                    AmountInCents = (int)obj["amountInCents"]?.ToObject<int>(),
-                    TransactionId = obj["referenceId"]?.ToString(),
-                    Description = obj["description"]?.ToString(),
-                    Url = obj["url"]?.ToString(),
-                    ExpiryDate = (DateTime)obj["expiryDate"]?.ToObject<DateTime>(),
-                    CreatedDateTime = (DateTime)obj["createdDateTime"]?.ToObject<DateTime>(),
-                    Status = obj["status"]?.ToString(),
-                    NumberOfPayments = (int)obj["numberOfPayments"]?.ToObject<int>(),
-                    TotalAmountPayed = (int)obj["totalAmountPaidInCents"]?.ToObject<int>(),
-                };
+                return response.Content;
                 
             }
 

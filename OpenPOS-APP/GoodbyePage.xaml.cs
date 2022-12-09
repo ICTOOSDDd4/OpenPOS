@@ -1,12 +1,11 @@
-﻿using OpenPOS_APP.Models;
-using OpenPOS_APP.Settings;
+﻿using OpenPOS_APP.Settings;
 
 namespace OpenPOS_APP;
 
 public partial class GoodbyePage : ContentPage
 {
 	private System.Timers.Timer _timer = new System.Timers.Timer(1000);
-	private int count = 5;
+	private int count = 10;
 	public GoodbyePage()
 	{
 		InitializeComponent();

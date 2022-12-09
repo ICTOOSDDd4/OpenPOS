@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenPOS_APP.Settings
-{
+namespace OpenPOS_Settings 
+{ 
    public class ApiSettings
    {
       private string _base_url;

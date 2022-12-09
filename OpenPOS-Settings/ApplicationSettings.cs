@@ -1,7 +1,6 @@
-﻿using OpenPOS_APP.Models;
-using OpenPOS_Settings;
+﻿using OpenPOS_Models;
 
-namespace OpenPOS_APP.Settings;
+namespace OpenPOS_Settings;
 
 public static class ApplicationSettings
 {

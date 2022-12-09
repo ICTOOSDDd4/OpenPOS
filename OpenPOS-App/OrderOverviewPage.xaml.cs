@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using OpenPOS_APP.Models;
 using System.Runtime.CompilerServices;
 using OpenPOS_APP.EventArgsClasses;
 using OpenPOS_APP.Services;

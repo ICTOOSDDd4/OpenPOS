@@ -97,9 +97,9 @@ namespace OpenPOS_Database
                     var propType = prop.PropertyType;
                     try
                    {
-                      if (propType.IsGenericType && propType.GetGenericTypeDefinition().Equals(typeof(Nullable<>)))
+                      if (propType.IsGenericType && propType.GetGenericTypeDefinition() == typeof(Nullable<>))
                       {
-                         if (reader[prop.Name] == null)
+                         if (reader[prop.Name] == null || reader[prop.Name] == DBNull.Value || reader[prop.Name].ToString() == "")
                          {
                             prop.SetValue(obj, null, null);
                          }

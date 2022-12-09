@@ -1,11 +1,8 @@
-﻿using OpenPOS_APP.Models;
+
+
+using OpenPOS_Settings;
 using OpenPOS_Database.Services.Models;
-using OpenPOS_APP.Settings;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OpenPOS_Models;
 
 namespace OpenPOS_Controllers
 {

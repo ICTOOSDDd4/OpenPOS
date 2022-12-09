@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.Configuration;
-using OpenPOS_APP.Models;
-using OpenPOS_APP.Settings;
+using OpenPOS_Models;
+using OpenPOS_Settings;
 using OpenPOS_Database.Services.Models;
 using OpenPOS_Settings;
 

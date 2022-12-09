@@ -19,6 +19,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\OpenPOS-API\OpenPOS-API.csproj" />
 	  <ProjectReference Include="..\OpenPOS-Database\OpenPOS-Database.csproj" />
 	  <ProjectReference Include="..\OpenPOS-Models\OpenPOS-Models.csproj" />
 	  <ProjectReference Include="..\OpenPOS-Settings\OpenPOS-Settings.csproj" />

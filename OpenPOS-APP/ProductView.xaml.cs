@@ -1,4 +1,3 @@
-using OpenPOS_APP.Models;
 using OpenPOS_APP.Settings;
 using System.Diagnostics;
 using Brush = Microsoft.Maui.Controls.Brush;
