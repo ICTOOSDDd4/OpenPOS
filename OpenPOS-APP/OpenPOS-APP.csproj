@@ -121,4 +121,8 @@
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Controllers" />
+	  <Folder Include="Settings" />
+	</ItemGroup>
 </Project>

@@ -1,4 +1,3 @@
-using OpenPOS_APP.Controllers;
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Models;
 
