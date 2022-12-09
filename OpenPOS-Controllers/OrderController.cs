@@ -1,5 +1,5 @@
-﻿using OpenPOS_APP.Models;
-using OpenPOS_Database.Services.Models;
+﻿using OpenPOS_Database.Services.Models;
+using OpenPOS_Models;
 
 namespace OpenPOS_Controllers
 {

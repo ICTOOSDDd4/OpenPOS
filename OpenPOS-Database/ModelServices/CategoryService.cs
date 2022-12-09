@@ -1,4 +1,3 @@
-using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Interfaces;
 using System.Data;
 using System.Data.SqlClient;

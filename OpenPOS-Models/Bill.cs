@@ -1,4 +1,4 @@
-﻿namespace OpenPOS_APP.Models
+﻿namespace OpenPOS_Models
 {
     public class Bill
     {

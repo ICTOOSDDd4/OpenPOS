@@ -1,5 +1,3 @@
-using OpenPOS_APP.Models;
-
 namespace OpenPOS_APP;
 
 public partial class OrderView : ContentView

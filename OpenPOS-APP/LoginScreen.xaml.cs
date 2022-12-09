@@ -1,5 +1,3 @@
-
-using OpenPOS_APP.Models;
 using OpenPOS_APP.Settings;
 using System.Reflection;
 using OpenPOS_APP.Enums;

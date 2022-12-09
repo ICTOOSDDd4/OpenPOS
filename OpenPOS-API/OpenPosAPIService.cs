@@ -1,6 +1,6 @@
 ﻿using OpenPOS_APP.Settings;
 using Microsoft.AspNetCore.SignalR.Client;
-using OpenPOS_APP.Models;
+using OpenPOS_Models;
 using OpenPOS_Settings;
 using OpenPOS_Settings.EventArgsClasses;
 using RestSharp;

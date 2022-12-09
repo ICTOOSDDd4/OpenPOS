@@ -1,6 +1,5 @@
 ﻿using System;
 using Newtonsoft.Json.Linq;
-using OpenPOS_APP.Models;
 using OpenPOS_APP.Settings;
 using RestSharp;
 

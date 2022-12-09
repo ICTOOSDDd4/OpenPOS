@@ -1,4 +1,4 @@
-﻿using OpenPOS_APP.Models;
+﻿using OpenPOS_Models;
 using OpenPOS_Settings;
 
 namespace OpenPOS_APP.Settings;

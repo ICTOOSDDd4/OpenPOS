@@ -1,6 +1,5 @@
 
 using Microsoft.Maui.Controls;
-using OpenPOS_APP.Models;
 using OpenPOS_APP.Settings;
 using OpenPOS_APP.Views.Onboarding;
 using System.Reflection;

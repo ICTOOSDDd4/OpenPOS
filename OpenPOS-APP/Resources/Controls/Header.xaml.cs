@@ -1,4 +1,3 @@
-using OpenPOS_APP.Models;
 using System.Diagnostics;
 using OpenPOS_APP.Settings;
 using System.Diagnostics;
