@@ -1,6 +1,5 @@
 ﻿using OpenPOS_APP.EventArgsClasses;
 using OpenPOS_APP.Services;
-using OpenPOS_APP.Settings;
 using System.Diagnostics;
 using OpenPOS_Controllers.Services;
 using OpenPOS_Database.Services.Models;

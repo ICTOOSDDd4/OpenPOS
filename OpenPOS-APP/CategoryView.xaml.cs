@@ -1,5 +1,3 @@
-using OpenPOS_APP.Settings;
-
 namespace OpenPOS_APP;
 
 public partial class CategoryView : ContentView

@@ -1,9 +1,9 @@
-using OpenPOS_APP.Settings;
 using System.Reflection;
-using OpenPOS_APP.Enums;
+using OpenPOS_Controllers.Services;
+using OpenPOS_Settings;
+using OpenPOS_Settings.Enums;
 
-
-namespace OpenPOS_APP.Views.Onboarding;
+namespace OpenPOS_APP;
 
 public partial class LoginScreen : ContentPage
 {
@@ -90,7 +90,8 @@ public partial class LoginScreen : ContentPage
 
    private bool UserAuth(string username, string password)
    {
-     
+      string encryptedPassword = UtilityService.HashPassword(password);
+
       User user = UserService.Authenticate(username, password);
       
       if (user != null)

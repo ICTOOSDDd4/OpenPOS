@@ -1,5 +1,4 @@
 using OpenPOS_APP.Services.Models;
-using OpenPOS_APP.Settings;
 using System.Reflection;
 using System.Text.RegularExpressions;
 

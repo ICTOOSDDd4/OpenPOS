@@ -1,7 +1,6 @@
 using CommunityToolkit.Maui.Markup;
 using CommunityToolkit.Maui.Views;
 using Microsoft.Maui.Controls.Platform;
-using OpenPOS_APP.Settings;
 using System.Globalization;
 
 namespace OpenPOS_APP.Resources.Controls.PopUps;

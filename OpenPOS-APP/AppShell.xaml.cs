@@ -1,6 +1,4 @@
-﻿using OpenPOS_APP.Views.Onboarding;
-
-namespace OpenPOS_APP;
+﻿namespace OpenPOS_APP;
 
 public partial class AppShell : Shell
 {

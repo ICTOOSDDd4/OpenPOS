@@ -1,6 +1,4 @@
-﻿using OpenPOS_APP.Settings;
-
-namespace OpenPOS_APP;
+﻿namespace OpenPOS_APP;
 
 public partial class GoodbyePage : ContentPage
 {

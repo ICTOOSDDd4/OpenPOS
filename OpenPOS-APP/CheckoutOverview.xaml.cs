@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Maui.Views;
 using Microsoft.Maui;
 using OpenPOS_APP.Resources.Controls.PopUps;
-using OpenPOS_APP.Settings;
 using System.Diagnostics;
 using System.Globalization;
 using OpenPOS_APP.Services;

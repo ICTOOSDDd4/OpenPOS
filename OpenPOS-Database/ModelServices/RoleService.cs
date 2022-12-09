@@ -3,6 +3,7 @@ using System.Data.SqlClient;
 using OpenPOS_APP.Enums;
 using OpenPOS_Database.Interfaces;
 using OpenPOS_Models;
+using OpenPOS_Settings.Enums;
 
 namespace OpenPOS_Database.Services.Models;
 

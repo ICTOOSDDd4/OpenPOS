@@ -2,7 +2,6 @@ using Microsoft.Extensions.Logging;
 using OpenPOS_APP.Services;
 using Microsoft.Extensions.Configuration;
 using System.Reflection;
-using OpenPOS_APP.Settings;
 using CommunityToolkit.Maui;
 using System.Diagnostics;
 using Microsoft.Maui.LifecycleEvents;

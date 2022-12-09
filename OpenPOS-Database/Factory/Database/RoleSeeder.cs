@@ -1,6 +1,6 @@
-﻿using OpenPOS_APP.Enums;
-using OpenPOS_Database.Services.Models;
+﻿using OpenPOS_Database.Services.Models;
 using OpenPOS_Models;
+using OpenPOS_Settings.Enums;
 
 namespace OpenPOS_Database.Factory.Database
 {
