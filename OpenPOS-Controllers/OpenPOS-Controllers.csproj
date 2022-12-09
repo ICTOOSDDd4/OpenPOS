@@ -18,4 +18,10 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\OpenPOS-Database\OpenPOS-Database.csproj" />
+	  <ProjectReference Include="..\OpenPOS-Models\OpenPOS-Models.csproj" />
+	  <ProjectReference Include="..\OpenPOS-Settings\OpenPOS-Settings.csproj" />
+	</ItemGroup>
+
 </Project>

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenPOS_APP.Models;
 using System.Collections;
+using OpenPOS_Repositories;
 
 namespace OpenPOS_APP.Services.Models
 {

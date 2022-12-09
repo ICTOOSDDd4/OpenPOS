@@ -1,10 +1,8 @@
 
 using OpenPOS_APP.Models;
-using OpenPOS_APP.Services.Models;
 using OpenPOS_APP.Settings;
 using System.Reflection;
 using OpenPOS_APP.Enums;
-using OpenPOS_APP.Services;
 
 
 namespace OpenPOS_APP.Views.Onboarding;

@@ -1,6 +1,4 @@
-﻿using OpenPOS_APP.Services.Models;
-
-namespace OpenPOS_APP.Models
+﻿namespace OpenPOS_APP.Models
 {
     public class Order
     {
@@ -19,14 +17,6 @@ namespace OpenPOS_APP.Models
             Bill_id = billId;
             Updated_At = updatedAt;
             Created_At = createdAt;
-        }
-
-        public List<OrderLineProduct> GetLines(int id)
-        {
-
-            List<OrderLineProduct> lines = OrderLineService.GetAllById(id);
-
-            return lines;
         }
     }
 }
