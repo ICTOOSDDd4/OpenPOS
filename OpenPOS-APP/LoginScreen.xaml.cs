@@ -12,7 +12,7 @@ namespace OpenPOS_APP.Views.Onboarding;
 public partial class LoginScreen : ContentPage
 {
     
-    private string _username;
+   private string _username;
    private string _password;
    private ResourceDictionary _appColors = new();
    public LoginScreen()
