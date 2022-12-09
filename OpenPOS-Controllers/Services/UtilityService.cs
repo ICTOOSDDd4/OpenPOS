@@ -1,11 +1,11 @@
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
-using OpenPOS_APP.Settings;
+using OpenPOS_Settings;
 
 namespace OpenPOS_Controllers.Services;
 
-public class UtilityService
+public static class UtilityService
 {
     public static ImageSource GenerateQrCodeFromUrl(string url)
     {
@@ -19,26 +19,22 @@ public class UtilityService
         return ImageSource.FromFile(filename);
     }
 
-   public static string GetRootDirectory()
-   {
-      return AppDomain.CurrentDomain.BaseDirectory;
-   }
+    public static string HashPassword(string unencrypted)
+    {
+        // ComputeHash - returns byte array  
+        var bytes = SHA256.HashData(Encoding.UTF8.GetBytes(unencrypted));
 
-   public static string HashPassword(string unencrypted)
-   {
-      //apply SHA256 hash
-      using (SHA256 sha256Hash = SHA256.Create())
-      {
-         // ComputeHash - returns byte array  
-         byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(unencrypted));
+        // Convert byte array to a string   
+        StringBuilder builder = new();
+        foreach (var t in bytes)
+        {
+            builder.Append(t.ToString("x2"));
+        }
+        return builder.ToString();
+    }
 
-         // Convert byte array to a string   
-         StringBuilder builder = new();
-         for (int i = 0; i < bytes.Length; i++)
-         {
-            builder.Append(bytes[i].ToString("x2"));
-         }
-         return builder.ToString();
-      }
-   }
+    private static string GetRootDirectory()
+    {
+       return AppDomain.CurrentDomain.BaseDirectory;
+    }
 }

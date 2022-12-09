@@ -1,8 +1,8 @@
-﻿using System.Data.SqlClient;
-using System.Data;
+﻿using System.Data;
+using System.Data.SqlClient;
 using OpenPOS_Models;
 
-namespace OpenPOS_Database.Services.Models
+namespace OpenPOS_Database.ModelServices
 {
     public class OrderLineService
     {

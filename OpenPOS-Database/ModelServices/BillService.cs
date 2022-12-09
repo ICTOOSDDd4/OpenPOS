@@ -1,9 +1,9 @@
-using OpenPOS_APP.Services.Interfaces;
 using System.Data;
 using System.Data.SqlClient;
+using OpenPOS_Database.Interfaces;
 using OpenPOS_Models;
 
-namespace OpenPOS_Database.Services.Models;
+namespace OpenPOS_Database.ModelServices;
 
 public class BillService : IModelService<Bill>
 {
@@ -39,7 +39,7 @@ public class BillService : IModelService<Bill>
 
     public bool Update(Bill obj)
     {
-        SqlCommand query = new SqlCommand("UPDATE [dbo].[Bill] SET [user_id] = @userid, [paid] = @paid WHERE [id] = @id");
+        SqlCommand query = new SqlCommand("UPDATE [dbo].[Bill] SET [user_id] = @userid, [paid] = @paid, [updated_at] = @updated_at WHERE [id] = @id");
 
         query.Parameters.Add("@userid", SqlDbType.Int);
         query.Parameters["@userid"].Value = obj.User_id;
@@ -47,6 +47,8 @@ public class BillService : IModelService<Bill>
         query.Parameters["@paid"].Value = obj.Paid;
         query.Parameters.Add("@id", SqlDbType.Int);
         query.Parameters["@id"].Value = obj.Id;
+        query.Parameters.Add("@updated_at", SqlDbType.DateTime);
+        query.Parameters["@updated_at"].Value = DateTime.Now;
 
         return DatabaseService.Execute(query);
     }

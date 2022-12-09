@@ -1,5 +1,6 @@
 
 
+using OpenPOS_Database.ModelServices;
 using OpenPOS_Settings;
 using OpenPOS_Database.Services.Models;
 using OpenPOS_Models;

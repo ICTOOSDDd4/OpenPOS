@@ -1,6 +1,6 @@
 using System.Data.SqlClient;
-using OpenPOS_APP.Services.Interfaces;
 using OpenPOS_Database;
+using OpenPOS_Database.Interfaces;
 using OpenPOS_Models;
 
 namespace OpenPOS_Database.Services.Models;

@@ -1,4 +1,4 @@
-namespace OpenPOS_APP.Services.Interfaces;
+namespace OpenPOS_Database.Interfaces;
 
 public interface IModelService<T>
 {

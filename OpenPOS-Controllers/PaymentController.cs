@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
-using OpenPOS_APP.Settings;
+using OpenPOS_Settings;
 using OpenPOS_Database.Services.Models;
 using OpenPOS_Models;
 

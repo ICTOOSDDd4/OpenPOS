@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using OpenPOS_APP.Exceptions;
 using OpenPOS_Database.Factory.Database;
-using OpenPOS_APP.Settings;
+using OpenPOS_Settings;
 
 namespace OpenPOS_Database
 {
