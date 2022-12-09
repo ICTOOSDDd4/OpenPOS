@@ -8,14 +8,14 @@ namespace OpenPOS_Database.Services.Models;
 
 public class RoleService : IModelService<Role>
 {
-    public static List<Role> GetAll()
+    public List<Role> GetAll()
     {
         List<Role> resultList = DatabaseService.Execute<Role>(new SqlCommand("SELECT * FROM [dbo].[role]"));
 
         return resultList;
     }
 
-    public static Role FindByID(int id)
+    public Role FindByID(int id)
     {
         SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[Role] WHERE [ID] = @ID");
         
@@ -27,7 +27,7 @@ public class RoleService : IModelService<Role>
         return result;
     }
 
-    public static bool Delete(Role obj)
+    public bool Delete(Role obj)
     {
         SqlCommand query = new SqlCommand("DELETE FROM [dbo].[Role] WHERE [ID] = @ID");
         
@@ -37,7 +37,7 @@ public class RoleService : IModelService<Role>
         return DatabaseService.Execute(query);
     }
 
-    public static bool Update(Role obj)
+    public bool Update(Role obj)
     {
         SqlCommand query = new SqlCommand("UPDATE [dbo].[Role] SET [title] = @Title WHERE [ID] = @ID");
         
@@ -49,7 +49,7 @@ public class RoleService : IModelService<Role>
         return DatabaseService.Execute(query);
     }
 
-    public static Role Create(Role obj)
+    public Role Create(Role obj)
     {
         SqlCommand query = new SqlCommand("INSERT INTO [dbo].[Role] ([title])  OUTPUT  inserted.*  VALUES (@Title)");
         
@@ -59,7 +59,7 @@ public class RoleService : IModelService<Role>
         return DatabaseService.ExecuteSingle<Role>(query);
     }
 
-    public static Role FindUserRole(int id)
+    public Role FindUserRole(int id)
     {
         SqlCommand query = new SqlCommand(
             "SELECT r.id, r.title FROM [OpenPOS_dev].[dbo].[user_role] as ur INNER JOIN [dbo].[user] as u ON ur.user_id = u.id INNER JOIN role as r ON ur.role_id = r.id WHERE u.id = @ID");
@@ -72,7 +72,7 @@ public class RoleService : IModelService<Role>
         return result;
     }
     
-    public static Role FindOnRoleTitle(RolesEnum role)
+    public Role FindOnRoleTitle(RolesEnum role)
     {
         SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[Role] WHERE [title] = @Title");
 

@@ -7,13 +7,13 @@ namespace OpenPOS_Database.Services.Models;
 
 public class CategoryService : IModelService<Category>
 {
-    public static List<Category> GetAll()
+    public List<Category> GetAll()
     {
         List<Category> resultList = DatabaseService.Execute<Category>(new SqlCommand("SELECT * FROM [dbo].[Category]"));
         return resultList;
     }
 
-    public static Category FindByID(int id)
+    public Category FindByID(int id)
     {
         SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[Category] WHERE [Id] = @ID");
         
@@ -25,7 +25,7 @@ public class CategoryService : IModelService<Category>
         return result;
     }
 
-    public static bool Delete(Category obj)
+    public bool Delete(Category obj)
     {
         SqlCommand query = new SqlCommand("DELETE FROM [dbo].[Category] WHERE [Id] = @ID");
         
@@ -35,7 +35,7 @@ public class CategoryService : IModelService<Category>
         return DatabaseService.Execute(query);
     }
 
-    public static bool Update(Category obj)
+    public bool Update(Category obj)
     {
         SqlCommand query = new SqlCommand("UPDATE [dbo].[Category] SET [Name] = @Name WHERE [Id] = @ID");
         
@@ -47,7 +47,7 @@ public class CategoryService : IModelService<Category>
         return DatabaseService.Execute(query);
     }
 
-    public static Category Create(Category obj)
+    public Category Create(Category obj)
     {
         SqlCommand query = new SqlCommand("INSERT INTO [dbo].[Category] ([Name])  OUTPUT  inserted.*  VALUES (@Name)");
         

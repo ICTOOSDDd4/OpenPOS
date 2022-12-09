@@ -6,13 +6,13 @@ namespace OpenPOS_Database.Services.Models
 {
     public class OrderLineService
     {
-        public static List<OrderLine> GetAll()
+        public List<OrderLine> GetAll()
         {
             SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[order_product]");
 
             return DatabaseService.Execute<OrderLine>(query);
         }
-        public static List<OrderLineProduct> GetAllById(int id)
+        public List<OrderLineProduct> GetAllById(int id)
         {
             SqlCommand query = new SqlCommand("SELECT m.order_id, m.product_id, o.status, m.amount, p.name, m.comment, o.created_at FROM [OpenPOS_dev].[dbo].[order_product] as m INNER JOIN [dbo].[order] as o ON m.order_id = o.id INNER JOIN product as p ON m.product_id = p.id WHERE o.id = @ID");
 
@@ -23,7 +23,7 @@ namespace OpenPOS_Database.Services.Models
 
             return resultList;
         }
-        public static List<OrderLine> GetByIds(int Order_id, int Product_id)
+        public List<OrderLine> GetByIds(int Order_id, int Product_id)
         {
             SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[order_product] WHERE [order_id] = @OrderId AND [product_id] = @ProductId");
 
@@ -36,7 +36,7 @@ namespace OpenPOS_Database.Services.Models
 
             return resultList;
         }
-        public static List<OrderLineProduct> GetAllUnfinished()
+        public List<OrderLineProduct> GetAllUnfinished()
         {
             SqlCommand query = new SqlCommand("SELECT m.order_id, m.product_id, o.status, m.amount, p.name, m.comment, o.created_at FROM [OpenPOS_dev].[dbo].[order_product] as m INNER JOIN [dbo].[order] as o ON m.order_id = o.id INNER JOIN product as p ON m.product_id = p.id WHERE o.[status] = 0");
 
@@ -45,7 +45,7 @@ namespace OpenPOS_Database.Services.Models
             return resultList;
         }
 
-        public static bool Delete(OrderLineProduct obj)
+        public bool Delete(OrderLineProduct obj)
         {
             SqlCommand query = new SqlCommand("DELETE FROM [dbo].[order_product] WHERE [order_id] = @OrderId AND [product_id] = @ProductId");
 
@@ -57,7 +57,7 @@ namespace OpenPOS_Database.Services.Models
             return DatabaseService.Execute(query);
         }
 
-        public static bool Delete(OrderLine obj)
+        public bool Delete(OrderLine obj)
         {
             SqlCommand query = new SqlCommand("DELETE FROM [dbo].[order_product] WHERE [order_id] = @OrderId AND [product_id] = @ProductId");
 
@@ -69,7 +69,7 @@ namespace OpenPOS_Database.Services.Models
             return DatabaseService.Execute(query);
         }
 
-        public static OrderLine Create(OrderLine obj)
+        public OrderLine Create(OrderLine obj)
         {
             SqlCommand query = new SqlCommand("INSERT INTO [dbo].[order_product] ([order_id], [product_id], [amount], [comment])  OUTPUT  inserted.*  VALUES (@OrderId, @ProductId, @Amount, @Comment)");
 

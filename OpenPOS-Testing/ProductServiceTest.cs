@@ -1,8 +1,10 @@
 using Microsoft.Extensions.Configuration;
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Services;
-using OpenPOS_APP.Services.Models;
 using OpenPOS_APP.Settings;
+using OpenPOS_Database;
+using OpenPOS_Database.Services.Models;
+using OpenPOS_Settings;
 using System.Reflection;
 
 namespace OpenPOS_Testing;
@@ -10,6 +12,8 @@ namespace OpenPOS_Testing;
 [TestFixture]
 public class ProductServiceTest
 {
+    private ProductService _productService = new();
+
     Product Product = new Product
     {
         Name = "Productnaam",
@@ -45,12 +49,12 @@ public class ProductServiceTest
     public void ProductService_GetAllProducts_ReturnsAllProducts()
     {
         var Product = this.Product;
-        var result = ProductService.Create(Product);
-        var Products = ProductService.GetAll();
+        var result = _productService.Create(Product);
+        var Products = _productService.GetAll();
         
         Assert.Greater(Products.Count, 0);
         
-        ProductService.Delete(result);
+        _productService.Delete(result);
     }
 
     [Test]
@@ -58,50 +62,50 @@ public class ProductServiceTest
     {
 
         var Product = this.Product;
-        var result = ProductService.Create(Product);
+        var result = _productService.Create(Product);
         
         Assert.That(Product.Name, Is.EqualTo(result.Name));
         
-        ProductService.Delete(result);
+        _productService.Delete(result);
     }
     
     [Test]
     public void ProductService_FindProduct_ReturnsProduct()
     {
         var Product = this.Product;
-        var createdProduct = ProductService.Create(Product);
-        var result = ProductService.FindByID(createdProduct.Id);
+        var createdProduct = _productService.Create(Product);
+        var result = _productService.FindByID(createdProduct.Id);
        
         Assert.That(Product.Price, Is.EqualTo(result.Price));
        
-        ProductService.Delete(result);
+        _productService.Delete(result);
     }
 
     [Test]
     public void ProductService_UpdateProduct_ReturnsTrue()
     {
         var Product = this.Product;
-        var createdProduct = ProductService.Create(Product);
+        var createdProduct = _productService.Create(Product);
         
         Assert.That(createdProduct.Description, Is.Not.EqualTo("Nieuwe beschrijving!"));
         createdProduct.Description = "Nieuwe beschrijving!";
         
-        var result = ProductService.Update(createdProduct);
+        var result = _productService.Update(createdProduct);
         
         Assert.IsTrue(result);
-        Assert.That(ProductService.FindByID(createdProduct.Id).Description, Is.EqualTo("Nieuwe beschrijving!"));
+        Assert.That(_productService.FindByID(createdProduct.Id).Description, Is.EqualTo("Nieuwe beschrijving!"));
         
-        ProductService.Delete(createdProduct);
+        _productService.Delete(createdProduct);
     }
 
     [Test]
     public void ProductService_DeleteProduct_ReturnsTrue()
     {
         var Product = this.Product;
-        var createdProduct = ProductService.Create(Product);
-        var result = ProductService.Delete(createdProduct);
+        var createdProduct = _productService.Create(Product);
+        var result = _productService.Delete(createdProduct);
         
         Assert.IsTrue(result);
-        Assert.That(ProductService.FindByID(createdProduct.Id).Name, Is.Null);
+        Assert.That(_productService.FindByID(createdProduct.Id).Name, Is.Null);
     }
 }

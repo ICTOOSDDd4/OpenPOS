@@ -6,6 +6,7 @@ namespace OpenPOS_Database.Factory.Database
 {
     public class RoleSeeder
     {
+
         private static IDictionary<RolesEnum, string> _roles = new Dictionary<RolesEnum, string>()
         {
             { RolesEnum.Owner, RolesEnum.Owner.ToString() },
@@ -20,11 +21,12 @@ namespace OpenPOS_Database.Factory.Database
 
         public static void Seed()
         {
-            _dbRoles = RoleService.GetAll();
+            RoleService roleService = new RoleService();
+            _dbRoles = roleService.GetAll();
             foreach (RolesEnum role in Enum.GetValues(typeof(RolesEnum)))
             {
                 if (_dbRoles.All(r => r.Title != _roles[role]))
-                    RoleService.Create(new Role(_roles[role]));
+                    roleService.Create(new Role(_roles[role]));
             }
         }
 

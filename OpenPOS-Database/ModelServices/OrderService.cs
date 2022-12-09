@@ -7,14 +7,14 @@ namespace OpenPOS_Database.Services.Models;
 
 public class OrderService : IModelService<Order>
 {
-    public static List<Order> GetAll()
+    public List<Order> GetAll()
     {
         List<Order> resultList = DatabaseService.Execute<Order>(new SqlCommand("SELECT * FROM [dbo].[Order]"));
 
         return resultList;
     }
 
-    public static List<Order> GetAllOpenOrders()
+    public List<Order> GetAllOpenOrders()
     {
         SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[Order] WHERE [status] = @status");
         query.Parameters.Add("@status", SqlDbType.TinyInt);
@@ -23,7 +23,7 @@ public class OrderService : IModelService<Order>
         return DatabaseService.Execute<Order>(query);
     }
 
-    public static Order FindByID(int id)
+    public Order FindByID(int id)
     {
         SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[Order] WHERE [Id] = @ID");
 
@@ -35,7 +35,7 @@ public class OrderService : IModelService<Order>
         return result;
     }
 
-    public static bool Delete(Order obj)
+    public bool Delete(Order obj)
     {
         SqlCommand query = new SqlCommand("DELETE FROM [dbo].[order] WHERE [ID] = @OrderId");
 
@@ -45,7 +45,7 @@ public class OrderService : IModelService<Order>
         return DatabaseService.Execute(query);
     }
 
-    public static bool Update(Order obj)
+    public bool Update(Order obj)
     {
         SqlCommand query = new SqlCommand("UPDATE [dbo].[order] SET [status] = @status, [user_id] = @userid, [bill_id] = @billId WHERE [id] = @id");
 
@@ -61,7 +61,7 @@ public class OrderService : IModelService<Order>
         return DatabaseService.Execute(query);
     }
 
-    public static Order Create(Order obj)
+    public Order Create(Order obj)
     {
         SqlCommand query = new SqlCommand("INSERT INTO [dbo].[order] ([status], [user_id], [bill_id], [created_at], [updated_at])  OUTPUT  inserted.*  VALUES (@status, @userid, @billId, @created_at, @updated_at)");
 

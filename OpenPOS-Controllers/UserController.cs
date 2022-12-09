@@ -1,4 +1,6 @@
 ﻿using OpenPOS_APP.Models;
+using OpenPOS_Controllers.Services;
+using OpenPOS_Database.Services.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace OpenPOS_Controllers
 {
-    public class UserController
+    public static class UserController
     {
-        public UserController() { }
-        public List<User> GetUsers()
+        private static UserService _userService = new();
+        public static User Authenticate(string email, string password)
         {
-            throw new NotImplementedException();
+            return _userService.Authenticate(email, UtilityService.HashPassword(password));
         }
     }
 }

@@ -7,14 +7,14 @@ namespace OpenPOS_Database.Services.Models;
 
 public class BillService : IModelService<Bill>
 {
-    public static List<Bill> GetAll()
+    public List<Bill> GetAll()
     {
         List<Bill> resultList = DatabaseService.Execute<Bill>(new SqlCommand("SELECT * FROM [dbo].[Bill]"));
 
         return resultList;
     }
 
-    public static Bill FindByID(int id)
+    public Bill FindByID(int id)
     {
         SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[Bill] WHERE [id] = @ID");
 
@@ -26,7 +26,7 @@ public class BillService : IModelService<Bill>
         return result;
     }
 
-    public static bool Delete(Bill obj)
+    public bool Delete(Bill obj)
     {
         SqlCommand query = new SqlCommand("DELETE FROM [dbo].[Bill] WHERE [id] = @BillId");
 
@@ -37,7 +37,7 @@ public class BillService : IModelService<Bill>
 
     }
 
-    public static bool Update(Bill obj)
+    public bool Update(Bill obj)
     {
         SqlCommand query = new SqlCommand("UPDATE [dbo].[Bill] SET [user_id] = @userid, [paid] = @paid WHERE [id] = @id");
 
@@ -51,7 +51,7 @@ public class BillService : IModelService<Bill>
         return DatabaseService.Execute(query);
     }
 
-    public static Bill Create(Bill obj)
+    public Bill Create(Bill obj)
     {
         SqlCommand query = new SqlCommand("INSERT INTO [dbo].[Bill] ([user_id], [paid], [created_at], [updated_at])  OUTPUT  inserted.*  VALUES (@userid, @paid, @created_at, @updated_at)");
 

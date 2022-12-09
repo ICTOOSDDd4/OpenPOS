@@ -1,8 +1,10 @@
 using Microsoft.Extensions.Configuration;
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Services;
-using OpenPOS_APP.Services.Models;
 using OpenPOS_APP.Settings;
+using OpenPOS_Database;
+using OpenPOS_Database.Services.Models;
+using OpenPOS_Settings;
 using System.Reflection;
 
 namespace OpenPOS_Testing;
@@ -10,6 +12,8 @@ namespace OpenPOS_Testing;
 [TestFixture]
 public class FloorServiceTest
 {
+    private FloorService _floorService = new();
+
     Floor Floor = new Floor
     {
         Storey = "6"
@@ -43,12 +47,12 @@ public class FloorServiceTest
     public void FloorService_GetAllFloors_ReturnsAllFloors()
     {
         var Floor = this.Floor;
-        var result = FloorService.Create(Floor);
-        var Floors = FloorService.GetAll();
+        var result = _floorService.Create(Floor);
+        var Floors = _floorService.GetAll();
         
         Assert.Greater(Floors.Count, 0);
-        
-        FloorService.Delete(result);
+
+        _floorService.Delete(result);
     }
 
     [Test]
@@ -56,50 +60,50 @@ public class FloorServiceTest
     {
 
         var Floor = this.Floor;
-        var result = FloorService.Create(Floor);
+        var result = _floorService.Create(Floor);
         
         Assert.That(Floor.Storey, Is.EqualTo(result.Storey));
         
-        FloorService.Delete(result);
+        _floorService.Delete(result);
     }
     
     [Test]
     public void FloorService_FindFloor_ReturnsFloor()
     {
         var Floor = this.Floor;
-        var createdFloor = FloorService.Create(Floor);
-        var result = FloorService.FindByID(createdFloor.Id);
+        var createdFloor = _floorService.Create(Floor);
+        var result = _floorService.FindByID(createdFloor.Id);
        
         Assert.That(Floor.Storey, Is.EqualTo(result.Storey));
        
-        FloorService.Delete(result);
+        _floorService.Delete(result);
     }
 
     [Test]
     public void FloorService_UpdateFloor_ReturnsTrue()
     {
         var Floor = this.Floor;
-        var createdFloor = FloorService.Create(Floor);
+        var createdFloor = _floorService.Create(Floor);
         
         Assert.That(createdFloor.Storey, Is.Not.EqualTo("9"));
         createdFloor.Storey = "9";
         
-        var result = FloorService.Update(createdFloor);
+        var result = _floorService.Update(createdFloor);
         
         Assert.IsTrue(result);
-        Assert.That(FloorService.FindByID(createdFloor.Id).Storey, Is.EqualTo("9"));
+        Assert.That(_floorService.FindByID(createdFloor.Id).Storey, Is.EqualTo("9"));
         
-        FloorService.Delete(createdFloor);
+        _floorService.Delete(createdFloor);
     }
 
     [Test]
     public void FloorService_DeleteFloor_ReturnsTrue()
     {
         var Floor = this.Floor;
-        var createdFloor = FloorService.Create(Floor);
-        var result = FloorService.Delete(createdFloor);
+        var createdFloor = _floorService.Create(Floor);
+        var result = _floorService.Delete(createdFloor);
         
         Assert.IsTrue(result);
-        Assert.That(FloorService.FindByID(createdFloor.Id).Storey, Is.Null);
+        Assert.That(_floorService.FindByID(createdFloor.Id).Storey, Is.Null);
     }
 }

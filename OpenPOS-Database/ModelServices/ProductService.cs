@@ -8,14 +8,14 @@ namespace OpenPOS_Database.Services.Models;
 
 public class ProductService : IModelService<Product>
 {
-    public static List<Product> GetAll()
+    public List<Product> GetAll()
     {
         List<Product> resultList = DatabaseService.Execute<Product>(new SqlCommand("SELECT * FROM [dbo].[Product]"));
 
         return resultList;
     }
 
-   public static List<Product> GetAllByFilter(string filter)
+   public List<Product> GetAllByFilter(string filter)
    {
       string searchTerm = string.Format("%{0}%", filter);
       SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[product] WHERE [name] LIKE @Filter");
@@ -33,7 +33,7 @@ public class ProductService : IModelService<Product>
       return result;
     }
     
-    public static List<Product> GetAllByCategoryId(int categoryId)
+    public List<Product> GetAllByCategoryId(int categoryId)
     {
         List<Product> result;
         if (categoryId != 0)
@@ -50,7 +50,7 @@ public class ProductService : IModelService<Product>
         return result;
     }
 
-    public static Product FindByID(int id)
+    public Product FindByID(int id)
     {
         SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[Product] WHERE [ID] = @ID");
         
@@ -62,7 +62,7 @@ public class ProductService : IModelService<Product>
         return result;
     }
 
-    public static bool Delete(Product obj)
+    public bool Delete(Product obj)
     {
         SqlCommand query = new SqlCommand("DELETE FROM [dbo].[product] WHERE [ID] = @ProductID");
         
@@ -72,7 +72,7 @@ public class ProductService : IModelService<Product>
         return DatabaseService.Execute(query);
     }
 
-    public static bool Update(Product obj)
+    public bool Update(Product obj)
     {
         SqlCommand query = new SqlCommand("UPDATE [dbo].[Product] SET [Name] = @Name, [Price] = @Price, [description] = @Description WHERE [ID] = @ID");
         
@@ -88,7 +88,7 @@ public class ProductService : IModelService<Product>
         return DatabaseService.Execute(query);
     }
 
-    public static Product Create(Product obj)
+    public Product Create(Product obj)
     {
         SqlCommand query = new SqlCommand("INSERT INTO [dbo].[Product] ([Name], [Price], [Description])  OUTPUT  inserted.*  VALUES (@Name, @Price, @Description)");
         

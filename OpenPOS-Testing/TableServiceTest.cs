@@ -1,8 +1,10 @@
 using Microsoft.Extensions.Configuration;
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Services;
-using OpenPOS_APP.Services.Models;
 using OpenPOS_APP.Settings;
+using OpenPOS_Database;
+using OpenPOS_Database.Services.Models;
+using OpenPOS_Settings;
 using System.Reflection;
 
 namespace OpenPOS_Testing;
@@ -10,6 +12,7 @@ namespace OpenPOS_Testing;
 [TestFixture]
 public class TableServiceTest
 {
+    private TableService _tableService = new();
     Table Table = new Table
     {
         Table_number = 69,
@@ -45,12 +48,12 @@ public class TableServiceTest
     public void TableService_GetAllTables_ReturnsAllTables()
     {
         var Table = this.Table;
-        var result = TableService.Create(Table);
-        var Tables = TableService.GetAll();
+        var result = _tableService.Create(Table);
+        var Tables = _tableService.GetAll();
         
         Assert.Greater(Tables.Count, 0);
         
-        TableService.Delete(result);
+        _tableService.Delete(result);
     }
 
     [Test]
@@ -58,70 +61,70 @@ public class TableServiceTest
     {
 
         var Table = this.Table;
-        var result = TableService.Create(Table);
+        var result = _tableService.Create(Table);
 
         Assert.That(result.Bill_id, Is.EqualTo(Table.Bill_id));
         
-        TableService.Delete(result);
+        _tableService.Delete(result);
     }
     
     [Test]
     public void TableService_FindTable_ReturnsTable()
     {
         var Table = this.Table;
-        var createdTable = TableService.Create(Table);
-        var result = TableService.FindByID(createdTable.Id);
+        var createdTable = _tableService.Create(Table);
+        var result = _tableService.FindByID(createdTable.Id);
        
         Assert.That(Table.Bill_id, Is.EqualTo(result.Bill_id));
        
-        TableService.Delete(result);
+        _tableService.Delete(result);
     }
 
     [Test]
     public void TableService_UpdateTable_ReturnsTrue()
     {
         var Table = this.Table;
-        var createdTable = TableService.Create(Table);
+        var createdTable = _tableService.Create(Table);
         
         Assert.That(createdTable.Table_number, Is.Not.EqualTo(123));
         createdTable.Table_number = 123;
         
-        var result = TableService.Update(createdTable);
+        var result = _tableService.Update(createdTable);
         
         Assert.IsTrue(result);
-        Assert.That(TableService.FindByID(createdTable.Id).Table_number, Is.EqualTo(123));
+        Assert.That(_tableService.FindByID(createdTable.Id).Table_number, Is.EqualTo(123));
         
-        TableService.Delete(createdTable);
+        _tableService.Delete(createdTable);
     }
 
     [Test]
     public void TableService_DeleteTable_ReturnsTrue()
     {
         var Table = this.Table;
-        var createdTable = TableService.Create(Table);
-        var result = TableService.Delete(createdTable);
+        var createdTable = _tableService.Create(Table);
+        var result = _tableService.Delete(createdTable);
         
         Assert.IsTrue(result);
-        Assert.That(TableService.FindByID(createdTable.Id).Table_number, Is.EqualTo(0));
+        Assert.That(_tableService.FindByID(createdTable.Id).Table_number, Is.EqualTo(0));
     }
 
     [Test]
     public void TableService_FindByTableNumber_ReturnsTable()
     {
         var Table = this.Table;
-        var createdTable = TableService.Create(Table);
-        var result = TableService.FindByTableNumber(createdTable.Table_number);
+        var createdTable = _tableService.Create(Table);
+        var result = _tableService.FindByTableNumber(createdTable.Table_number);
         
         Assert.That(result.Table_number, Is.EqualTo(createdTable.Table_number));
 
-        TableService.Delete(createdTable);
+        _tableService.Delete(createdTable);
 
     }
     
     [Test]
     public void TableService_FindByTableNumber_ReturnsNull()
     {
-        var result = TableService.FindByTableNumber(679);
+        var result = _tableService.FindByTableNumber(679);
         
         Assert.IsNull(result);
 

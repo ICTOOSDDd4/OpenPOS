@@ -6,9 +6,9 @@ using RestSharp;
 
 namespace OpenPOS_Database.Services.Models
 {
-    public static class TikkiePaymentService
+    public class TikkiePaymentService
     {
-        public static Transaction CreatePaymentRequest(int amountInCents, int transactionId, string desc)
+        public Transaction CreatePaymentRequest(int amountInCents, int transactionId, string desc)
         {
             var client = new RestClient(ApplicationSettings.TikkieSet.BaseUrl);
             var request = new RestRequest("/paymentrequests", Method.Post);
@@ -50,7 +50,7 @@ namespace OpenPOS_Database.Services.Models
             return null;
         }
 
-        public static Transaction GetTransactionInformation(string paymentRequestToken)
+        public Transaction GetTransactionInformation(string paymentRequestToken)
         {
             var client = new RestClient(ApplicationSettings.TikkieSet.BaseUrl);
             var request = new RestRequest($"/paymentrequests/{paymentRequestToken}");

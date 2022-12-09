@@ -1,14 +1,17 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.Configuration;
 using OpenPOS_APP.Models;
-using OpenPOS_APP.Services.Models;
 using OpenPOS_APP.Settings;
+using OpenPOS_Database.Services.Models;
+using OpenPOS_Settings;
 
 namespace OpenPOS_Testing;
 
 [TestFixture]
 public class PaymentServiceTest
 {
+    private TikkiePaymentService _tikkiePaymentService = new();
+
     private Transaction? _testTransaction;
     [SetUp]
     public void Setup()
@@ -32,7 +35,7 @@ public class PaymentServiceTest
     [Test]
     public void PaymentService_CreatingNewTransaction_ReturningLink()
     {
-        _testTransaction = TikkiePaymentService.CreatePaymentRequest(10000, 111111111, "TestingIfItReturnsALink");
+        _testTransaction = _tikkiePaymentService.CreatePaymentRequest(10000, 111111111, "TestingIfItReturnsALink");
         Assert.IsNotNull(_testTransaction);
         Assert.IsNotEmpty(_testTransaction.Url);
         Assert.IsNotEmpty(_testTransaction.PaymentRequestToken);
@@ -41,13 +44,13 @@ public class PaymentServiceTest
     [Test]
     public void PaymentService_CreatingNewTransaction_ReturnsError()
     {
-        Assert.Throws<Exception>(delegate { TikkiePaymentService.CreatePaymentRequest(0, 111111111, "TestingIfItReturnsALink"); });
+        Assert.Throws<Exception>(delegate { _tikkiePaymentService.CreatePaymentRequest(0, 111111111, "TestingIfItReturnsALink"); });
     }
     
     [Test]
     public void PaymentService_FetchingTransactionInfo_ReturnsError()
     {
-        Assert.Throws<Exception>(delegate { TikkiePaymentService.GetTransactionInformation("0"); } );
+        Assert.Throws<Exception>(delegate { _tikkiePaymentService.GetTransactionInformation("0"); } );
     }
     
     [Test]
@@ -55,7 +58,7 @@ public class PaymentServiceTest
     {
         if (_testTransaction != null)
         {
-            Transaction transaction = TikkiePaymentService.GetTransactionInformation(_testTransaction.PaymentRequestToken);
+            Transaction transaction = _tikkiePaymentService.GetTransactionInformation(_testTransaction.PaymentRequestToken);
             Assert.That(_testTransaction.Url, Is.EqualTo(transaction.Url));
             Assert.That(_testTransaction.AmountInCents, Is.EqualTo(transaction.AmountInCents));
             Assert.That(_testTransaction.ExpiryDate, Is.EqualTo(transaction.ExpiryDate));

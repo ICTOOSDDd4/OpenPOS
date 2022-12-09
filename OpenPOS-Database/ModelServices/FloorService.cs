@@ -8,14 +8,14 @@ namespace OpenPOS_Database.Services.Models;
 
 public class FloorService : IModelService<Floor>
 {
-    public static List<Floor> GetAll()
+    public List<Floor> GetAll()
     {
         List<Floor> resultList = DatabaseService.Execute<Floor>(new SqlCommand("SELECT * FROM [dbo].[Floor]"));
 
         return resultList;
     }
 
-    public static Floor FindByID(int id)
+    public Floor FindByID(int id)
     {
         SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[Floor] WHERE [Id] = @ID");
         
@@ -27,7 +27,7 @@ public class FloorService : IModelService<Floor>
         return result;
     }
 
-    public static bool Delete(Floor obj)
+    public bool Delete(Floor obj)
     {
         SqlCommand query = new SqlCommand("DELETE FROM [dbo].[Floor] WHERE [Id] = @ID");
         
@@ -37,7 +37,7 @@ public class FloorService : IModelService<Floor>
         return DatabaseService.Execute(query);
     }
 
-    public static bool Update(Floor obj)
+    public bool Update(Floor obj)
     {
         SqlCommand query = new SqlCommand("UPDATE [dbo].[Floor] SET [storey] = @Storey WHERE [Id] = @ID");
         
@@ -49,7 +49,7 @@ public class FloorService : IModelService<Floor>
         return DatabaseService.Execute(query);
     }
 
-    public static Floor Create(Floor obj)
+    public Floor Create(Floor obj)
     {
         SqlCommand query = new SqlCommand("INSERT INTO [dbo].[Floor] ([storey])  OUTPUT  inserted.*  VALUES (@Storey)");
         

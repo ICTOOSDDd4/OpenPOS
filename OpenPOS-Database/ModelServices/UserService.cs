@@ -2,20 +2,19 @@ using System.Data;
 using System.Data.SqlClient;
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Interfaces;
-using OpenPOS_Controllers.Services;
 
 namespace OpenPOS_Database.Services.Models;
 
 public class UserService : IModelService<User>
 {
-    public static List<User> GetAll()
+    public List<User> GetAll()
     {
         List<User> resultList = DatabaseService.Execute<User>(new SqlCommand("SELECT * FROM [dbo].[user]"));
 
         return resultList;
     }
 
-    public static User FindByID(int id)
+    public User FindByID(int id)
     {
         SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[user] WHERE [Id] = @ID");
         
@@ -27,7 +26,7 @@ public class UserService : IModelService<User>
         return result;
     }
 
-    public static bool Delete(User obj)
+    public bool Delete(User obj)
     {
         SqlCommand query = new SqlCommand("DELETE FROM [dbo].[user] WHERE [id] = @ID");
         
@@ -37,7 +36,7 @@ public class UserService : IModelService<User>
         return DatabaseService.Execute(query);
     }
 
-    public static bool Update(User obj)
+    public bool Update(User obj)
     {
         Console.WriteLine(obj.Password);
         SqlCommand query = new SqlCommand("UPDATE [dbo].[user] SET [name] = @Name, [last_name] = @LastName, [password] = @Password WHERE [id] = @ID");
@@ -54,7 +53,7 @@ public class UserService : IModelService<User>
         return DatabaseService.Execute(query);
     }
 
-    public static User Create(User obj)
+    public User Create(User obj)
     {
         SqlCommand query = new SqlCommand("INSERT INTO [dbo].[user] ([name], [last_name], [email], [password]) OUTPUT inserted.* VALUES (@Name, @LastName, @Email, @Password)");
         
@@ -70,15 +69,14 @@ public class UserService : IModelService<User>
         return DatabaseService.ExecuteSingle<User>(query);
     }
 
-    public static User Authenticate(string email, string password)
+    public User Authenticate(string email, string password)
     {
-        string encryptedPassword = UtilityService.HashPassword(password);
         SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[user] WHERE [email] = @Email AND [password] = @Password");
         
         query.Parameters.Add("@Email", SqlDbType.VarChar);
         query.Parameters["@Email"].Value = email;
         query.Parameters.Add("@Password", SqlDbType.VarChar);
-        query.Parameters["@Password"].Value = encryptedPassword;
+        query.Parameters["@Password"].Value = password;
         
         User user = DatabaseService.ExecuteSingle<User>(query);
         
@@ -89,7 +87,7 @@ public class UserService : IModelService<User>
         return user;
     }
 
-    public static User FindByEmail(string email)
+    public User FindByEmail(string email)
     {
         SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[user] WHERE [email] = @Email");
         

@@ -2,14 +2,18 @@ using System.Reflection;
 using Microsoft.Extensions.Configuration;
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Services;
-using OpenPOS_APP.Services.Models;
 using OpenPOS_APP.Settings;
+using OpenPOS_Database;
+using OpenPOS_Database.Services.Models;
+using OpenPOS_Settings;
 
 namespace OpenPOS_Testing;
 
 [TestFixture]
 public class UserServiceTest
 {
+    private UserService _userService = new();
+
     User user = new User
     {
         Name = "Voornaam",
@@ -49,12 +53,12 @@ public class UserServiceTest
     public void UserService_GetAllUsers_ReturnsAllUsers()
     {
         var user = this.user;
-        var result = UserService.Create(user);
-        var users = UserService.GetAll();
+        var result = _userService.Create(user);
+        var users = _userService.GetAll();
         
         Assert.Greater(users.Count, 0);
         
-        UserService.Delete(result);
+        _userService.Delete(result);
     }
 
     [Test]
@@ -62,52 +66,52 @@ public class UserServiceTest
     {
 
         var user = this.user;
-        var result = UserService.Create(user);
+        var result = _userService.Create(user);
         
         Assert.That(user.Email, Is.EqualTo(result.Email));
        
-        UserService.Delete(result);
+        _userService.Delete(result);
     }
     
     [Test]
     public void UserService_FindUser_ReturnsUser()
     {
         var user = this.user;
-        var createdUser = UserService.Create(user);
-        var result = UserService.FindByID(createdUser.Id);
+        var createdUser = _userService.Create(user);
+        var result = _userService.FindByID(createdUser.Id);
         
         Assert.That(user.Email, Is.EqualTo(result.Email));
         
-        UserService.Delete(result);
+        _userService.Delete(result);
     }
 
     [Test]
     public void UserService_UpdateUser_ReturnsTrue()
     {
         var user = this.user;
-        var createdUser = UserService.Create(user);
+        var createdUser = _userService.Create(user);
         
         Assert.That(createdUser.Name, Is.Not.EqualTo("Gerard"));
         createdUser.Name = "Gerard";
         createdUser.Last_name = "Joling";
         
-        var result = UserService.Update(createdUser);
+        var result = _userService.Update(createdUser);
         
         Assert.IsTrue(result);
-        Assert.That(UserService.FindByID(createdUser.Id).Name, Is.EqualTo("Gerard"));
+        Assert.That(_userService.FindByID(createdUser.Id).Name, Is.EqualTo("Gerard"));
         
-        UserService.Delete(createdUser);
+        _userService.Delete(createdUser);
     }
 
     [Test]
     public void UserService_DeleteUser_ReturnsTrue()
     {
         var user = this.user;
-        var createdUser = UserService.Create(user);
-        var result = UserService.Delete(createdUser);
+        var createdUser = _userService.Create(user);
+        var result = _userService.Delete(createdUser);
         
         Assert.IsTrue(result);
-        Assert.IsNull(UserService.FindByID(createdUser.Id).Name);
+        Assert.IsNull(_userService.FindByID(createdUser.Id).Name);
     }
 
     [Test]
@@ -117,7 +121,7 @@ public class UserServiceTest
         string email = "unittest@openpos.org";
         string password = "unittest";
         
-        User user = UserService.Authenticate(email, password);
+        User user = _userService.Authenticate(email, password);
         
         Assert.That(user.Email, Is.EqualTo(email));
     }
@@ -129,7 +133,7 @@ public class UserServiceTest
         string email = "unittest@openpos.org";
         string password = "wrongpassword";
        
-        User user = UserService.Authenticate(email, password);
+        User user = _userService.Authenticate(email, password);
         
         Assert.IsNull(user);
     }

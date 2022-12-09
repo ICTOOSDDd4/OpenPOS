@@ -8,7 +8,7 @@ namespace OpenPOS_Database.Services.Models;
 public class TableService : IModelService<Table>
 {
 
-    public static Table FindByTableNumber(int tableNumber) 
+    public Table FindByTableNumber(int tableNumber) 
    {
       SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[restaurant_table] WHERE [table_number] = @TableNumber");
 
@@ -24,14 +24,14 @@ public class TableService : IModelService<Table>
       
       return result;
    }
-    public static List<Table> GetAll()
+    public List<Table> GetAll()
     {
         List<Table> resultList = DatabaseService.Execute<Table>(new SqlCommand("SELECT * FROM [dbo].[restaurant_table]"));
 
         return resultList;
     }
 
-    public static Table FindByID(int id)
+    public Table FindByID(int id)
     {
         SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[restaurant_table] WHERE [ID] = @ID");
 
@@ -43,7 +43,7 @@ public class TableService : IModelService<Table>
         return result;
     }
 
-    public static Table FindByBill(int id)
+    public Table FindByBill(int id)
     {
 
         SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[restaurant_table] WHERE [bill_Id] = @BillId");
@@ -56,7 +56,7 @@ public class TableService : IModelService<Table>
         return result;
     }
 
-    public static bool Delete(Table obj)
+    public bool Delete(Table obj)
     {
         SqlCommand query = new SqlCommand("DELETE FROM [dbo].[restaurant_table] WHERE [ID] = @ID");
 
@@ -66,7 +66,7 @@ public class TableService : IModelService<Table>
         return DatabaseService.Execute(query);
     }
 
-    public static bool Update(Table obj)
+    public bool Update(Table obj)
     {
         SqlCommand query = new SqlCommand("UPDATE [dbo].[restaurant_table] SET [table_number] = @TableNumber, [bill_id] = @BillId, [floor_id] = @FloorId WHERE [id] = @ID");
 
@@ -82,7 +82,7 @@ public class TableService : IModelService<Table>
         return DatabaseService.Execute(query);
     }
 
-    public static Table Create(Table obj)
+    public Table Create(Table obj)
     {
         SqlCommand query = new SqlCommand("INSERT INTO [dbo].[restaurant_table] ([table_number], [bill_id], [floor_id])  OUTPUT  inserted.*  VALUES (@TableNumber, @BillId, @FloorId)");
 
