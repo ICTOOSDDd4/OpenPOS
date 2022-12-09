@@ -1,7 +1,7 @@
 
 using OpenPOS_APP.Controllers;
 using OpenPOS_Models;
-using OpenPOS_APP.Settings;
+using OpenPOS_Settings;
 using OpenPOS_Database.Services.Models;
 using System;
 using System.Collections.Generic;
