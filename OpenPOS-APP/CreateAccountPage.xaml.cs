@@ -111,7 +111,7 @@ public partial class CreateAccountPage : ContentPage
 			if (UserService.FindByEmail(EmailEntry.Text) == null)
 			{
 				//TODO: Encrypt passwords (OPENPOS-11)
-				string encryptedPassword = HashingService.HashPassword(PasswordEntry.Text);
+				string encryptedPassword = UtilityService.HashPassword(PasswordEntry.Text);
 
 
 				User currentUser = UserService.Create(new User

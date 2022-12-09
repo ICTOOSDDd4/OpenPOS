@@ -26,12 +26,12 @@ public partial class PaymentPage : ContentPage
    public async void Connect()
    {
       await _eventHubService.ConnectToServerPayment();
-      bool AddedToPaymentListener = await OpenPosAPIService.AddToPaymentListener(_eventHubService.GetConnectionID(), CurrentTransaction.PaymentRequestToken);
+      bool AddedToPaymentListener = await OpenPosAPIService.AddToPaymentListener(_eventHubService.GetConnectionId(), CurrentTransaction.PaymentRequestToken);
       if (!AddedToPaymentListener)
       {
          throw new Exception("Can't add the Transaction to the Payment Listener");
       }
-      _eventHubService.newPayent += OnPaymentPayed;
+      _eventHubService.NewPayent += OnPaymentPayed;
       ImageSource imageSource = UtilityService.GenerateQrCodeFromUrl(CurrentTransaction.Url);
       
       // Deleting the loader from the screen.

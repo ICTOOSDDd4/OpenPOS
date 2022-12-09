@@ -20,7 +20,7 @@ public partial class Onboarding : ContentPage
 
    private async void OnIconLoaded()
    {
-      await openposicon.RelRotateTo(360, 4000);
+      await Openposicon.RelRotateTo(360, 4000);
    }
 
 	private async void OnLoginButtonClicked(object sender, EventArgs e)

@@ -5,7 +5,7 @@ using RestSharp;
 
 namespace OpenPOS_APP.Services.Models
 {
-    public static class TikkiePayementService
+    public static class TikkiePaymentService
     {
         public static Transaction CreatePaymentRequest(int amountInCents, int transactionId, string desc)
         {

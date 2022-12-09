@@ -17,7 +17,6 @@
 
         <Image 
                 Source="openpos_logo_v1.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
                 HeightRequest="100"
                 HorizontalOptions="Center"/>
 
@@ -31,8 +30,6 @@
         
         <Entry
             x:Name="TableNumberEntry"
-            SemanticProperties.Description="Enter your table number"
-            SemanticProperties.Hint="Enter your table numbers"
             Keyboard="Numeric"
             Placeholder="Tablenumber"
             TextChanged="OnTableNumberEntryChanged"
@@ -56,7 +53,6 @@
         <Button
                 x:Name="SubmitButton"
                 Text="Sumbit"
-                SemanticProperties.Hint="Press to continue"
                 IsEnabled="false"
                 Clicked="OnSubmitButtonClicked"
                 HorizontalOptions="Center"

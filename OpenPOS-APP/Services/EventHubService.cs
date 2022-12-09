@@ -11,18 +11,18 @@ namespace OpenPOS_APP.Services
       private readonly CancellationTokenSource _cancelToken = new CancellationTokenSource();
       private readonly string _url = ApplicationSettings.ApiSet.base_url;
       private readonly string _secret = ApplicationSettings.ApiSet.secret;
-      private HubConnection _connection = null;
-      private bool _isConnected = false;
-      private bool ConnectionStopped = true;
-      public string _connectionStatus = "Closed";
+      private HubConnection _connection;
+      private bool _isConnected = false; //Stays here for future possible use.
+      private bool _connectionStopped = true;
+      public string ConnectionStatus = "Closed"; //Stays public for future possible use.
 
-      public event EventHandler<OrderEventArgs> newOrder;
-      public event EventHandler<PaymentEventArgs> newPayent;
+      public event EventHandler<OrderEventArgs> NewOrder;
+      public event EventHandler<PaymentEventArgs> NewPayent;
 
       public async Task Stop()
       {
-         ConnectionStopped = false;
-         _connectionStatus = "Disconnected";
+         _connectionStopped = false;
+         ConnectionStatus = "Disconnected";
          await _connection.StopAsync();
       }
 
@@ -39,19 +39,19 @@ namespace OpenPOS_APP.Services
          {
             await _connection.StartAsync();
             _isConnected = true;
-            _connectionStatus = "Connected";
+            ConnectionStatus = "Connected";
          }
          catch (Exception ex)
          {
             System.Diagnostics.Debug.WriteLine(ex);
          }
 
-         _connection.Closed += async (s) =>
+         _connection.Closed += async (_) =>
          {
-            if (ConnectionStopped)
+            if (_connectionStopped)
             {
                _isConnected = false;
-               _connectionStatus = "Disconnected";
+               ConnectionStatus = "Disconnected";
                await _connection.StartAsync();
                _isConnected = true;
             } else
@@ -60,7 +60,7 @@ namespace OpenPOS_APP.Services
             }
          };
 
-         _connection.On<Order>("newOrder", async (Order m) =>  {  OnNewOrder(m); });
+          _connection.On<Order>("newOrder", OnNewOrder);
         }
 
       public async Task ConnectToServerPayment()
@@ -76,19 +76,19 @@ namespace OpenPOS_APP.Services
          {
             await _connection.StartAsync();
             _isConnected = true;
-            _connectionStatus = "Connected";
+            ConnectionStatus = "Connected";
          }
          catch (Exception ex)
          {
             System.Diagnostics.Debug.WriteLine(ex);
          }
 
-         _connection.Closed += async (s) =>
+         _connection.Closed += async (_) =>
          {
-            if (ConnectionStopped)
+            if (_connectionStopped)
             {
                _isConnected = false;
-               _connectionStatus = "Disconnected";
+               ConnectionStatus = "Disconnected";
                await _connection.StartAsync();
                _isConnected = true;
             }
@@ -98,22 +98,22 @@ namespace OpenPOS_APP.Services
             }
          };
 
-         _connection.On<Tikkie>("PaymentConformation", async (Tikkie t) => { OnNewPayment(t); });
+         _connection.On<Tikkie>("PaymentConformation",  OnNewPayment);
       }
    
-      public string GetConnectionID()
+      public string GetConnectionId()
       {
          return _connection.ConnectionId;
       }
 
-      protected void OnNewOrder(Order order)
+      private void OnNewOrder(Order order)
       {
-         newOrder?.Invoke(this, new OrderEventArgs() { order = order });
+         NewOrder?.Invoke(this, new OrderEventArgs() { order = order });
       }
 
-      protected void OnNewPayment(Tikkie tikkie)
+      private void OnNewPayment(Tikkie tikkie)
       {
-         newPayent?.Invoke(this, new PaymentEventArgs() { Tikkie = tikkie });
+         NewPayent?.Invoke(this, new PaymentEventArgs() { Tikkie = tikkie });
       }
       }
 }

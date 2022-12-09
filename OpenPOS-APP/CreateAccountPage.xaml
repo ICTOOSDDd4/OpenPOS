@@ -17,14 +17,11 @@
             VerticalOptions="Center">
             <Image
                 Source="openpos_logo_v1.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
                 HeightRequest="100"
                 HorizontalOptions="Center" />
 
             <Label
                 Text="Create Account"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Create Account"
                 TextColor="Black"
                 FontSize="18"
                 HorizontalOptions="Center" />
@@ -33,7 +30,6 @@
                 x:Name="FirstName"
                 Placeholder="First name..."
                 TextChanged="OnTextChanged"
-                SemanticProperties.Description="First name"
                 TextColor="Black"
                 WidthRequest="250"
                 MaxLength="50"
@@ -47,7 +43,6 @@
                 x:Name="LastName"
                 Placeholder="Last name..."
                 TextChanged="OnTextChanged"
-                SemanticProperties.Description="Last name"
                 TextColor="Black"
                 WidthRequest="250"
                 MaxLength="50"
@@ -61,7 +56,6 @@
                 x:Name="EmailEntry"
                 Placeholder="Email..."
                 TextChanged="OnTextChanged"
-                SemanticProperties.Description="Email"
                 TextColor="Black"
                 WidthRequest="250"
                 MaxLength="50"
@@ -76,7 +70,6 @@
                 Placeholder="Password..."
                 IsPassword="True"
                 TextChanged="OnTextChanged"
-                SemanticProperties.Description="Password"
                 TextColor="Black"
                 WidthRequest="250"
                 MaxLength="50"
@@ -90,7 +83,6 @@
                 Placeholder="Repeat password..."
                 IsPassword="True"
                 TextChanged="OnTextChanged"
-                SemanticProperties.Description="Repeat Password"
                 TextColor="Black"
                 WidthRequest="250"
                 MaxLength="50"
@@ -102,7 +94,6 @@
             <Button
                 x:Name="CreateAccountButton"
                 Text="CREATE"
-                SemanticProperties.Hint="Create account!"
                 IsEnabled="False"
                 Clicked="OnCreateAccountButtonClicked"
                 HorizontalOptions="Center"

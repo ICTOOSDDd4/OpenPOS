@@ -13,15 +13,15 @@ public class ProductModelTest
         string name = "Test Product";
         double price = 10.00;
         string description = "Test Description";
-        Uri imagepath = new Uri("https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png");
+      string imagepath = "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png";
 
 
-        Product product = new Product(id,name, price, description);
+        Product product = new Product(id,name, price, description, imagepath);
         
-        Assert.AreEqual(id, product.Id);
-        Assert.AreEqual(name, product.Name);
-        Assert.AreEqual(price, product.Price);
-        Assert.AreEqual(description, product.Description);
-        Assert.AreEqual(imagepath, product.Imagepath);
+        Assert.That(product.Id, Is.EqualTo(id));
+        Assert.That(product.Name, Is.EqualTo(name));
+        Assert.That(product.Price, Is.EqualTo(price));
+        Assert.That(product.Description, Is.EqualTo(description));
+        Assert.That(product.Imagepath, Is.EqualTo(imagepath));
     }
 }

@@ -32,7 +32,7 @@ public class PaymentServiceTest
     [Test]
     public void PaymentService_CreatingNewTransaction_ReturningLink()
     {
-        _testTransaction = TikkiePayementService.CreatePaymentRequest(10000, 111111111, "TestingIfItReturnsALink");
+        _testTransaction = TikkiePaymentService.CreatePaymentRequest(10000, 111111111, "TestingIfItReturnsALink");
         Assert.IsNotNull(_testTransaction);
         Assert.IsNotEmpty(_testTransaction.Url);
         Assert.IsNotEmpty(_testTransaction.PaymentRequestToken);
@@ -41,13 +41,13 @@ public class PaymentServiceTest
     [Test]
     public void PaymentService_CreatingNewTransaction_ReturnsError()
     {
-        Assert.Throws<Exception>(delegate { TikkiePayementService.CreatePaymentRequest(0, 111111111, "TestingIfItReturnsALink"); });
+        Assert.Throws<Exception>(delegate { TikkiePaymentService.CreatePaymentRequest(0, 111111111, "TestingIfItReturnsALink"); });
     }
     
     [Test]
     public void PaymentService_FetchingTransactionInfo_ReturnsError()
     {
-        Assert.Throws<Exception>(delegate { TikkiePayementService.GetTransactionInformation("0"); } );
+        Assert.Throws<Exception>(delegate { TikkiePaymentService.GetTransactionInformation("0"); } );
     }
     
     [Test]
@@ -55,7 +55,7 @@ public class PaymentServiceTest
     {
         if (_testTransaction != null)
         {
-            Transaction transaction = TikkiePayementService.GetTransactionInformation(_testTransaction.PaymentRequestToken);
+            Transaction transaction = TikkiePaymentService.GetTransactionInformation(_testTransaction.PaymentRequestToken);
             Assert.That(_testTransaction.Url, Is.EqualTo(transaction.Url));
             Assert.That(_testTransaction.AmountInCents, Is.EqualTo(transaction.AmountInCents));
             Assert.That(_testTransaction.ExpiryDate, Is.EqualTo(transaction.ExpiryDate));
