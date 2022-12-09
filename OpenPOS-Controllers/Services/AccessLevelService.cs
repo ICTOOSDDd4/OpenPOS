@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenPOS_APP.Models;
+﻿using OpenPOS_APP.Models;
 using OpenPOS_APP.Services.Interfaces;
-using OpenPOS_APP.Services.Models;
+using OpenPOS_Database.Services.Models;
 
-namespace OpenPOS_APP.Services
+namespace OpenPOS_Controllers.Services
 {
     public class AccessLevelService : IAccessLevel
     {

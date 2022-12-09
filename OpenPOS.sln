@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenPOS-Settings", "OpenPOS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenPOS-Database", "OpenPOS-Database\OpenPOS-Database.csproj", "{64B68F49-6929-4E96-B24A-DE2246D7DB06}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenPOS-TikkiePayment", "OpenPOS-TikkiePayment\OpenPOS-TikkiePayment.csproj", "{417962F0-A5C1-4751-84FA-54F72A038BD1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenPOS-API", "OpenPOS-API\OpenPOS-API.csproj", "{42B28170-F0AC-4361-87F4-AB28637FA345}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +51,14 @@ Global
 		{64B68F49-6929-4E96-B24A-DE2246D7DB06}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64B68F49-6929-4E96-B24A-DE2246D7DB06}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64B68F49-6929-4E96-B24A-DE2246D7DB06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{417962F0-A5C1-4751-84FA-54F72A038BD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{417962F0-A5C1-4751-84FA-54F72A038BD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{417962F0-A5C1-4751-84FA-54F72A038BD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{417962F0-A5C1-4751-84FA-54F72A038BD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42B28170-F0AC-4361-87F4-AB28637FA345}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42B28170-F0AC-4361-87F4-AB28637FA345}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42B28170-F0AC-4361-87F4-AB28637FA345}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42B28170-F0AC-4361-87F4-AB28637FA345}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

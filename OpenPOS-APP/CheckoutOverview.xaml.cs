@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.Globalization;
 using OpenPOS_APP.Services;
 using System.Linq;
-using OpenPOS_APP.Services.Models;
 
 namespace OpenPOS_APP;
 

@@ -1,4 +1,4 @@
-namespace OpenPOS_APP.Settings;
+namespace OpenPOS_Settings;
 
 public class QRCodeGeneratorSettings
 {

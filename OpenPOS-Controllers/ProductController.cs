@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenPOS_APP.Controllers
+namespace OpenPOS_Controllers
 {
     public class ProductController
     {

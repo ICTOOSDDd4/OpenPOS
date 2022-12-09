@@ -3,7 +3,7 @@ using OpenPOS_APP.EventArgsClasses;
 using OpenPOS_APP.Models;
 using OpenPOS_APP.Settings;
 
-namespace OpenPOS_APP.Services
+namespace OpenPOS_Controllers.Services
 {   
    public class EventHubService
    {

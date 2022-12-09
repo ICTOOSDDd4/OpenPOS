@@ -1,4 +1,5 @@
 ﻿using OpenPOS_APP.Settings;
+using OpenPOS_Settings;
 using RestSharp;
 namespace OpenPOS_Database.Services.Models
 {

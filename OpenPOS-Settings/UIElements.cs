@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenPOS_APP.Settings
+namespace OpenPOS_Settings
 {
     public class UIElements
     {

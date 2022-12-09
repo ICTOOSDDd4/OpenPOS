@@ -1,10 +1,9 @@
 using System.Net;
-using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using OpenPOS_APP.Settings;
 
-namespace OpenPOS_APP.Services;
+namespace OpenPOS_Controllers.Services;
 
 public class UtilityService
 {
