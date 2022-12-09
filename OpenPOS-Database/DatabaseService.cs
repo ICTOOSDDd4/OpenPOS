@@ -1,6 +1,6 @@
 ﻿using System.Data.SqlClient;
 using System.Diagnostics;
-using OpenPOS_APP.Exceptions;
+using OpenPOS_Settings.Exceptions;
 using OpenPOS_APP.Factory.Database;
 using OpenPOS_APP.Settings;
 

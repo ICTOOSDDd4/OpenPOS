@@ -19,7 +19,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\OpenPOS-APP\OpenPOS-APP.csproj" />
 	  <ProjectReference Include="..\OpenPOS-Models\OpenPOS-Models.csproj" />
 	  <ProjectReference Include="..\OpenPOS-Settings\OpenPOS-Settings.csproj" />
 	</ItemGroup>
