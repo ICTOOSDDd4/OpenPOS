@@ -7,7 +7,8 @@ namespace OpenPOS_Controllers
     public static class BillController
     {
         private static BillService _billService = new();
-
+        
+        // Create Method
         public static Bill CreateBill(int user_id)
         {
             Bill bill = new Bill()
@@ -16,25 +17,61 @@ namespace OpenPOS_Controllers
             return bill;
         }
         
-        public static List<Bill> GetAllBills()
+        // Delete Method
+        public static bool Delete(Bill bill)
+        {
+            return _billService.Delete(bill);
+        }
+        
+        // Select Methods
+        public static List<Bill> GetAll()
         {
             return _billService.GetAll();
         }
 
-        public static bool UpdateBill(Bill bill)
-        {
-            return _billService.Update(bill);
-        }
-        
-        public static Bill FindBill(int id)
+        public static Bill Find(int id)
         {
             return _billService.FindByID(id);
         }
         
-        public static bool DeleteBill(Bill bill)
+        // Update Methods
+
+        public static bool UpdateAll(Bill bill)
         {
-            return _billService.Delete(bill);
+            return _billService.Update(bill);
+        }
+        
+        public static bool MarkAsPaid(Bill bill) // Update Using object
+        {
+            bill.Paid = true;
+            return _billService.Update(bill);
+        }
+        
+        public static bool MarkAsPaid(int id) // Update using id
+        {
+            Bill bill = Find(id);
+            bill.Paid = true;
+            return _billService.Update(bill);
         }
 
+        public static bool UpdateAttachedUser(int bilId, int userId) // Update using id and id
+        {
+            Bill bill = Find(bilId);
+            bill.User_id = userId;
+            return _billService.Update(bill);
+        }
+        
+        public static bool UpdateAttachedUser(Bill bill, int userId) // Update using object and id
+        {
+            bill.User_id = userId;
+            return _billService.Update(bill);
+        }
+        
+        public static bool UpdateAttachedUser(Bill bill, User user) // Update using object and object
+        {
+            bill.User_id = user.Id;
+            return _billService.Update(bill);
+        }
+        
     }
 }

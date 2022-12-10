@@ -1,4 +1,4 @@
-﻿namespace OpenPOS_Models;
+﻿namespace OpenPOS_Models
 {
     public class Category
     {

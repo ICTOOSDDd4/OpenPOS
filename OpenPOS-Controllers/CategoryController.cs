@@ -13,7 +13,8 @@ namespace OpenPOS_Controllers
     {
         private static CategoryService _categoryService = new();
 
-        public static Category CreateNewCategory(string CategoryName)
+        // Create Method
+        public static Category CreateNew(string CategoryName)
         {
             Category newCategory = new()
             {
@@ -22,25 +23,35 @@ namespace OpenPOS_Controllers
 
             return _categoryService.Create(newCategory);
         }
-        
-        public static bool CreateCategory(Category category)
-        {
-            return _categoryService.Update(category);
-        }
-        
-        public static bool DeleteCategory(Category category)
+
+        // Delete Method
+        public static bool Delete(Category category)
         {
             return _categoryService.Delete(category);
         }
 
-        public static List<Category> GetAllCategories()
+        // Select Methods
+        public static List<Category> GetAll()
         {
             return _categoryService.GetAll();
         }
         
-        public static Category GetCategory(int id)
+        public static Category Get(int id)
         {
             return _categoryService.FindByID(id);
+        }
+        
+        // Update Methods
+        public static bool UpdateAll(Category category)
+        {
+            return _categoryService.Update(category);
+        }
+        
+        public static bool UpdateName(int id, string name)
+        {
+            Category category = Get(id);
+            category.Name = name;
+            return _categoryService.Update(category);
         }
     }
 }
