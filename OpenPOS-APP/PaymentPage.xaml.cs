@@ -3,6 +3,7 @@ using OpenPOS_APP.Services;
 using System.Diagnostics;
 using OpenPOS_Controllers.Services;
 using OpenPOS_Database.Services.Models;
+using OpenPOS_Models;
 
 
 namespace OpenPOS_APP;

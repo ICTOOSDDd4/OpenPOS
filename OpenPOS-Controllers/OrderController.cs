@@ -7,11 +7,18 @@ using OpenPOS_Models;
 
 namespace OpenPOS_Controllers
 {
-    public static class OrderController
+    public class OrderController
     {
-        private static OrderService _orderService = new();
-        private static OrderLineService _orderLineService = new();
-        public static bool CreateOrder(Dictionary<int, int> SelectedProducts)
+        private OrderService _orderService;
+        private OrderLineService _orderLineService;
+
+        public OrderController()
+        {
+            _orderLineService = new OrderLineService();
+            _orderService = new OrderService();
+        }
+
+        public bool CreateOrder(Dictionary<int, int> SelectedProducts)
         {
             try
             {
@@ -32,6 +39,15 @@ namespace OpenPOS_Controllers
             }
         }
 
-       
+        public void UpdateOrder(Order order)
+        {
+            _orderService.Update(order);
+        }
+
+        public List<Order> GetOpenOrders()
+        {
+            return _orderService.GetAllOpenOrders();
+        }
+
     }
 }

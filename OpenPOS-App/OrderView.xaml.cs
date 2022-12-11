@@ -1,3 +1,7 @@
+using OpenPOS_Controllers;
+using OpenPOS_Database.Services.Models;
+using OpenPOS_Models;
+
 namespace OpenPOS_APP;
 
 public partial class OrderView : ContentView
@@ -6,16 +10,19 @@ public partial class OrderView : ContentView
    public HorizontalStackLayout layout;
    public event EventHandler OrderDone;
    public event EventHandler OrderCanceled;
+
+   private TableController _tableController;
 	public OrderView()
 	{
-		InitializeComponent();
-      MainVerticalLayout.Shadow = new Shadow
-      {
+	    InitializeComponent();
+        _tableController = new TableController();
+        MainVerticalLayout.Shadow = new Shadow
+        {
          Offset = new Point(5, 5),
          Brush = Brush.Black,
          Opacity = 0.12f,
-      };
-   }
+        };
+    }
 
    private void OnClickedDone(object sender, EventArgs e)
    {
@@ -32,7 +39,7 @@ public partial class OrderView : ContentView
       order = o;
       layout = h;
       OrderNUmber.Text = $"Order: {order.Id}";
-      Table table = TableService.FindByBill(order.Bill_id);
+      Table table = _tableController.GetTable(order);
       TableNumber.Text = $"Table: {table.Table_number}";
       AddOrderLinesToLayout();
    }

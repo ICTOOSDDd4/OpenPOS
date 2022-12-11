@@ -8,15 +8,20 @@ using System.Threading.Tasks;
 
 namespace OpenPOS_Controllers
 {
-    public static class ProductController
+    public class ProductController
     {
-        private static ProductService _produstService = new();
-        public static List<Product> GetAllProducts()
+        private ProductService _produstService = new();
+
+        public ProductController()
+        {
+            _produstService = new ProductService();
+        }
+        public List<Product> GetAllProducts()
         {
             return _produstService.GetAll();
         }
 
-        public static List<Product> GetProductsBySearch(string searchString) 
+        public List<Product> GetProductsBySearch(string searchString) 
         {
             if (string.IsNullOrWhiteSpace(searchString) || string.IsNullOrEmpty(searchString))
             {

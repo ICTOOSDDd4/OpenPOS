@@ -38,7 +38,4 @@ public static class OpenPOSAPIController
     {
         return _openPosAPIService.ConnectionStatus;
     }
-    
-    
-    
 }

@@ -1,8 +1,9 @@
 using System.Reflection;
+using OpenPOS_Controllers;
 using OpenPOS_Controllers.Services;
 using OpenPOS_Settings;
 using OpenPOS_Settings.Enums;
-
+using OpenPOS_Models;
 namespace OpenPOS_APP;
 
 public partial class LoginScreen : ContentPage
@@ -11,8 +12,10 @@ public partial class LoginScreen : ContentPage
    private string _username;
    private string _password;
    private ResourceDictionary _appColors = new();
+   private AuthenticationController _authenticationController;
    public LoginScreen()
    {
+       _authenticationController = new AuthenticationController();
       InitializeComponent();
       _appColors.SetAndLoadSource(new Uri("Resources/Styles/Colors.xaml", UriKind.RelativeOrAbsolute), "Resources/Styles/Colors.xaml", this.GetType().GetTypeInfo().Assembly, null);
    }
@@ -46,7 +49,7 @@ public partial class LoginScreen : ContentPage
    {
       if (UserAuth(_username, _password))
       {
-            var role = Enum.Parse<RolesEnum>(RoleService.FindUserRole(UserService.Authenticate(_username, _password).Id).Title);
+            var role = Enum.Parse<RolesEnum>(_authenticationController.GetUserRole(_username, _password).Title);
             switch (role)            {
                 case (RolesEnum.Owner or RolesEnum.Admin):
                     await Shell.Current.GoToAsync(nameof(AdminOverview));
@@ -92,7 +95,7 @@ public partial class LoginScreen : ContentPage
    {
       string encryptedPassword = UtilityService.HashPassword(password);
 
-      User user = UserService.Authenticate(username, password);
+      User user = _authenticationController.Authenticate(username, password);
       
       if (user != null)
       {

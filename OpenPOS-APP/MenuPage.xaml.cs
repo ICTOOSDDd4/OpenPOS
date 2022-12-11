@@ -1,5 +1,8 @@
 using OpenPOS_APP.Resources.Controls;
-using OpenPOS_APP.EventArgsClasses;
+using OpenPOS_Database.ModelServices;
+using OpenPOS_Database.Services.Models;
+using OpenPOS_Models;
+using OpenPOS_Settings;
 
 namespace OpenPOS_APP;
 

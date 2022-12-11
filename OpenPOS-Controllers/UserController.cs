@@ -6,10 +6,15 @@ using OpenPOS_Models;
 
 namespace OpenPOS_Controllers
 {
-    public static class UserController
+    public class UserController
     {
-        private static UserService _userService = new();
-        public static User Authenticate(string email, string password)
+        private UserService _userService;
+
+        public UserController()
+        {
+            _userService = new UserService();
+        }
+        public User Authenticate(string email, string password)
         {
             return _userService.Authenticate(email, UtilityService.HashPassword(password));
         }

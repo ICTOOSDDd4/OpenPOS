@@ -1,4 +1,6 @@
 using System.Diagnostics;
+using OpenPOS_Models;
+using OpenPOS_Settings;
 using Brush = Microsoft.Maui.Controls.Brush;
 using Shadow = Microsoft.Maui.Controls.Shadow;
 

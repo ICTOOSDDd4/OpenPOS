@@ -9,12 +9,16 @@ using OpenPOS_Database.ModelServices;
 
 namespace OpenPOS_Controllers
 {
-    public static class CategoryController
+    public  class CategoryController
     {
-        private static CategoryService _categoryService = new();
+        private CategoryService _categoryService;
 
+        private CategoryController()
+        {
+            _categoryService = new CategoryService();
+        }
         // Create Method
-        public static Category CreateNew(string CategoryName)
+        public Category CreateNew(string CategoryName)
         {
             Category newCategory = new()
             {
@@ -25,29 +29,29 @@ namespace OpenPOS_Controllers
         }
 
         // Delete Method
-        public static bool Delete(Category category)
+        public bool Delete(Category category)
         {
             return _categoryService.Delete(category);
         }
 
         // Select Methods
-        public static List<Category> GetAll()
+        public List<Category> GetAll()
         {
             return _categoryService.GetAll();
         }
         
-        public static Category Get(int id)
+        public Category Get(int id)
         {
             return _categoryService.FindByID(id);
         }
         
         // Update Methods
-        public static bool UpdateAll(Category category)
+        public bool UpdateAll(Category category)
         {
             return _categoryService.Update(category);
         }
         
-        public static bool UpdateName(int id, string name)
+        public bool UpdateName(int id, string name)
         {
             Category category = Get(id);
             category.Name = name;

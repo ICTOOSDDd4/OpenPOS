@@ -6,10 +6,16 @@ using OpenPOS_Settings;
 
 namespace OpenPOS_Controllers;
 
-public static class PaymentController
+public class PaymentController
 {
-    private static TikkiePaymentService _tikkiePaymentService = new();
-    public static Transaction NewTikkieTransaction(int amountInCents)
+    private TikkiePaymentService _tikkiePaymentService;
+
+    public PaymentController()
+    {
+        _tikkiePaymentService = new TikkiePaymentService();
+    }
+
+    public Transaction NewTikkieTransaction(int amountInCents)
     {
         // Calling the API for a new Tikkie Transaction
         var response = _tikkiePaymentService.CreatePaymentRequest(amountInCents, ApplicationSettings.CurrentBill.Id,
@@ -46,7 +52,7 @@ public static class PaymentController
         };
     }
 
-    public static Transaction GetTikkieTransaction(string paymentID)
+    public Transaction GetTikkieTransaction(string paymentID)
     {
         // Calling the tikkie API for a transaction
         var response = _tikkiePaymentService.GetTransactionInformation(paymentID);
