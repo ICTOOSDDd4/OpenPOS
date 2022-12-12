@@ -22,6 +22,10 @@ public partial class TablePickerScreen : ContentPage
    
    private async void OnSubmitButtonClicked(object sender, EventArgs e)
    {
+      SubmitButton.IsVisible = false;
+      LoadingIndicator.IsRunning = true;
+      LoadingIndicator.IsVisible = true;
+      
       string entryString = TableNumberEntry.Text;
       if (int.TryParse(entryString.Trim(), out int value))
       {
@@ -43,6 +47,12 @@ public partial class TablePickerScreen : ContentPage
                await Shell.Current.GoToAsync(nameof(MenuPage));
             }
          }
+      }
+      else
+      {
+         SubmitButton.IsVisible = true;
+         LoadingIndicator.IsRunning = false;
+         LoadingIndicator.IsVisible = false;
       }
       
    }
