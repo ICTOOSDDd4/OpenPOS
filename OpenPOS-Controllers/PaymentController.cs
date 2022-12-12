@@ -3,12 +3,15 @@ using OpenPOS_Settings;
 using OpenPOS_Database.Services.Models;
 using OpenPOS_Models;
 using OpenPOS_Settings;
+using System.Net;
+using OpenPOS_Controllers.Services;
 
 namespace OpenPOS_Controllers;
 
 public class PaymentController
 {
     private TikkiePaymentService _tikkiePaymentService;
+    private UtilityService _utilityService;
 
     public PaymentController()
     {
@@ -86,5 +89,9 @@ public class PaymentController
             NumberOfPayments = (int)obj["numberOfPayments"]?.ToObject<int>(),
             TotalAmountPayed = (int)obj["totalAmountPaidInCents"]?.ToObject<int>(),
         };
+    }
+    public ImageSource GetPaymentQR(string url)
+    {
+        return _utilityService.GenerateQrCodeFromUrl(url);
     }
 }
