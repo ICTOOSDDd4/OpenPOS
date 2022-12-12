@@ -1,6 +1,7 @@
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
+using OpenPOS_Database;
 using OpenPOS_Settings;
 
 namespace OpenPOS_Controllers.Services;
@@ -36,5 +37,10 @@ public static class UtilityService
     public static string GetRootDirectory()
     {
        return AppDomain.CurrentDomain.BaseDirectory;
+    }
+
+    public static void StartDatabase()
+    {
+        DatabaseService.Initialize();
     }
 }

@@ -5,6 +5,7 @@ using System.Reflection;
 using CommunityToolkit.Maui;
 using System.Diagnostics;
 using Microsoft.Maui.LifecycleEvents;
+using OpenPOS_Controllers.Services;
 using OpenPOS_Models;
 using OpenPOS_Settings;
 
@@ -94,7 +95,7 @@ public static class MauiProgram
 			
 			if (ApplicationSettings.DbSett != null) 
 			{
-				DatabaseService.Initialize(); // TODO: Needs a alternative, DB Can't be referenced in this project!
+				UtilityService.StartDatabase(); //TODO: Temp Fix
 			}
 			
         } else throw new ApplicationException("Can't find appsettings.json file");
