@@ -41,11 +41,6 @@ namespace OpenPOS_Controllers
             };
             return _userRoleService.Create(newUserRole);
         }
-        
-        public User Authenticate(string email, string password)
-        {
-            return _userService.Authenticate(email, UtilityService.HashPassword(password));
-        }
 
         public User FindByEmail(string email)
         {
