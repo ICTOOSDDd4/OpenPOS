@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using OpenPOS_Models;
 using OpenPOS_Settings;
 using Brush = Microsoft.Maui.Controls.Brush;
@@ -34,7 +33,7 @@ public partial class ProductView : ContentView
       ProductPrice.Text = $"€ {value}";
         if (product.Imagepath != null)
         {
-            ProductImage.Source = Microsoft.Maui.Controls.ImageSource.FromUri(new Uri(product.Imagepath));
+            ProductImage.Source = ImageSource.FromUri(new Uri(product.Imagepath));
         }
         if (_menuPage.SelectedProducts.ContainsKey(_product.Id))
         {

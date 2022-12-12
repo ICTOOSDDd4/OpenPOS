@@ -1,10 +1,4 @@
 ﻿using OpenPOS_Models;
-using OpenPOS_Database.Services.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OpenPOS_Database.ModelServices;
 
 namespace OpenPOS_Controllers
@@ -13,16 +7,16 @@ namespace OpenPOS_Controllers
     {
         private CategoryService _categoryService;
 
-        private CategoryController()
+        public CategoryController()
         {
             _categoryService = new CategoryService();
         }
         // Create Method
-        public Category CreateNew(string CategoryName)
+        public Category CreateNew(string categoryName)
         {
             Category newCategory = new()
             {
-                Name = CategoryName
+                Name = categoryName
             };
 
             return _categoryService.Create(newCategory);

@@ -1,10 +1,6 @@
 ﻿using CommunityToolkit.Maui.Views;
-using Microsoft.Maui;
 using OpenPOS_APP.Resources.Controls.PopUps;
 using System.Diagnostics;
-using System.Globalization;
-using OpenPOS_APP.Services;
-using System.Linq;
 using OpenPOS_Controllers;
 using OpenPOS_Models;
 using OpenPOS_Settings;
@@ -14,7 +10,7 @@ namespace OpenPOS_APP;
 public partial class CheckoutOverview : ContentPage
 { 
     private Dictionary<Product, int> CheckoutItems { get; set; }
-    private double TotalPrice;
+    private double _totalPrice;
     private double _tip;
     private PaymentController _paymentController = new PaymentController();
 
@@ -38,9 +34,9 @@ public partial class CheckoutOverview : ContentPage
         CheckoutListView.ItemsSource = CheckoutItems.Keys;
         for (int i = 0; i < products.Count; i++)
         {
-            TotalPrice += (products.ElementAt(i).Key.Price * products.ElementAt(i).Value);
+            _totalPrice += (products.ElementAt(i).Key.Price * products.ElementAt(i).Value);
         }
-        string value = String.Format(((Math.Round(TotalPrice + _tip) == TotalPrice + _tip) ? "{0:0}" : "{0:0.00}"), TotalPrice + _tip);
+        string value = String.Format(((Math.Round(_totalPrice + _tip) == _totalPrice + _tip) ? "{0:0}" : "{0:0.00}"), _totalPrice + _tip);
 
         TotalPriceLabel.Text = $"Total: €{value}";
 
@@ -57,7 +53,7 @@ public partial class CheckoutOverview : ContentPage
          {
             if (!int.IsNegative(count))
             {
-               int totalInCents = (int)Math.Round(TotalPrice * 100);
+               int totalInCents = (int)Math.Round(_totalPrice * 100);
                int tipInCents = (int)Math.Round(_tip * 100);
                int total = totalInCents + tipInCents;
                int splitamount = totalInCents / count;
@@ -86,7 +82,7 @@ public partial class CheckoutOverview : ContentPage
 
    private async void OnClickedPay(object sender, EventArgs args)
    {
-      int totalInCents = (int)Math.Round(TotalPrice * 100);
+      int totalInCents = (int)Math.Round(_totalPrice * 100);
       int tipInCents = (int)Math.Round(_tip * 100);
       int total = totalInCents + tipInCents;
       Transaction transaction = _paymentController.NewTikkieTransaction(total);
@@ -97,7 +93,7 @@ public partial class CheckoutOverview : ContentPage
 
    private void OnClickedAddATip(object sender, EventArgs args)
    {
-      TipPopUp popUp = new TipPopUp(TotalPrice, this);
+      TipPopUp popUp = new TipPopUp(_totalPrice, this);
       this.ShowPopup(popUp);
 
    }
@@ -135,7 +131,7 @@ public partial class CheckoutOverview : ContentPage
          TipButton.Text = "Add a tip";
          TipButton.Clicked -= OnEditTip;
          TipButton.Clicked += OnClickedAddATip;
-         string totalValue = String.Format(((Math.Round(TotalPrice + _tip) == TotalPrice + _tip) ? "{0:0}" : "{0:0.00}"), TotalPrice + _tip);
+         string totalValue = String.Format(((Math.Round(_totalPrice + _tip) == _totalPrice + _tip) ? "{0:0}" : "{0:0.00}"), _totalPrice + _tip);
          TotalPriceLabel.Text = $"€{totalValue}";
          Debug.WriteLine("Remove");
       }
@@ -147,7 +143,7 @@ public partial class CheckoutOverview : ContentPage
 
       TipButton.Text = $"Tip: €{tipValue}";
 
-      string totalValue = String.Format(((Math.Round(TotalPrice + _tip) == TotalPrice + _tip) ? "{0:0}" : "{0:0.00}"), TotalPrice + _tip);
+      string totalValue = String.Format(((Math.Round(_totalPrice + _tip) == _totalPrice + _tip) ? "{0:0}" : "{0:0.00}"), _totalPrice + _tip);
 
       TotalPriceLabel.Text = $"€{totalValue}";
    }

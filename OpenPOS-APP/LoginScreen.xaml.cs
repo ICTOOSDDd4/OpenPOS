@@ -1,6 +1,5 @@
 using System.Reflection;
 using OpenPOS_Controllers;
-using OpenPOS_Controllers.Services;
 using OpenPOS_Settings;
 using OpenPOS_Settings.Enums;
 using OpenPOS_Models;
@@ -86,15 +85,9 @@ public partial class LoginScreen : ContentPage
       await Shell.Current.GoToAsync(nameof(CreateAccountPage));
       // await DisplayAlert("Work in Progress", "This feature is still under development try agian later.", "Alright");
    }
-   protected override void OnNavigatedTo(NavigatedToEventArgs args)
-   {
-      base.OnNavigatedTo(args);
-   }
 
    private bool UserAuth(string username, string password)
    {
-      string encryptedPassword = UtilityService.HashPassword(password);
-
       User user = _authenticationController.Authenticate(username, password);
       
       if (user != null)

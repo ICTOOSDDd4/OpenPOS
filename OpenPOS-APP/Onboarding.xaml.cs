@@ -1,5 +1,3 @@
-
-using Microsoft.Maui.Controls;
 using System.Reflection;
 
 namespace OpenPOS_APP;
@@ -23,15 +21,5 @@ public partial class Onboarding : ContentPage
 	{
 		await Shell.Current.GoToAsync(nameof(LoginScreen));
 	}
-	
-	private async void CreateNewAccount_Tapped(object sender, EventArgs e)
-	{
-		// Navigation.PushAsync();
-		await DisplayAlert("Test", "Creating account...", "OK");
-
-	}
-    private void OnSearch(object sender, TextChangedEventArgs e)
-    {
-    }
 }
 

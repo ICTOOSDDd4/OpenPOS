@@ -19,16 +19,11 @@ public partial class TablePickerScreen : ContentPage
       _appColors.SetAndLoadSource(new Uri("Resources/Styles/Colors.xaml", UriKind.RelativeOrAbsolute), "Resources/Styles/Colors.xaml", this.GetType().GetTypeInfo().Assembly, null);
 
    }
-
-   protected override void OnNavigatedTo(NavigatedToEventArgs args)
-   {
-      base.OnNavigatedTo(args);
-   }
-
+   
    private async void OnSubmitButtonClicked(object sender, EventArgs e)
    {
       string entryString = TableNumberEntry.Text;
-      if (int.TryParse(entryString.ToString().Trim(), out int value))
+      if (int.TryParse(entryString.Trim(), out int value))
       {
          _tableNumber = value;
          ApplicationSettings.TableNumber = _tableNumber;
@@ -56,14 +51,13 @@ public partial class TablePickerScreen : ContentPage
    {
       int value;
       string oldValue = e.OldTextValue;
-      string newValue = e.NewTextValue;
 
       if (int.TryParse(e.NewTextValue, out value))
       {
          _tableNumber = value;
          if (oldValue != null)
          {
-            if (oldValue.Any(e => char.IsLetter(e)))
+            if (oldValue.Any(c => char.IsLetter(c)))
             {
                ErrorDisplayLabel.IsVisible = true;
             }

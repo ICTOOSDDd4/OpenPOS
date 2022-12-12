@@ -1,12 +1,9 @@
 using Microsoft.Extensions.Logging;
-using OpenPOS_APP.Services;
 using Microsoft.Extensions.Configuration;
 using System.Reflection;
 using CommunityToolkit.Maui;
-using System.Diagnostics;
 using Microsoft.Maui.LifecycleEvents;
 using OpenPOS_Controllers.Services;
-using OpenPOS_Models;
 using OpenPOS_Settings;
 
 // Specific WinUI elements.

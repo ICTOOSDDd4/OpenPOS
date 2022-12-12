@@ -9,13 +9,14 @@ public partial class OrderOverviewPage : ContentPage
 {
     public List<Order> Orders { get; set; }
     private HorizontalStackLayout _horizontalLayout;
-    private OpenPOSAPIController _openPOSAPIController;
-   private OrderController _orderController;
+    private OpenPosapiController _openPosapiController;
+    private OrderController _orderController;
     private bool _isInitialized;
     private double _width;
 
     public OrderOverviewPage()
     {
+        _openPosapiController = new OpenPosapiController();
         _orderController = new OrderController();
         InitializeComponent();
         Orders = _orderController.GetOpenOrders();
@@ -24,10 +25,10 @@ public partial class OrderOverviewPage : ContentPage
 
     private async void Initialize()
     {
-        await _openPOSAPIController.SubcribeToOrderNotification(newOrder);
+        await _openPosapiController.SubcribeToOrderNotification(NewOrder);
     }
 
-    private async void newOrder(object sender, OrderEventArgs orderEvent)
+    private async void NewOrder(object sender, OrderEventArgs orderEvent)
     {
 
        Debug.WriteLine("NewEvent");
@@ -60,7 +61,7 @@ public partial class OrderOverviewPage : ContentPage
     private void OrderCanceled(object sender, EventArgs e)
     {
 	    OrderView view = (OrderView)sender;
-	    Order order = view.order;
+	    Order order = view.Order;
         order.Status = false;
         _orderController.UpdateOrder(order);
         DeleteView(view);
@@ -69,7 +70,7 @@ public partial class OrderOverviewPage : ContentPage
     private void OrderDone(object sender, EventArgs e)
     {
       OrderView view = (OrderView)sender;
-      Order order = view.order;
+      Order order = view.Order;
       order.Status = true;
       _orderController.UpdateOrder(order);
       DeleteView(view);
@@ -77,7 +78,7 @@ public partial class OrderOverviewPage : ContentPage
 
     private void DeleteView(OrderView view)
     {
-      view.layout.Children.Remove(view);
+      view.Hlayout.Children.Remove(view);
     }
 
     private async void ClickedRefresh(object sender, EventArgs e)
@@ -106,7 +107,14 @@ public partial class OrderOverviewPage : ContentPage
       orderview.AddBinds(order, _horizontalLayout);
       orderview.OrderDone += OrderDone;
       orderview.OrderCanceled += OrderCanceled;
-      _horizontalLayout.Add(orderview);      
+      if (_horizontalLayout != null)
+      {
+        _horizontalLayout.Add(orderview);
+      }
+      else
+      {
+        throw new Exception("HorizontalLayout is null, Can't add OrderView");
+      }
     }
 
     private void AddHorizontalLayout()

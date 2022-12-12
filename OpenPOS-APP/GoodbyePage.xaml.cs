@@ -7,7 +7,7 @@ namespace OpenPOS_APP;
 public partial class GoodbyePage : ContentPage
 {
 	private System.Timers.Timer _timer = new System.Timers.Timer(1000);
-	private int count = 10;
+	private int _count = 10;
 	private BillController _billController = new BillController();
 	private TableController _tableController = new TableController();
 	public GoodbyePage()
@@ -33,15 +33,15 @@ public partial class GoodbyePage : ContentPage
 	{
 		Dispatcher.DispatchAsync(() =>
 		{
-         if (count == 0)
+         if (_count == 0)
          {
             _timer.Stop();
-            Device.BeginInvokeOnMainThread(RedirectToMainPage);
+            Device.BeginInvokeOnMainThread(RedirectToMainPage); //TODO: Fix this warning
          }
          else
          {
-            Countdown.Text = $"You will be signed out and redirected in {count} seconds";
-            count--;
+            Countdown.Text = $"You will be signed out and redirected in {_count} seconds";
+            _count--;
          }
       });	
 	}

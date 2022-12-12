@@ -1,7 +1,6 @@
 using OpenPOS_APP.Resources.Controls;
 using OpenPOS_Controllers;
 using OpenPOS_Models;
-using OpenPOS_Settings;
 
 namespace OpenPOS_APP;
 
@@ -14,15 +13,19 @@ public partial class MenuPage : ContentPage
 	private OrderController _orderController;
 	public Dictionary<int, int> SelectedProducts { get; set; }
 	public delegate void OnSearchEventHandler(object source, EventArgs args);
-	public static event OnSearchEventHandler Searched;
-	private int _ProductCardViewWidth = 300;
+
+	private int _productCardViewWidth = 300;
 	
 	private bool _isInitialized;
 	private double _width;
     public MenuPage()
-	{
-      SelectedProducts = new Dictionary<int, int>();
-      Products = _productController.GetAllProducts();
+    {
+	    _productController = new ProductController();
+	    _categoryController = new CategoryController();
+	    _orderController = new OrderController();
+	    
+		SelectedProducts = new Dictionary<int, int>();
+		Products = _productController.GetAllProducts();
 		InitializeComponent();
 		Header.Searched += OnSearch;
 		Header.currentPage = this;
@@ -40,7 +43,7 @@ public partial class MenuPage : ContentPage
 
 	private void SetWindowScaling(double width, double height)
 	{
-		ScrView.HeightRequest = height - _ProductCardViewWidth;
+		ScrView.HeightRequest = height - _productCardViewWidth;
 		_width = width;
 		AddAllCategories(_categoryController.GetAll());
       AddAllProducts();
@@ -58,7 +61,7 @@ public partial class MenuPage : ContentPage
 
    public void AddProductToLayout(Product product)
    {
-	   int moduloNumber = ((int)_width / _ProductCardViewWidth);
+	   int moduloNumber = ((int)_width / _productCardViewWidth);
 	   if (_horizontalLayout == null || _horizontalLayout.Children.Count % moduloNumber == 0) 
 		{
 			AddHorizontalLayout();
@@ -67,8 +70,15 @@ public partial class MenuPage : ContentPage
 		ProductView productView = new ProductView();
 		productView.SetProductValues(this,product);
 		productView.ClickedMoreInfo += OnInfoButtonClicked;
-      _horizontalLayout.Add(productView);
-    }
+		if (_horizontalLayout != null)
+		{
+			_horizontalLayout.Add(productView);
+		}
+		else
+		{
+			throw new Exception("Horizontal layout is null, Can't add product to layout");
+		}
+   }
 
     public void AddAllCategories(List<Category> categories)
     {

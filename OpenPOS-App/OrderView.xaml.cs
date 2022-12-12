@@ -5,8 +5,8 @@ namespace OpenPOS_APP;
 
 public partial class OrderView : ContentView
 {
-   public Order order;
-   public HorizontalStackLayout layout;
+   public Order Order;
+   public HorizontalStackLayout Hlayout;
    public event EventHandler OrderDone;
    public event EventHandler OrderCanceled;
 
@@ -16,6 +16,8 @@ public partial class OrderView : ContentView
 	{
 	    InitializeComponent();
         _tableController = new TableController();
+        _orderController = new OrderController();
+        
         MainVerticalLayout.Shadow = new Shadow
         {
          Offset = new Point(5, 5),
@@ -26,27 +28,41 @@ public partial class OrderView : ContentView
 
    private void OnClickedDone(object sender, EventArgs e)
    {
-      OrderDone.Invoke(this, e);
+      if (OrderDone != null)
+      {
+         OrderDone.Invoke(this, e);
+      }
+      else
+      {
+         throw new Exception("OrderDone event is not set");
+      }
    }
 
    private void OnClickedCancel(object sender, EventArgs e)
    {
-      OrderCanceled.Invoke(this, e);
+      if (OrderCanceled != null)
+      {
+         OrderCanceled.Invoke(this, e);
+      }
+      else
+      {
+         throw new Exception("OrderCanceled event is not set");
+      }
    }
 
    public void AddBinds(Order o, HorizontalStackLayout h)
    {
-      order = o;
-      layout = h;
-      OrderNUmber.Text = $"Order: {order.Id}";
-      Table table = _tableController.GetByBillId(order.Bill_id);
+      Order = o;
+      Hlayout = h;
+      OrderNUmber.Text = $"Order: {Order.Id}";
+      Table table = _tableController.GetByBillId(Order.Bill_id);
       TableNumber.Text = $"Table: {table.Table_number}";
       AddOrderLinesToLayout();
    }
 
    private void AddOrderLinesToLayout()
    {
-      foreach(OrderLineProduct line in _orderController.GetOrderLines(order.Id)) 
+      foreach(OrderLineProduct line in _orderController.GetOrderLines(Order.Id)) 
       {
          // Setting up layout
          HorizontalStackLayout layout = new HorizontalStackLayout();

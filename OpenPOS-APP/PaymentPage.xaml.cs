@@ -12,11 +12,11 @@ public partial class PaymentPage : ContentPage
 {
 	public static Transaction CurrentTransaction { get; set; }
 	public static int RequiredPayments { get; set; } 
-   private Thread thread;
-   private string paymentStatusString;
+   private Thread _thread;
+   private string _paymentStatusString;
    System.Timers.Timer _timer = new System.Timers.Timer(500);
    private int CurrentlyPaid { get; set; }
-   private OpenPOSAPIController _openPOSAPIController = new OpenPOSAPIController();
+   private OpenPosapiController _openPosapiController = new OpenPosapiController();
 	public PaymentPage()
 	{
       InitializeComponent();
@@ -24,8 +24,8 @@ public partial class PaymentPage : ContentPage
    }
    public async void Connect()
    {
-      bool AddedToPaymentListener = await _openPOSAPIController.SubcribeToPaymentNotification(CurrentTransaction.PaymentRequestToken, OnPaymentPayed);
-      if (!AddedToPaymentListener)
+      bool addedToPaymentListener = await _openPosapiController.SubcribeToPaymentNotification(CurrentTransaction.PaymentRequestToken, OnPaymentPayed);
+      if (!addedToPaymentListener)
       {
          throw new Exception("Can't add the Transaction to the Payment Listener");
       }
@@ -41,11 +41,11 @@ public partial class PaymentPage : ContentPage
 
       if (RequiredPayments == 1)
       {
-         paymentStatusString = "payment";
+         _paymentStatusString = "payment";
       }
-      else { paymentStatusString = "payments"; }
-      thread = new Thread(new ThreadStart(StartStatusLabel));
-      thread.Start();
+      else { _paymentStatusString = "payments"; }
+      _thread = new Thread(StartStatusLabel);
+      _thread.Start();
 
    }
    private void StartStatusLabel()
@@ -56,7 +56,7 @@ public partial class PaymentPage : ContentPage
 	public void OnPaymentPayed(object? sender, PaymentEventArgs e)
 	{
       _timer.Stop();
-      thread.Interrupt();
+      _thread.Interrupt();
       Dispatcher.DispatchAsync(async () =>
       {
          CurrentlyPaid++;
@@ -65,7 +65,7 @@ public partial class PaymentPage : ContentPage
          {
             PaymentStatusLabel.Text = $"Payment complete!";
             await Shell.Current.GoToAsync(nameof(GoodbyePage));
-            await _openPOSAPIController.UnsubcribeToPaymentNotification(CurrentTransaction.PaymentRequestToken, OnPaymentPayed); //TODO: Move to background task
+            await _openPosapiController.UnsubcribeToPaymentNotification(CurrentTransaction.PaymentRequestToken, OnPaymentPayed); //TODO: Move to background task
          }
          else
          {
@@ -78,17 +78,17 @@ public partial class PaymentPage : ContentPage
    public void ChangeStatusLabel(object sender, object e)
    {
       string newString = "";
-      Dispatcher.DispatchAsync(async () =>
+      Dispatcher.DispatchAsync(() =>
       {
          if (PaymentStatusLabel.Text.Contains("..."))
          {
-            newString = $"Waiting for {paymentStatusString}.";
+            newString = $"Waiting for {_paymentStatusString}.";
          } else if (PaymentStatusLabel.Text.Contains(".."))
          {
-            newString = $"Waiting for {paymentStatusString}...";
+            newString = $"Waiting for {_paymentStatusString}...";
          } else if (PaymentStatusLabel.Text.Contains("."))
          {
-            newString = $"Waiting for {paymentStatusString}..";
+            newString = $"Waiting for {_paymentStatusString}..";
          }
 
          PaymentStatusLabel.Text = newString;

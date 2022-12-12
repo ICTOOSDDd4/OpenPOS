@@ -16,6 +16,8 @@ public partial class CategoryView : ContentView
 
     public void SetCategoryValues(MenuPage page, Category category)
     {
+        _productController = new ProductController();
+        
         _menuPage = page;
         _category = category;
 
