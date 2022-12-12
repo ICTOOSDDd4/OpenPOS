@@ -6,12 +6,12 @@ namespace OpenPOS_APP;
 public partial class OrderView : ContentView
 {
    public Order Order;
-   public HorizontalStackLayout Hlayout;
+   public HorizontalStackLayout HorizontalLayout;
    public event EventHandler OrderDone;
    public event EventHandler OrderCanceled;
 
-   private TableController _tableController;
-   private OrderController _orderController;
+   private readonly TableController _tableController;
+   private readonly OrderController _orderController;
 	public OrderView()
 	{
 	    InitializeComponent();
@@ -53,7 +53,7 @@ public partial class OrderView : ContentView
    public void AddBinds(Order o, HorizontalStackLayout h)
    {
       Order = o;
-      Hlayout = h;
+      HorizontalLayout = h;
       OrderNUmber.Text = $"Order: {Order.Id}";
       Table table = _tableController.GetByBillId(Order.Bill_id);
       TableNumber.Text = $"Table: {table.Table_number}";
@@ -65,20 +65,27 @@ public partial class OrderView : ContentView
       foreach(OrderLineProduct line in _orderController.GetOrderLines(Order.Id)) 
       {
          // Setting up layout
-         HorizontalStackLayout layout = new HorizontalStackLayout();
-         layout.VerticalOptions = LayoutOptions.Center;
-         layout.HorizontalOptions = LayoutOptions.Center;
-         layout.Spacing = 10;
-         layout.Margin = new Thickness(2);
+         HorizontalStackLayout layout = new()
+         {
+             VerticalOptions = LayoutOptions.Center,
+             HorizontalOptions = LayoutOptions.Center,
+             Spacing = 10,
+             Margin = new Thickness(2)
+         };
 
          // Adding product
-         Label productLabel = new Label();
-         productLabel.Text = line.Name;
+         Label productLabel = new()
+         {
+             Text = line.Name
+         };
+
          layout.Add(productLabel);
 
          // Adding amount
-         Label amountLabel = new Label();
-         amountLabel.Text = $"{ line.Amount }";
+         Label amountLabel = new()
+         {
+             Text = $"{ line.Amount }"
+         };
          layout.Add(amountLabel);
 
          // Adding layout to main layout.

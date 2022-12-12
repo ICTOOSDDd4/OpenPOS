@@ -29,9 +29,9 @@ namespace OpenPOS_Database.Services.Models
          request.AddHeader("Content-Type", "application/json");
          request.AddHeader("Accept", "application/json");
          request.AddJsonBody(new
-         {
-            paymentRequestToken = paymentRequestToken,
-            connectionId = GetConnectionId()
+         { 
+             paymentRequestToken,
+             connectionId = GetConnectionId()
          });
          
          RestResponse response = await client.ExecuteAsync(request);

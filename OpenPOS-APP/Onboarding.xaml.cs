@@ -4,7 +4,7 @@ namespace OpenPOS_APP;
 
 public partial class Onboarding : ContentPage
 {
-	private ResourceDictionary _appColors = new();
+	private readonly ResourceDictionary _appColors = new();
 	public Onboarding()
 	{
       InitializeComponent();

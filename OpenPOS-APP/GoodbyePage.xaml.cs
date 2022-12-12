@@ -6,10 +6,10 @@ namespace OpenPOS_APP;
 
 public partial class GoodbyePage : ContentPage
 {
-	private System.Timers.Timer _timer = new System.Timers.Timer(1000);
+	private readonly System.Timers.Timer _timer = new System.Timers.Timer(1000);
 	private int _count = 10;
-	private BillController _billController = new BillController();
-	private TableController _tableController = new TableController();
+	private readonly BillController _billController = new BillController();
+	private readonly TableController _tableController = new TableController();
 	public GoodbyePage()
 	{
 		InitializeComponent();

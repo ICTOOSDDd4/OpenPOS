@@ -9,14 +9,14 @@ public partial class OrderOverviewPage : ContentPage
 {
     public List<Order> Orders { get; set; }
     private HorizontalStackLayout _horizontalLayout;
-    private OpenPosapiController _openPosapiController;
-    private OrderController _orderController;
+    private readonly OpenPosapiController _openPosApiController;
+    private readonly OrderController _orderController;
     private bool _isInitialized;
     private double _width;
 
     public OrderOverviewPage()
     {
-        _openPosapiController = new OpenPosapiController();
+        _openPosApiController = new OpenPosapiController();
         _orderController = new OrderController();
         InitializeComponent();
         Orders = _orderController.GetOpenOrders();
@@ -25,7 +25,7 @@ public partial class OrderOverviewPage : ContentPage
 
     private async void Initialize()
     {
-        await _openPosapiController.SubcribeToOrderNotification(NewOrder);
+        await _openPosApiController.SubcribeToOrderNotification(NewOrder);
     }
 
     private async void NewOrder(object sender, OrderEventArgs orderEvent)
@@ -78,50 +78,47 @@ public partial class OrderOverviewPage : ContentPage
 
     private void DeleteView(OrderView view)
     {
-      view.Hlayout.Children.Remove(view);
+      view.HorizontalLayout.Children.Remove(view);
     }
-
-    private async void ClickedRefresh(object sender, EventArgs e)
-    {
-      await Shell.Current.GoToAsync(nameof(OrderOverviewPage));
-    }
-
-
+    
     private void AddAllOrders()
     {
-      for (int i = 0; i < Orders.Count; i++)
-      {
-         AddOrderToLayout(Orders[i]);
-      }
+        foreach (var t in Orders)
+        {
+            AddOrderToLayout(t);
+        }
     }
 
     public void AddOrderToLayout(Order order)
-    {
-      int moduloNumber = ((int)_width / 300);
-      if (_horizontalLayout == null || _horizontalLayout.Children.Count % moduloNumber == 0)
-      {
+    { 
+        int moduloNumber = ((int)_width / 300);
+        if (_horizontalLayout == null || _horizontalLayout.Children.Count % moduloNumber == 0)
+        {
 		    AddHorizontalLayout();
-      }
+        }
 
-      OrderView orderview = new OrderView(); 
-      orderview.AddBinds(order, _horizontalLayout);
-      orderview.OrderDone += OrderDone;
-      orderview.OrderCanceled += OrderCanceled;
-      if (_horizontalLayout != null)
-      {
-        _horizontalLayout.Add(orderview);
-      }
-      else
-      {
-        throw new Exception("HorizontalLayout is null, Can't add OrderView");
-      }
+        OrderView orderView = new OrderView(); 
+        orderView.AddBinds(order, _horizontalLayout);
+        orderView.OrderDone += OrderDone;
+        orderView.OrderCanceled += OrderCanceled;
+        
+        if (_horizontalLayout != null)
+        {
+            _horizontalLayout.Add(orderView);
+        }
+        else
+        { 
+            throw new Exception("HorizontalLayout is null, Can't add OrderView");
+        }
     }
 
     private void AddHorizontalLayout()
     {
-      HorizontalStackLayout hLayout = new HorizontalStackLayout();
-      hLayout.Spacing = 20;
-      hLayout.Margin = new Thickness(10);
+      HorizontalStackLayout hLayout = new HorizontalStackLayout
+      {
+          Spacing = 20,
+          Margin = new Thickness(10)
+      };
       MainVerticalLayout.Add(hLayout);
       _horizontalLayout = hLayout;
     }

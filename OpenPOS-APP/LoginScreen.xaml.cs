@@ -10,8 +10,8 @@ public partial class LoginScreen : ContentPage
     
    private string _username;
    private string _password;
-   private ResourceDictionary _appColors = new();
-   private AuthenticationController _authenticationController;
+   private readonly ResourceDictionary _appColors = new();
+   private readonly AuthenticationController _authenticationController;
    public LoginScreen()
    {
        _authenticationController = new AuthenticationController();

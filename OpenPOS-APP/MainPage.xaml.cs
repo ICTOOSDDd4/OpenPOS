@@ -4,7 +4,7 @@ namespace OpenPOS_APP;
 
 public partial class MainPage : ContentPage
 {
-	private ResourceDictionary _appColors = new();
+	private readonly ResourceDictionary _appColors = new();
 	public MainPage()
 	{
       InitializeComponent();
@@ -14,7 +14,7 @@ public partial class MainPage : ContentPage
 
    private async void OnIconLoaded()
    {
-      await Openposicon.RelRotateTo(360, 4000);
+      await OpenPosIcon.RelRotateTo(360, 4000);
    }
 
 	private async void OnLoginButtonClicked(object sender, EventArgs e)

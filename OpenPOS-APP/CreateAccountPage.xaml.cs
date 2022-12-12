@@ -12,9 +12,9 @@ namespace OpenPOS_APP;
 public partial class CreateAccountPage : ContentPage
 {
 	
-	private ResourceDictionary _appColors = new();
-	private UserController _userController = new();
-	private RoleController _roleController = new();
+	private readonly ResourceDictionary _appColors = new();
+	private readonly UserController _userController = new();
+	private readonly RoleController _roleController = new();
 
 
 	public CreateAccountPage()

@@ -22,7 +22,7 @@
 
         <Label 
             Text="Welcome! Please enter your table number."
-            FontFamily="LeagueSpartan-Meduim"
+            FontFamily="LeagueSpartan-Medium"
             FontSize="20"
             HorizontalTextAlignment="Center"
             VerticalOptions="Center"
@@ -52,7 +52,7 @@
         
         <Button
                 x:Name="SubmitButton"
-                Text="Sumbit"
+                Text="Submit"
                 IsEnabled="false"
                 Clicked="OnSubmitButtonClicked"
                 HorizontalOptions="Center"

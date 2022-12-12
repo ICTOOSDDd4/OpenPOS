@@ -12,6 +12,7 @@
             <VerticalStackLayout
             BackgroundColor="{ StaticResource OpenPos-Blue }"
             WidthRequest="200"
+            HeightRequest="350"
             HorizontalOptions="Center"
             VerticalOptions="Start"
             IsVisible="true"
@@ -80,7 +81,7 @@
                 Text="Add"
                 WidthRequest="65"
                 CornerRadius="0"
-                Clicked="OnClickedToevoegen"
+                Clicked="OnClickedAdd"
                 TextColor="Black"
                 BackgroundColor="{ StaticResource OpenPos-Green}"
                     />
@@ -97,7 +98,7 @@
             />
             <Button
                 Text="Delete"
-                Clicked="OnClickedVerwijderen"
+                Clicked="OnClickedDelete"
                 CornerRadius="0"
                 x:Name="DeleteButton"
                 WidthRequest="65"

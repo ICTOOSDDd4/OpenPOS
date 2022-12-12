@@ -8,15 +8,15 @@ public partial class MenuPage : ContentPage
 {
 	public List<Product> Products { get; set; }
 	private HorizontalStackLayout _horizontalLayout;
-	private ProductController _productController;
-	private CategoryController _categoryController;
-	private OrderController _orderController;
+	private readonly ProductController _productController;
+	private readonly CategoryController _categoryController;
+	private readonly OrderController _orderController;
 	public Dictionary<int, int> SelectedProducts { get; set; }
 	public delegate void OnSearchEventHandler(object source, EventArgs args);
 
-	private int _productCardViewWidth = 300;
-	
-	private bool _isInitialized;
+    private const int ProductCardViewWidth = 300;
+
+    private bool _isInitialized;
 	private double _width;
     public MenuPage()
     {
@@ -43,7 +43,7 @@ public partial class MenuPage : ContentPage
 
 	private void SetWindowScaling(double width, double height)
 	{
-		ScrView.HeightRequest = height - _productCardViewWidth;
+		ScrView.HeightRequest = height - ProductCardViewWidth;
 		_width = width;
 		AddAllCategories(_categoryController.GetAll());
       AddAllProducts();
@@ -52,32 +52,32 @@ public partial class MenuPage : ContentPage
 	public void AddAllProducts()
 	{
 		MainVerticalLayout.Clear();
-      _horizontalLayout = null;
-		for (int i = 0; i < Products.Count; i++)
-		{
-            AddProductToLayout(Products[i]);
-		}
+        _horizontalLayout = null;
+		foreach (var t in Products)
+        {
+            AddProductToLayout(t);
+        }
 	}
 
    public void AddProductToLayout(Product product)
    {
-	   int moduloNumber = ((int)_width / _productCardViewWidth);
+	   int moduloNumber = ((int)_width / ProductCardViewWidth);
 	   if (_horizontalLayout == null || _horizontalLayout.Children.Count % moduloNumber == 0) 
-		{
-			AddHorizontalLayout();
-		}
+       {
+           AddHorizontalLayout();
+       }
         
-		ProductView productView = new ProductView();
-		productView.SetProductValues(this,product);
-		productView.ClickedMoreInfo += OnInfoButtonClicked;
-		if (_horizontalLayout != null)
-		{
+       ProductView productView = new();
+       productView.SetProductValues(this,product);
+       productView.ClickedMoreInfo += OnInfoButtonClicked;
+       if (_horizontalLayout != null)
+       {
 			_horizontalLayout.Add(productView);
-		}
-		else
-		{
-			throw new Exception("Horizontal layout is null, Can't add product to layout");
-		}
+       }
+       else
+       { 
+           throw new Exception("Horizontal layout is null, Can't add product to layout");
+       }
    }
 
     public void AddAllCategories(List<Category> categories)
@@ -87,9 +87,9 @@ public partial class MenuPage : ContentPage
         categoryView.SetCategoryValues(this, new Category() { Id = 0, Name = "All"});
         CategoryHorizontal.Add(categoryView);
 
-        for (int i = 0; i < categories.Count; i++)
+        foreach (var t in categories)
         {
-            AddCategoryToLayout(categories[i]);
+            AddCategoryToLayout(t);
         }
     }
 
@@ -102,10 +102,12 @@ public partial class MenuPage : ContentPage
 
     private void AddHorizontalLayout()
 	{
-      HorizontalStackLayout hLayout = new HorizontalStackLayout();
-		hLayout.Spacing = 20;
-		hLayout.Margin = new Thickness(10);
-		MainVerticalLayout.Add(hLayout);
+      HorizontalStackLayout hLayout = new()
+      {
+          Spacing = 20,
+          Margin = new Thickness(10)
+      };
+      MainVerticalLayout.Add(hLayout);
 		_horizontalLayout = hLayout;
     }
 

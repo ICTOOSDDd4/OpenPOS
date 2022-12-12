@@ -1,3 +1,4 @@
+using System.Reflection;
 using OpenPOS_Models;
 using OpenPOS_Settings;
 using Brush = Microsoft.Maui.Controls.Brush;
@@ -11,8 +12,10 @@ public partial class ProductView : ContentView
    public event EventHandler ClickedMoreInfo;
    private MenuPage _menuPage;
    private Product _product;
+   private readonly ResourceDictionary _appColors = new();
 
-   public ProductView()
+
+    public ProductView()
    {
       InitializeComponent();
       MainVerticalLayout.Shadow = new Shadow
@@ -21,7 +24,8 @@ public partial class ProductView : ContentView
          Brush = Brush.Black,
          Opacity = 0.12f,
       };
-   }
+      _appColors.SetAndLoadSource(new Uri("Resources/Styles/Colors.xaml", UriKind.RelativeOrAbsolute), "Resources/Styles/Colors.xaml", this.GetType().GetTypeInfo().Assembly, null);
+    }
 
    public void SetProductValues(MenuPage page, Product product)
    {
@@ -42,7 +46,7 @@ public partial class ProductView : ContentView
         }
    }
 
-   private void OnClickedToevoegen(object sender, EventArgs e)
+   private void OnClickedAdd(object sender, EventArgs e)
    {
       Amount++;
       AmountCount.Text = Amount.ToString();
@@ -57,7 +61,7 @@ public partial class ProductView : ContentView
          _menuPage.SelectedProducts.Add(_product.Id, Amount);
       }
 
-      // Add to over checkoutlist
+      // Add to over checkoutList
       if (ApplicationSettings.CheckoutList.ContainsKey(_product))
       {
          ApplicationSettings.CheckoutList[_product]++;
@@ -73,7 +77,7 @@ public partial class ProductView : ContentView
       ClickedMoreInfo?.Invoke(this, e);
    }
 
-   private void OnClickedVerwijderen(object sender, EventArgs e)
+   private void OnClickedDelete(object sender, EventArgs e)
    {
       Amount--;
       AmountCount.Text = Amount.ToString();
@@ -92,7 +96,7 @@ public partial class ProductView : ContentView
          }
       }
 
-      // Remove from overall checkoutlist
+      // Remove from overall checkoutList
       if (ApplicationSettings.CheckoutList.ContainsKey(_product))
       {
          if(ApplicationSettings.CheckoutList[_product] > 1)
@@ -128,7 +132,7 @@ public partial class ProductView : ContentView
       if (active)
       {
          DeleteButton.IsEnabled = true;
-         if (ApplicationSettings.UIElements.AppColors.TryGetValue("DeleteRed", out var color))
+         if (_appColors.TryGetValue("DeleteRed", out var color))
          {
             DeleteButton.BackgroundColor = (Color)color;
          }
@@ -136,7 +140,7 @@ public partial class ProductView : ContentView
       else
       {
          DeleteButton.IsEnabled = false;
-         if (ApplicationSettings.UIElements.AppColors.TryGetValue("Gray100", out var color))
+         if (_appColors.TryGetValue("Gray100", out var color))
          {
             DeleteButton.BackgroundColor = (Color)color;
          }

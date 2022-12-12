@@ -96,8 +96,7 @@ public static class MauiProgram
 			}
 			
         } else throw new ApplicationException("Can't find appsettings.json file");
-		
-		ApplicationSettings.UIElements = new UIElements();
-   
-	}
+    }
+
 }
+
