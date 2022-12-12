@@ -1,12 +1,12 @@
 using System.Data.SqlClient;
-using OpenPOS_Database;
 using OpenPOS_Database.Interfaces;
 using OpenPOS_Models;
 
-namespace OpenPOS_Database.Services.Models;
+namespace OpenPOS_Database.ModelServices;
 
 public class UserRoleService: IModelService<UserRole>
 {
+    //TODO: WHAT IS THE PURPOSE OF THIS?????
     public List<UserRole> GetAll()
     {
         SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[User_role]");

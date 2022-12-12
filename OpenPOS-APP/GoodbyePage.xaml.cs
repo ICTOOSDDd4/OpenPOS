@@ -1,18 +1,31 @@
-﻿namespace OpenPOS_APP;
+﻿using OpenPOS_Controllers;
+using OpenPOS_Models;
+using OpenPOS_Settings;
+
+namespace OpenPOS_APP;
 
 public partial class GoodbyePage : ContentPage
 {
 	private System.Timers.Timer _timer = new System.Timers.Timer(1000);
 	private int count = 10;
+	private BillController _billController = new BillController();
+	private TableController _tableController = new TableController();
 	public GoodbyePage()
 	{
 		InitializeComponent();
+		
+		// TODO: Need to become background tasks these can't stay in the constructor!
 		ApplicationSettings.LoggedinUser = null;
-      ApplicationSettings.CurrentBill.Paid = true;
-		BillService.Update(ApplicationSettings.CurrentBill);
+		
+		_billController.MarkAsPaid(ApplicationSettings.CurrentBill);
 		ApplicationSettings.CurrentBill = null;
-		ApplicationSettings.CheckoutList = new();
-      _timer.Elapsed += Timer_Tick;
+		
+		ApplicationSettings.CheckoutList = new Dictionary<Product, int>();
+		
+		_tableController.RemoveBill(ApplicationSettings.TableNumber);
+		ApplicationSettings.TableNumber = 0;
+		
+		_timer.Elapsed += Timer_Tick;
 		_timer.Start();
 	}
 	

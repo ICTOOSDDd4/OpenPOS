@@ -1,6 +1,5 @@
 using OpenPOS_APP.Resources.Controls;
-using OpenPOS_Database.ModelServices;
-using OpenPOS_Database.Services.Models;
+using OpenPOS_Controllers;
 using OpenPOS_Models;
 using OpenPOS_Settings;
 
@@ -10,6 +9,9 @@ public partial class MenuPage : ContentPage
 {
 	public List<Product> Products { get; set; }
 	private HorizontalStackLayout _horizontalLayout;
+	private ProductController _productController;
+	private CategoryController _categoryController;
+	private OrderController _orderController;
 	public Dictionary<int, int> SelectedProducts { get; set; }
 	public delegate void OnSearchEventHandler(object source, EventArgs args);
 	public static event OnSearchEventHandler Searched;
@@ -20,7 +22,7 @@ public partial class MenuPage : ContentPage
     public MenuPage()
 	{
       SelectedProducts = new Dictionary<int, int>();
-      Products = ProductService.GetAll();
+      Products = _productController.GetAllProducts();
 		InitializeComponent();
 		Header.Searched += OnSearch;
 		Header.currentPage = this;
@@ -40,7 +42,7 @@ public partial class MenuPage : ContentPage
 	{
 		ScrView.HeightRequest = height - _ProductCardViewWidth;
 		_width = width;
-		AddAllCategories(CategoryService.GetAll());
+		AddAllCategories(_categoryController.GetAll());
       AddAllProducts();
     }
 
@@ -114,40 +116,24 @@ public partial class MenuPage : ContentPage
 		{
 			if (await DisplayAlert("Confirm order", "Are you sure you want to place your order?", "Yes", "No"))
 			{
-				Order order = new Order(1, false, ApplicationSettings.LoggedinUser.Id, ApplicationSettings.CurrentBill.Id, DateTime.Now, DateTime.Now);
-				order = OrderService.Create(order);
-
-				// Get current product from selected products
-				foreach (KeyValuePair<int, int> entry in SelectedProducts)
-				{
-					OrderLine line = new OrderLine(order.Id, entry.Key, entry.Value, "In Development");
-					OrderLineService.Create(line);
-				}
-            if (order == null)
-            {
-               await DisplayAlert("Oops", "Something went wrong please try again.", "Alright");
-            }
-            else
-            {
-               await DisplayAlert("Order Placed", "Your order was successfully sent to our staff!", "Thank you");
-               await Shell.Current.GoToAsync(nameof(MenuPage));
-            }
-         }
-         else
-         {
-			 //EMPTY FOR NOW: DOING NOTHING
-         }
-        }		
+				_orderController.CreateOrder(SelectedProducts);
+			}
+			else
+			{
+				await DisplayAlert("Order Placed", "Your order was successfully sent to our staff!", "Thank you");
+				await Shell.Current.GoToAsync(nameof(MenuPage));
+			}
+		}		
 	}
 
 	public virtual void OnSearch(object sender, EventArgs e) {
 		MainVerticalLayout.Clear();
 		if (String.IsNullOrWhiteSpace(((SearchBar)sender).Text) || String.IsNullOrEmpty(((SearchBar)sender).Text))
 		{
-			Products = ProductService.GetAll();
+			Products = _productController.GetAllProducts();
 		} else
 		{
-            Products = ProductService.GetAllByFilter(((SearchBar)sender).Text);
+            Products = _productController.GetProductsBySearch(((SearchBar)sender).Text);
         }
 		AddAllProducts();
 	}

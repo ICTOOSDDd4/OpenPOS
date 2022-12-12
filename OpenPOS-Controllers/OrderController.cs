@@ -48,6 +48,11 @@ namespace OpenPOS_Controllers
         {
             return _orderService.GetAllOpenOrders();
         }
+        
+        public List<OrderLineProduct> GetOrderLines(int orderId)
+        {
+            return _orderLineService.GetAllById(orderId);
+        }
 
     }
 }

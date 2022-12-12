@@ -1,6 +1,8 @@
-using OpenPOS_APP.Services.Models;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using OpenPOS_Controllers;
+using OpenPOS_Models;
+using OpenPOS_Settings;
 
 namespace OpenPOS_APP;
 
@@ -8,6 +10,8 @@ public partial class TablePickerScreen : ContentPage
 {
    private int _tableNumber;
    private ResourceDictionary _appColors = new();
+   private TableController _tableController = new();
+   private BillController _billController = new();
 
    public TablePickerScreen()
 	{
@@ -28,18 +32,18 @@ public partial class TablePickerScreen : ContentPage
       {
          _tableNumber = value;
          ApplicationSettings.TableNumber = _tableNumber;
-         Table table = TableService.FindByTableNumber(_tableNumber);
+         Table table = _tableController.GetByTableNumber(_tableNumber);
          if (table == null)
          {
             ErrorDisplayLabel.Text = "This isn't a valid table.";
             ErrorDisplayLabel.IsVisible = true;
             ActivateButton(false);
-         } else
+         } 
+         else
          {
-            Bill bill = new Bill(value, ApplicationSettings.LoggedinUser.Id, false, DateTime.Now, DateTime.Now);
-            ApplicationSettings.CurrentBill = BillService.Create(bill);
+            ApplicationSettings.CurrentBill = _billController.CreateBill(ApplicationSettings.LoggedinUser.Id);
             table.Bill_id = ApplicationSettings.CurrentBill.Id;
-            if (TableService.Update(table))
+            if (_tableController.AttachBillToTable(_tableNumber, ApplicationSettings.CurrentBill.Id))
             {
                await Shell.Current.GoToAsync(nameof(MenuPage));
             }

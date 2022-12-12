@@ -5,6 +5,8 @@ using System.Reflection;
 using CommunityToolkit.Maui;
 using System.Diagnostics;
 using Microsoft.Maui.LifecycleEvents;
+using OpenPOS_Models;
+using OpenPOS_Settings;
 
 // Specific WinUI elements.
 #if WINDOWS
@@ -54,8 +56,8 @@ public static class MauiProgram
 							if (winuiAppWindow.Presenter is OverlappedPresenter p)
 							{
 								p.Maximize(); // Does work
-                        p.IsMaximizable = false; // Does not work
-                        //p.IsAlwaysOnTop = true; // Does work // COMMENT OUT FOR DEV!
+		                        p.IsMaximizable = false; // Does not work
+		                        //p.IsAlwaysOnTop = true; // Does work // COMMENT OUT FOR DEV!
 								p.IsResizable = false; // Does not work
 								p.IsMinimizable = false; // Does not work
 								p.IsModal = false;
@@ -64,7 +66,6 @@ public static class MauiProgram
 							{
 								winuiAppWindow.Resize(new SizeInt32(1920, 1080));
 								winuiAppWindow.MoveAndResize(new RectInt32(0, 0, 1920, 1080));
-								//winuiAppWindow.MoveAndResize(new RectInt32(1920 / 2 - width / 2, 1080 / 2 - height / 2, width, height));
 							}
 						});
 					});
@@ -89,16 +90,13 @@ public static class MauiProgram
 			ApplicationSettings.DbSett = config.GetRequiredSection("DATABASE_CONNECTION").Get<DatabaseSettings>();
 			ApplicationSettings.TikkieSet = config.GetRequiredSection("TIKKIE_API").Get<TikkieSettings>();
 			ApplicationSettings.QRCodeGeneratorSet = config.GetRequiredSection("QR_CODE_GENERATOR").Get<QRCodeGeneratorSettings>();
-         ApplicationSettings.ApiSet = config.GetRequiredSection("OPENPOS_API").Get<ApiSettings>();
+			ApplicationSettings.ApiSet = config.GetRequiredSection("OPENPOS_API").Get<ApiSettings>();
 			
 			if (ApplicationSettings.DbSett != null) 
 			{
-				DatabaseService.Initialize();
+				DatabaseService.Initialize(); // TODO: Needs a alternative, DB Can't be referenced in this project!
 			}
-            Bill bill = BillService.FindByID(12);
-            bill.Paid = false;
-            var result = BillService.Update(bill);
-			Debug.WriteLine(result);
+			
         } else throw new ApplicationException("Can't find appsettings.json file");
 		
 		ApplicationSettings.UIElements = new UIElements();

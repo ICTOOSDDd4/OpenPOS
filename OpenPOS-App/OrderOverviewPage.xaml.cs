@@ -9,8 +9,8 @@ public partial class OrderOverviewPage : ContentPage
 {
     public List<Order> Orders { get; set; }
     private HorizontalStackLayout _horizontalLayout;
-    private OrderController _orderController;
-    private EventHubService _eventHubService = new();
+    private OpenPOSAPIController _openPOSAPIController;
+   private OrderController _orderController;
     private bool _isInitialized;
     private double _width;
 
@@ -24,8 +24,7 @@ public partial class OrderOverviewPage : ContentPage
 
     private async void Initialize()
     {
-        _eventHubService.NewOrder += newOrder;
-        await _eventHubService.ConnectToServer();
+        await _openPOSAPIController.SubcribeToOrderNotification(newOrder);
     }
 
     private async void newOrder(object sender, OrderEventArgs orderEvent)

@@ -1,5 +1,4 @@
 using OpenPOS_Controllers;
-using OpenPOS_Database.Services.Models;
 using OpenPOS_Models;
 
 namespace OpenPOS_APP;
@@ -12,6 +11,7 @@ public partial class OrderView : ContentView
    public event EventHandler OrderCanceled;
 
    private TableController _tableController;
+   private OrderController _orderController;
 	public OrderView()
 	{
 	    InitializeComponent();
@@ -39,14 +39,14 @@ public partial class OrderView : ContentView
       order = o;
       layout = h;
       OrderNUmber.Text = $"Order: {order.Id}";
-      Table table = _tableController.GetTable(order);
+      Table table = _tableController.GetByBillId(order.Bill_id);
       TableNumber.Text = $"Table: {table.Table_number}";
       AddOrderLinesToLayout();
    }
 
    private void AddOrderLinesToLayout()
    {
-      foreach(OrderLineProduct line in order.GetLines(order.Id)) 
+      foreach(OrderLineProduct line in _orderController.GetOrderLines(order.Id)) 
       {
          // Setting up layout
          HorizontalStackLayout layout = new HorizontalStackLayout();

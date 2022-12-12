@@ -1,9 +1,9 @@
-﻿using OpenPOS_APP.EventArgsClasses;
-using OpenPOS_APP.Services;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using OpenPOS_Controllers;
 using OpenPOS_Controllers.Services;
-using OpenPOS_Database.Services.Models;
 using OpenPOS_Models;
+using OpenPOS_Settings;
+using OpenPOS_Settings.EventArgsClasses;
 
 
 namespace OpenPOS_APP;
@@ -12,12 +12,11 @@ public partial class PaymentPage : ContentPage
 {
 	public static Transaction CurrentTransaction { get; set; }
 	public static int RequiredPayments { get; set; } 
-	private EventHubService _eventHubService = new EventHubService();
    private Thread thread;
-   private delegate void EventMethod(object sender, EventArgs e);
    private string paymentStatusString;
    System.Timers.Timer _timer = new System.Timers.Timer(500);
    private int CurrentlyPaid { get; set; }
+   private OpenPOSAPIController _openPOSAPIController = new OpenPOSAPIController();
 	public PaymentPage()
 	{
       InitializeComponent();
@@ -25,13 +24,11 @@ public partial class PaymentPage : ContentPage
    }
    public async void Connect()
    {
-      await _eventHubService.ConnectToServerPayment();
-      bool AddedToPaymentListener = await OpenPosAPIService.AddToPaymentListener(_eventHubService.GetConnectionId(), CurrentTransaction.PaymentRequestToken);
+      bool AddedToPaymentListener = await _openPOSAPIController.SubcribeToPaymentNotification(CurrentTransaction.PaymentRequestToken, OnPaymentPayed);
       if (!AddedToPaymentListener)
       {
          throw new Exception("Can't add the Transaction to the Payment Listener");
       }
-      _eventHubService.NewPayment += OnPaymentPayed;
       ImageSource imageSource = UtilityService.GenerateQrCodeFromUrl(CurrentTransaction.Url);
       
       // Deleting the loader from the screen.
@@ -56,7 +53,7 @@ public partial class PaymentPage : ContentPage
       _timer.Elapsed += ChangeStatusLabel;
       _timer.Start();
    }
-	public void OnPaymentPayed(object sender, PaymentEventArgs e)
+	public void OnPaymentPayed(object? sender, PaymentEventArgs e)
 	{
       _timer.Stop();
       thread.Interrupt();
@@ -66,10 +63,9 @@ public partial class PaymentPage : ContentPage
          Debug.WriteLine("Payed");
          if (CurrentlyPaid >= RequiredPayments)
          {
-            await _eventHubService.Stop();
             PaymentStatusLabel.Text = $"Payment complete!";
             await Shell.Current.GoToAsync(nameof(GoodbyePage));
-            await OpenPosAPIService.RemoveFromPaymentListener(CurrentTransaction.PaymentRequestToken);
+            await _openPOSAPIController.UnsubcribeToPaymentNotification(CurrentTransaction.PaymentRequestToken, OnPaymentPayed); //TODO: Move to background task
          }
          else
          {
@@ -105,14 +101,9 @@ public partial class PaymentPage : ContentPage
 		RequiredPayments = numberOfRequiredPayments;
       Debug.WriteLine(transaction.PaymentRequestToken);
    }
-   public void RemoveQRCodeFile()
+   public void RemoveQrCodeFile()
    {
       File.Delete($"{UtilityService.GetRootDirectory()}/qr-{ApplicationSettings.CurrentBill.Id}.png");
-   }
-   
-   protected override void OnNavigatedTo(NavigatedToEventArgs args)
-   {
-      base.OnNavigatedTo(args);
    }
 
 }

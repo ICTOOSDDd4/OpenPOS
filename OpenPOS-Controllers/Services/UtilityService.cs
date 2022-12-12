@@ -33,7 +33,7 @@ public static class UtilityService
         return builder.ToString();
     }
 
-    private static string GetRootDirectory()
+    public static string GetRootDirectory()
     {
        return AppDomain.CurrentDomain.BaseDirectory;
     }

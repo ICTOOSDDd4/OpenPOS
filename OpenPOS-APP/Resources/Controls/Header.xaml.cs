@@ -1,5 +1,5 @@
 using System.Diagnostics;
-using System.Diagnostics;
+using OpenPOS_Settings;
 
 namespace OpenPOS_APP.Resources.Controls;
 

@@ -1,8 +1,11 @@
 ﻿using System.Reflection;
-using System.Security.Cryptography;
-using System.Text;
 using System.Text.RegularExpressions;
-using OpenPOS_APP.Services;
+using OpenPOS_Controllers;
+using OpenPOS_Controllers.Services;
+using OpenPOS_Models;
+using OpenPOS_Settings;
+using OpenPOS_Settings.Enums;
+using TextChangedEventArgs = Microsoft.Maui.Controls.TextChangedEventArgs;
 
 namespace OpenPOS_APP;
 
@@ -10,8 +13,10 @@ public partial class CreateAccountPage : ContentPage
 {
 	
 	private ResourceDictionary _appColors = new();
+	private UserController _userController = new();
+	private RoleController _roleController = new();
 
-	
+
 	public CreateAccountPage()
 	{
 		InitializeComponent();
@@ -104,31 +109,16 @@ public partial class CreateAccountPage : ContentPage
 	{
 		if (CheckAllFieldsValid())
 		{
-			if (UserService.FindByEmail(EmailEntry.Text) == null)
+			if (_userController.FindByEmail(EmailEntry.Text) == null)
 			{
-				//TODO: Encrypt passwords (OPENPOS-11)
-				string encryptedPassword = UtilityService.HashPassword(PasswordEntry.Text);
-
-
-				User currentUser = UserService.Create(new User
-				{
-					Name = FirstName.Text,
-					Last_name = LastName.Text,
-					Email = EmailEntry.Text,
-					Password = encryptedPassword
-				});
+				User currentUser = _userController.CreateNew(FirstName.Text, LastName.Text, EmailEntry.Text, PasswordEntry.Text);
 				
-				Role guestRole = RoleService.FindOnRoleTitle(RolesEnum.Guest);
-				UserRoleService.Create(new UserRole
-				{
-					User_id = currentUser.Id,
-					Role_id = guestRole.Id
-				});
+				
+				Role guestRole = _roleController.FindOnTitle(RolesEnum.Guest);
+				_userController.AddRoleToUser(currentUser.Id, guestRole.Id);
 				
 				ApplicationSettings.LoggedinUser = currentUser;
 				RedirectToMainPage();
-				
-				
 			}
 			else
 			{

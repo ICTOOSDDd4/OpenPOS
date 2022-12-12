@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Globalization;
 using OpenPOS_APP.Services;
 using System.Linq;
-using OpenPOS_Database.Services.Models;
+using OpenPOS_Controllers;
 using OpenPOS_Models;
 using OpenPOS_Settings;
 
@@ -14,10 +14,9 @@ namespace OpenPOS_APP;
 public partial class CheckoutOverview : ContentPage
 { 
     private Dictionary<Product, int> CheckoutItems { get; set; }
-
     private double TotalPrice;
-
     private double _tip;
+    private PaymentController _paymentController = new PaymentController();
 
 
     public static Dictionary<Product,int> GetCheckoutItems()
@@ -62,7 +61,7 @@ public partial class CheckoutOverview : ContentPage
                int tipInCents = (int)Math.Round(_tip * 100);
                int total = totalInCents + tipInCents;
                int splitamount = totalInCents / count;
-               Transaction transaction = TikkiePaymentService.CreatePaymentRequest(splitamount, ApplicationSettings.CurrentBill.Id, $"OpenPOS Tikkie Payment: {ApplicationSettings.CurrentBill.Id}");
+               Transaction transaction = _paymentController.NewTikkieTransaction(splitamount);
                if (transaction.Url != null)
                {
                   PaymentPage.SetTransaction(transaction, count);
@@ -75,13 +74,13 @@ public partial class CheckoutOverview : ContentPage
             await DisplayAlert("Oops", "You can't split a bill with a negative amount of people!", "Try Again");
             continue;
          }
-         else if (result == null)
+         
+         if (result == null)
          {
             loop = false;
             continue;
          }
          await DisplayAlert("Oops", "You can only input a number.", "Try Again");
-         continue;
       }
    }
 
@@ -90,7 +89,7 @@ public partial class CheckoutOverview : ContentPage
       int totalInCents = (int)Math.Round(TotalPrice * 100);
       int tipInCents = (int)Math.Round(_tip * 100);
       int total = totalInCents + tipInCents;
-      Transaction transaction = TikkiePaymentService.CreatePaymentRequest(total, ApplicationSettings.CurrentBill.Id, $"OpenPOS Tikkie Payment: {ApplicationSettings.CurrentBill.Id}");
+      Transaction transaction = _paymentController.NewTikkieTransaction(total);
       PaymentPage.SetTransaction(transaction, 1);
       await Shell.Current.GoToAsync(nameof(PaymentPage));
       

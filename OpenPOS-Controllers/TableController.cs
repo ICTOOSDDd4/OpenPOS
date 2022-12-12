@@ -20,7 +20,6 @@ namespace OpenPOS_Controllers
         public bool CreateTableAsync(int tableId)
         {
             BillController billController = new BillController();
-            //ApplicationSettings.TableNumber = _tableNumber;
             Table table = _tableService.FindByTableNumber(tableId);
             if (table == null)
             {
@@ -36,9 +35,34 @@ namespace OpenPOS_Controllers
                 return true;
             }    
         }
-        public Table GetTable(Order order)
+        
+        public bool AttachBillToTable(int tableId, int billId)
         {
-            return _tableService.FindByBill(order.Bill_id);
+            Table table = _tableService.FindByTableNumber(tableId);
+            if (table == null)
+            {
+                return false;
+            }
+            table.Bill_id = billId;
+            _tableService.Update(table);
+            return true;
+        }
+        
+        public Table GetByTableNumber(int tableNumber)
+        {
+            return _tableService.FindByTableNumber(tableNumber);
+        }
+        
+        public Table GetByBillId(int billId)
+        {
+            return _tableService.FindByBill(billId);
+        }
+
+        public bool RemoveBill(int tableNumber)
+        {
+            Table table = _tableService.FindByTableNumber(tableNumber);
+            table.Bill_id = null;
+            return _tableService.Update(table);
         }
     }
 }
