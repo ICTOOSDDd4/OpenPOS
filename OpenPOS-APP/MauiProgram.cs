@@ -5,6 +5,7 @@ using CommunityToolkit.Maui;
 using Microsoft.Maui.LifecycleEvents;
 using OpenPOS_Controllers.Services;
 using OpenPOS_Settings;
+using Plugin.Maui.Audio;
 
 // Specific WinUI elements.
 #if WINDOWS
@@ -37,8 +38,8 @@ public static class MauiProgram
 				fonts.AddFont("LeagueSpartan-Thin.ttf", "LeagueSpartanThin");
 			});
             Initialize();
-			
 
+            builder.Services.AddSingleton(AudioManager.Current);
       // Windows specific window size settings
 #if WINDOWS
       builder.ConfigureLifecycleEvents(events =>
