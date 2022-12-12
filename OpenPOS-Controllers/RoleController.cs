@@ -2,7 +2,7 @@
 using OpenPOS_Models;
 using OpenPOS_Settings.Enums;
 
-namespace OpenPOS_Controllers.Services;
+namespace OpenPOS_Controllers;
 
 public class RoleController
 {

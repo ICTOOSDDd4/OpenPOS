@@ -3,7 +3,7 @@ using OpenPOS_Settings.EventArgsClasses;
 using OpenPOS_Database.Services.Models;
 namespace OpenPOS_Controllers;
 
-public class OpenPosapiController
+public class OpenPosApiController
 {
     private OpenPosApiService _openPosApiService = new();
 
