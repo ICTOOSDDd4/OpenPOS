@@ -1,9 +1,5 @@
 using Microsoft.Extensions.Configuration;
-using OpenPOS_APP.Services;
-using OpenPOS_Database;
-using OpenPOS_Database.Services.Models;
-using OpenPOS_Models;
-using OpenPOS_Settings;
+using OpenPOS_Database.ModelServices;
 using System.Reflection;
 
 namespace OpenPOS_Testing;
