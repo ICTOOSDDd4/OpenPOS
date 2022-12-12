@@ -17,8 +17,7 @@ namespace OpenPOS_Controllers
         {
             Bill bill = new Bill()
                 { User_id = user_id, Paid = false, Created_at = DateTime.Now, Updated_at = DateTime.Now };
-            ApplicationSettings.CurrentBill = _billService.Create(bill);
-            return bill;
+            return _billService.Create(bill); ;
         }
         
         // Delete Method

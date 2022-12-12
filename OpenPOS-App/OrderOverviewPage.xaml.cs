@@ -9,14 +9,14 @@ public partial class OrderOverviewPage : ContentPage
 {
     public List<Order> Orders { get; set; }
     private HorizontalStackLayout _horizontalLayout;
-    private readonly OpenPosapiController _openPosApiController;
+    private readonly OpenPosApiController _openPosApiController;
     private readonly OrderController _orderController;
     private bool _isInitialized;
     private double _width;
 
     public OrderOverviewPage()
     {
-        _openPosApiController = new OpenPosapiController();
+        _openPosApiController = new OpenPosApiController();
         _orderController = new OrderController();
         InitializeComponent();
         Orders = _orderController.GetOpenOrders();

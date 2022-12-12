@@ -19,7 +19,7 @@ public partial class LoginScreen : ContentPage
         _appColors.SetAndLoadSource(new Uri("Resources/Styles/Colors.xaml", UriKind.RelativeOrAbsolute),
             "Resources/Styles/Colors.xaml", this.GetType().GetTypeInfo().Assembly, null);
     }
-
+    
     private void OnTextFilledUsername(object sender, TextChangedEventArgs e)
     {
         _username = e.NewTextValue;
@@ -50,6 +50,10 @@ public partial class LoginScreen : ContentPage
     {
         if (UserAuth(_username, _password))
         {
+            MainLoginButton.IsVisible = false;
+            MainLoginButton.IsEnabled = false;
+            LoadingIndicator.IsRunning = true;
+            LoadingIndicator.IsEnabled = true;
             var role = Enum.Parse<RolesEnum>(_authenticationController.GetUserRole(_username, _password).Title);
             switch (role)
             {
@@ -80,6 +84,8 @@ public partial class LoginScreen : ContentPage
         }
         else
         {
+            LoadingIndicator.IsVisible = false;
+            LoadingIndicator.IsRunning = false;
             await DisplayAlert("Invalid credentials", "This username and/or password are not correct.", "Try again");
         }
     }

@@ -1,14 +1,17 @@
 using OpenPOS_APP.Resources.Controls;
+using OpenPOS_APP.Resources.Controls.PopUps;
 using OpenPOS_Controllers;
 using OpenPOS_Models;
+using OpenPOS_Settings.EventArgsClasses;
+using CommunityToolkit.Maui.Views;
 
 namespace OpenPOS_APP;
 
 public partial class MenuPage : ContentPage
 {
-	public List<Product> Products { get; set; }
+	  public List<Product> Products { get; set; }
     public Dictionary<int, int> SelectedProducts { get; set; }
-	public delegate void OnSearchEventHandler(object source, EventArgs args);
+	  public delegate void OnSearchEventHandler(object source, EventArgs args);
 
     private HorizontalStackLayout _horizontalLayout;
     private readonly ProductController _productController;
@@ -16,7 +19,7 @@ public partial class MenuPage : ContentPage
     private readonly OrderController _orderController;
     private const int _productCardViewWidth = 300;
     private bool _isInitialized;
-	private double _width;
+	  private double _width;
 
     public MenuPage()
     {
@@ -43,7 +46,7 @@ public partial class MenuPage : ContentPage
     }
 
     private void SetWindowScaling(double width, double height)
-	{
+	  {
         ScrView.HeightRequest = height - _productCardViewWidth;
         _width = width;
         AddAllCategories(_categoryController.GetAll());
@@ -81,6 +84,7 @@ public partial class MenuPage : ContentPage
         }
     }
 
+
     public void AddAllCategories(List<Category> categories)
     {
 		//adds an "all" category
@@ -112,10 +116,11 @@ public partial class MenuPage : ContentPage
         _horizontalLayout = hLayout;
     }
 
-    private async void OnInfoButtonClicked(object sender, EventArgs e)
+    private async void OnInfoButtonClicked(object sender, InfoButtonEventArgs e)
     {
-        await DisplayAlert("Work In Progress", "This will display more about the product and allergy information",
-            "Understood");
+        ProductInfoPopUp infoPop = new();
+        infoPop.SetProduct(e.product);
+        this.ShowPopup(infoPop);
     }
 
     private async void OrderButton_OnClicked(object sender, EventArgs e)

@@ -1,6 +1,7 @@
 using System.Reflection;
 using OpenPOS_Models;
 using OpenPOS_Settings;
+using OpenPOS_Settings.EventArgsClasses;
 using Brush = Microsoft.Maui.Controls.Brush;
 using Shadow = Microsoft.Maui.Controls.Shadow;
 
@@ -9,11 +10,10 @@ namespace OpenPOS_APP;
 public partial class ProductView : ContentView
 {
     public int Amount { get; set; }
-    public event EventHandler ClickedMoreInfo;
+    public event EventHandler<InfoButtonEventArgs> ClickedMoreInfo;
     private MenuPage _menuPage;
     private Product _product;
     private readonly ResourceDictionary _appColors = new();
-
 
     public ProductView()
     {
@@ -75,7 +75,7 @@ public partial class ProductView : ContentView
 
     private void OnClickedInfo(object sender, EventArgs e)
     {
-        ClickedMoreInfo?.Invoke(this, e);
+        ClickedMoreInfo?.Invoke(this, new InfoButtonEventArgs(_product));
     }
 
     private void OnClickedDelete(object sender, EventArgs e)
@@ -147,5 +147,4 @@ public partial class ProductView : ContentView
             }
         }
     }
-
 }
