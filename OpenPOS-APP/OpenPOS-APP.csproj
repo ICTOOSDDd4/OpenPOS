@@ -118,6 +118,9 @@
 		<MauiXaml Update="Resources\Controls\PopUps\InputCustomTipPopUp.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+		<MauiXaml Update="Resources\Controls\PopUps\ProductInfoPopUp.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="Resources\Controls\PopUps\TipPopUp.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>

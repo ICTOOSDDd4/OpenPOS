@@ -1,6 +1,9 @@
 using OpenPOS_APP.Resources.Controls;
+using OpenPOS_APP.Resources.Controls.PopUps;
 using OpenPOS_Controllers;
 using OpenPOS_Models;
+using OpenPOS_Settings.EventArgsClasses;
+using CommunityToolkit.Maui.Views;
 
 namespace OpenPOS_APP;
 
@@ -80,7 +83,8 @@ public partial class MenuPage : ContentPage
        }
    }
 
-    public void AddAllCategories(List<Category> categories)
+
+   public void AddAllCategories(List<Category> categories)
     {
 		//adds an "all" category
         CategoryView categoryView = new CategoryView();
@@ -111,11 +115,13 @@ public partial class MenuPage : ContentPage
 		_horizontalLayout = hLayout;
     }
 
-	private async void OnInfoButtonClicked(object sender, EventArgs e)
-	{
-		await DisplayAlert("Work In Progress", "This will display more about the product and allergy information",
-			"Understood");
-	}
+	private void OnInfoButtonClicked(object sender, InfoButtonEventArgs e)
+    {
+        ProductInfoPopUp infoPop = new();
+        infoPop.SetProduct(e.product);
+        this.ShowPopup(infoPop);
+
+    }
 
 	private async void OrderButton_OnClicked(object sender, EventArgs e)
 	{

@@ -6,13 +6,13 @@
     <VerticalStackLayout
         x:Name="MainVerticalLayout"
         WidthRequest="200"
+        
         BackgroundColor="{ StaticResource White}"
         >
         <Grid>
             <VerticalStackLayout
             BackgroundColor="{ StaticResource OpenPos-Blue }"
             WidthRequest="200"
-            HeightRequest="350"
             HorizontalOptions="Center"
             VerticalOptions="Start"
             IsVisible="true"
@@ -52,6 +52,7 @@
            VerticalOptions="Center"
            MinimumHeightRequest="85"
            HorizontalOptions="Center"
+           MaximumHeightRequest="85"
         >
             <Label x:Name="ProductName"
                    FontSize="16"

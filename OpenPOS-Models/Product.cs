@@ -8,15 +8,17 @@
         public string Description { get; set; }
 
         public string Imagepath { get; set; }
+        public string Allergies { get; set; }
 
         public Product() { }
-        public Product(int id, string name, double price, string description, string imagepath )
+        public Product(int id, string name, double price, string description, string imagepath, string allergies )
         {
             Id = id;
             Name = name;
             Price = price;
             Description = description;
             Imagepath = imagepath;
+            Allergies = allergies;
         }
     }
 }
