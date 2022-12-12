@@ -13,21 +13,26 @@ public partial class GoodbyePage : ContentPage
 	public GoodbyePage()
 	{
 		InitializeComponent();
-		
+
 		// TODO: Need to become background tasks these can't stay in the constructor!
-		ApplicationSettings.LoggedinUser = null;
-		
-		_billController.MarkAsPaid(ApplicationSettings.CurrentBill);
-		ApplicationSettings.CurrentBill = null;
-		
-		ApplicationSettings.CheckoutList = new Dictionary<Product, int>();
-		
-		_tableController.RemoveBill(ApplicationSettings.TableNumber);
-		ApplicationSettings.TableNumber = 0;
-		
-		_timer.Elapsed += Timer_Tick;
+		Cleanup();
+
+      _timer.Elapsed += Timer_Tick;
 		_timer.Start();
 	}
+
+	public void Cleanup()
+	{
+      ApplicationSettings.LoggedinUser = null;
+
+      _billController.MarkAsPaid(ApplicationSettings.CurrentBill);
+      ApplicationSettings.CurrentBill = null;
+
+      ApplicationSettings.CheckoutList = new Dictionary<Product, int>();
+
+      _tableController.RemoveBill(ApplicationSettings.TableNumber);
+      ApplicationSettings.TableNumber = 0;
+   }
 	
 	private void Timer_Tick(object sender, object e)
 	{

@@ -13,7 +13,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<!-- Display name -->
-		<ApplicationTitle>OpenPOS-APP</ApplicationTitle>
+		<ApplicationTitle>OpenPOS</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.openpos.openpos_app</ApplicationId>
@@ -34,13 +34,13 @@
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-maccatalyst|AnyCPU'">
 		<CreatePackage>false</CreatePackage>
 	</PropertyGroup>
-	<!--<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-maccatalyst|AnyCPU'">
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-maccatalyst|AnyCPU'">
 	  <CreatePackage>false</CreatePackage>
-	</PropertyGroup>-->
+	</PropertyGroup>
 	
 	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' and '$(Configuration)' == 'Release'">
     <AppxPackageSigningEnabled>true</AppxPackageSigningEnabled>
-    <PackageCertificateThumbprint>9FF30526A6EC3A6596C71B84D4052F7B19AFDD06</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>69A290C0599D8868432DBA8F6BBD2AAA07F81291</PackageCertificateThumbprint>
 	</PropertyGroup>
 	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' and '$(RuntimeIdentifierOverride)' != ''">
 		<RuntimeIdentifier>$(RuntimeIdentifierOverride)</RuntimeIdentifier>
