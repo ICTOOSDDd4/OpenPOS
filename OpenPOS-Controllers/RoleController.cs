@@ -1,4 +1,5 @@
-﻿using OpenPOS_Database.Services.Models;
+﻿using OpenPOS_Database.ModelServices;
+using OpenPOS_Database.Services.Models;
 using OpenPOS_Models;
 using OpenPOS_Settings.Enums;
 

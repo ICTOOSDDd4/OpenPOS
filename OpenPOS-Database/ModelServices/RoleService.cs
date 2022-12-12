@@ -4,7 +4,7 @@ using OpenPOS_Database.Interfaces;
 using OpenPOS_Models;
 using OpenPOS_Settings.Enums;
 
-namespace OpenPOS_Database.Services.Models;
+namespace OpenPOS_Database.ModelServices;
 
 public class RoleService : IModelService<Role>
 {

@@ -21,7 +21,7 @@ namespace OpenPOS_Database
             _connectionString = ApplicationSettings.DbSett.connection_string;
             Dbcontext = new SqlConnection
             {
-                ConnectionString = _connectionString
+                ConnectionString = _connectionString,
             };
         }
         public static bool Execute(SqlCommand command)
@@ -39,7 +39,7 @@ namespace OpenPOS_Database
             {
                 Console.WriteLine(ex.Message);
                 Debug.WriteLine(ex.Message);
-                WriteToLogHandler.WriteToLog(ex);
+                ExceptionHandler.HandleException(ex,null, true, false);
                 CloseConnection();
                 return false;
             }
@@ -55,7 +55,7 @@ namespace OpenPOS_Database
                 T result;
                 try
                 {
-                   result = getObject<T>(reader);
+                    result = getObject<T>(reader);
                 }
 
                 finally
@@ -96,30 +96,30 @@ namespace OpenPOS_Database
                 { 
                     var propType = prop.PropertyType;
                     try
-                   {
-                      if (propType.IsGenericType && propType.GetGenericTypeDefinition() == typeof(Nullable<>))
-                      {
-                         if (reader[prop.Name] == null || reader[prop.Name] == DBNull.Value || reader[prop.Name].ToString() == "")
-                         {
-                            prop.SetValue(obj, null, null);
-                         }
-                         else
-                         {
-                             propType = Nullable.GetUnderlyingType(propType);
-                             prop.SetValue(obj, Convert.ChangeType(reader[prop.Name].ToString(), propType));
-                         }
-                      }
-                      else
-                      {
-                         prop.SetValue(obj, Convert.ChangeType(reader[prop.Name].ToString(), propType));
-                      }
-                   }
-                   catch (Exception e)
-                   {
-                      Console.WriteLine(e);
-                      Debug.WriteLine(e);
-                      throw;
-                   }
+                    {
+                        if (propType.IsGenericType && propType.GetGenericTypeDefinition() == typeof(Nullable<>))
+                        {
+                            if (reader[prop.Name] == null || reader[prop.Name] == DBNull.Value || reader[prop.Name].ToString() == "")
+                            {
+                                prop.SetValue(obj, null, null);
+                            }
+                            else
+                            {
+                                propType = Nullable.GetUnderlyingType(propType);
+                                prop.SetValue(obj, Convert.ChangeType(reader[prop.Name].ToString(), propType));
+                            }
+                        }
+                        else
+                        {
+                            prop.SetValue(obj, Convert.ChangeType(reader[prop.Name].ToString(), propType));
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                        Debug.WriteLine(e);
+                        throw;
+                    }
                 }
             }
 
