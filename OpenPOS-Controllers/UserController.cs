@@ -1,5 +1,3 @@
-
-
 using OpenPOS_Controllers.Services;
 using OpenPOS_Database.ModelServices;
 using OpenPOS_Database.Services.Models;
@@ -10,13 +8,12 @@ namespace OpenPOS_Controllers
     public class UserController
     {
         private UserService _userService;
-        private RoleService _roleService;
         private UserRoleService _userRoleService;
+        private UtilityService _utilityService;
 
         public UserController()
         {
             _userService = new UserService();
-            _roleService = new RoleService();
             _userRoleService = new UserRoleService();
         }
         
@@ -46,7 +43,6 @@ namespace OpenPOS_Controllers
         {
            return _userService.FindByEmail(email);
         }
-        
-        
+
     }
 }

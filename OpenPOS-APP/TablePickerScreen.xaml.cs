@@ -8,100 +8,102 @@ namespace OpenPOS_APP;
 
 public partial class TablePickerScreen : ContentPage
 {
-   private int _tableNumber;
-   private ResourceDictionary _appColors = new();
-   private TableController _tableController = new();
-   private BillController _billController = new();
+    private int _tableNumber;
+    private readonly ResourceDictionary _appColors = new();
+    private readonly TableController _tableController = new();
+    private readonly BillController _billController = new();
 
-   public TablePickerScreen()
-	{
-		InitializeComponent();
-      _appColors.SetAndLoadSource(new Uri("Resources/Styles/Colors.xaml", UriKind.RelativeOrAbsolute), "Resources/Styles/Colors.xaml", this.GetType().GetTypeInfo().Assembly, null);
+    public TablePickerScreen()
+    {
+        InitializeComponent();
+        _appColors.SetAndLoadSource(new Uri("Resources/Styles/Colors.xaml", UriKind.RelativeOrAbsolute), "Resources/Styles/Colors.xaml", this.GetType().GetTypeInfo().Assembly, null);
+    }
 
-   }
-   
-   private async void OnSubmitButtonClicked(object sender, EventArgs e)
-   {
-      string entryString = TableNumberEntry.Text;
-      if (int.TryParse(entryString.Trim(), out int value))
-      {
-         _tableNumber = value;
-         ApplicationSettings.TableNumber = _tableNumber;
-         Table table = _tableController.GetByTableNumber(_tableNumber);
-         if (table == null)
-         {
-            ErrorDisplayLabel.Text = "This isn't a valid table.";
+    private async void OnSubmitButtonClicked(object sender, EventArgs e)
+    {
+        string entryString = TableNumberEntry.Text;
+        if (int.TryParse(entryString.Trim(), out int value))
+        {
+            _tableNumber = value;
+            ApplicationSettings.TableNumber = _tableNumber;
+            Table table = _tableController.GetByTableNumber(_tableNumber);
+
+            if (table == null)
+            {
+                ErrorDisplayLabel.Text = "This isn't a valid table.";
+                ErrorDisplayLabel.IsVisible = true;
+                ActivateButton(false);
+            }
+            else
+            {
+                ApplicationSettings.CurrentBill = _billController.CreateBill(ApplicationSettings.LoggedinUser.Id);
+                table.Bill_id = ApplicationSettings.CurrentBill.Id;
+                if (_tableController.AttachBillToTable(_tableNumber, ApplicationSettings.CurrentBill.Id))
+                {
+                    await Shell.Current.GoToAsync(nameof(MenuPage));
+                }
+            }
+        }
+    }
+
+    private void OnTableNumberEntryChanged(object sender, TextChangedEventArgs e)
+    {
+        int value;
+        string oldValue = e.OldTextValue;
+
+        if (int.TryParse(e.NewTextValue, out value))
+        {
+            _tableNumber = value;
+            if (oldValue != null)
+            {
+                if (oldValue.Any(c => char.IsLetter(c)))
+                {
+                    ErrorDisplayLabel.IsVisible = true;
+                }
+                else
+                {
+                    ErrorDisplayLabel.IsVisible = false;
+                }
+            }
+
+            ActivateButton(true);
+        }
+        else if (e.NewTextValue.Trim() == string.Empty)
+        {
+            ErrorDisplayLabel.Text = "You need to input a number to continue";
             ErrorDisplayLabel.IsVisible = true;
             ActivateButton(false);
-         } 
-         else
-         {
-            ApplicationSettings.CurrentBill = _billController.CreateBill(ApplicationSettings.LoggedinUser.Id);
-            table.Bill_id = ApplicationSettings.CurrentBill.Id;
-            if (_tableController.AttachBillToTable(_tableNumber, ApplicationSettings.CurrentBill.Id))
+        }
+        else
+        {
+            ErrorDisplayLabel.Text = "You can only input numbers.";
+            ErrorDisplayLabel.IsVisible = true;
+            string placeholder = e.NewTextValue;
+            placeholder = Regex.Replace(placeholder, "[^0-9]+", "");
+            TableNumberEntry.Text = placeholder;
+            ActivateButton(false);
+        }
+    }
+
+    private void ActivateButton(bool active)
+    {
+        if (active)
+        {
+
+            if (_appColors.TryGetValue("OpenPos-Green", out var color))
             {
-               await Shell.Current.GoToAsync(nameof(MenuPage));
+                SubmitButton.BackgroundColor = (Color)color;
+                SubmitButton.IsEnabled = true;
             }
-         }
-      }
-      
-   }
+        }
+        else
+        {
 
-   private void OnTableNumberEntryChanged(object sender, TextChangedEventArgs e)
-   {
-      int value;
-      string oldValue = e.OldTextValue;
-
-      if (int.TryParse(e.NewTextValue, out value))
-      {
-         _tableNumber = value;
-         if (oldValue != null)
-         {
-            if (oldValue.Any(c => char.IsLetter(c)))
+            if (_appColors.TryGetValue("Gray100", out var color))
             {
-               ErrorDisplayLabel.IsVisible = true;
+                SubmitButton.BackgroundColor = (Color)color;
+                SubmitButton.IsEnabled = false;
             }
-            else { ErrorDisplayLabel.IsVisible = false; }
-         }
-         ActivateButton(true);
-      }
-      else if (e.NewTextValue.Trim() == string.Empty)
-      {
-         ErrorDisplayLabel.Text = "You need to input a number to continue";
-         ErrorDisplayLabel.IsVisible = true;
-         ActivateButton(false);
-      } 
-      else
-      {
-         ErrorDisplayLabel.Text = "You can only input numbers.";
-         ErrorDisplayLabel.IsVisible = true;
-         string placeholder = e.NewTextValue;
-         placeholder = Regex.Replace(placeholder, "[^0-9]+", ""); 
-         TableNumberEntry.Text = placeholder; 
-         ActivateButton(false);
-         
-      }
-
-   }
-
-   private void ActivateButton(bool active)
-   {
-      if (active)
-      {
-         
-         if (_appColors.TryGetValue("OpenPos-Green", out var color)) {
-            SubmitButton.BackgroundColor = (Color)color;
-            SubmitButton.IsEnabled = true;
-         }
-      } 
-      else
-      {
-         
-         if (_appColors.TryGetValue("Gray100", out var color))
-         {
-            SubmitButton.BackgroundColor = (Color)color;
-            SubmitButton.IsEnabled = false;
-         }
-      }
-   }
+        }
+    }
 }
