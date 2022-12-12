@@ -24,7 +24,7 @@ public partial class PaymentPage : ContentPage
    }
    public async void Connect()
    {
-      bool addedToPaymentListener = await _openPosApiController.SubcribeToPaymentNotification(CurrentTransaction.PaymentRequestToken, OnPaymentPayed);
+      bool addedToPaymentListener = await _openPosApiController.SubscribeToPaymentNotification(CurrentTransaction.PaymentRequestToken, OnPaymentPayed);
       if (!addedToPaymentListener)
       {
          throw new Exception("Can't add the Transaction to the Payment Listener");
@@ -65,7 +65,7 @@ public partial class PaymentPage : ContentPage
          {
             PaymentStatusLabel.Text = $"Payment complete!";
             await Shell.Current.GoToAsync(nameof(GoodbyePage));
-            await _openPosApiController.UnsubcribeToPaymentNotification(CurrentTransaction.PaymentRequestToken, OnPaymentPayed); //TODO: Move to background task
+            await _openPosApiController.UnsubscribeToPaymentNotification(CurrentTransaction.PaymentRequestToken, OnPaymentPayed); //TODO: Move to background task
          }
          else
          {

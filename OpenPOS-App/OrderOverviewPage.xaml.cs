@@ -25,7 +25,7 @@ public partial class OrderOverviewPage : ContentPage
 
     private async void Initialize()
     {
-        await _openPosApiController.SubcribeToOrderNotification(NewOrder);
+        await _openPosApiController.SubscribeToOrderNotification(NewOrder);
     }
 
     private async void NewOrder(object sender, OrderEventArgs orderEvent)
