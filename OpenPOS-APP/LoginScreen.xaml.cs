@@ -7,7 +7,6 @@ namespace OpenPOS_APP;
 
 public partial class LoginScreen : ContentPage
 {
-    
    private string _username;
    private string _password;
    private readonly ResourceDictionary _appColors = new();
