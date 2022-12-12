@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Maui.ApplicationModel.Communication;
 using OpenPOS_Controllers.Services;
 using OpenPOS_Database.Services.Models;
 using OpenPOS_Models;

@@ -3,14 +3,15 @@ using OpenPOS_Models;
 using OpenPOS_Settings;
 using OpenPOS_Settings.EventArgsClasses;
 using RestSharp;
-namespace OpenPOS_Database.Services.Models
+
+namespace OpenPOS_API
 {
-   public class OpenPosAPIService
+   public class OpenPosApiService
    {
       private readonly CancellationTokenSource _cancelToken = new ();
       private readonly string _url = ApplicationSettings.ApiSet.base_url;
       private readonly string _secret = ApplicationSettings.ApiSet.secret;
-      
+
       private HubConnection _connection;
       
       private bool _isConnected = false; //Stays here for future possible use.
@@ -62,81 +63,96 @@ namespace OpenPOS_Database.Services.Models
          _connectionStopped = false;
          ConnectionStatus = "Disconnected";
          await _connection.StopAsync();
+         _connection = null;
       }
-      
+
       public async Task SubcribeToNewOrderNotification()
       {
-         System.Diagnostics.Debug.WriteLine(_secret);
-         _connection = new HubConnectionBuilder()
-            .WithUrl(_url + "/order_event", (conn) =>
+         if (_connection == null)
+         {
+            _connection = new HubConnectionBuilder()
+               .WithUrl(_url + "/order_event", (conn) =>
+               {
+                  conn.Headers.Add("secret", _secret);
+               })
+               .Build();
+            try
             {
-               conn.Headers.Add("secret", _secret);
-            })
-            .Build();
-         try
-         {
-            await _connection.StartAsync();
-            _isConnected = true;
-            ConnectionStatus = "Connected";
-         }
-         catch (Exception ex)
-         {
-            System.Diagnostics.Debug.WriteLine(ex);
-         }
-
-         _connection.Closed += async (_) =>
-         {
-            if (_connectionStopped)
-            {
-               _isConnected = false;
-               ConnectionStatus = "Disconnected";
                await _connection.StartAsync();
                _isConnected = true;
-            } else
-            {
-               _cancelToken.Cancel();
+               ConnectionStatus = "Connected";
             }
-         };
+            catch (Exception ex)
+            {
+               System.Diagnostics.Debug.WriteLine(ex);
+            }
 
-         _connection.On<Order>("newOrder", OnNewOrder);
+            _connection.Closed += async (_) =>
+            {
+               if (_connectionStopped)
+               {
+                  _isConnected = false;
+                  ConnectionStatus = "Disconnected";
+                  await _connection.StartAsync();
+                  _isConnected = true;
+               } else
+               {
+                  _cancelToken.Cancel();
+               }
+            };
+
+            _connection.On<Order>("newOrder", OnNewOrder);
+         }
+         else
+         {
+            throw new Exception("Connection is already connected, you have to disconnect first.");
+         }
+         
       }
       
       public async Task SubcribeToPaymentNotifications()
       {
-         System.Diagnostics.Debug.WriteLine(_secret);
-         _connection = new HubConnectionBuilder()
-            .WithUrl(_url + "/tikkie_event", (conn) =>
+         if (_connection == null)
+         {
+            _connection = new HubConnectionBuilder()
+               .WithUrl(_url + "/tikkie_event", (conn) =>
+               {
+                  conn.Headers.Add("secret", _secret);
+               })
+               .Build();
+            try
             {
-               conn.Headers.Add("secret", _secret);
-            })
-            .Build();
-         try
-         {
-            await _connection.StartAsync();
-            _isConnected = true;
-            ConnectionStatus = "Connected";
-         }
-         catch (Exception ex)
-         {
-            System.Diagnostics.Debug.WriteLine(ex);
-         }
-
-         _connection.Closed += async (_) =>
-         {
-            if (_connectionStopped)
-            {
-               _isConnected = false;
-               ConnectionStatus = "Disconnected";
                await _connection.StartAsync();
                _isConnected = true;
+               ConnectionStatus = "Connected";
             }
-            else
+            catch (Exception ex)
             {
-               _cancelToken.Cancel();
+               System.Diagnostics.Debug.WriteLine(ex);
             }
-         };
 
-         _connection.On<Tikkie>("PaymentConformation",  OnNewPayment);
+            _connection.Closed += async (_) =>
+            {
+               if (_connectionStopped)
+               {
+                  _isConnected = false;
+                  ConnectionStatus = "Disconnected";
+                  await _connection.StartAsync();
+                  _isConnected = true;
+               }
+               else
+               {
+                  _cancelToken.Cancel();
+               }
+            };
+
+            _connection.On<Tikkie>("PaymentConformation",  OnNewPayment);
+         }
+         else
+         {
+            throw new Exception("Connection is already connected, you have to disconnect first.");
+         }
+         
       }
       
       private void OnNewOrder(Order order)
