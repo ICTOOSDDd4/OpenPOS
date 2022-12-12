@@ -17,7 +17,7 @@ public partial class PaymentPage : ContentPage
     private string _paymentStatusString;
     private readonly System.Timers.Timer _timer = new(500);
     private int _currentlyPaid { get; set; }
-    private readonly OpenPosapiController _openPosApiController = new();
+    private readonly OpenPosApiController _openPosApiController = new();
     private PaymentController _paymentController;
 
     public PaymentPage()
