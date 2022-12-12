@@ -22,7 +22,7 @@
             HorizontalOptions="Center"/>
 
         <Label
-            Text="Thank you for your visit!"
+            Text="Thank you for visiting!"
             FontFamily="LeagueSpartan-SemiBold"
             TextColor="Black"
             FontSize="24"
@@ -36,7 +36,7 @@
             HorizontalOptions="Center" />
         <Label
             x:Name="Countdown"
-            Text="You will be signed out and redirected in 5 seconds"
+            Text="You will be signed out and redirected in 10 seconds"
             FontFamily="LeagueSpartan-Light"
             TextColor="Black"
             FontSize="20"

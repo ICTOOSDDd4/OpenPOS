@@ -6,9 +6,9 @@ using OpenPOS_Settings;
 
 namespace OpenPOS_Controllers.Services;
 
-public static class UtilityService
+public class UtilityService
 {
-    public static ImageSource GenerateQrCodeFromUrl(string url)
+    public ImageSource GenerateQrCodeFromUrl(string url)
     {
         string filename = $"{GetRootDirectory()}/qr.png";
         string apiUrl = ApplicationSettings.QRCodeGeneratorSet.Base_url + url;
@@ -20,7 +20,7 @@ public static class UtilityService
         return ImageSource.FromFile(filename);
     }
 
-    public static string HashPassword(string unencrypted)
+    public string HashPassword(string unencrypted)
     {
         // ComputeHash - returns byte array  
         var bytes = SHA256.HashData(Encoding.UTF8.GetBytes(unencrypted));
