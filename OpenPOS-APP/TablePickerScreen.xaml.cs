@@ -55,7 +55,7 @@ public partial class TablePickerScreen : ContentPage
             SubmitButton.IsVisible = true;
             LoadingIndicator.IsRunning = false;
             LoadingIndicator.IsVisible = false;
-            await DisplayAlert("Error", "This table already has an open bill. Please call for one of our staff members.", "OK");
+            await DisplayAlert("Error", "This table already has been taken. \n Please call for one of our staff members.", "OK");
          }
       }
       else
