@@ -35,6 +35,15 @@ namespace OpenPOS_Controllers
                 return true;
             }    
         }
+
+        public bool CheckForOpenBill(int tableNumber)
+        {
+            if (_tableService.FindByTableNumber(tableNumber).Bill_id == null)
+            {
+                return false;
+            }
+            return true;
+        }
         
         public bool AttachBillToTable(int tableId, int billId)
         {
