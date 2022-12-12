@@ -7,7 +7,6 @@ namespace OpenPOS_APP;
 
 public partial class LoginScreen : ContentPage
 {
-    
    private string _username;
    private string _password;
    private readonly ResourceDictionary _appColors = new();
@@ -46,6 +45,11 @@ public partial class LoginScreen : ContentPage
 
    private async void OnLoginButtonClicked(object sender, EventArgs e)
    {
+      MainLoginButton.IsVisible = false;
+      MainLoginButton.IsEnabled = false;
+      LoadingIndicator.IsRunning = true;
+      LoadingIndicator.IsEnabled = true;
+      
       if (UserAuth(_username, _password))
       {
             var role = Enum.Parse<RolesEnum>(_authenticationController.GetUserRole(_username, _password).Title);
@@ -67,15 +71,19 @@ public partial class LoginScreen : ContentPage
                     break;
             }
 
-
             // If you want to save the user inputs when they press the back button
             // Remove this block of code.
             _password = string.Empty; _username = string.Empty;
-          EmailEntry.Text = string.Empty;
-          PasswordEntry.Text = string.Empty;
+            EmailEntry.Text = string.Empty;
+            PasswordEntry.Text = string.Empty;
 
       }
-      else { await DisplayAlert("Invalid credentials", "This username and/or password are not correct.", "Try again"); }
+      else
+      {
+         LoadingIndicator.IsVisible = false;
+         LoadingIndicator.IsRunning = false;
+         await DisplayAlert("Invalid credentials", "This username and/or password are not correct.", "Try again");
+      }
 
    }
 

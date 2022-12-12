@@ -14,7 +14,6 @@ namespace OpenPOS_API
 
       private HubConnection _connection;
       
-      private bool _isConnected = false; //Stays here for future possible use.
       private bool _connectionStopped = true;
       public string ConnectionStatus = "Closed"; //Stays public for future possible use.
       
@@ -49,7 +48,7 @@ namespace OpenPOS_API
          request.AddHeader("paymentRequestToken", paymentRequestToken);
 
 
-         RestResponse response = client.Execute(request); ;
+         RestResponse response = client.Execute(request);
          return response.IsSuccessful;
       }
       
@@ -79,7 +78,6 @@ namespace OpenPOS_API
             try
             {
                await _connection.StartAsync();
-               _isConnected = true;
                ConnectionStatus = "Connected";
             }
             catch (Exception ex)
@@ -91,10 +89,8 @@ namespace OpenPOS_API
             {
                if (_connectionStopped)
                {
-                  _isConnected = false;
                   ConnectionStatus = "Disconnected";
                   await _connection.StartAsync();
-                  _isConnected = true;
                } else
                {
                   _cancelToken.Cancel();
@@ -123,7 +119,6 @@ namespace OpenPOS_API
             try
             {
                await _connection.StartAsync();
-               _isConnected = true;
                ConnectionStatus = "Connected";
             }
             catch (Exception ex)
@@ -135,10 +130,8 @@ namespace OpenPOS_API
             {
                if (_connectionStopped)
                {
-                  _isConnected = false;
                   ConnectionStatus = "Disconnected";
                   await _connection.StartAsync();
-                  _isConnected = true;
                }
                else
                {

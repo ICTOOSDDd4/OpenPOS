@@ -22,27 +22,47 @@ public partial class TablePickerScreen : ContentPage
    
    private async void OnSubmitButtonClicked(object sender, EventArgs e)
    {
+      SubmitButton.IsVisible = false;
+      LoadingIndicator.IsRunning = true;
+      LoadingIndicator.IsVisible = true;
+      
       string entryString = TableNumberEntry.Text;
       if (int.TryParse(entryString.Trim(), out int value))
       {
-         _tableNumber = value;
-         ApplicationSettings.TableNumber = _tableNumber;
-         Table table = _tableController.GetByTableNumber(_tableNumber);
-         if (table == null)
+         if (!_tableController.CheckForOpenBill(value))
          {
-            ErrorDisplayLabel.Text = "This isn't a valid table.";
-            ErrorDisplayLabel.IsVisible = true;
-            ActivateButton(false);
-         } 
-         else
-         {
-            ApplicationSettings.CurrentBill = _billController.CreateBill(ApplicationSettings.LoggedinUser.Id);
-            table.Bill_id = ApplicationSettings.CurrentBill.Id;
-            if (_tableController.AttachBillToTable(_tableNumber, ApplicationSettings.CurrentBill.Id))
+            _tableNumber = value;
+            ApplicationSettings.TableNumber = _tableNumber;
+            Table table = _tableController.GetByTableNumber(_tableNumber);
+            if (table == null)
             {
-               await Shell.Current.GoToAsync(nameof(MenuPage));
+               ErrorDisplayLabel.Text = "This isn't a valid table.";
+               ErrorDisplayLabel.IsVisible = true;
+               ActivateButton(false);
+            } 
+            else
+            {
+               ApplicationSettings.CurrentBill = _billController.CreateBill(ApplicationSettings.LoggedinUser.Id);
+               table.Bill_id = ApplicationSettings.CurrentBill.Id;
+               if (_tableController.AttachBillToTable(_tableNumber, ApplicationSettings.CurrentBill.Id))
+               {
+                  await Shell.Current.GoToAsync(nameof(MenuPage));
+               }
             }
          }
+         else
+         {
+            SubmitButton.IsVisible = true;
+            LoadingIndicator.IsRunning = false;
+            LoadingIndicator.IsVisible = false;
+            await DisplayAlert("Error", "This table already has been taken. \n Please call for one of our staff members.", "OK");
+         }
+      }
+      else
+      {
+         SubmitButton.IsVisible = true;
+         LoadingIndicator.IsRunning = false;
+         LoadingIndicator.IsVisible = false;
       }
       
    }
