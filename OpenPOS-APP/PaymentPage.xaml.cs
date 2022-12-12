@@ -4,6 +4,7 @@ using OpenPOS_Controllers.Services;
 using OpenPOS_Models;
 using OpenPOS_Settings;
 using OpenPOS_Settings.EventArgsClasses;
+using OpenPOS_Settings.Exceptions;
 
 
 namespace OpenPOS_APP;
@@ -24,11 +25,18 @@ public partial class PaymentPage : ContentPage
    }
    public async void Connect()
    {
-      bool addedToPaymentListener = await _openPosApiController.SubscribeToPaymentNotification(CurrentTransaction.PaymentRequestToken, OnPaymentPayed);
-      if (!addedToPaymentListener)
+      try
       {
-         throw new Exception("Can't add the Transaction to the Payment Listener");
+         bool addedToPaymentListener = await _openPosApiController.SubscribeToPaymentNotification(CurrentTransaction.PaymentRequestToken, OnPaymentPayed);
+         if (!addedToPaymentListener)
+         {
+            throw new Exception("Can't add the Transaction to the Payment Listener");
+         }
+      } catch (Exception e)
+      {
+         ExceptionHandler.HandleException(e, this, true, true);
       }
+      
       ImageSource imageSource = UtilityService.GenerateQrCodeFromUrl(CurrentTransaction.Url);
       
       // Deleting the loader from the screen.

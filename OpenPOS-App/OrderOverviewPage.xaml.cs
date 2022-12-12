@@ -1,7 +1,7 @@
-using System.Diagnostics;
 using OpenPOS_Controllers;
 using OpenPOS_Models;
 using OpenPOS_Settings.EventArgsClasses;
+using OpenPOS_Settings.Exceptions;
 
 namespace OpenPOS_APP;
 
@@ -25,7 +25,13 @@ public partial class OrderOverviewPage : ContentPage
 
     private async void Initialize()
     {
-        await _openPosApiController.SubscribeToOrderNotification(NewOrder);
+        try
+        {
+            await _openPosApiController.SubscribeToOrderNotification(NewOrder);
+        } catch (Exception e)
+        {
+            ExceptionHandler.HandleException(e, this, true, true);
+        }
     }
 
     private async void NewOrder(object sender, OrderEventArgs orderEvent)
@@ -83,7 +89,14 @@ public partial class OrderOverviewPage : ContentPage
     {
         foreach (var t in Orders)
         {
-            AddOrderToLayout(t);
+            try
+            {
+                AddOrderToLayout(t);
+            }
+            catch (Exception e)
+            {
+                ExceptionHandler.HandleException(e, this, true, true);
+            }
         }
     }
 

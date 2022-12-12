@@ -82,6 +82,7 @@ public partial class LoginScreen : ContentPage
       {
          LoadingIndicator.IsVisible = false;
          LoadingIndicator.IsRunning = false;
+         MainLoginButton.IsVisible = true;
          await DisplayAlert("Invalid credentials", "This username and/or password are not correct.", "Try again");
       }
 

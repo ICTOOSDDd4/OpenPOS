@@ -65,7 +65,7 @@ namespace OpenPOS_API
          _connection = null;
       }
 
-      public async Task SubcribeToNewOrderNotification()
+      public async Task SubscribeToNewOrderNotification()
       {
          if (_connection == null)
          {
@@ -106,7 +106,7 @@ namespace OpenPOS_API
          
       }
       
-      public async Task SubcribeToPaymentNotifications()
+      public async Task SubscribeToPaymentNotifications()
       {
          if (_connection == null)
          {

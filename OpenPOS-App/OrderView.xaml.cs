@@ -1,5 +1,6 @@
 using OpenPOS_Controllers;
 using OpenPOS_Models;
+using OpenPOS_Settings.Exceptions;
 
 namespace OpenPOS_APP;
 
@@ -28,25 +29,40 @@ public partial class OrderView : ContentView
 
    private void OnClickedDone(object sender, EventArgs e)
    {
-      if (OrderDone != null)
+      try
       {
-         OrderDone.Invoke(this, e);
+         if (OrderDone != null)
+         {
+            OrderDone.Invoke(this, e);
+         }
+         else
+         {
+            throw new Exception("OrderDone event is not set");
+         }
       }
-      else
+      catch (Exception ex)
       {
-         throw new Exception("OrderDone event is not set");
+         ExceptionHandler.HandleException(ex, null, true, false);
       }
+      
    }
 
    private void OnClickedCancel(object sender, EventArgs e)
    {
-      if (OrderCanceled != null)
+      try
       {
-         OrderCanceled.Invoke(this, e);
+         if (OrderCanceled != null)
+         {
+            OrderCanceled.Invoke(this, e);
+         }
+         else
+         {
+            throw new Exception("OrderCanceled event is not set");
+         }
       }
-      else
+      catch (Exception ex)
       {
-         throw new Exception("OrderCanceled event is not set");
+         ExceptionHandler.HandleException(ex, null, true, false);
       }
    }
 

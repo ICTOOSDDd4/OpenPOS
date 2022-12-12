@@ -4,6 +4,7 @@ using OpenPOS_Controllers;
 using OpenPOS_Models;
 using OpenPOS_Settings.EventArgsClasses;
 using CommunityToolkit.Maui.Views;
+using OpenPOS_Settings.Exceptions;
 
 namespace OpenPOS_APP;
 
@@ -58,7 +59,14 @@ public partial class MenuPage : ContentPage
         _horizontalLayout = null;
 		foreach (var t in Products)
         {
-            AddProductToLayout(t);
+	        try
+	        {
+		        AddProductToLayout(t);
+	        }
+	        catch (Exception e)
+	        {
+		        ExceptionHandler.HandleException(e, this, true, true);
+	        }
         }
 	}
 
