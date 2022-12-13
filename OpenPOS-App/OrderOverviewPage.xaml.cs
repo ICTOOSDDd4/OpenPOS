@@ -37,10 +37,12 @@ public partial class OrderOverviewPage : ContentPage
     private async void NewOrder(object sender, OrderEventArgs orderEvent)
     {
         await Dispatcher.DispatchAsync(() =>
-       { 
-           Orders.Add(orderEvent.order); 
-           AddOrderToLayout(orderEvent.order);
+        { 
+            System.Diagnostics.Debug.WriteLine("Received");
+            Orders.Add(orderEvent.order); 
+            AddOrderToLayout(orderEvent.order);
         });
+        
     }
 
     protected override void OnSizeAllocated(double width, double height)

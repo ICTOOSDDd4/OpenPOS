@@ -25,6 +25,7 @@ public class OpenPosApiController
     {
         await _openPosApiService.SubscribeToNewOrderNotification();
         _openPosApiService.NewOrderNotification += handler;
+        System.Diagnostics.Debug.WriteLine(_openPosApiService.ConnectionStatus);
         return true;
     }
     

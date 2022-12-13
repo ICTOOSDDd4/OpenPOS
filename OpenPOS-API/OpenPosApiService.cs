@@ -37,8 +37,19 @@ namespace OpenPOS_API
          RestResponse response = await client.ExecuteAsync(request);
          return response.IsSuccessful;
       }
+      public async Task<bool> newOrderRequest(Order order)
+      {
+          var client = new RestClient(ApplicationSettings.ApiSet.base_url);
+          var request = new RestRequest("/api/order/newOrder", Method.Post);
+          request.AddHeader("secret", ApplicationSettings.ApiSet.secret);
+          request.AddHeader("Content-Type", "application/json");
+          request.AddHeader("Accept", "application/json");
+          request.AddJsonBody(order);
 
-      public bool RemoveFromPaymentListener(string paymentRequestToken)
+          RestResponse response = await client.ExecuteAsync(request);
+          return response.IsSuccessful;
+      }
+        public bool RemoveFromPaymentListener(string paymentRequestToken)
       {
          var client = new RestClient(ApplicationSettings.ApiSet.base_url);
          var request = new RestRequest("/api/Tikkie/AddToPaymentListener", Method.Get);
@@ -150,6 +161,7 @@ namespace OpenPOS_API
       
       private void OnNewOrder(Order order)
       {
+          System.Diagnostics.Debug.WriteLine(order.Id);
          NewOrderNotification?.Invoke(this, new OrderEventArgs() { order = order });
       }
 

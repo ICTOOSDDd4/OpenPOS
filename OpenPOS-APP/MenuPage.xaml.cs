@@ -148,7 +148,7 @@ public partial class MenuPage : ContentPage
 			if (await DisplayAlert("Confirm order", "Are you sure you want to place your order?", "Yes", "No"))
 			{
 				_orderController.CreateOrder(SelectedProducts);
-            await DisplayAlert("Order Placed", "Your order was successfully sent to our staff!", "Thank you");
+                await DisplayAlert("Order Placed", "Your order was successfully sent to our staff!", "Thank you");
             await Shell.Current.GoToAsync(nameof(MenuPage));
          } else
 			{
