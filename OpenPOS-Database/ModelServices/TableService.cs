@@ -73,7 +73,7 @@ public class TableService : IModelService<Table>
         query.Parameters.Add("@TableNumber", SqlDbType.Int);
         query.Parameters["@TableNumber"].Value = obj.Table_number;
         query.Parameters.Add("@BillId", SqlDbType.Int);
-        query.Parameters["@BillId"].Value = obj.Bill_id;
+        query.Parameters["@BillId"].Value = (object)obj.Bill_id ?? DBNull.Value;
         query.Parameters.Add("@FloorId", SqlDbType.Int);
         query.Parameters["@FloorId"].Value = obj.Floor_id;
         query.Parameters.Add("@ID", SqlDbType.Int);
