@@ -142,20 +142,20 @@ public partial class MenuPage : ContentPage
          Loader.IsRunning = false;
          Loader.IsVisible = false;
          OrderButton.IsVisible = true;
-      }
+		}
 		else
 		{
 			if (await DisplayAlert("Confirm order", "Are you sure you want to place your order?", "Yes", "No"))
 			{
-				_orderController.CreateOrder(SelectedProducts);
-                await DisplayAlert("Order Placed", "Your order was successfully sent to our staff!", "Thank you");
-            await Shell.Current.GoToAsync(nameof(MenuPage));
-         } else
+				await _orderController.CreateOrder(SelectedProducts);
+				await DisplayAlert("Order Placed", "Your order was successfully sent to our staff!", "Thank you");
+				await Shell.Current.GoToAsync(nameof(MenuPage));
+			} else
 			{
-            Loader.IsRunning = false;
-            Loader.IsVisible = false;
-            OrderButton.IsVisible = true;
-         }
+				Loader.IsRunning = false;
+				Loader.IsVisible = false;
+				OrderButton.IsVisible = true;
+			}
 		}		
 	}
 

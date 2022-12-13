@@ -21,7 +21,7 @@ namespace OpenPOS_Controllers
             _openPosApiService = new OpenPosApiService();
         }
 
-        public bool CreateOrder(Dictionary<int, int> SelectedProducts)
+        public async Task<bool> CreateOrder(Dictionary<int, int> selectedProducts)
         {
             try
             {
@@ -29,8 +29,8 @@ namespace OpenPOS_Controllers
                 order = _orderService.Create(order);
                 if (order == null)
                     return false;
-                _openPosApiService.newOrderRequest(order);
-                foreach (KeyValuePair<int, int> entry in SelectedProducts)
+                await _openPosApiService.newOrderRequest(order);
+                foreach (KeyValuePair<int, int> entry in selectedProducts)
                 {
                     OrderLine line = new OrderLine(order.Id, entry.Key, entry.Value, "In Development");
                     _orderLineService.Create(line);
