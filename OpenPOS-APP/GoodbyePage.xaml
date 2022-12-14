@@ -22,7 +22,7 @@
             HorizontalOptions="Center"/>
 
         <Label
-            Text="Thank you for your visit!"
+            Text="Thank you for visiting!"
             FontFamily="LeagueSpartan-SemiBold"
             TextColor="Black"
             FontSize="24"

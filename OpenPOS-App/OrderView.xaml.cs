@@ -6,24 +6,25 @@ namespace OpenPOS_APP;
 
 public partial class OrderView : ContentView
 {
-   public Order Order;
-   public HorizontalStackLayout HorizontalLayout;
-   public event EventHandler OrderDone;
-   public event EventHandler OrderCanceled;
+    public Order Order;
+    public HorizontalStackLayout HorizontalLayout;
+    public event EventHandler OrderDone;
+    public event EventHandler OrderCanceled;
 
-   private readonly TableController _tableController;
-   private readonly OrderController _orderController;
-	public OrderView()
-	{
-	    InitializeComponent();
+    private readonly TableController _tableController;
+    private readonly OrderController _orderController;
+
+    public OrderView()
+    {
+        InitializeComponent();
         _tableController = new TableController();
         _orderController = new OrderController();
-        
+
         MainVerticalLayout.Shadow = new Shadow
         {
-         Offset = new Point(5, 5),
-         Brush = Brush.Black,
-         Opacity = 0.12f,
+            Offset = new Point(5, 5),
+            Brush = Brush.Black,
+            Opacity = 0.12f,
         };
     }
 
@@ -76,37 +77,35 @@ public partial class OrderView : ContentView
       AddOrderLinesToLayout();
    }
 
-   private void AddOrderLinesToLayout()
-   {
-      foreach(OrderLineProduct line in _orderController.GetOrderLines(Order.Id)) 
-      {
-         // Setting up layout
-         HorizontalStackLayout layout = new()
-         {
-             VerticalOptions = LayoutOptions.Center,
-             HorizontalOptions = LayoutOptions.Center,
-             Spacing = 10,
-             Margin = new Thickness(2)
-         };
+    private void AddOrderLinesToLayout()
+    {
+        foreach (OrderLineProduct line in _orderController.GetOrderLines(Order.Id))
+        {
+            // Setting up layout
+            HorizontalStackLayout layout = new()
+            {
+                VerticalOptions = LayoutOptions.Center,
+                HorizontalOptions = LayoutOptions.Center,
+                Spacing = 10,
+                Margin = new Thickness(2)
+            };
 
-         // Adding product
-         Label productLabel = new()
-         {
-             Text = line.Name
-         };
+            // Adding product
+            Label productLabel = new()
+            {
+                Text = line.Name
+            };
+            layout.Add(productLabel);
 
-         layout.Add(productLabel);
+            // Adding amount
+            Label amountLabel = new()
+            {
+                Text = $"{line.Amount}"
+            };
+            layout.Add(amountLabel);
 
-         // Adding amount
-         Label amountLabel = new()
-         {
-             Text = $"{ line.Amount }"
-         };
-         layout.Add(amountLabel);
-
-         // Adding layout to main layout.
-         OrderLinesLayout.Add(layout);
-      }
-   }
-
+            // Adding layout to main layout.
+            OrderLinesLayout.Add(layout);
+        }
+    }
 }

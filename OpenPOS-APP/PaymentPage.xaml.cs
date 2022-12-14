@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using OpenPOS_Controllers;
 using OpenPOS_Controllers.Services;
 using OpenPOS_Models;
