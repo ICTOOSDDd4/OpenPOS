@@ -131,27 +131,6 @@ public partial class MenuPage : ContentPage
         this.ShowPopup(infoPop);
     }
 
-    private async void OrderButton_OnClicked(object sender, EventArgs e)
-    {
-        if (SelectedProducts.Count == 0)
-        {
-            await DisplayAlert("No products selected", "You forgot to add products to your order!", "Back");
-
-        }
-        else
-        {
-            if (await DisplayAlert("Confirm order", "Are you sure you want to place your order?", "Yes", "No"))
-            {
-                _orderController.CreateOrder(SelectedProducts);
-            }
-            else
-            {
-                await DisplayAlert("Order Placed", "Your order was successfully sent to our staff!", "Thank you");
-                await Shell.Current.GoToAsync(nameof(MenuPage));
-            }
-        }
-    }
-
 	private async void OrderButton_OnClicked(object sender, EventArgs e)
 	{
 		OrderButton.IsVisible = false;
