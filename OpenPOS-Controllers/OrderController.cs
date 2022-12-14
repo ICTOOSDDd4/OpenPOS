@@ -29,7 +29,7 @@ namespace OpenPOS_Controllers
                 order = _orderService.Create(order);
                 if (order == null)
                     return false;
-                await _openPosApiService.newOrderRequest(order);
+                _openPosApiService.NewOrderRequest(order);
                 foreach (KeyValuePair<int, int> entry in selectedProducts)
                 {
                     OrderLine line = new OrderLine(order.Id, entry.Key, entry.Value, "In Development");

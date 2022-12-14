@@ -20,7 +20,7 @@
             VerticalScrollBarVisibility="Always"
             VerticalOptions="FillAndExpand"
             HeightRequest="900"
-            >s
+            >
             
             <VerticalStackLayout
             HorizontalOptions="Center"

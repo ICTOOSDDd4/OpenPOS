@@ -38,7 +38,7 @@ namespace OpenPOS_API
          RestResponse response = await client.ExecuteAsync(request);
          return response.IsSuccessful;
       }
-      public async Task<bool> newOrderRequest(Order order)
+      public async Task<bool> NewOrderRequest(Order order)
       {
           var client = new RestClient(ApplicationSettings.ApiSet.base_url);
           var request = new RestRequest("/api/order/newOrder", Method.Post);
@@ -79,6 +79,7 @@ namespace OpenPOS_API
 
       public async Task SubscribeToNewOrderNotification()
       {
+         Debug.WriteLine("Subscribing to new order notification");
          if (_connection == null)
          {
             _connection = new HubConnectionBuilder()
@@ -114,6 +115,7 @@ namespace OpenPOS_API
          }
          else
          {
+            Debug.WriteLine("problem");
             throw new Exception("Connection is already connected, you have to disconnect first.");
          }
          
