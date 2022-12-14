@@ -20,7 +20,7 @@
             VerticalScrollBarVisibility="Always"
             VerticalOptions="FillAndExpand"
             HeightRequest="900"
-            >
+            >s
             
             <VerticalStackLayout
             HorizontalOptions="Center"
@@ -39,6 +39,7 @@
             Clicked="OrderButton_OnClicked"
         />
         <ActivityIndicator
+            Margin="20"
             x:Name="Loader"
             Color="{StaticResource OpenPos-Blue}"
             IsRunning="False"

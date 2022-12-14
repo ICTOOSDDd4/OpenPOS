@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR.Client;
+﻿using System.Diagnostics;
+using Microsoft.AspNetCore.SignalR.Client;
 using OpenPOS_Models;
 using OpenPOS_Settings;
 using OpenPOS_Settings.EventArgsClasses;
@@ -93,7 +94,8 @@ namespace OpenPOS_API
             }
             catch (Exception ex)
             {
-               System.Diagnostics.Debug.WriteLine(ex);
+               Debug.WriteLine(ex);
+               Debug.WriteLine("API Oopsie");
             }
 
             _connection.Closed += async (_) =>
@@ -134,7 +136,8 @@ namespace OpenPOS_API
             }
             catch (Exception ex)
             {
-               System.Diagnostics.Debug.WriteLine(ex);
+               Debug.WriteLine(ex);
+               Debug.WriteLine("API Oopsie");
             }
 
             _connection.Closed += async (_) =>
@@ -161,12 +164,13 @@ namespace OpenPOS_API
       
       private void OnNewOrder(Order order)
       {
-          System.Diagnostics.Debug.WriteLine(order.Id);
+         Debug.WriteLine(order.Id);
          NewOrderNotification?.Invoke(this, new OrderEventArgs() { order = order });
       }
 
       private void OnNewPayment(Tikkie tikkie)
       {
+         Debug.WriteLine(tikkie.paymentRequestToken);
          PaymentNotification?.Invoke(this, new PaymentEventArgs() { Tikkie = tikkie });
       }
       
