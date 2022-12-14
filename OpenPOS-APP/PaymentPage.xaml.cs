@@ -36,8 +36,10 @@ public partial class PaymentPage : ContentPage
       {
          ExceptionHandler.HandleException(e, this, true, true);
       }
-      
-      ImageSource imageSource = UtilityService.GenerateQrCodeFromUrl(CurrentTransaction.Url);
+
+      UtilityService utility = new UtilityService();
+
+      ImageSource imageSource = utility.GenerateQrCodeFromUrl(CurrentTransaction.Url);
       
       // Deleting the loader from the screen.
       Loader.IsVisible = false;
