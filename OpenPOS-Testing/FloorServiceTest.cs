@@ -11,7 +11,7 @@ public class FloorServiceTest
 
     Floor Floor = new Floor
     {
-        Storey = "6"
+        Storey = "7"
     };
     
     [SetUp]

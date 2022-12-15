@@ -12,7 +12,7 @@ public class OrderServiceTest
     Order Order = new Order
     {
         User_id = 176,
-        Bill_id = 3,
+        Bill_id = 1221,
         Status = false,
         Updated_At = DateTime.Today,
         Created_At = DateTime.Now
@@ -84,13 +84,13 @@ public class OrderServiceTest
         var Order = this.Order;
         var createdOrder = _orderService.Create(Order);
         
-        Assert.That(createdOrder.User_id, Is.Not.EqualTo(239));
-        createdOrder.User_id = 239;
+        Assert.That(createdOrder.User_id, Is.Not.EqualTo(217639));
+        createdOrder.User_id = 176;
         
         var result = _orderService.Update(createdOrder);
         
         Assert.IsTrue(result);
-        Assert.That(_orderService.FindByID(createdOrder.Id).User_id, Is.EqualTo(239));
+        Assert.That(_orderService.FindByID(createdOrder.Id).User_id, Is.EqualTo(176));
         
         _orderService.Delete(createdOrder);
     }
