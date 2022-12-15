@@ -8,7 +8,7 @@
              Title="CheckoutOverview"
              Shell.NavBarIsVisible="False">
     <VerticalStackLayout>
-        <customControls:Header/>
+        <customControls:Header x:Name="Header"/>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition/>
@@ -51,7 +51,8 @@
                                             </Grid.ColumnDefinitions>
 
                                             <Image Grid.RowSpan="3"
-                               Source="placeholder_product_image.png"
+                               Source="{ Binding Imagepath }"
+                               Margin="1"
                                Aspect="AspectFit"
                                HeightRequest="120"
                                WidthRequest="120" />
@@ -73,7 +74,7 @@
 
                                             <Label Grid.Row="0"
                                Grid.Column="2"
-                               Text="{Binding Price, StringFormat='€{0}'}"
+                               Text="{Binding Price, StringFormat='€{0:0.00}'}"
                                HorizontalTextAlignment="End"
                                WidthRequest="230"/>
                                             <Label Grid.Row="1"
@@ -109,21 +110,27 @@
                     <Label x:Name="TotalPriceLabel"
                        FontSize="32"
                        HorizontalTextAlignment="Center"></Label>
-                    <Button Text="Pay"
+                    <Button
+                        x:Name="PayButton"
+                        Text="Pay"
                         WidthRequest="300"
                         HeightRequest="100"
                         FontSize="36"
                         Clicked="OnClickedPay"/>
-                    <Button Text="Split Payment"
+                    <Button
+                        x:Name="SplitButton"
+                        Text="Split Payment"
                         WidthRequest="300"
                         HeightRequest="100"
                         FontSize="36"
                         Clicked="OnClickedSplitPay"/>
-                    <Button Text="Split Products"
+                    <Button  
+                        x:Name="TipButton"
+                        Text="Add a tip"
                         WidthRequest="300"
                         HeightRequest="100"
                         FontSize="36"
-                        Clicked="OnClickedSplitProducts"/>
+                        Clicked="OnClickedAddATip"/>
                 </VerticalStackLayout>
 
             </HorizontalStackLayout>

@@ -26,7 +26,7 @@
                 WidthRequest="130"/>
                 <Label
                 x:Name="TableNumber"
-                Text="TAFEL"
+                Text="Table "
                 VerticalTextAlignment="Center"
                 FontSize="24"/>
                 <SearchBar
@@ -40,12 +40,15 @@
                 />
                 <ImageButton
                 Source="cart.png"
+                x:Name="CartButton"
                 Padding="10"
                 Clicked="OnClickedCard"
                 BackgroundColor="#e1e1e1"
                 />
                 <ImageButton
-                Source="account.png"
+                Source="logouticon.png"
+                x:Name="AccountButton"
+                Clicked="OnClickedLogout"
                 Padding="10"
                 BackgroundColor="#e1e1e1"
                 />

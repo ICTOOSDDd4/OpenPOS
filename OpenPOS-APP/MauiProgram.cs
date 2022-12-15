@@ -1,11 +1,18 @@
 using Microsoft.Extensions.Logging;
-using OpenPOS_APP.Services;
 using Microsoft.Extensions.Configuration;
 using System.Reflection;
-using OpenPOS_APP.Settings;
-using OpenPOS_APP.Models;
-using OpenPOS_APP.Services.Models;
 using CommunityToolkit.Maui;
+using Microsoft.Maui.LifecycleEvents;
+using OpenPOS_Controllers.Services;
+using OpenPOS_Settings;
+
+// Specific WinUI elements.
+#if WINDOWS
+using Microsoft.UI;
+using Microsoft.UI.Windowing;
+using Windows.Graphics;
+#endif
+
 
 namespace OpenPOS_APP;
 
@@ -31,11 +38,41 @@ public static class MauiProgram
 			});
             Initialize();
 
+      // Windows specific window size settings
+#if WINDOWS
+      builder.ConfigureLifecycleEvents(events =>
+				{
+					events.AddWindows(windows => windows.OnClosed((window, args) => args.Handled = true));
+					events.AddWindows(wndLifeCycleBuilder =>
+					{
+						wndLifeCycleBuilder.OnWindowCreated(window =>
+						{
+							IntPtr nativeWindowHandle = WinRT.Interop.WindowNative.GetWindowHandle(window);
+							WindowId win32WindowsId = Win32Interop.GetWindowIdFromWindow(nativeWindowHandle);
+							AppWindow winuiAppWindow = AppWindow.GetFromWindowId(win32WindowsId);
+							if (winuiAppWindow.Presenter is OverlappedPresenter p)
+							{
+								p.Maximize(); // Does work
+		                        p.IsMaximizable = false; // Does not work
+		                        //p.IsAlwaysOnTop = true; // Does work // COMMENT OUT FOR DEV!
+								p.IsResizable = false; // Does not work
+								p.IsMinimizable = false; // Does not work
+								p.IsModal = false;
+							}
+							else
+							{
+								winuiAppWindow.Resize(new SizeInt32(1920, 1080));
+								winuiAppWindow.MoveAndResize(new RectInt32(0, 0, 1920, 1080));
+							}
+						});
+					});
+				});
+#endif
+
 #if DEBUG
       builder.Logging.AddDebug();
 #endif
-
-		return builder.Build();
+      return builder.Build();
 	}
 	private static void Initialize()
 	{
@@ -49,18 +86,16 @@ public static class MauiProgram
 
 			ApplicationSettings.DbSett = config.GetRequiredSection("DATABASE_CONNECTION").Get<DatabaseSettings>();
 			ApplicationSettings.TikkieSet = config.GetRequiredSection("TIKKIE_API").Get<TikkieSettings>();
+			ApplicationSettings.QRCodeGeneratorSet = config.GetRequiredSection("QR_CODE_GENERATOR").Get<QRCodeGeneratorSettings>();
+			ApplicationSettings.ApiSet = config.GetRequiredSection("OPENPOS_API").Get<ApiSettings>();
 			
-			if (ApplicationSettings.DbSett != null)
+			if (ApplicationSettings.DbSett != null) 
 			{
-				DatabaseService.Initialize();
+				UtilityService.StartDatabase(); //TODO: Temp Fix
 			}
-            Bill bill = BillService.FindByID(12);
-            bill.Paid = false;
-            var result = BillService.Update(bill);
-			System.Diagnostics.Debug.WriteLine(result);
+			
         } else throw new ApplicationException("Can't find appsettings.json file");
-		
-		ApplicationSettings.UIElements = new UIElements();
-   
-	}
+    }
+
 }
+

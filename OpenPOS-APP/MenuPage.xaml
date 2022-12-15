@@ -6,7 +6,14 @@
              xmlns:customControls="clr-namespace:OpenPOS_APP.Resources.Controls"
              Title="MenuPage">
     <VerticalStackLayout>
-        <customControls:Header/>
+        <customControls:Header x:Name="Header"/>
+        <HorizontalStackLayout
+            x:Name="CategoryHorizontal"
+            HeightRequest="50"
+            Margin="30,0,30,0"
+            BackgroundColor="{ StaticResource White}"
+            HorizontalOptions="Center">
+        </HorizontalStackLayout>
         <ScrollView
             x:Name="ScrView"
             Orientation="Vertical"
@@ -21,7 +28,7 @@
 
             </VerticalStackLayout>
         </ScrollView>
-                <Button
+        <Button
             x:Name="OrderButton"
             Text="Place your Order"
             WidthRequest="350"
@@ -30,6 +37,13 @@
             Padding="0,0,10,0"
             Margin="0,30,0,10"
             Clicked="OrderButton_OnClicked"
+        />
+        <ActivityIndicator
+            Margin="20"
+            x:Name="Loader"
+            Color="{StaticResource OpenPos-Blue}"
+            IsRunning="False"
+            IsVisible="False"
         />
     </VerticalStackLayout>
 </ContentPage>

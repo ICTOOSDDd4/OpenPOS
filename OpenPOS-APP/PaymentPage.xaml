@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OpenPOS_APP.PaymentPage"
+             Shell.NavBarIsVisible="False"
+
+             Title="PaymentPage">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False" IsEnabled="False" />
+    </Shell.BackButtonBehavior>
+    <VerticalStackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Spacing="20">
+        <VerticalStackLayout VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" >
+           <Image
+            Source="openpos_logo_v1.png"
+            HeightRequest="100"
+            IsVisible="true"
+            HorizontalOptions="Center"
+            Margin="30,30,30,20"
+           />
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Margin="40" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="300" WidthRequest="300">
+            <Label
+            FontSize="50"
+            FontFamily="LeagueSpartan-Bold"
+            Text="Scan to pay"
+            VerticalTextAlignment="Center"
+            HorizontalTextAlignment="Center"
+            />
+            
+            <ActivityIndicator
+            x:Name="Loader"
+            IsVisible="true"
+            IsRunning="True"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Margin="20"
+            Color="{StaticResource OpenPos-Green}"
+            />
+            
+            <Image 
+            x:Name="QRCode"
+            Margin="30"
+            IsVisible="false"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            />
+
+            <Label 
+            x:Name="PaymentStatusLabel" 
+            Text="Creating QR-Code..."
+            FontSize="20"
+            FontFamily="LeagueSpartan-Medium"
+            VerticalTextAlignment="Center"
+            HorizontalTextAlignment="Center"
+            />
+        </VerticalStackLayout>
+
+    </VerticalStackLayout>
+</ContentPage>

@@ -1,15 +1,14 @@
 using Microsoft.Extensions.Configuration;
-using OpenPOS_APP.Models;
-using OpenPOS_APP.Services;
-using OpenPOS_APP.Services.Models;
-using OpenPOS_APP.Settings;
 using System.Reflection;
+using OpenPOS_Database.ModelServices;
 
 namespace OpenPOS_Testing;
 
 [TestFixture]
 public class RoleServiceTest
 {
+    private RoleService _roleService = new();
+
     Role Role = new Role
     {
         Title = "UnitTitel"
@@ -43,12 +42,12 @@ public class RoleServiceTest
     public void RoleService_GetAllRoles_ReturnsAllRoles()
     {
         var Role = this.Role;
-        var result = RoleService.Create(Role);
-        var Roles = RoleService.GetAll();
+        var result = _roleService.Create(Role);
+        var Roles = _roleService.GetAll();
         
         Assert.Greater(Roles.Count, 0);
         
-        RoleService.Delete(result);
+        _roleService.Delete(result);
     }
 
     [Test]
@@ -56,50 +55,50 @@ public class RoleServiceTest
     {
 
         var Role = this.Role;
-        var result = RoleService.Create(Role);
+        var result = _roleService.Create(Role);
         
         Assert.That(Role.Title, Is.EqualTo(result.Title));
         
-        RoleService.Delete(result);
+        _roleService.Delete(result);
     }
     
     [Test]
     public void RoleService_FindRole_ReturnsRole()
     {
         var Role = this.Role;
-        var createdRole = RoleService.Create(Role);
-        var result = RoleService.FindByID(createdRole.Id);
+        var createdRole = _roleService.Create(Role);
+        var result = _roleService.FindByID(createdRole.Id);
        
         Assert.That(Role.Title, Is.EqualTo(result.Title));
        
-        RoleService.Delete(result);
+        _roleService.Delete(result);
     }
 
     [Test]
     public void RoleService_UpdateRole_ReturnsTrue()
     {
         var Role = this.Role;
-        var createdRole = RoleService.Create(Role);
+        var createdRole = _roleService.Create(Role);
         
         Assert.That(createdRole.Title, Is.Not.EqualTo("Nieuwe titel!"));
         createdRole.Title = "Nieuwe titel!";
         
-        var result = RoleService.Update(createdRole);
+        var result = _roleService.Update(createdRole);
         
         Assert.IsTrue(result);
-        Assert.That(RoleService.FindByID(createdRole.Id).Title, Is.EqualTo("Nieuwe titel!"));
+        Assert.That(_roleService.FindByID(createdRole.Id).Title, Is.EqualTo("Nieuwe titel!"));
         
-        RoleService.Delete(createdRole);
+        _roleService.Delete(createdRole);
     }
 
     [Test]
     public void RoleService_DeleteRole_ReturnsTrue()
     {
         var Role = this.Role;
-        var createdRole = RoleService.Create(Role);
-        var result = RoleService.Delete(createdRole);
+        var createdRole = _roleService.Create(Role);
+        var result = _roleService.Delete(createdRole);
         
         Assert.IsTrue(result);
-        Assert.That(RoleService.FindByID(createdRole.Id).Title, Is.Null);
+        Assert.That(_roleService.FindByID(createdRole.Id).Title, Is.Null);
     }
 }

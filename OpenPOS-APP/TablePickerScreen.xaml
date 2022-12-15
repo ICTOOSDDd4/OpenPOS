@@ -17,13 +17,12 @@
 
         <Image 
                 Source="openpos_logo_v1.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
                 HeightRequest="100"
                 HorizontalOptions="Center"/>
 
         <Label 
             Text="Welcome! Please enter your table number."
-            FontFamily="LeagueSpartan-Meduim"
+            FontFamily="LeagueSpartan-Medium"
             FontSize="20"
             HorizontalTextAlignment="Center"
             VerticalOptions="Center"
@@ -31,8 +30,6 @@
         
         <Entry
             x:Name="TableNumberEntry"
-            SemanticProperties.Description="Enter your table number"
-            SemanticProperties.Hint="Enter your table numbers"
             Keyboard="Numeric"
             Placeholder="Tablenumber"
             TextChanged="OnTableNumberEntryChanged"
@@ -55,8 +52,7 @@
         
         <Button
                 x:Name="SubmitButton"
-                Text="Sumbit"
-                SemanticProperties.Hint="Press to continue"
+                Text="Submit"
                 IsEnabled="false"
                 Clicked="OnSubmitButtonClicked"
                 HorizontalOptions="Center"
@@ -64,6 +60,14 @@
                 BackgroundColor="{StaticResource Gray100}" 
                 CornerRadius="10"   
              />
+        
+        <ActivityIndicator
+            x:Name="LoadingIndicator"
+            IsVisible="False"
+            IsRunning="False"
+            Color="{ StaticResource OpenPos-Yellow }"
+            HorizontalOptions="Center"
+            />
 
     </VerticalStackLayout>
 </ContentPage>
