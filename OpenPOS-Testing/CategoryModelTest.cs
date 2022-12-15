@@ -1,6 +1,3 @@
-using NUnit.Framework;
-using OpenPOS_Models;
-
 namespace OpenPOS_Testing;
 
 [TestFixture]
@@ -14,7 +11,7 @@ public class CategoryModelTest
         
         Category category = new Category(id, name);
         
-        Assert.AreEqual(id, category.Id);
-        Assert.AreEqual(name, category.Name);
+        Assert.That(category.Id, Is.EqualTo(id));
+        Assert.That(category.Name, Is.EqualTo(name));
     }
 }

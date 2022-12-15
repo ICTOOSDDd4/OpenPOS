@@ -12,7 +12,7 @@ public class PaymentServiceTest
 {
     private TikkiePaymentService _tikkiePaymentService = new();
 
-    private Transaction? _testTransaction;
+    private string _testTransaction;
     [SetUp]
     public void Setup()
     {
@@ -35,36 +35,21 @@ public class PaymentServiceTest
     [Test]
     public void PaymentService_CreatingNewTransaction_ReturningLink()
     {
-      // TODO: Fix these tests when possible
-        //_testTransaction = _tikkiePaymentService.CreatePaymentRequest(10000, 111111111, "TestingIfItReturnsALink");
-        //Assert.IsNotNull(_testTransaction);
-        //Assert.IsNotEmpty(_testTransaction.Url);
-        //Assert.IsNotEmpty(_testTransaction.PaymentRequestToken);
+        _testTransaction = _tikkiePaymentService.CreatePaymentRequest(10000, 111111111, "TestingIfItReturnsALink");
+        Assert.IsNotNull(_testTransaction);
+        Assert.IsTrue(_testTransaction.Contains("https://sbx.tikkie.me/pay/"));
     }
-    
+
     [Test]
     public void PaymentService_CreatingNewTransaction_ReturnsError()
     {
-        Assert.Throws<Exception>(delegate { _tikkiePaymentService.CreatePaymentRequest(0, 111111111, "TestingIfItReturnsALink"); });
+        Assert.IsTrue(_tikkiePaymentService.CreatePaymentRequest(0, 111111111, "TestingIfItReturnsALink")
+            .Contains("errors"));
     }
-    
+
     [Test]
     public void PaymentService_FetchingTransactionInfo_ReturnsError()
     {
-        Assert.Throws<Exception>(delegate { _tikkiePaymentService.GetTransactionInformation("0"); } );
-    }
-    
-    [Test]
-    public void PaymentService_FetchingTransactionInfo_ReturnsTransaction()
-    {
-        if (_testTransaction != null)
-        {
-            // TODO: Fix these tests.
-            //Transaction transaction = _tikkiePaymentService.GetTransactionInformation(_testTransaction.PaymentRequestToken);
-            //Assert.That(_testTransaction.Url, Is.EqualTo(transaction.Url));
-            //Assert.That(_testTransaction.AmountInCents, Is.EqualTo(transaction.AmountInCents));
-            //Assert.That(_testTransaction.ExpiryDate, Is.EqualTo(transaction.ExpiryDate));
-            //Assert.That(_testTransaction.PaymentRequestToken, Is.EqualTo(transaction.PaymentRequestToken));
-        }
+        Assert.IsTrue(_tikkiePaymentService.GetTransactionInformation("0").Contains("errors"));
     }
 }

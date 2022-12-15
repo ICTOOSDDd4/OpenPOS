@@ -81,7 +81,7 @@ jobs:
           dotnet nuget locals all --clear 
           dotnet workload install maui
           dotnet workload install android ios maccatalyst tvos macos maui wasm-tools
-          dotnet build --configuration Release
+          dotnet build --configuration Release -p:TargetFramework=net7.0
 
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun

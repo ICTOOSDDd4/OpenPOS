@@ -1,6 +1,3 @@
-using NUnit.Framework;
-using OpenPOS_Models;
-
 namespace OpenPOS_Testing;
 
 [TestFixture]
@@ -17,11 +14,11 @@ public class BillModelTest
         
         Bill bill = new Bill(id, user_id, paid, created_at, updated_at);
         
-        Assert.AreEqual(id, bill.Id);
-        Assert.AreEqual(user_id, bill.User_id);
-        Assert.AreEqual(paid, bill.Paid);
-        Assert.AreEqual(created_at, bill.Created_at);
-        Assert.AreEqual(created_at, bill.Updated_at);
+        Assert.That(bill.Id, Is.EqualTo(id));
+        Assert.That(bill.User_id, Is.EqualTo(user_id));
+        Assert.That(bill.Paid, Is.EqualTo(paid));
+        Assert.That(bill.Created_at, Is.EqualTo(created_at));
+        Assert.That(bill.Updated_at, Is.EqualTo(created_at));
         
     }
 }

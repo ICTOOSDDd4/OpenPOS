@@ -59,7 +59,7 @@ jobs:
       run: dotnet restore OpenPOS.sln
 
     - name: Build with .NET
-      run: dotnet build --configuration Release
+      run: dotnet build --configuration Release --no-restore -p:TargetFramework=net7.0
     
     - name: Test with .NET
       run: dotnet test --configuration Release --no-build --verbosity normal

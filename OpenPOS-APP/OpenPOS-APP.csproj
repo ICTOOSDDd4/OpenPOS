@@ -114,7 +114,7 @@
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="CreateAccountPage.xaml">
-		  <SubType></SubType>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 	</ItemGroup>
 	<ItemGroup>

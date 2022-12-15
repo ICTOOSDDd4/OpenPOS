@@ -1,19 +1,17 @@
 ﻿using Microsoft.Extensions.Configuration;
-using OpenPOS_Settings;
-using OpenPOS_Database.Services.Models;
 using System.Reflection;
 using OpenPOS_Database.ModelServices;
 
 namespace OpenPOS_Testing;
 
 [TestFixture]
-public class _billServiceTest
+public class BillServiceTest
 {
     private BillService _billService = new();
 
     Bill Bill = new Bill
     {
-        User_id = 176,
+        User_id = 1297,
         Paid = false,
         Created_at = DateTime.Today,
         Updated_at = DateTime.Now,
@@ -59,10 +57,10 @@ public class _billServiceTest
     public void BillService_CreateBill_ReturnsObject()
     {
 
-        var Bill = this.Bill;
-        var result = _billService.Create(Bill);
+        var bill = this.Bill;
+        var result = _billService.Create(bill);
         
-        Assert.That(Bill.User_id, Is.EqualTo(result.User_id));
+        Assert.That(bill.User_id, Is.EqualTo(result.User_id));
         _billService.Delete(result);
     }
     
@@ -81,16 +79,16 @@ public class _billServiceTest
     [Test]
     public void BillService_UpdateBill_ReturnsTrue()
     {
-        var Bill = this.Bill;
-        var createdBill = _billService.Create(Bill);
+        var bill = Bill;
+        var createdBill = _billService.Create(bill);
         
         Assert.That(createdBill.User_id, Is.Not.EqualTo(239));
-        createdBill.User_id = 239;
+        createdBill.User_id = 1298;
         
         var result = _billService.Update(createdBill);
         
         Assert.IsTrue(result);
-        Assert.That(_billService.FindByID(createdBill.Id).User_id, Is.EqualTo(239));
+        Assert.That(_billService.FindByID(createdBill.Id).User_id, Is.EqualTo(1298));
         
         _billService.Delete(createdBill);
     }

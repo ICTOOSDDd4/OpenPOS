@@ -11,6 +11,7 @@ namespace OpenPOS_Database.Factory.Database
         public static void Initialize()
         {
             RoleSeeder.Seed();
+            TestUserSeeder.Seed();
         }
     }
 }
