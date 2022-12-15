@@ -1,5 +1,6 @@
 using System.Reflection;
 using Microsoft.Extensions.Configuration;
+using OpenPOS_Controllers.Services;
 using OpenPOS_Database.Services.Models;
 
 namespace OpenPOS_Testing;
@@ -8,6 +9,7 @@ namespace OpenPOS_Testing;
 public class UserServiceTest
 {
     private UserService _userService = new();
+    private UtilityService _utilityService = new();
 
     User user = new User
     {
@@ -116,7 +118,7 @@ public class UserServiceTest
         string email = "unittest@openpos.org";
         string password = "unittest";
         
-        User user = _userService.Authenticate(email, password);
+        User user = _userService.Authenticate(email, _utilityService.HashPassword(password));
         
         Assert.That(user.Email, Is.EqualTo(email));
     }
