@@ -28,6 +28,11 @@
 	<string>Assets.xcassets/appicon.appiconset</string>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>CFBundleIdentifier</key>
 	<string>com.openpos.openpos_app</string>
 </dict>
