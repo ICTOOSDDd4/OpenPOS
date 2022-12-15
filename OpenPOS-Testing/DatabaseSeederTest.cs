@@ -1,18 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using OpenPOS_APP.Enums;
-using OpenPOS_Models;
-using OpenPOS_APP.Services;
-using OpenPOS_Settings;
-using OpenPOS_Database;
 using OpenPOS_Database.Factory.Database;
-using OpenPOS_Database.Services.Models;
-using OpenPOS_Settings;
+using OpenPOS_Database.ModelServices;
 
 namespace OpenPOS_Testing
 {

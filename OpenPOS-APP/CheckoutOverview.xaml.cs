@@ -4,6 +4,7 @@ using System.Diagnostics;
 using OpenPOS_Controllers;
 using OpenPOS_Models;
 using OpenPOS_Settings;
+using OpenPOS_Settings.Exceptions;
 
 namespace OpenPOS_APP;
 
@@ -22,7 +23,7 @@ public partial class CheckoutOverview : ContentPage
     public CheckoutOverview()
 	 {
         InitializeComponent();
-	    AddToCheckOut(ApplicationSettings.CheckoutList);
+	      AddToCheckOut(ApplicationSettings.CheckoutList);
         Header.currentPage = this;
     }
 
@@ -75,8 +76,25 @@ public partial class CheckoutOverview : ContentPage
 
             if (result == null)
             {
-                loop = false;
-                continue;
+                try
+                {
+                    int totalInCents = (int)Math.Round(_totalPrice * 100);
+                    int tipInCents = (int)Math.Round(_tip * 100);
+                    int total = totalInCents + tipInCents;
+                    int splitAmount = totalInCents / count;
+                    Transaction transaction = _paymentController.NewTikkieTransaction(splitAmount);
+                    if (transaction.Url != null)
+                    {
+                        PaymentPage.SetTransaction(transaction, count);
+                        loop = false; 
+                        await Shell.Current.GoToAsync(nameof(PaymentPage));
+                        continue;
+                    }
+                    throw new Exception($"Payment Error: {splitAmount} isn't compatible with the API.");
+                } catch (Exception e)
+                {
+                    ExceptionHandler.HandleException(e, this, true, true);
+                }
             }
 
             await DisplayAlert("Oops", "You can only input a number.", "Try Again");

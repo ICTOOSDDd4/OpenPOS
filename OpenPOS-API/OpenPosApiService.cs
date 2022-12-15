@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR.Client;
+﻿using System.Diagnostics;
+using Microsoft.AspNetCore.SignalR.Client;
 using OpenPOS_Models;
 using OpenPOS_Settings;
 using OpenPOS_Settings.EventArgsClasses;
@@ -37,8 +38,19 @@ namespace OpenPOS_API
          RestResponse response = await client.ExecuteAsync(request);
          return response.IsSuccessful;
       }
+      public async Task<bool> NewOrderRequest(Order order)
+      {
+          var client = new RestClient(ApplicationSettings.ApiSet.base_url);
+          var request = new RestRequest("/api/order/newOrder", Method.Post);
+          request.AddHeader("secret", ApplicationSettings.ApiSet.secret);
+          request.AddHeader("Content-Type", "application/json");
+          request.AddHeader("Accept", "application/json");
+          request.AddJsonBody(order);
 
-      public bool RemoveFromPaymentListener(string paymentRequestToken)
+          RestResponse response = await client.ExecuteAsync(request);
+          return response.IsSuccessful;
+      }
+        public bool RemoveFromPaymentListener(string paymentRequestToken)
       {
          var client = new RestClient(ApplicationSettings.ApiSet.base_url);
          var request = new RestRequest("/api/Tikkie/AddToPaymentListener", Method.Get);
@@ -65,8 +77,9 @@ namespace OpenPOS_API
          _connection = null;
       }
 
-      public async Task SubcribeToNewOrderNotification()
+      public async Task SubscribeToNewOrderNotification()
       {
+         Debug.WriteLine("Subscribing to new order notification");
          if (_connection == null)
          {
             _connection = new HubConnectionBuilder()
@@ -82,7 +95,8 @@ namespace OpenPOS_API
             }
             catch (Exception ex)
             {
-               System.Diagnostics.Debug.WriteLine(ex);
+               Debug.WriteLine(ex);
+               Debug.WriteLine("API Oopsie");
             }
 
             _connection.Closed += async (_) =>
@@ -101,12 +115,13 @@ namespace OpenPOS_API
          }
          else
          {
+            Debug.WriteLine("problem");
             throw new Exception("Connection is already connected, you have to disconnect first.");
          }
          
       }
       
-      public async Task SubcribeToPaymentNotifications()
+      public async Task SubscribeToPaymentNotifications()
       {
          if (_connection == null)
          {
@@ -123,7 +138,8 @@ namespace OpenPOS_API
             }
             catch (Exception ex)
             {
-               System.Diagnostics.Debug.WriteLine(ex);
+               Debug.WriteLine(ex);
+               Debug.WriteLine("API Oopsie");
             }
 
             _connection.Closed += async (_) =>
@@ -150,11 +166,13 @@ namespace OpenPOS_API
       
       private void OnNewOrder(Order order)
       {
+         Debug.WriteLine(order.Id);
          NewOrderNotification?.Invoke(this, new OrderEventArgs() { order = order });
       }
 
       private void OnNewPayment(Tikkie tikkie)
       {
+         Debug.WriteLine(tikkie.paymentRequestToken);
          PaymentNotification?.Invoke(this, new PaymentEventArgs() { Tikkie = tikkie });
       }
       

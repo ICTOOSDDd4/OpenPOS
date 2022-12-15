@@ -1,5 +1,6 @@
 using OpenPOS_Controllers;
 using OpenPOS_Models;
+using OpenPOS_Settings.Exceptions;
 
 namespace OpenPOS_APP;
 
@@ -27,39 +28,54 @@ public partial class OrderView : ContentView
         };
     }
 
-    private void OnClickedDone(object sender, EventArgs e)
-    {
-        if (OrderDone != null)
-        {
+   private void OnClickedDone(object sender, EventArgs e)
+   {
+      try
+      {
+         if (OrderDone != null)
+         {
             OrderDone.Invoke(this, e);
-        }
-        else
-        {
+         }
+         else
+         {
             throw new Exception("OrderDone event is not set");
-        }
-    }
+         }
+      }
+      catch (Exception ex)
+      {
+         ExceptionHandler.HandleException(ex, null, true, false);
+      }
+      
+   }
 
-    private void OnClickedCancel(object sender, EventArgs e)
-    {
-        if (OrderCanceled != null)
-        {
+   private void OnClickedCancel(object sender, EventArgs e)
+   {
+      try
+      {
+         if (OrderCanceled != null)
+         {
             OrderCanceled.Invoke(this, e);
-        }
-        else
-        {
+         }
+         else
+         {
             throw new Exception("OrderCanceled event is not set");
-        }
-    }
+         }
+      }
+      catch (Exception ex)
+      {
+         ExceptionHandler.HandleException(ex, null, true, false);
+      }
+   }
 
-    public void AddBinds(Order o, HorizontalStackLayout h)
-    {
-        Order = o;
-        HorizontalLayout = h;
-        OrderNUmber.Text = $"Order: {Order.Id}";
-        Table table = _tableController.GetByBillId(Order.Bill_id);
-        TableNumber.Text = $"Table: {table.Table_number}";
-        AddOrderLinesToLayout();
-    }
+   public void AddBinds(Order o, HorizontalStackLayout h)
+   {
+      Order = o;
+      HorizontalLayout = h;
+      OrderNUmber.Text = $"Order: {Order.Id}";
+      Table table = _tableController.GetByBillId(Order.Bill_id);
+      TableNumber.Text = $"Table: {table.Table_number}";
+      AddOrderLinesToLayout();
+   }
 
     private void AddOrderLinesToLayout()
     {

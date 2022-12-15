@@ -28,7 +28,7 @@
 
             </VerticalStackLayout>
         </ScrollView>
-                <Button
+        <Button
             x:Name="OrderButton"
             Text="Place your Order"
             WidthRequest="350"
@@ -37,6 +37,13 @@
             Padding="0,0,10,0"
             Margin="0,30,0,10"
             Clicked="OrderButton_OnClicked"
+        />
+        <ActivityIndicator
+            Margin="20"
+            x:Name="Loader"
+            Color="{StaticResource OpenPos-Blue}"
+            IsRunning="False"
+            IsVisible="False"
         />
     </VerticalStackLayout>
 </ContentPage>

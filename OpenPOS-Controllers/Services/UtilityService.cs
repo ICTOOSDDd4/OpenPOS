@@ -1,3 +1,4 @@
+using System.Data;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
@@ -42,5 +43,10 @@ public class UtilityService
     public static void StartDatabase()
     {
         DatabaseService.Initialize();
+        DatabaseService.Dbcontext.Open();
+        if (DatabaseService.Dbcontext.State == ConnectionState.Open)
+        { 
+            DatabaseService.Dbcontext.Close();
+        }
     }
 }

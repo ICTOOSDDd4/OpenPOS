@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenPOS_Controllers.Services;
+using OpenPOS_Database.ModelServices;
 using OpenPOS_Database.Services.Models;
 using OpenPOS_Models;
 using OpenPOS_Settings.Enums;

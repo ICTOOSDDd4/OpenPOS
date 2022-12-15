@@ -9,7 +9,7 @@ public class OpenPosApiController
 
     public async Task<bool> SubscribeToPaymentNotification(string paymentId, EventHandler<PaymentEventArgs> handler)
     {
-        await _openPosApiService.SubcribeToPaymentNotifications();
+        await _openPosApiService.SubscribeToPaymentNotifications();
         _openPosApiService.PaymentNotification += handler;
         return await _openPosApiService.AddToPaymentListener(paymentId);
     }
@@ -23,8 +23,9 @@ public class OpenPosApiController
     
     public async Task<bool> SubscribeToOrderNotification(EventHandler<OrderEventArgs> handler)
     {
-        await _openPosApiService.SubcribeToNewOrderNotification();
+        await _openPosApiService.SubscribeToNewOrderNotification();
         _openPosApiService.NewOrderNotification += handler;
+        System.Diagnostics.Debug.WriteLine(_openPosApiService.ConnectionStatus);
         return true;
     }
     

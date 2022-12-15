@@ -4,6 +4,7 @@ using OpenPOS_Controllers;
 using OpenPOS_Models;
 using OpenPOS_Settings.EventArgsClasses;
 using CommunityToolkit.Maui.Views;
+using OpenPOS_Settings.Exceptions;
 
 namespace OpenPOS_APP;
 
@@ -59,7 +60,14 @@ public partial class MenuPage : ContentPage
         _horizontalLayout = null;
         foreach (var t in Products)
         {
-            AddProductToLayout(t);
+	        try
+	        {
+		        AddProductToLayout(t);
+	        }
+	        catch (Exception e)
+	        {
+		        ExceptionHandler.HandleException(e, this, true, true);
+	        }
         }
     }
 
@@ -123,38 +131,43 @@ public partial class MenuPage : ContentPage
         this.ShowPopup(infoPop);
     }
 
-    private async void OrderButton_OnClicked(object sender, EventArgs e)
-    {
-        if (SelectedProducts.Count == 0)
-        {
-            await DisplayAlert("No products selected", "You forgot to add products to your order!", "Back");
+	private async void OrderButton_OnClicked(object sender, EventArgs e)
+	{
+		OrderButton.IsVisible = false;
+		Loader.IsRunning = true;
+		Loader.IsVisible = true;
+		if (SelectedProducts.Count == 0)
+		{
+			await DisplayAlert("No products selected", "You forgot to add products to your order!", "Back");
+         Loader.IsRunning = false;
+         Loader.IsVisible = false;
+         OrderButton.IsVisible = true;
+		}
+		else
+		{
+			if (await DisplayAlert("Confirm order", "Are you sure you want to place your order?", "Yes", "No"))
+			{
+				await _orderController.CreateOrder(SelectedProducts);
+				await DisplayAlert("Order Placed", "Your order was successfully sent to our staff!", "Thank you");
+				await Shell.Current.GoToAsync(nameof(MenuPage));
+			} else
+			{
+				Loader.IsRunning = false;
+				Loader.IsVisible = false;
+				OrderButton.IsVisible = true;
+			}
+		}		
+	}
 
-        }
-        else
-        {
-            if (await DisplayAlert("Confirm order", "Are you sure you want to place your order?", "Yes", "No"))
-            {
-                _orderController.CreateOrder(SelectedProducts);
-            }
-            else
-            {
-                await DisplayAlert("Order Placed", "Your order was successfully sent to our staff!", "Thank you");
-                await Shell.Current.GoToAsync(nameof(MenuPage));
-            }
-        }
+	public virtual void OnSearch(object sender, EventArgs e) {
+		MainVerticalLayout.Clear();
+		if (String.IsNullOrWhiteSpace(((SearchBar)sender).Text) || String.IsNullOrEmpty(((SearchBar)sender).Text))
+		{
+			Products = _productController.GetAllProducts();
+		} else
+		{
+      Products = _productController.GetProductsBySearch(((SearchBar)sender).Text);
     }
-
-    public virtual void OnSearch(object sender, EventArgs e)
-    {
-        MainVerticalLayout.Clear();
-        if (String.IsNullOrWhiteSpace(((SearchBar)sender).Text) || String.IsNullOrEmpty(((SearchBar)sender).Text))
-        {
-            Products = _productController.GetAllProducts();
-        }
-        else
-        {
-            Products = _productController.GetProductsBySearch(((SearchBar)sender).Text);
-        }
 
         AddAllProducts();
     }

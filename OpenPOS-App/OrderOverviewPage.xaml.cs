@@ -1,8 +1,7 @@
-using System.Diagnostics;
 using OpenPOS_Controllers;
 using OpenPOS_Models;
 using OpenPOS_Settings.EventArgsClasses;
-using Plugin.Maui.Audio;
+using OpenPOS_Settings.Exceptions;
 
 namespace OpenPOS_APP;
 
@@ -14,33 +13,36 @@ public partial class OrderOverviewPage : ContentPage
     private readonly OrderController _orderController;
     private bool _isInitialized;
     private double _width;
-    private readonly IAudioManager audioManager;
 
-    public OrderOverviewPage(IAudioManager audioManager)
+    public OrderOverviewPage()
     {
         _openPosApiController = new OpenPosApiController();
         _orderController = new OrderController();
         InitializeComponent();
         Orders = _orderController.GetOpenOrders();
         Initialize();
-        this.audioManager = audioManager;
     }
 
     private async void Initialize()
     {
-        await _openPosApiController.SubscribeToOrderNotification(NewOrder);
+        try
+        {
+            await _openPosApiController.SubscribeToOrderNotification(NewOrder);
+        } catch (Exception e)
+        {
+            ExceptionHandler.HandleException(e, this, true, true);
+        }
     }
 
     private async void NewOrder(object sender, OrderEventArgs orderEvent)
     {
         await Dispatcher.DispatchAsync(() =>
-       { 
-           Orders.Add(orderEvent.order); 
-           AddOrderToLayout(orderEvent.order);
+        { 
+            System.Diagnostics.Debug.WriteLine("Received");
+            Orders.Add(orderEvent.order); 
+            AddOrderToLayout(orderEvent.order);
         });
         
-        var player = audioManager.CreatePlayer(await FileSystem.OpenAppPackageFileAsync("FileName"));
-        player.Play();
     }
 
     protected override void OnSizeAllocated(double width, double height)
@@ -87,7 +89,14 @@ public partial class OrderOverviewPage : ContentPage
     {
         foreach (var t in Orders)
         {
-            AddOrderToLayout(t);
+            try
+            {
+                AddOrderToLayout(t);
+            }
+            catch (Exception e)
+            {
+                ExceptionHandler.HandleException(e, this, true, true);
+            }
         }
     }
 

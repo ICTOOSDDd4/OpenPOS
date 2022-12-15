@@ -80,15 +80,16 @@ public partial class LoginScreen : ContentPage
             _username = string.Empty;
             EmailEntry.Text = string.Empty;
             PasswordEntry.Text = string.Empty;
+      }
+      else
+      {
+         LoadingIndicator.IsVisible = false;
+         LoadingIndicator.IsRunning = false;
+         MainLoginButton.IsVisible = true;
+         await DisplayAlert("Invalid credentials", "This username and/or password are not correct.", "Try again");
+      }
 
-        }
-        else
-        {
-            LoadingIndicator.IsVisible = false;
-            LoadingIndicator.IsRunning = false;
-            await DisplayAlert("Invalid credentials", "This username and/or password are not correct.", "Try again");
-        }
-    }
+   }
 
     private async void CreateNewAccount_Tapped(object sender, EventArgs e)
     {

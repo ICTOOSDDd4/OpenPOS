@@ -1,5 +1,6 @@
 
 
+using OpenPOS_API;
 using OpenPOS_Database.ModelServices;
 using OpenPOS_Settings;
 using OpenPOS_Database.Services.Models;
@@ -11,14 +12,16 @@ namespace OpenPOS_Controllers
     {
         private OrderService _orderService;
         private OrderLineService _orderLineService;
+        private OpenPosApiService _openPosApiService;
 
         public OrderController()
         {
             _orderLineService = new OrderLineService();
             _orderService = new OrderService();
+            _openPosApiService = new OpenPosApiService();
         }
 
-        public bool CreateOrder(Dictionary<int, int> SelectedProducts)
+        public async Task<bool> CreateOrder(Dictionary<int, int> selectedProducts)
         {
             try
             {
@@ -26,8 +29,8 @@ namespace OpenPOS_Controllers
                 order = _orderService.Create(order);
                 if (order == null)
                     return false;
-
-                foreach (KeyValuePair<int, int> entry in SelectedProducts)
+                _openPosApiService.NewOrderRequest(order);
+                foreach (KeyValuePair<int, int> entry in selectedProducts)
                 {
                     OrderLine line = new OrderLine(order.Id, entry.Key, entry.Value, "In Development");
                     _orderLineService.Create(line);
