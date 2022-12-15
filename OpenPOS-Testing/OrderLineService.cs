@@ -11,8 +11,8 @@ public class OrderLineServiceTest
 
     OrderLine OrderLine = new OrderLine
     {
-        Order_id = 61,
-        Product_id = 56,
+        Order_id = 1143,
+        Product_id = 1168,
         Amount = 2,
         Comment = "test123"
     };

@@ -12,7 +12,7 @@ public class OrderServiceTest
     Order Order = new Order
     {
         User_id = 176,
-        Bill_id = 3,
+        Bill_id = 1221,
         Status = false,
         Updated_At = DateTime.Today,
         Created_At = DateTime.Now
