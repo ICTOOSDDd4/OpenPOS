@@ -1,13 +1,11 @@
 ﻿using Microsoft.Extensions.Configuration;
-using OpenPOS_Settings;
-using OpenPOS_Database.Services.Models;
 using System.Reflection;
 using OpenPOS_Database.ModelServices;
 
 namespace OpenPOS_Testing;
 
 [TestFixture]
-public class _billServiceTest
+public class BillServiceTest
 {
     private BillService _billService = new();
 
@@ -59,10 +57,10 @@ public class _billServiceTest
     public void BillService_CreateBill_ReturnsObject()
     {
 
-        var Bill = this.Bill;
-        var result = _billService.Create(Bill);
+        var bill = this.Bill;
+        var result = _billService.Create(bill);
         
-        Assert.That(Bill.User_id, Is.EqualTo(result.User_id));
+        Assert.That(bill.User_id, Is.EqualTo(result.User_id));
         _billService.Delete(result);
     }
     

@@ -39,7 +39,6 @@ namespace OpenPOS_Database
             {
                 Console.WriteLine(ex.Message);
                 Debug.WriteLine(ex.Message);
-                ExceptionHandler.HandleException(ex,null, true, false);
                 CloseConnection();
                 return false;
             }
