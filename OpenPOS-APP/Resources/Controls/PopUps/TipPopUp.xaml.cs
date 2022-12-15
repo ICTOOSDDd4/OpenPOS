@@ -1,8 +1,6 @@
 using CommunityToolkit.Maui.Markup;
 using CommunityToolkit.Maui.Views;
 using Microsoft.Maui.Controls.Platform;
-using OpenPOS_APP.Services.Models;
-using OpenPOS_APP.Settings;
 using System.Globalization;
 
 namespace OpenPOS_APP.Resources.Controls.PopUps;
@@ -18,7 +16,7 @@ public partial class TipPopUp : Popup
       _price = price;
       _overview = sender;
       string total = String.Format(((Math.Round(price) == price) ? "{0:0}" : "{0:0.00}"), price);
-      TotalLabel.Text = $"New Total: €{total}";
+      TotalLabel.Text = $"New Total: ï¿½{total}";
       double percentage = 0;
       TipLabel.Text = $"Tip Percentage {percentage}%";
    }
@@ -44,7 +42,7 @@ public partial class TipPopUp : Popup
       newPrice = Math.Round(newPrice, 2);
       tip = newPrice - _price;
       string start = String.Format(((Math.Round(newPrice) == newPrice) ? "{0:0}" : "{0:0.00}"), newPrice);
-      TotalLabel.Text = $"New Total: €{start}";
+      TotalLabel.Text = $"New Total: ï¿½{start}";
       TipLabel.Text = $"Tip Percentage {Math.Round(e.NewValue)}%";
    }
 

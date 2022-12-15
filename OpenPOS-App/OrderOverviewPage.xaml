@@ -10,24 +10,12 @@
             Orientation="Vertical"
             VerticalScrollBarVisibility="Always"
             VerticalOptions="FillAndExpand"
-            HeightRequest="900"
-            >
-
+        >
             <VerticalStackLayout
-            HorizontalOptions="Center"
-            x:Name="MainVerticalLayout">
+                        HorizontalOptions="Center"
+                        x:Name="MainVerticalLayout">
 
             </VerticalStackLayout>
         </ScrollView>
-        <Button
-            Margin="10,20,10,20"
-            x:Name="OrderButton"
-            Text="Refresh"
-            WidthRequest="350"
-            HeightRequest="60"
-            Clicked="ClickedRefresh"
-            FontSize="35"
-            Padding="0,0,10,0"
-            />
     </VerticalStackLayout>
 </ContentPage>

@@ -1,8 +1,5 @@
-using OpenPOS_APP.Models;
-using OpenPOS_APP.Services.Models;
 using System.Diagnostics;
-using OpenPOS_APP.Settings;
-using System.Diagnostics;
+using OpenPOS_Settings;
 
 namespace OpenPOS_APP.Resources.Controls;
 

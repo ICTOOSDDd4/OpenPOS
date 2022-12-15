@@ -6,6 +6,7 @@
     <VerticalStackLayout
         x:Name="MainVerticalLayout"
         WidthRequest="200"
+        
         BackgroundColor="{ StaticResource White}"
         >
         <Grid>
@@ -51,6 +52,7 @@
            VerticalOptions="Center"
            MinimumHeightRequest="85"
            HorizontalOptions="Center"
+           MaximumHeightRequest="85"
         >
             <Label x:Name="ProductName"
                    FontSize="16"
@@ -80,7 +82,7 @@
                 Text="Add"
                 WidthRequest="65"
                 CornerRadius="0"
-                Clicked="OnClickedToevoegen"
+                Clicked="OnClickedAdd"
                 TextColor="Black"
                 BackgroundColor="{ StaticResource OpenPos-Green}"
                     />
@@ -97,7 +99,7 @@
             />
             <Button
                 Text="Delete"
-                Clicked="OnClickedVerwijderen"
+                Clicked="OnClickedDelete"
                 CornerRadius="0"
                 x:Name="DeleteButton"
                 WidthRequest="65"

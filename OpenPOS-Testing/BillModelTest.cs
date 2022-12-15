@@ -1,5 +1,5 @@
 using NUnit.Framework;
-using OpenPOS_APP.Models;
+using OpenPOS_Models;
 
 namespace OpenPOS_Testing;
 

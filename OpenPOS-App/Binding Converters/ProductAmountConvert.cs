@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenPOS_APP.Models;
+using OpenPOS_Models;
 
 namespace OpenPOS_APP
 {

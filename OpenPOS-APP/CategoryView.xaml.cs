@@ -1,6 +1,5 @@
-using OpenPOS_APP.Models;
-using OpenPOS_APP.Services.Models;
-using OpenPOS_APP.Settings;
+using OpenPOS_Controllers;
+using OpenPOS_Models;
 
 namespace OpenPOS_APP;
 
@@ -8,6 +7,7 @@ public partial class CategoryView : ContentView
 {
     private MenuPage _menuPage;
     private Category _category;
+    private ProductController _productController;
 
     public CategoryView()
     {
@@ -16,6 +16,8 @@ public partial class CategoryView : ContentView
 
     public void SetCategoryValues(MenuPage page, Category category)
     {
+        _productController = new ProductController();
+        
         _menuPage = page;
         _category = category;
 
@@ -24,7 +26,7 @@ public partial class CategoryView : ContentView
 
     private void OnClickedCategory(object sender, EventArgs e)
     {
-        _menuPage.Products = ProductService.GetAllByCategoryId(_category.Id);
+        _menuPage.Products = _productController.GetByCategory(_category.Id);
         _menuPage.AddAllProducts();
     }
 

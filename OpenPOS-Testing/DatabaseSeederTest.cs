@@ -1,22 +1,14 @@
 ﻿using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using OpenPOS_APP.Enums;
-using OpenPOS_APP.Factory.Database;
-using OpenPOS_APP.Models;
-using OpenPOS_APP.Services;
-using OpenPOS_APP.Services.Models;
-using OpenPOS_APP.Settings;
+using OpenPOS_Database.Factory.Database;
+using OpenPOS_Database.ModelServices;
 
 namespace OpenPOS_Testing
 {
     [TestFixture]
     public class DatabaseSeederTest
     {
+        private RoleService _roleService = new();
         [SetUp]
         public void SetUp()
         {
@@ -58,7 +50,7 @@ namespace OpenPOS_Testing
             try
             {
                 DatabaseService.SetConnectionString();
-                List<Role> roles = RoleService.GetAll();
+                List<Role> roles = _roleService.GetAll();
                 List<string> ExpectedRoles = new List<string>() { "Owner", "Admin", "Crew", "Cook", "Bar", "Guest" };
 
                 foreach (string role in ExpectedRoles)

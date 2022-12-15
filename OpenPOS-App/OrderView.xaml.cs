@@ -1,70 +1,111 @@
-using OpenPOS_APP.Controllers;
-using OpenPOS_APP.Models;
-using OpenPOS_APP.Services.Models;
+using OpenPOS_Controllers;
+using OpenPOS_Models;
+using OpenPOS_Settings.Exceptions;
 
 namespace OpenPOS_APP;
 
 public partial class OrderView : ContentView
 {
-   public Order order;
-   public HorizontalStackLayout layout;
-   public event EventHandler OrderDone;
-   public event EventHandler OrderCanceled;
-	public OrderView()
-	{
-		InitializeComponent();
-      MainVerticalLayout.Shadow = new Shadow
-      {
-         Offset = new Point(5, 5),
-         Brush = Brush.Black,
-         Opacity = 0.12f,
-      };
-   }
+    public Order Order;
+    public HorizontalStackLayout HorizontalLayout;
+    public event EventHandler OrderDone;
+    public event EventHandler OrderCanceled;
+
+    private readonly TableController _tableController;
+    private readonly OrderController _orderController;
+
+    public OrderView()
+    {
+        InitializeComponent();
+        _tableController = new TableController();
+        _orderController = new OrderController();
+
+        MainVerticalLayout.Shadow = new Shadow
+        {
+            Offset = new Point(5, 5),
+            Brush = Brush.Black,
+            Opacity = 0.12f,
+        };
+    }
 
    private void OnClickedDone(object sender, EventArgs e)
    {
-      OrderDone.Invoke(this, e);
+      try
+      {
+         if (OrderDone != null)
+         {
+            OrderDone.Invoke(this, e);
+         }
+         else
+         {
+            throw new Exception("OrderDone event is not set");
+         }
+      }
+      catch (Exception ex)
+      {
+         ExceptionHandler.HandleException(ex, null, true, false);
+      }
+      
    }
 
    private void OnClickedCancel(object sender, EventArgs e)
    {
-      OrderCanceled.Invoke(this, e);
+      try
+      {
+         if (OrderCanceled != null)
+         {
+            OrderCanceled.Invoke(this, e);
+         }
+         else
+         {
+            throw new Exception("OrderCanceled event is not set");
+         }
+      }
+      catch (Exception ex)
+      {
+         ExceptionHandler.HandleException(ex, null, true, false);
+      }
    }
 
    public void AddBinds(Order o, HorizontalStackLayout h)
    {
-      order = o;
-      layout = h;
-      OrderNUmber.Text = $"Order: {order.Id}";
-      Table table = TableService.FindByBill(order.Bill_id);
+      Order = o;
+      HorizontalLayout = h;
+      OrderNUmber.Text = $"Order: {Order.Id}";
+      Table table = _tableController.GetByBillId(Order.Bill_id);
       TableNumber.Text = $"Table: {table.Table_number}";
       AddOrderLinesToLayout();
    }
 
-   private void AddOrderLinesToLayout()
-   {
-      foreach(OrderLineProduct line in order.GetLines(order.Id)) 
-      {
-         // Setting up layout
-         HorizontalStackLayout layout = new HorizontalStackLayout();
-         layout.VerticalOptions = LayoutOptions.Center;
-         layout.HorizontalOptions = LayoutOptions.Center;
-         layout.Spacing = 10;
-         layout.Margin = new Thickness(2);
+    private void AddOrderLinesToLayout()
+    {
+        foreach (OrderLineProduct line in _orderController.GetOrderLines(Order.Id))
+        {
+            // Setting up layout
+            HorizontalStackLayout layout = new()
+            {
+                VerticalOptions = LayoutOptions.Center,
+                HorizontalOptions = LayoutOptions.Center,
+                Spacing = 10,
+                Margin = new Thickness(2)
+            };
 
-         // Adding product
-         Label productLabel = new Label();
-         productLabel.Text = line.Name;
-         layout.Add(productLabel);
+            // Adding product
+            Label productLabel = new()
+            {
+                Text = line.Name
+            };
+            layout.Add(productLabel);
 
-         // Adding amount
-         Label amountLabel = new Label();
-         amountLabel.Text = $"{ line.Amount }";
-         layout.Add(amountLabel);
+            // Adding amount
+            Label amountLabel = new()
+            {
+                Text = $"{line.Amount}"
+            };
+            layout.Add(amountLabel);
 
-         // Adding layout to main layout.
-         OrderLinesLayout.Add(layout);
-      }
-   }
-
+            // Adding layout to main layout.
+            OrderLinesLayout.Add(layout);
+        }
+    }
 }

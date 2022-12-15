@@ -1,125 +1,136 @@
-using System.Diagnostics;
-using OpenPOS_APP.Models;
-using OpenPOS_APP.Services.Models;
-using System.Runtime.CompilerServices;
-using OpenPOS_APP.EventArgsClasses;
-using OpenPOS_APP.Services;
+using OpenPOS_Controllers;
+using OpenPOS_Models;
+using OpenPOS_Settings.EventArgsClasses;
+using OpenPOS_Settings.Exceptions;
 
 namespace OpenPOS_APP;
 
 public partial class OrderOverviewPage : ContentPage
 {
-	public List<Order> Orders { get; set; }
-	private HorizontalStackLayout _horizontalLayout;
-   private EventHubService _eventHubService = new();
-   private bool _isInitialized;
-   private double _width;
+    public List<Order> Orders { get; set; }
+    private HorizontalStackLayout _horizontalLayout;
+    private readonly OpenPosApiController _openPosApiController;
+    private readonly OrderController _orderController;
+    private bool _isInitialized;
+    private double _width;
 
-   public OrderOverviewPage()
-	{
-		InitializeComponent();
-      Orders = OrderService.GetAllOpenOrders();
-      Debug.WriteLine(Orders.Count);
+    public OrderOverviewPage()
+    {
+        _openPosApiController = new OpenPosApiController();
+        _orderController = new OrderController();
+        InitializeComponent();
+        Orders = _orderController.GetOpenOrders();
         Initialize();
     }
 
     private async void Initialize()
     {
-        _eventHubService.NewOrder += newOrder;
-        await _eventHubService.ConnectToServer();
+        try
+        {
+            await _openPosApiController.SubscribeToOrderNotification(NewOrder);
+        } catch (Exception e)
+        {
+            ExceptionHandler.HandleException(e, this, true, true);
+        }
     }
 
-    private async void newOrder(object sender, OrderEventArgs orderEvent)
-   {
-
-       Debug.WriteLine("NewEvent");
-       await Dispatcher.DispatchAsync(() =>
-       { 
-           Orders.Add(orderEvent.order); 
-           AddOrderToLayout(orderEvent.order);
+    private async void NewOrder(object sender, OrderEventArgs orderEvent)
+    {
+        await Dispatcher.DispatchAsync(() =>
+        { 
+            System.Diagnostics.Debug.WriteLine("Received");
+            Orders.Add(orderEvent.order); 
+            AddOrderToLayout(orderEvent.order);
         });
+        
     }
 
     protected override void OnSizeAllocated(double width, double height)
-   {
-      base.OnSizeAllocated(width, height);
-      if (!_isInitialized)
-      {
-         _isInitialized = true;
-         SetWindowScaling(width, height);
-      }
+    {
+        base.OnSizeAllocated(width, height);
+        if (!_isInitialized)
+        {
+            _isInitialized = true;
+            SetWindowScaling(width, height);
+        }
+    }
 
-   }
+    private void SetWindowScaling(double width, double height)
+    {
+        ScrView.HeightRequest = height - 300;
+        _width = width;
+        AddAllOrders();
+    }
 
-   private void SetWindowScaling(double width, double height)
-   {
-      ScrView.HeightRequest = height - 300;
-      _width = width;
-      AddAllOrders();
-
-   }
-
-   private void OrderCanceled(object sender, EventArgs e)
-	{
-		OrderView view = (OrderView)sender;
-		Order order = view.order;
+    private void OrderCanceled(object sender, EventArgs e)
+    {
+	    OrderView view = (OrderView)sender;
+	    Order order = view.Order;
         order.Status = false;
-		OrderService.Update(order);
-      DeleteView(view);
-   }
+        _orderController.UpdateOrder(order);
+        DeleteView(view);
+    }
 
-   private void OrderDone(object sender, EventArgs e)
-	{
-      OrderView view = (OrderView)sender;
-      Order order = view.order;
-      order.Status = true;
-      OrderService.Update(order);
-      DeleteView(view);
-   }
+    private void OrderDone(object sender, EventArgs e)
+    {
+        OrderView view = (OrderView)sender;
+        Order order = view.Order;
+        order.Status = true;
+        _orderController.UpdateOrder(order);
+        DeleteView(view);
+    }
 
-   private void DeleteView(OrderView view)
-   {
-      view.layout.Children.Remove(view);
-   }
+    private void DeleteView(OrderView view)
+    {
+        view.HorizontalLayout.Children.Remove(view);
+    }
 
-   private async void ClickedRefresh(object sender, EventArgs e)
-   {
-      await Shell.Current.GoToAsync(nameof(OrderOverviewPage));
-   }
+    private void AddAllOrders()
+    {
+        foreach (var t in Orders)
+        {
+            try
+            {
+                AddOrderToLayout(t);
+            }
+            catch (Exception e)
+            {
+                ExceptionHandler.HandleException(e, this, true, true);
+            }
+        }
+    }
 
+    public void AddOrderToLayout(Order order)
+    {
+        int moduloNumber = ((int)_width / 300);
+        if (_horizontalLayout == null || _horizontalLayout.Children.Count % moduloNumber == 0)
+        {
+            AddHorizontalLayout();
+        }
 
-   private void AddAllOrders()
-   {
-      for (int i = 0; i < Orders.Count; i++)
-      {
-         AddOrderToLayout(Orders[i]);
-      }
-   }
+        OrderView orderView = new OrderView();
+        orderView.AddBinds(order, _horizontalLayout);
+        orderView.OrderDone += OrderDone;
+        orderView.OrderCanceled += OrderCanceled;
 
-	public void AddOrderToLayout(Order order)
-	{
-      int moduloNumber = ((int)_width / 300);
-      if (_horizontalLayout == null || _horizontalLayout.Children.Count % moduloNumber == 0)
-      {
-			AddHorizontalLayout();
-      }
+        if (_horizontalLayout != null)
+        {
+            _horizontalLayout.Add(orderView);
+        }
+        else
+        {
+            throw new Exception("HorizontalLayout is null, Can't add OrderView");
+        }
+    }
 
-      OrderView orderview = new OrderView(); 
-      orderview.AddBinds(order, _horizontalLayout);
-      orderview.OrderDone += OrderDone;
-      orderview.OrderCanceled += OrderCanceled;
-      _horizontalLayout.Add(orderview);      
-	}
-
-	private void AddHorizontalLayout()
-	{
-      HorizontalStackLayout hLayout = new HorizontalStackLayout();
-      hLayout.Spacing = 20;
-      hLayout.Margin = new Thickness(10);
-      MainVerticalLayout.Add(hLayout);
-      _horizontalLayout = hLayout;
-   }
-	
-	
-	
+    private void AddHorizontalLayout()
+    {
+        HorizontalStackLayout hLayout = new HorizontalStackLayout
+        {
+            Spacing = 20,
+            Margin = new Thickness(10)
+        };
+        MainVerticalLayout.Add(hLayout);
+        _horizontalLayout = hLayout;
+    }
 }

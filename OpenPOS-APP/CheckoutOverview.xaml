@@ -118,7 +118,7 @@
                         FontSize="36"
                         Clicked="OnClickedPay"/>
                     <Button
-                        x:Name="SplittButton"
+                        x:Name="SplitButton"
                         Text="Split Payment"
                         WidthRequest="300"
                         HeightRequest="100"

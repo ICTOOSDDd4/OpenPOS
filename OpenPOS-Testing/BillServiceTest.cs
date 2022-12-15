@@ -1,15 +1,16 @@
 ﻿using Microsoft.Extensions.Configuration;
-using OpenPOS_APP.Models;
-using OpenPOS_APP.Services;
-using OpenPOS_APP.Services.Models;
-using OpenPOS_APP.Settings;
+using OpenPOS_Settings;
+using OpenPOS_Database.Services.Models;
 using System.Reflection;
+using OpenPOS_Database.ModelServices;
 
 namespace OpenPOS_Testing;
 
 [TestFixture]
-public class BillServiceTest
+public class _billServiceTest
 {
+    private BillService _billService = new();
+
     Bill Bill = new Bill
     {
         User_id = 176,
@@ -46,12 +47,12 @@ public class BillServiceTest
     public void BillService_GetAllBills_ReturnsAllBills()
     {
         var Bill = this.Bill;
-        var result = BillService.Create(Bill);
-        var Bills = BillService.GetAll();
+        var result = _billService.Create(Bill);
+        var Bills = _billService.GetAll();
         
         Assert.Greater(Bills.Count, 0);
         
-        BillService.Delete(result);
+        _billService.Delete(result);
     }
 
     [Test]
@@ -59,49 +60,49 @@ public class BillServiceTest
     {
 
         var Bill = this.Bill;
-        var result = BillService.Create(Bill);
+        var result = _billService.Create(Bill);
         
         Assert.That(Bill.User_id, Is.EqualTo(result.User_id));
-        BillService.Delete(result);
+        _billService.Delete(result);
     }
     
     [Test]
     public void BillService_FindBill_ReturnsBill()
     {
         var Bill = this.Bill;
-        var createdBill = BillService.Create(Bill);
-        var result = BillService.FindByID(createdBill.Id);
+        var createdBill = _billService.Create(Bill);
+        var result = _billService.FindByID(createdBill.Id);
 
         Assert.That(Bill.User_id, Is.EqualTo(result.User_id));
        
-        BillService.Delete(result);
+        _billService.Delete(result);
     }
 
     [Test]
     public void BillService_UpdateBill_ReturnsTrue()
     {
         var Bill = this.Bill;
-        var createdBill = BillService.Create(Bill);
+        var createdBill = _billService.Create(Bill);
         
         Assert.That(createdBill.User_id, Is.Not.EqualTo(239));
         createdBill.User_id = 239;
         
-        var result = BillService.Update(createdBill);
+        var result = _billService.Update(createdBill);
         
         Assert.IsTrue(result);
-        Assert.That(BillService.FindByID(createdBill.Id).User_id, Is.EqualTo(239));
+        Assert.That(_billService.FindByID(createdBill.Id).User_id, Is.EqualTo(239));
         
-        BillService.Delete(createdBill);
+        _billService.Delete(createdBill);
     }
 
     [Test]
     public void BillService_DeleteBill_ReturnsTrue()
     {
         var Bill = this.Bill;
-        var createdBill = BillService.Create(Bill);
-        var result = BillService.Delete(createdBill);
+        var createdBill = _billService.Create(Bill);
+        var result = _billService.Delete(createdBill);
         
         Assert.IsTrue(result);
-        Assert.That(BillService.FindByID(createdBill.Id).User_id, Is.EqualTo(0));
+        Assert.That(_billService.FindByID(createdBill.Id).User_id, Is.EqualTo(0));
     }
 }

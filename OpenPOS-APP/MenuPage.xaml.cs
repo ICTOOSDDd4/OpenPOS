@@ -1,72 +1,97 @@
-using OpenPOS_APP.Models;
 using OpenPOS_APP.Resources.Controls;
-using OpenPOS_APP.Services.Models;
-using OpenPOS_APP.Settings;
-using OpenPOS_APP.EventArgsClasses;
+using OpenPOS_APP.Resources.Controls.PopUps;
+using OpenPOS_Controllers;
+using OpenPOS_Models;
+using OpenPOS_Settings.EventArgsClasses;
+using CommunityToolkit.Maui.Views;
+using OpenPOS_Settings.Exceptions;
 
 namespace OpenPOS_APP;
 
 public partial class MenuPage : ContentPage
 {
-	public List<Product> Products { get; set; }
-	private HorizontalStackLayout _horizontalLayout;
-	public Dictionary<int, int> SelectedProducts { get; set; }
-	public delegate void OnSearchEventHandler(object source, EventArgs args);
-	public static event OnSearchEventHandler Searched;
-	private int _ProductCardViewWidth = 300;
-	
-	private bool _isInitialized;
-	private double _width;
+	  public List<Product> Products { get; set; }
+    public Dictionary<int, int> SelectedProducts { get; set; }
+	  public delegate void OnSearchEventHandler(object source, EventArgs args);
+
+    private HorizontalStackLayout _horizontalLayout;
+    private readonly ProductController _productController;
+    private readonly CategoryController _categoryController;
+    private readonly OrderController _orderController;
+    private const int _productCardViewWidth = 300;
+    private bool _isInitialized;
+	  private double _width;
+
     public MenuPage()
-	{
-      SelectedProducts = new Dictionary<int, int>();
-      Products = ProductService.GetAll();
-		InitializeComponent();
-		Header.Searched += OnSearch;
-		Header.currentPage = this;
-	}
+    {
+        _productController = new ProductController();
+        _categoryController = new CategoryController();
+        _orderController = new OrderController();
 
-	protected override void OnSizeAllocated(double width, double height)
-	{ // Gets called by MAUI
-		base.OnSizeAllocated(width, height);
-		if (!_isInitialized)
-		{
-			_isInitialized = true;
-			SetWindowScaling(width,height);
-		}
+        SelectedProducts = new Dictionary<int, int>();
+        Products = _productController.GetAllProducts();
+        InitializeComponent();
+        Header.Searched += OnSearch;
+        Header.currentPage = this;
     }
 
-	private void SetWindowScaling(double width, double height)
-	{
-		ScrView.HeightRequest = height - _ProductCardViewWidth;
-		_width = width;
-		AddAllCategories(CategoryService.GetAll());
-      AddAllProducts();
+    protected override void OnSizeAllocated(double width, double height)
+    {
+        // Gets called by MAUI
+        base.OnSizeAllocated(width, height);
+        if (!_isInitialized)
+        {
+            _isInitialized = true;
+            SetWindowScaling(width, height);
+        }
     }
 
-	public void AddAllProducts()
-	{
-		MainVerticalLayout.Clear();
-      _horizontalLayout = null;
-		for (int i = 0; i < Products.Count; i++)
-		{
-            AddProductToLayout(Products[i]);
-		}
-	}
-
-   public void AddProductToLayout(Product product)
-   {
-	   int moduloNumber = ((int)_width / _ProductCardViewWidth);
-	   if (_horizontalLayout == null || _horizontalLayout.Children.Count % moduloNumber == 0) 
-		{
-			AddHorizontalLayout();
-		}
-        
-		ProductView productView = new ProductView();
-		productView.SetProductValues(this,product);
-		productView.ClickedMoreInfo += OnInfoButtonClicked;
-      _horizontalLayout.Add(productView);
+    private void SetWindowScaling(double width, double height)
+	  {
+        ScrView.HeightRequest = height - _productCardViewWidth;
+        _width = width;
+        AddAllCategories(_categoryController.GetAll());
+        AddAllProducts();
     }
+
+    public void AddAllProducts()
+    {
+        MainVerticalLayout.Clear();
+        _horizontalLayout = null;
+        foreach (var t in Products)
+        {
+	        try
+	        {
+		        AddProductToLayout(t);
+	        }
+	        catch (Exception e)
+	        {
+		        ExceptionHandler.HandleException(e, this, true, true);
+	        }
+        }
+    }
+
+    public void AddProductToLayout(Product product)
+    {
+        int moduloNumber = ((int)_width / _productCardViewWidth);
+        if (_horizontalLayout == null || _horizontalLayout.Children.Count % moduloNumber == 0)
+        {
+            AddHorizontalLayout();
+        }
+
+        ProductView productView = new();
+        productView.SetProductValues(this, product);
+        productView.ClickedMoreInfo += OnInfoButtonClicked;
+        if (_horizontalLayout != null)
+        {
+            _horizontalLayout.Add(productView);
+        }
+        else
+        {
+            throw new Exception("Horizontal layout is null, Can't add product to layout");
+        }
+    }
+
 
     public void AddAllCategories(List<Category> categories)
     {
@@ -75,80 +100,75 @@ public partial class MenuPage : ContentPage
         categoryView.SetCategoryValues(this, new Category() { Id = 0, Name = "All"});
         CategoryHorizontal.Add(categoryView);
 
-        for (int i = 0; i < categories.Count; i++)
+        foreach (var t in categories)
         {
-            AddCategoryToLayout(categories[i]);
+            AddCategoryToLayout(t);
         }
     }
 
     public void AddCategoryToLayout(Category category)
     {
         CategoryView categoryView = new CategoryView();
-		categoryView.SetCategoryValues(this, category);
+        categoryView.SetCategoryValues(this, category);
         CategoryHorizontal.Add(categoryView);
     }
 
     private void AddHorizontalLayout()
-	{
-      HorizontalStackLayout hLayout = new HorizontalStackLayout();
-		hLayout.Spacing = 20;
-		hLayout.Margin = new Thickness(10);
-		MainVerticalLayout.Add(hLayout);
-		_horizontalLayout = hLayout;
+    {
+        HorizontalStackLayout hLayout = new()
+        {
+            Spacing = 20,
+            Margin = new Thickness(10)
+        };
+        MainVerticalLayout.Add(hLayout);
+        _horizontalLayout = hLayout;
     }
 
-	private async void OnInfoButtonClicked(object sender, EventArgs e)
-	{
-		await DisplayAlert("Work In Progress", "This will display more about the product and allergy information",
-			"Understood");
-	}
+    private async void OnInfoButtonClicked(object sender, InfoButtonEventArgs e)
+    {
+        ProductInfoPopUp infoPop = new();
+        infoPop.SetProduct(e.product);
+        this.ShowPopup(infoPop);
+    }
 
 	private async void OrderButton_OnClicked(object sender, EventArgs e)
 	{
+		OrderButton.IsVisible = false;
+		Loader.IsRunning = true;
+		Loader.IsVisible = true;
 		if (SelectedProducts.Count == 0)
 		{
 			await DisplayAlert("No products selected", "You forgot to add products to your order!", "Back");
-
+         Loader.IsRunning = false;
+         Loader.IsVisible = false;
+         OrderButton.IsVisible = true;
 		}
 		else
 		{
 			if (await DisplayAlert("Confirm order", "Are you sure you want to place your order?", "Yes", "No"))
 			{
-				Order order = new Order(1, false, ApplicationSettings.LoggedinUser.Id, ApplicationSettings.CurrentBill.Id, DateTime.Now, DateTime.Now);
-				order = OrderService.Create(order);
-
-				// Get current product from selected products
-				foreach (KeyValuePair<int, int> entry in SelectedProducts)
-				{
-					OrderLine line = new OrderLine(order.Id, entry.Key, entry.Value, "In Development");
-					OrderLineService.Create(line);
-				}
-            if (order == null)
-            {
-               await DisplayAlert("Oops", "Something went wrong please try again.", "Alright");
-            }
-            else
-            {
-               await DisplayAlert("Order Placed", "Your order was successfully sent to our staff!", "Thank you");
-               await Shell.Current.GoToAsync(nameof(MenuPage));
-            }
-         }
-         else
-         {
-			 //EMPTY FOR NOW: DOING NOTHING
-         }
-        }		
+				await _orderController.CreateOrder(SelectedProducts);
+				await DisplayAlert("Order Placed", "Your order was successfully sent to our staff!", "Thank you");
+				await Shell.Current.GoToAsync(nameof(MenuPage));
+			} else
+			{
+				Loader.IsRunning = false;
+				Loader.IsVisible = false;
+				OrderButton.IsVisible = true;
+			}
+		}		
 	}
 
 	public virtual void OnSearch(object sender, EventArgs e) {
 		MainVerticalLayout.Clear();
 		if (String.IsNullOrWhiteSpace(((SearchBar)sender).Text) || String.IsNullOrEmpty(((SearchBar)sender).Text))
 		{
-			Products = ProductService.GetAll();
+			Products = _productController.GetAllProducts();
 		} else
 		{
-            Products = ProductService.GetAllByFilter(((SearchBar)sender).Text);
-        }
-		AddAllProducts();
-	}
+      Products = _productController.GetProductsBySearch(((SearchBar)sender).Text);
+    }
+
+        AddAllProducts();
+    }
 }
