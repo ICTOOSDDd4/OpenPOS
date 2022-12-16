@@ -5,15 +5,8 @@ namespace OpenPOS_APP.Resources.Controls;
 
 public partial class Header : StackLayout
 {
-   public bool Showing { get; set; }
     public static event EventHandler Searched;
-    private static readonly BindableProperty headerProperty = BindableProperty.Create(
-        propertyName: nameof(Showing),
-        returnType: typeof(bool),
-        defaultValue: true,
-        declaringType: typeof(Header),
-        defaultBindingMode: BindingMode.OneWay);
-    public ContentPage currentPage { get; set; }
+    public ContentPage CurrentPage { get; set; }
 
     public Header()
 	{
@@ -24,8 +17,8 @@ public partial class Header : StackLayout
 
    private void OnSearch(object sender, EventArgs e)
    {
-        Debug.WriteLine("Invoked Search");
-      Searched.Invoke(sender, e);
+      Debug.WriteLine("Invoked Search");
+      if (Searched != null) Searched.Invoke(sender, e);
    }
 
    private void OnSearchTextChanged(object sender, EventArgs e) { }
@@ -33,7 +26,7 @@ public partial class Header : StackLayout
 
    private async void OnClickedLogout(object sender, EventArgs e)
    {
-      bool alert = await currentPage.DisplayAlert("Loging out", "Are you sure you want to log out?", "Yes", "No");
+      bool alert = await CurrentPage.DisplayAlert("Loging out", "Are you sure you want to log out?", "Yes", "No");
       if (alert)
       {
          if (ApplicationSettings.CheckoutList.Count == 0)
@@ -41,8 +34,7 @@ public partial class Header : StackLayout
             await Shell.Current.GoToAsync(nameof(GoodbyePage));
             return;
          }
-         await currentPage.DisplayAlert("Oops", "You will have to pay the current bill first to be able to log out!", "Understood");
-         return;
+         await CurrentPage.DisplayAlert("Oops", "You will have to pay the current bill first to be able to log out!", "Understood");
       }
    }
    private async void OnClickedCard(object sender, EventArgs e) 

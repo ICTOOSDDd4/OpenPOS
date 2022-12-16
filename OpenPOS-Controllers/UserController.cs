@@ -14,7 +14,8 @@ namespace OpenPOS_Controllers
         public UserController()
         {
             _userService = new UserService();
-            _userRoleService = new UserRoleService();
+            _userRoleService = new UserRoleService(); 
+            _utilityService = new UtilityService();
         }
         
         public User CreateNew(string firstName, string lastName, string email, string password)
@@ -24,7 +25,7 @@ namespace OpenPOS_Controllers
                 Name = firstName,
                 Last_name = lastName,
                 Email = email,
-                Password = password
+                Password = _utilityService.HashPassword(password)
             };
             return _userService.Create(newUser);
         }

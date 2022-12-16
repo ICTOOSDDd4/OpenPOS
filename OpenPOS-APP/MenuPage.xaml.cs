@@ -32,7 +32,7 @@ public partial class MenuPage : ContentPage
         Products = _productController.GetAllProducts();
         InitializeComponent();
         Header.Searched += OnSearch;
-        Header.currentPage = this;
+        Header.CurrentPage = this;
     }
 
     protected override void OnSizeAllocated(double width, double height)

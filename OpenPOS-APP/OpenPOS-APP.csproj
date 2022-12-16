@@ -86,9 +86,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<MauiXaml Update="AdminOverview.xaml">
-		  <Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
 		<MauiXaml Update="BarOverview.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
