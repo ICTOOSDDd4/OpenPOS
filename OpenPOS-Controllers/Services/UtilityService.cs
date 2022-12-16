@@ -17,8 +17,7 @@ public class UtilityService
         HttpClient client = new HttpClient();
         
         var response = await client.GetAsync(uri);
-        using (var fs = new FileStream(Path.GetFullPath(filename),
-                   FileMode.CreateNew))
+        using (var fs = new FileStream(Path.GetFullPath(filename), FileMode.Create))
         {
             await response.Content.CopyToAsync(fs);
         }
