@@ -14,7 +14,7 @@ public class FloorModelTest
         
         Floor floor = new Floor(id, storey);
         
-        Assert.AreEqual(id, floor.Id);
-        Assert.AreEqual(storey, floor.Storey);
+        Assert.That(floor.Id, Is.EqualTo(id));
+        Assert.That(floor.Storey, Is.EqualTo(storey));
     }
 }

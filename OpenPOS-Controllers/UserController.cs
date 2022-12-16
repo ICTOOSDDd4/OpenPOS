@@ -9,12 +9,11 @@ namespace OpenPOS_Controllers
     {
         private UserService _userService;
         private UserRoleService _userRoleService;
-        private UtilityService _utilityService;
 
         public UserController()
         {
-            _userService = new UserService();
             _userRoleService = new UserRoleService();
+            _userService = new UserService();
         }
         
         public User CreateNew(string firstName, string lastName, string email, string password)

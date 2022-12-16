@@ -9,9 +9,9 @@ public class OrderServiceTest
 {
     private OrderService _orderService = new();
 
-    Order Order = new Order
+    private Order _order = new Order
     {
-        User_id = 176,
+        User_id = 1297,
         Bill_id = 1221,
         Status = false,
         Updated_At = DateTime.Today,
@@ -45,11 +45,11 @@ public class OrderServiceTest
     [Test]
     public void OrderService_GetAllOrders_ReturnsAllOrders()
     {
-        var Order = this.Order;
-        var result = _orderService.Create(Order);
-        var Orders = _orderService.GetAll();
+        var order = this._order;
+        var result = _orderService.Create(order);
+        var orders = _orderService.GetAll();
         
-        Assert.Greater(Orders.Count, 0);
+        Assert.Greater(orders.Count, 0);
         
         _orderService.Delete(result);
     }
@@ -58,48 +58,47 @@ public class OrderServiceTest
     public void OrderService_CreateOrder_ReturnsObject()
     {
 
-        var Order = this.Order;
-        var result = _orderService.Create(Order);
-        
-        Assert.That(Order.User_id, Is.EqualTo(result.User_id));
-        
+        var order = this._order;
+        var result = _orderService.Create(order);
         _orderService.Delete(result);
+
+        
+        Assert.That(order.User_id, Is.EqualTo(result.User_id));
     }
     
     [Test]
     public void OrderService_FindOrder_ReturnsOrder()
     {
-        var Order = this.Order;
-        var createdOrder = _orderService.Create(Order);
+        var order = this._order;
+        var createdOrder = _orderService.Create(order);
         var result = _orderService.FindByID(createdOrder.Id);
-       
-        Assert.That(createdOrder.User_id, Is.EqualTo(result.User_id));
-       
         _orderService.Delete(result);
+
+        Assert.That(createdOrder.User_id, Is.EqualTo(result.User_id));
     }
 
     [Test]
     public void OrderService_UpdateOrder_ReturnsTrue()
     {
-        var Order = this.Order;
-        var createdOrder = _orderService.Create(Order);
+        var order = this._order;
+        var createdOrder = _orderService.Create(order);
         
-        Assert.That(createdOrder.User_id, Is.Not.EqualTo(217639));
-        createdOrder.User_id = 176;
+        Assert.That(createdOrder.User_id, Is.Not.EqualTo(1297));
+        createdOrder.User_id = 1298;
         
         var result = _orderService.Update(createdOrder);
         
-        Assert.IsTrue(result);
-        Assert.That(_orderService.FindByID(createdOrder.Id).User_id, Is.EqualTo(176));
-        
         _orderService.Delete(createdOrder);
+        
+        Assert.IsTrue(result);
+        Assert.That(_orderService.FindByID(createdOrder.Id).User_id, Is.EqualTo(1298));
     }
 
     [Test]
     public void OrderService_DeleteOrder_ReturnsTrue()
     {
-        var Order = this.Order;
-        var createdOrder = _orderService.Create(Order);
+        var order = this._order;
+        var createdOrder = _orderService.Create(order);
         var result = _orderService.Delete(createdOrder);
         
         Assert.IsTrue(result);

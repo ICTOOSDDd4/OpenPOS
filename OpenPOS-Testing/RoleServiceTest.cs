@@ -44,10 +44,9 @@ public class RoleServiceTest
         var Role = this.Role;
         var result = _roleService.Create(Role);
         var Roles = _roleService.GetAll();
-        
-        Assert.Greater(Roles.Count, 0);
-        
         _roleService.Delete(result);
+
+        Assert.Greater(Roles.Count, 0);
     }
 
     [Test]
@@ -56,10 +55,9 @@ public class RoleServiceTest
 
         var Role = this.Role;
         var result = _roleService.Create(Role);
-        
-        Assert.That(Role.Title, Is.EqualTo(result.Title));
-        
         _roleService.Delete(result);
+
+        Assert.That(Role.Title, Is.EqualTo(result.Title));
     }
     
     [Test]
@@ -68,10 +66,9 @@ public class RoleServiceTest
         var Role = this.Role;
         var createdRole = _roleService.Create(Role);
         var result = _roleService.FindByID(createdRole.Id);
-       
-        Assert.That(Role.Title, Is.EqualTo(result.Title));
-       
         _roleService.Delete(result);
+
+        Assert.That(Role.Title, Is.EqualTo(result.Title));
     }
 
     [Test]
@@ -84,11 +81,10 @@ public class RoleServiceTest
         createdRole.Title = "Nieuwe titel!";
         
         var result = _roleService.Update(createdRole);
-        
+        _roleService.Delete(createdRole);
+
         Assert.IsTrue(result);
         Assert.That(_roleService.FindByID(createdRole.Id).Title, Is.EqualTo("Nieuwe titel!"));
-        
-        _roleService.Delete(createdRole);
     }
 
     [Test]

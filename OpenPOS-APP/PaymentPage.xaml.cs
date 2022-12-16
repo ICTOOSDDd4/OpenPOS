@@ -39,7 +39,7 @@ public partial class PaymentPage : ContentPage
 
       UtilityService utility = new UtilityService();
 
-      ImageSource imageSource = utility.GenerateQrCodeFromUrl(CurrentTransaction.Url);
+      ImageSource imageSource = await utility.GenerateQrCodeFromUrl(CurrentTransaction.Url);
       
       // Deleting the loader from the screen.
       Loader.IsVisible = false;
@@ -63,8 +63,9 @@ public partial class PaymentPage : ContentPage
       _timer.Elapsed += ChangeStatusLabel;
       _timer.Start();
    }
-	public void OnPaymentPayed(object? sender, PaymentEventArgs e)
+	public void OnPaymentPayed(object sender, PaymentEventArgs e)
 	{
+      if (sender == null) throw new ArgumentNullException(nameof(sender));
       _timer.Stop();
       _thread.Interrupt();
       Dispatcher.DispatchAsync(async () =>

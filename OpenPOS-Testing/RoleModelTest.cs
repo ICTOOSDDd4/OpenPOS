@@ -14,8 +14,8 @@ public class RoleModelTest
 
         Role role = new Role(id, title);
         
-        Assert.AreEqual(id, role.Id);
-        Assert.AreEqual(title, role.Title);
+        Assert.That(role.Id, Is.EqualTo(id));
+        Assert.That(role.Title, Is.EqualTo(title));
 
     }
 }

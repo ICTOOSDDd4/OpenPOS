@@ -14,7 +14,7 @@ public class ProductServiceTest
 {
     private ProductService _productService = new();
 
-    Product Product = new Product
+    private Product _product = new Product
     {
         Name = "Productnaam",
         Price = 55.25,
@@ -48,61 +48,57 @@ public class ProductServiceTest
     [Test]
     public void ProductService_GetAllProducts_ReturnsAllProducts()
     {
-        var Product = this.Product;
-        var result = _productService.Create(Product);
-        var Products = _productService.GetAll();
-        
-        Assert.Greater(Products.Count, 0);
-        
+        var product = _product;
+        var result = _productService.Create(product);
+        var products = _productService.GetAll();
         _productService.Delete(result);
+        
+        Assert.Greater(products.Count, 0);
     }
 
     [Test]
     public void ProductService_CreateProduct_ReturnsObject()
     {
 
-        var Product = this.Product;
-        var result = _productService.Create(Product);
-        
-        Assert.That(Product.Name, Is.EqualTo(result.Name));
-        
+        var product = this._product;
+        var result = _productService.Create(product);
         _productService.Delete(result);
+        
+        Assert.That(product.Name, Is.EqualTo(result.Name));
     }
     
     [Test]
     public void ProductService_FindProduct_ReturnsProduct()
     {
-        var Product = this.Product;
-        var createdProduct = _productService.Create(Product);
+        var product = this._product;
+        var createdProduct = _productService.Create(product);
         var result = _productService.FindByID(createdProduct.Id);
-       
-        Assert.That(Product.Price, Is.EqualTo(result.Price));
-       
         _productService.Delete(result);
+        
+        Assert.That(product.Price, Is.EqualTo(result.Price));
     }
 
     [Test]
     public void ProductService_UpdateProduct_ReturnsTrue()
     {
-        var Product = this.Product;
-        var createdProduct = _productService.Create(Product);
+        var product = this._product;
+        var createdProduct = _productService.Create(product);
         
         Assert.That(createdProduct.Description, Is.Not.EqualTo("Nieuwe beschrijving!"));
         createdProduct.Description = "Nieuwe beschrijving!";
         
         var result = _productService.Update(createdProduct);
+        _productService.Delete(createdProduct);
         
         Assert.IsTrue(result);
         Assert.That(_productService.FindByID(createdProduct.Id).Description, Is.EqualTo("Nieuwe beschrijving!"));
-        
-        _productService.Delete(createdProduct);
     }
 
     [Test]
     public void ProductService_DeleteProduct_ReturnsTrue()
     {
-        var Product = this.Product;
-        var createdProduct = _productService.Create(Product);
+        var product = this._product;
+        var createdProduct = _productService.Create(product);
         var result = _productService.Delete(createdProduct);
         
         Assert.IsTrue(result);
