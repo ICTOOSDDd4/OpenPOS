@@ -80,6 +80,7 @@
 		<None Remove="appsettings.json" />
 		<None Remove="Resources\Images\account.svg" />
 		<None Remove="Resources\Images\cart.svg" />
+		<None Remove="Resources\Raw\service-bell-ring.mp3" />
 	</ItemGroup>
 	<ItemGroup>
 	  <EmbeddedResource Include="appsettings.json" />
