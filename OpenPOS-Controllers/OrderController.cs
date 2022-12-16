@@ -57,5 +57,27 @@ namespace OpenPOS_Controllers
             return _orderLineService.GetAllById(orderId);
         }
 
+        public bool OrderLinesToDone(List<OrderLineProduct> lines, Order order)
+        {
+            try
+            {
+                foreach(OrderLineProduct line in lines)
+                {
+                    line.Status = true;
+                    _orderLineService.ChangeStatus(line);
+                }
+
+                if (_orderLineService.GetAllOpenById(order.Id).Count == 0)
+                {
+                    order.Status = true;
+                    UpdateOrder(order);
+                }
+
+                return true;
+            } catch 
+            {
+                return false; 
+            }
+        }
     }
 }

@@ -67,19 +67,19 @@ public partial class OrderView : ContentView
       }
    }
 
-   public void AddBinds(Order o, HorizontalStackLayout h)
+   public void AddBinds(Order o, HorizontalStackLayout h, List<OrderLineProduct> lines)
    {
       Order = o;
       HorizontalLayout = h;
       OrderNUmber.Text = $"Order: {Order.Id}";
       Table table = _tableController.GetByBillId(Order.Bill_id);
       TableNumber.Text = $"Table: {table.Table_number}";
-      AddOrderLinesToLayout();
+      AddOrderLinesToLayout(lines);
    }
 
-    private void AddOrderLinesToLayout()
+    private void AddOrderLinesToLayout(List<OrderLineProduct> lines)
     {
-        foreach (OrderLineProduct line in _orderController.GetOrderLines(Order.Id))
+        foreach (OrderLineProduct line in lines)
         {
             // Setting up layout
             HorizontalStackLayout layout = new()

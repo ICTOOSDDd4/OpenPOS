@@ -9,6 +9,7 @@ namespace OpenPOS_APP;
 public partial class OrderOverviewPage : ContentPage
 {
     public List<Order> Orders { get; set; }
+    public Dictionary<Order, List<OrderLineProduct>> OrderLines { get; set; }
     private HorizontalStackLayout _horizontalLayout;
     private readonly OpenPosApiController _openPosApiController;
     private readonly OrderController _orderController;
@@ -21,6 +22,7 @@ public partial class OrderOverviewPage : ContentPage
         _orderController = new OrderController();
         InitializeComponent();
         Orders = _orderController.GetOpenOrders();
+        OrderLines = new Dictionary<Order, List<OrderLineProduct>>();
         Initialize();
     }
 
@@ -78,8 +80,9 @@ public partial class OrderOverviewPage : ContentPage
     {
         OrderView view = (OrderView)sender;
         Order order = view.Order;
-        order.Status = true;
-        _orderController.UpdateOrder(order);
+
+        _orderController.OrderLinesToDone(OrderLines[order], order);
+
         DeleteView(view);
     }
 
@@ -105,6 +108,8 @@ public partial class OrderOverviewPage : ContentPage
 
     public void AddOrderToLayout(Order order)
     {
+        OrderLines.Add(order, _orderController.GetOrderLines(order.Id));
+        
         int moduloNumber = ((int)_width / 300);
         if (_horizontalLayout == null || _horizontalLayout.Children.Count % moduloNumber == 0)
         {
@@ -112,7 +117,7 @@ public partial class OrderOverviewPage : ContentPage
         }
 
         OrderView orderView = new OrderView();
-        orderView.AddBinds(order, _horizontalLayout);
+        orderView.AddBinds(order, _horizontalLayout, OrderLines[order]);
         orderView.OrderDone += OrderDone;
         orderView.OrderCanceled += OrderCanceled;
 
