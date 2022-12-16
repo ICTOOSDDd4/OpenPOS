@@ -83,15 +83,15 @@ public class OrderServiceTest
         var order = this._order;
         var createdOrder = _orderService.Create(order);
         
-        Assert.That(createdOrder.User_id, Is.Not.EqualTo(1297));
+        Assert.That(createdOrder.User_id, Is.Not.EqualTo(1298));
         createdOrder.User_id = 1298;
         
         var result = _orderService.Update(createdOrder);
-        
+        int id = _orderService.FindByID(createdOrder.Id).User_id;
         _orderService.Delete(createdOrder);
         
         Assert.IsTrue(result);
-        Assert.That(_orderService.FindByID(createdOrder.Id).User_id, Is.EqualTo(1298));
+        Assert.That(id, Is.EqualTo(1298));
     }
 
     [Test]

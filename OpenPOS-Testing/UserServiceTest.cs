@@ -90,12 +90,12 @@ public class UserServiceTest
         createdUser.Last_name = "Joling";
         
         var result = _userService.Update(createdUser);
-        
+        string name = _userService.FindByID(createdUser.Id).Name;
         _userService.Delete(createdUser);
 
         
         Assert.IsTrue(result);
-        Assert.That(_userService.FindByID(createdUser.Id).Name, Is.EqualTo("Gerard"));
+        Assert.That(name, Is.EqualTo("Gerard"));
     }
 
     [Test]

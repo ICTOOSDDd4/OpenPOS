@@ -87,10 +87,11 @@ public class TableServiceTest
         createdTable.Table_number = 123;
         
         var result = _tableService.Update(createdTable);
+        int number = _tableService.FindByID(createdTable.Id).Table_number;
         _tableService.Delete(createdTable);
 
         Assert.IsTrue(result);
-        Assert.That(_tableService.FindByID(createdTable.Id).Table_number, Is.EqualTo(123));
+        Assert.That(number, Is.EqualTo(123));
     }
 
     [Test]

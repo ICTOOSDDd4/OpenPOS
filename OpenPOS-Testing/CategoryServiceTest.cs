@@ -81,10 +81,11 @@ public class CategoryServiceTest
         createdCategory.Name = "Sushi";
         
         var result = _categoryService.Update(createdCategory);
+        string re = _categoryService.FindByID(createdCategory.Id).Name;
         _categoryService.Delete(createdCategory);
 
         Assert.IsTrue(result);
-        Assert.That(_categoryService.FindByID(createdCategory.Id).Name, Is.EqualTo("Sushi"));
+        Assert.That(re, Is.EqualTo("Sushi"));
     }
 
     [Test]

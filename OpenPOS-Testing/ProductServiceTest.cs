@@ -88,10 +88,11 @@ public class ProductServiceTest
         createdProduct.Description = "Nieuwe beschrijving!";
         
         var result = _productService.Update(createdProduct);
+        string desc = _productService.FindByID(createdProduct.Id).Description;
         _productService.Delete(createdProduct);
         
         Assert.IsTrue(result);
-        Assert.That(_productService.FindByID(createdProduct.Id).Description, Is.EqualTo("Nieuwe beschrijving!"));
+        Assert.That(desc, Is.EqualTo("Nieuwe beschrijving!"));
     }
 
     [Test]

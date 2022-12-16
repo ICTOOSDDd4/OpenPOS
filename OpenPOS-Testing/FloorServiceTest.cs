@@ -81,10 +81,11 @@ public class FloorServiceTest
         createdFloor.Storey = "9";
         
         var result = _floorService.Update(createdFloor);
+        string re = _floorService.FindByID(createdFloor.Id).Storey;
         _floorService.Delete(createdFloor);
         
         Assert.IsTrue(result);
-        Assert.That(_floorService.FindByID(createdFloor.Id).Storey, Is.EqualTo("9"));
+        Assert.That(re, Is.EqualTo("9"));
     }
 
     [Test]

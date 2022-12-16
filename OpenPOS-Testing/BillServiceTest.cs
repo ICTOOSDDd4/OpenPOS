@@ -80,14 +80,15 @@ public class BillServiceTest
         var bill = _bill;
         var createdBill = _billService.Create(bill);
         
-        Assert.That(createdBill.User_id, Is.Not.EqualTo(239));
+        Assert.That(createdBill.User_id, Is.Not.EqualTo(1298));
         createdBill.User_id = 1298;
         
         var result = _billService.Update(createdBill);
+        int id = _billService.FindByID(createdBill.Id).User_id;
         _billService.Delete(createdBill);
 
         Assert.IsTrue(result);
-        Assert.That(_billService.FindByID(createdBill.Id).User_id, Is.EqualTo(1298));
+        Assert.That(id, Is.EqualTo(1298));
     }
 
     [Test]

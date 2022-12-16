@@ -81,10 +81,11 @@ public class RoleServiceTest
         createdRole.Title = "Nieuwe titel!";
         
         var result = _roleService.Update(createdRole);
+        string title = _roleService.FindByID(createdRole.Id).Title;
         _roleService.Delete(createdRole);
 
         Assert.IsTrue(result);
-        Assert.That(_roleService.FindByID(createdRole.Id).Title, Is.EqualTo("Nieuwe titel!"));
+        Assert.That(title, Is.EqualTo("Nieuwe titel!"));
     }
 
     [Test]
