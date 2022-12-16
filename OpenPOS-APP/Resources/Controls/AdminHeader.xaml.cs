@@ -1,3 +1,5 @@
+using OpenPOS_Settings;
+
 namespace OpenPOS_APP.Resources.Controls;
 
 public partial class AdminHeader : StackLayout
@@ -37,10 +39,11 @@ public partial class AdminHeader : StackLayout
 	
 	private async void OnClickedLogout(object sender, EventArgs e)
 	{
-		bool alert = await CurrentPage.DisplayAlert("Loging out", "Are you sure you want to log out?", "Yes", "No");
+		bool alert = await CurrentPage.DisplayAlert("Logging out", "Are you sure you want to log out?", "Yes", "No");
 		if (alert)
 		{
-			await Shell.Current.GoToAsync(nameof(GoodbyePage));
+			ApplicationSettings.LoggedinUser = null;
+			await Shell.Current.GoToAsync(nameof(Onboarding));
 		}
 	}
 	
