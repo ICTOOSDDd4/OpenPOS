@@ -40,7 +40,7 @@ public static class MauiProgram
 			});
             Initialize();
 
-      // Windows specific window size settings
+		// Windows specific window size settings
 #if WINDOWS
       builder.ConfigureLifecycleEvents(events =>
 				{
@@ -55,10 +55,10 @@ public static class MauiProgram
 							if (winuiAppWindow.Presenter is OverlappedPresenter p)
 							{
 								p.Maximize(); // Does work
-		                        p.IsMaximizable = false; // Does not work
+		                        p.IsMaximizable = false; // Does not work, Maui Bug
 		                        //p.IsAlwaysOnTop = true; // Does work // COMMENT OUT FOR DEV!
-								p.IsResizable = false; // Does not work
-								p.IsMinimizable = false; // Does not work
+								p.IsResizable = false; // Does not work, MAUI Bug
+								p.IsMinimizable = false; // Does not work, MAUI Bug
 								p.IsModal = false;
 							}
 							else
@@ -72,7 +72,7 @@ public static class MauiProgram
 #endif
 
 #if DEBUG
-      builder.Logging.AddDebug();
+		builder.Logging.AddDebug();
 #endif
       return builder.Build();
 	}

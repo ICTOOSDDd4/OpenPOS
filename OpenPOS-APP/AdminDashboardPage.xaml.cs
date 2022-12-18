@@ -5,22 +5,21 @@ namespace OpenPOS_APP;
 
 public partial class AdminDashboardPage : ContentPage
 {
+	public ISeries[] RevenueSeries { get; set; } 
+		= new ISeries[]
+	{
+		new LineSeries<int>
+		{
+			Values = new int[] { 4, 6, 5, 3, -3, -1, 2 }
+		},
+		new ColumnSeries<double>
+		{
+			Values = new double[] { 2, 5, 4, -2, 4, -3, 5 }
+		}
+	};
 	public AdminDashboardPage()
 	{
 		InitializeComponent();
 		AdminHeader.CurrentPage = this;
-		SettingChartData();
-	}
-
-	private void SettingChartData()
-	{
-		RevenueChart.Series = new ISeries[]
-		{
-			new LineSeries<double>
-			{
-				Values = new double[] { 2, 1, 3, 5, 3, 4, 6 },
-				Fill = null
-			}
-		};
 	}
 }

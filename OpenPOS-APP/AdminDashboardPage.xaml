@@ -12,6 +12,7 @@
             <HorizontalStackLayout>
                 <lvc:CartesianChart 
                     x:Name="RevenueChart"
+                    Series="{Binding RevenueSeries}"
                     IsVisible="true"
                 />
             </HorizontalStackLayout>
