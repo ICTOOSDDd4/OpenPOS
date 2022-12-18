@@ -9,7 +9,7 @@ public partial class AdminHeader : StackLayout
 	public AdminHeader()
 	{
 		InitializeComponent();
-      ChangeColor(1);
+		ChangeColor(1); // Marks Dashboard as selected
    }
 
    private async void OnTappedDashboardLabel(object sender, EventArgs e)

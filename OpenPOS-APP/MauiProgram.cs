@@ -5,6 +5,7 @@ using CommunityToolkit.Maui;
 using Microsoft.Maui.LifecycleEvents;
 using OpenPOS_Controllers.Services;
 using OpenPOS_Settings;
+using SkiaSharp.Views.Maui.Controls.Hosting;
 
 // Specific WinUI elements.
 #if WINDOWS
@@ -24,6 +25,7 @@ public static class MauiProgram
 		builder
 			.UseMauiApp<App>()
 			.UseMauiCommunityToolkit()
+			.UseSkiaSharp()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("LeagueSpartan-Black.ttf", "LeagueSpartanBlack");
