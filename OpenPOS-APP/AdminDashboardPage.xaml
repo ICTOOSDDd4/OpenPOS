@@ -5,9 +5,16 @@
              xmlns:customControls="clr-namespace:OpenPOS_APP.Resources.Controls"
              Title="AdminDashboardPage"
              Shell.NavBarIsVisible="False">
-    <VerticalStackLayout>
+    <VerticalStackLayout
+        x:Name="VerticalStackLayout"
+        Spacing="10">
         <customControls:AdminHeader x:Name="AdminHeader"/>
-        <customControls:RevenueChart/>
+        <HorizontalStackLayout 
+            x:Name="Charts"
+            Margin="20">
+            <customControls:RevenueChart MinimumHeightRequest="100" MinimumWidthRequest="300" x:Name="RChart"/>
+            <customControls:OrderChart MinimumHeightRequest="100" MinimumWidthRequest="300" x:Name="OChart"/>
+        </HorizontalStackLayout>
     </VerticalStackLayout>
     
 </ContentPage>

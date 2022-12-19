@@ -1,41 +1,54 @@
 using LiveChartsCore;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
+using OpenPOS_Controllers;
 using SkiaSharp;
 
 namespace OpenPOS_APP.Resources.Controls;
 
-public partial class RevenueChart : VerticalStackLayout
+public partial class RevenueChart : ContentView
 {
-   public ISeries[] RevenueSeries { get; set; }
-   public string RevenueTitle { get; set; }
+   private OrderController _orderController;
+   public ISeries[] Series { get; set; }
+   public string Title { get; set; } = "Revenue";
 
    public RevenueChart()
 	{
-      RevenueTitle = "Revenue";
+      _orderController = new OrderController();
       InitializeComponent();
-      CreateRevueneGraph();
+      CreateGraph();
    }
 
-   private void CreateRevueneGraph()
+   private void CreateGraph()
    {
       // List<OrderLine> lines = _orderController.GetOrderLines();
       // foreach (OrderLine line in lines)
       // {
       // 	IN DEVELOPMENT
       // }
-      RevenueSeries = new ISeries[]
-      { // Dev test data
-			new LineSeries<double>
+      
+      // Dev test data
+      var values = new int[100];
+      var r = new Random();
+      var t = 0;
+
+      for (var i = 0; i < 100; i++)
+      {
+         t += r.Next(-90, 100);
+         values[i] = t;
+      }
+      Series = new ISeries[]
+      { 
+			new LineSeries<int>
          {
-            Values = new List<double> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
             Name = "Revenue",
+            Values = values,
             Stroke = new SolidColorPaint(SKColors.Blue) { StrokeThickness = 4 },
             Fill = null,
             GeometryFill = null,
             GeometryStroke = null
          }
       };
-      RChart.Series = RevenueSeries;
+      RChart.Series = Series;
    }
 }
