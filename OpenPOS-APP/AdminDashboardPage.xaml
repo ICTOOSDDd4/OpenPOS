@@ -3,13 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="OpenPOS_APP.AdminDashboardPage"
              xmlns:customControls="clr-namespace:OpenPOS_APP.Resources.Controls"
-             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
              Title="AdminDashboardPage"
              Shell.NavBarIsVisible="False">
-    <lvc:CartesianChart 
-                    x:Name="RevenueChart"
-                    Title="{Binding RevenueTitle}"
-                    Series="{Binding RevenueSeries}"
-                    IsVisible="true"
-                />
+    <VerticalStackLayout>
+        <customControls:Header/>
+        
+    </VerticalStackLayout>
+    
 </ContentPage>
