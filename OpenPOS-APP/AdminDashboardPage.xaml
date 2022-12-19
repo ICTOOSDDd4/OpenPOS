@@ -6,8 +6,8 @@
              Title="AdminDashboardPage"
              Shell.NavBarIsVisible="False">
     <VerticalStackLayout>
-        <customControls:Header/>
-        
+        <customControls:AdminHeader x:Name="AdminHeader"/>
+        <customControls:RevenueChart/>
     </VerticalStackLayout>
     
 </ContentPage>
