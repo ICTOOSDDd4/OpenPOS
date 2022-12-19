@@ -32,9 +32,10 @@ public partial class AdminHeader : StackLayout
 		ChangeColor(3);
 	}
 	
-	private void OnTappedCategoryLabel(object sender, EventArgs e)
+	private async void OnTappedCategoryLabel(object sender, EventArgs e)
 	{
 		ChangeColor(4);
+		await Shell.Current.GoToAsync(nameof(AdminCategoryPage));
 	}
 	
 	private async void OnClickedLogout(object sender, EventArgs e)

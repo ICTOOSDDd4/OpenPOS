@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="OpenPOS_APP.AdminCategoryView">
+    <VerticalStackLayout
+        x:Name="MainVerticalLayout"
+        WidthRequest="500"
+        
+        BackgroundColor="{ StaticResource White}"
+        >
+        <HorizontalStackLayout
+            HorizontalOptions="EndAndExpand"
+            VerticalOptions="End"
+            >
+            <Label
+                x:Name="CategoryName"></Label>
+            <Button
+                HorizontalOptions="Fill"
+                Text="Add"
+                WidthRequest="65"
+                CornerRadius="0"
+                TextColor="Black"
+                BackgroundColor="{ StaticResource OpenPos-Green}"
+                    />
+            <Button
+                Text="Edit"
+                CornerRadius="0"
+                x:Name="InfoButton"
+                TextColor="Black"
+                IsVisible="true"
+                WidthRequest="70"
+                HorizontalOptions="Fill"
+                BackgroundColor="#49C9F5"
+            />
+            <Button
+                Text="Delete"
+                CornerRadius="0"
+                x:Name="DeleteButton"
+                WidthRequest="65"
+                TextColor="Black"
+                IsVisible="true"
+                HorizontalOptions="Fill"
+                BackgroundColor="#FF5245"
+            />
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentView>

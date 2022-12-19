@@ -114,6 +114,13 @@
 		<MauiXaml Update="CreateAccountPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+		<MauiXaml Update="AdminCategoryPage.xaml">
+		  <SubType></SubType>
+		</MauiXaml>
+		<MauiXaml Update="AdminCategoryView.xaml">
+		  <SubType>Designer</SubType>
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 	</ItemGroup>
 	<ItemGroup>
 		<MauiXaml Update="Resources\Controls\Header.xaml">
@@ -136,5 +143,11 @@
 	  <ProjectReference Include="..\OpenPOS-Controllers\OpenPOS-Controllers.csproj" />
 	  <ProjectReference Include="..\OpenPOS-Models\OpenPOS-Models.csproj" />
 	  <ProjectReference Include="..\OpenPOS-Settings\OpenPOS-Settings.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Compile Update="AdminCategoryView.xaml.cs">
+	    <DependentUpon>AdminCategoryView.xaml</DependentUpon>
+	    <SubType>Code</SubType>
+	  </Compile>
 	</ItemGroup>
 </Project>
