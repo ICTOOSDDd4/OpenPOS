@@ -36,5 +36,10 @@ namespace OpenPOS_Controllers
         {
             return _produstService.GetAllByCategoryId(categoryId);
         }
+        
+        public Product GetProductById(int id)
+        {
+            return _produstService.FindByID(id);
+        }
     }
 }

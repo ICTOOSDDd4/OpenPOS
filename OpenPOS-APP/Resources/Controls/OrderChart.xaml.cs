@@ -12,11 +12,15 @@ namespace OpenPOS_APP.Resources.Controls;
 public partial class OrderChart : ContentView
 {
 	private OrderController _orderController;
+	private ProductController _productController;
+	private Dictionary<string, int> _orderData;
 	public ISeries[] Series { get; set; }
 	public string Title { get; set; } = "Orders";
 
 	public OrderChart()
 	{
+		_orderData = new Dictionary<string, int>();
+		_productController = new ProductController();
 		_orderController = new OrderController();
 		InitializeComponent();
 		CreateGraph();
@@ -24,14 +28,20 @@ public partial class OrderChart : ContentView
 
 	private void CreateGraph()
 	{
-		var values = new List<int>();
-		var labels = new List<string>();
-		List<Order> lines = _orderController.GetAllOrders();
-		var groupBy = lines.GroupBy(x => x.Created_At);
-		foreach (var item in groupBy)
+		List<OrderLine> lines = _orderController.GetOrderLines();
+		
+		foreach (var item in lines)
 		{
-			values.Add(item.Count());
-			labels.Add(item.Key.ToString("MM-dd-yy"));
+			
+			DateTime created = _orderController.GetOrder(item.Order_id).Created_At;
+			if (_orderData.ContainsKey(created.Date.ToString("dd/MM/yyyy")))
+			{
+				_orderData[created.Date.ToString("dd/MM/yyyy")]++;
+			}
+			else
+			{
+				_orderData.Add(created.Date.ToString("dd/MM/yyyy"), 1);
+			}
 		}
 		
 		Series = new ISeries[]
@@ -39,7 +49,7 @@ public partial class OrderChart : ContentView
 			new LineSeries<int>
 			{
 				Name = "Revenue",
-				Values = values.ToArray(),
+				Values = _orderData.Values.ToArray(),
 				Stroke = new SolidColorPaint(SKColors.Blue) { StrokeThickness = 4 },
 				Fill = null,
 				GeometryFill = null,
@@ -48,15 +58,15 @@ public partial class OrderChart : ContentView
 		};
 
 
-		List<Axis> XAxes = new List<Axis>
+		List<Axis> xAxes = new List<Axis>
 		{
 			new Axis()
 			{
-				Labels = labels
+				Labels = _orderData.Keys.ToArray()
 			}
 		};
 		
-		RChart.Series = Series;
-		RChart.XAxes = XAxes;
+		OChart.Series = Series;
+		OChart.XAxes = xAxes;
 	}
 }

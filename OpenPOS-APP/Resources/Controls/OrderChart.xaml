@@ -4,11 +4,11 @@
              xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
              x:Class="OpenPOS_APP.Resources.Controls.OrderChart">
     <lvc:CartesianChart 
-        x:Name="RChart"
+        x:Name="OChart"
         Title="{Binding Title}"
         Series="{Binding Series}"
         XAxes="{Binding XAxes}"
-        ZoomMode="Both"
+        ZoomMode="X"
         IsVisible="true"
         LegendPosition="Right"/>
 </ContentView>

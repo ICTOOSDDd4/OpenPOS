@@ -6,10 +6,9 @@
              Shell.NavBarIsVisible="False">
     <lvc:CartesianChart 
         x:Name="RChart"
-        
         Title="{Binding Title}"
         Series="{Binding Series}"
-        ZoomMode="Both"
+        ZoomMode="X"
         IsVisible="true"
         LegendPosition="Right"/>
 </ContentView>

@@ -48,12 +48,12 @@ public partial class LoginScreen : ContentPage
 
     private async void OnLoginButtonClicked(object sender, EventArgs e)
     {
+        MainLoginButton.IsVisible = false;
+        MainLoginButton.IsEnabled = false;
+        LoadingIndicator.IsRunning = true;
+        LoadingIndicator.IsEnabled = true;
         if (UserAuth(_username, _password))
         {
-            MainLoginButton.IsVisible = false;
-            MainLoginButton.IsEnabled = false;
-            LoadingIndicator.IsRunning = true;
-            LoadingIndicator.IsEnabled = true;
             var role = Enum.Parse<RolesEnum>(_authenticationController.GetUserRole(_username, _password).Title);
             switch (role)
             {

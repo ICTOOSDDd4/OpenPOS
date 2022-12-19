@@ -15,6 +15,11 @@
             <customControls:RevenueChart MinimumHeightRequest="100" MinimumWidthRequest="300" x:Name="RChart"/>
             <customControls:OrderChart MinimumHeightRequest="100" MinimumWidthRequest="300" x:Name="OChart"/>
         </HorizontalStackLayout>
+        <HorizontalStackLayout 
+            x:Name="Collums"
+            Margin="20">
+            <!-- CustomControls here -->
+        </HorizontalStackLayout>
     </VerticalStackLayout>
     
 </ContentPage>

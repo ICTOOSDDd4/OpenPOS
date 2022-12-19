@@ -46,6 +46,11 @@ namespace OpenPOS_Controllers
         {
             _orderService.Update(order);
         }
+        
+        public Order GetOrder(int id)
+        {
+            return _orderService.FindByID(id);
+        }
 
         public List<Order> GetOpenOrders()
         {
