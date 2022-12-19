@@ -8,17 +8,11 @@
              Shell.NavBarIsVisible="False">
     <VerticalStackLayout>
         <customControls:AdminHeader x:Name="AdminHeader"/>
-        <VerticalStackLayout>
-            <HorizontalStackLayout>
-                <lvc:CartesianChart 
+        <lvc:CartesianChart 
                     x:Name="RevenueChart"
+                    Title="{Binding RevenueTitle}"
                     Series="{Binding RevenueSeries}"
                     IsVisible="true"
                 />
-            </HorizontalStackLayout>
-            <HorizontalStackLayout>
-                <Label Text="Testing stuff"/>
-            </HorizontalStackLayout>
-        </VerticalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

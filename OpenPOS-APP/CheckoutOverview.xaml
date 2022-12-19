@@ -29,7 +29,6 @@
                           ItemsSource="{Binding CheckoutItems}"
                           WidthRequest="600"
                           HeightRequest="650"
-                  
                 >
                             <ListView.ItemTemplate >
                                 <DataTemplate>
