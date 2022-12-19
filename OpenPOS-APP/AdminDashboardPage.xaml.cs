@@ -16,7 +16,7 @@ public partial class AdminDashboardPage : ContentPage
 		_orderController = new OrderController();
 		RevenueTitle = "Revenue";
 		InitializeComponent();
-		AdminHeader.CurrentPage = this;
+		//AdminHeader.CurrentPage = this;
 		CreateRevueneGraph();
 	}
 

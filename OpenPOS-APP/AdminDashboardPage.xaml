@@ -6,13 +6,10 @@
              xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
              Title="AdminDashboardPage"
              Shell.NavBarIsVisible="False">
-    <VerticalStackLayout>
-        <customControls:AdminHeader x:Name="AdminHeader"/>
-        <lvc:CartesianChart 
+    <lvc:CartesianChart 
                     x:Name="RevenueChart"
                     Title="{Binding RevenueTitle}"
                     Series="{Binding RevenueSeries}"
                     IsVisible="true"
                 />
-    </VerticalStackLayout>
 </ContentPage>
