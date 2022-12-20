@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-12-20T11:17:41.429Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.2 Safari/605.1.15" etag="tfEWpMQT2jXctm255PtY" version="20.7.4" type="github" pages="3">
+<mxfile host="app.diagrams.net" modified="2022-12-20T11:25:14.947Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.2 Safari/605.1.15" etag="K4exfjOonMm-O6JGt3Wx" version="20.7.4" type="github" pages="3">
   <diagram id="Idi5wzEeITfHmeWHL57_" name="Pagina-1">
     <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -1110,6 +1110,18 @@
         </mxCell>
         <mxCell id="V0250pp24PSXjkfbzm21-50" value="+ User(string name, string lastName, string email, string password)&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="V0250pp24PSXjkfbzm21-39">
           <mxGeometry y="190" width="370" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="V0250pp24PSXjkfbzm21-95" value="RolesEnum" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="657" y="530" width="170" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="V0250pp24PSXjkfbzm21-96" value="+ RolesEnum: enum" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1" parent="V0250pp24PSXjkfbzm21-95">
+          <mxGeometry y="26" width="170" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="V0250pp24PSXjkfbzm21-103" value="UtilityService" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="657" y="610" width="170" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="V0250pp24PSXjkfbzm21-104" value="+ RolesEnum: enum" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=16;" vertex="1" parent="V0250pp24PSXjkfbzm21-103">
+          <mxGeometry y="26" width="170" height="26" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
