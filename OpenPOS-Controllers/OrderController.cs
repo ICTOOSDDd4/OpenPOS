@@ -12,6 +12,7 @@ namespace OpenPOS_Controllers
     {
         private OrderService _orderService;
         private OrderLineService _orderLineService;
+        private UserController _userController;
         private OpenPosApiService _openPosApiService;
 
         public OrderController()
@@ -19,6 +20,7 @@ namespace OpenPOS_Controllers
             _orderLineService = new OrderLineService();
             _orderService = new OrderService();
             _openPosApiService = new OpenPosApiService();
+            _userController = new UserController();
         }
 
         public async Task<bool> CreateOrder(Dictionary<int, int> selectedProducts)
@@ -54,7 +56,7 @@ namespace OpenPOS_Controllers
         
         public List<OrderLineProduct> GetOrderLines(int orderId)
         {
-            return _orderLineService.GetAllById(orderId);
+            return _orderLineService.GetAllUnfinishedByRoleAndOrder(_userController.GetUserRoleByUserId(ApplicationSettings.LoggedinUser.Id).Role_id, orderId);
         }
 
         public bool OrderLinesToDone(List<OrderLineProduct> lines, Order order)

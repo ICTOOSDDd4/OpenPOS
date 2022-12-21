@@ -59,6 +59,20 @@ namespace OpenPOS_Database.ModelServices
             return resultList;
         }
 
+        public List<OrderLineProduct> GetAllUnfinishedByRoleAndOrder(int roleId, int orderId)
+        {
+            SqlCommand query = new SqlCommand("SELECT l.order_id ,l.product_id, l.status, l.amount, l.comment FROM [OpenPOS_dev].[dbo].[order_product] as l WHERE l.order_id = @OrderId AND l.status = 0 AND l.product_id IN (SELECT cp.productid FROM [OpenPOS_dev].[dbo].Category_product as cp WHERE cp.Categoryid IN (SELECT rc.Categoryid FROM [OpenPOS_dev].[dbo].role_Category as rc WHERE rc.roleid = @RoleId))");
+
+            query.Parameters.Add("@RoleId", SqlDbType.Int);
+            query.Parameters["@RoleId"].Value = roleId;
+            query.Parameters.Add("@OrderId", SqlDbType.Int);
+            query.Parameters["@OrderId"].Value = orderId;
+
+            List<OrderLineProduct> resultList = DatabaseService.Execute<OrderLineProduct>(query);
+
+            return resultList;
+        }
+
         public bool Delete(OrderLineProduct obj)
         {
             SqlCommand query = new SqlCommand("DELETE FROM [dbo].[order_product] WHERE [order_id] = @OrderId AND [product_id] = @ProductId");

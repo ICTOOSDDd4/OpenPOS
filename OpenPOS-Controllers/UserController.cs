@@ -44,5 +44,9 @@ namespace OpenPOS_Controllers
            return _userService.FindByEmail(email);
         }
 
+        public UserRole GetUserRoleByUserId(int userId)
+        {
+            return _userRoleService.FindByID(userId);
+        }
     }
 }
