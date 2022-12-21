@@ -28,12 +28,13 @@
                         <ListView x:Name="CheckoutListView"
                           ItemsSource="{Binding CheckoutItems}"
                           WidthRequest="600"
-                          HeightRequest="650"
-                  
-                >
-                            <ListView.ItemTemplate >
+                          HeightRequest="500"
+                          
+                        >
+                            <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <ViewCell>
+                                    <ViewCell
+                                        IsEnabled="false">
                                         <Grid Padding="10">
                                             <Grid.Resources>
                                                 <openPosApp1:ProductAmountConvert x:Name="ProductAmountConverter" x:Key="ProductAmountConvert" />

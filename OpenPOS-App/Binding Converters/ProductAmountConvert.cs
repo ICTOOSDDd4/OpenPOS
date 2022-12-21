@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenPOS_Models;
+using OpenPOS_Settings;
 
 namespace OpenPOS_APP
 {
@@ -14,7 +15,7 @@ namespace OpenPOS_APP
         {
             if (value != null)
             {
-                var amount = CheckoutOverview.GetCheckoutItems()[(Product)value];
+                var amount = ApplicationSettings.CheckoutList[(Product)value];
                 return amount;
             }
             return 0;

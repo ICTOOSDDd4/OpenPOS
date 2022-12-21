@@ -9,28 +9,21 @@ using OpenPOS_Settings.Exceptions;
 namespace OpenPOS_APP;
 
 public partial class CheckoutOverview : ContentPage
-{ 
-    private Dictionary<Product, int> _checkoutItems { get; set; }
+{
     private double _totalPrice;
     private double _tip;
     private readonly PaymentController _paymentController = new();
-
-    public static Dictionary<Product,int> GetCheckoutItems()
-    {
-        return ApplicationSettings.CheckoutList;
-    }
 
     public CheckoutOverview()
 	 {
         InitializeComponent();
 	      AddToCheckOut(ApplicationSettings.CheckoutList);
-        Header.currentPage = this;
+          Header.currentPage = this;
     }
 
     public void AddToCheckOut(Dictionary<Product, int> products)
     {
-        _checkoutItems = products;
-        CheckoutListView.ItemsSource = _checkoutItems.Keys;
+        CheckoutListView.ItemsSource = products.Keys;
 
         for (int i = 0; i < products.Count; i++)
         {
