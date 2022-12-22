@@ -12,6 +12,11 @@ namespace OpenPOS_Database.ModelServices
 
             return DatabaseService.Execute<OrderLine>(query);
         }
+        /// <summary>
+        /// Deze methode haalt alle orderlines op die bij een bepaalde order horen
+        /// </summary>
+        /// <param name="id">Het orderID</param>
+        /// <returns>Lijst van orderlines</returns>
         public List<OrderLineProduct> GetAllById(int id)
         {
             SqlCommand query = new SqlCommand("SELECT m.order_id, m.product_id, o.status, m.amount, p.name, m.comment, o.created_at FROM [OpenPOS_dev].[dbo].[order_product] as m INNER JOIN [dbo].[order] as o ON m.order_id = o.id INNER JOIN product as p ON m.product_id = p.id WHERE o.id = @ID");

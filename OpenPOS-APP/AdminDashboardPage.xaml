@@ -12,8 +12,22 @@
         <HorizontalStackLayout 
             x:Name="Charts"
             Margin="20">
-            <customControls:RevenueChart MinimumHeightRequest="100" MinimumWidthRequest="300" x:Name="RChart"/>
-            <customControls:OrderChart MinimumHeightRequest="100" MinimumWidthRequest="300" x:Name="OChart"/>
+            <VerticalStackLayout>
+                <Label
+                    HorizontalOptions="Center"
+                    x:Name="TotalRevenueLabel"
+                    Text="Total Revenue: $0"
+                    />
+                <customControls:RevenueChart MinimumHeightRequest="100" MinimumWidthRequest="300" x:Name="RChart"/>
+            </VerticalStackLayout>
+            <VerticalStackLayout>
+                <Label
+                    HorizontalOptions="Center"
+                    x:Name="TotalOrderLabel"
+                    Text="Total Amount of Orders: 0"
+                />
+                <customControls:OrderChart MinimumHeightRequest="100" MinimumWidthRequest="300" x:Name="OChart"/>
+            </VerticalStackLayout>
         </HorizontalStackLayout>
         <HorizontalStackLayout 
             x:Name="Collums"

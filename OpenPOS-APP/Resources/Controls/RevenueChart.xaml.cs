@@ -12,7 +12,7 @@ public partial class RevenueChart : ContentView
    private OrderController _orderController;
    private ProductController _productController;
    private Dictionary<string, double> _revenueData;
-   private double _totalPrice;
+   public double TotalPrice { get; set; }
    public ISeries[] Series { get; set; }
    public string Title { get; set; } = "Revenue";
 
@@ -31,7 +31,7 @@ public partial class RevenueChart : ContentView
       foreach (OrderLine line in lines)
       {
          double price = _productController.GetProductById(line.Product_id).Price * line.Amount;
-         _totalPrice += price;
+         TotalPrice += price;
          DateTime created = _orderController.GetOrder(line.Order_id).Created_At;
          if (_revenueData.ContainsKey(created.Date.ToString("dd/MM/yyyy")))
          {

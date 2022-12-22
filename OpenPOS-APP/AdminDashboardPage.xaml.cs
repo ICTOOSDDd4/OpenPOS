@@ -21,10 +21,15 @@ public partial class AdminDashboardPage : ContentPage
 			double itemWidth = (width / 2) - margin;
 			RChart.WidthRequest = itemWidth;
 			OChart.WidthRequest = itemWidth;
+			
 
 			double itemHeight = (height / 2) - margin;
 			RChart.HeightRequest = itemHeight;
 			OChart.HeightRequest = itemHeight;
+			
+			string revenueValue = String.Format(((Math.Round(RChart.TotalPrice) ==RChart.TotalPrice) ? "{0:0}" : "{0:0.00}"), RChart.TotalPrice);
+			TotalRevenueLabel.Text = $"Total Revenue: € {revenueValue}";
+			TotalOrderLabel.Text = "Total Amount of Orders: " + OChart.TotalAmount;
 		}
 	}
 
