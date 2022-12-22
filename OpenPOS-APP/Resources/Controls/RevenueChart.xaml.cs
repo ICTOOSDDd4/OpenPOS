@@ -26,7 +26,7 @@ public partial class RevenueChart : ContentView
    }
 
    private void CreateGraph()
-   {
+   { // TODO: Create a query for this
       List<OrderLine> lines = _orderController.GetOrderLines();
       foreach (OrderLine line in lines)
       {
@@ -37,7 +37,7 @@ public partial class RevenueChart : ContentView
          {
             _revenueData[created.Date.ToString("dd/MM/yyyy")] += price;
          }
-         else
+         else 
          {
             _revenueData.Add(created.Date.ToString("dd/MM/yyyy"), price);
          }

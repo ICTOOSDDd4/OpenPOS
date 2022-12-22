@@ -29,16 +29,14 @@ public partial class OrderChart : ContentView
 	private void CreateGraph()
 	{
 		List<OrderLine> lines = _orderController.GetOrderLines();
-		
 		foreach (var item in lines)
-		{
-			
+		{ // TODO: Create a query for this
 			DateTime created = _orderController.GetOrder(item.Order_id).Created_At;
 			if (_orderData.ContainsKey(created.Date.ToString("dd/MM/yyyy")))
 			{
 				_orderData[created.Date.ToString("dd/MM/yyyy")]++;
 			}
-			else
+			else 
 			{
 				_orderData.Add(created.Date.ToString("dd/MM/yyyy"), 1);
 			}
