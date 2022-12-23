@@ -14,9 +14,11 @@ public class UtilityService
         string filename = $"{GetRootDirectory()}/qr.png";
         string apiUrl = ApplicationSettings.QRCodeGeneratorSet.Base_url + url;
         
-        using (WebClient client = new WebClient())
+        // WebClient is used because its possible to Download the image
+        // without override and replacement issues.
+        using (WebClient client = new WebClient()) 
         {
-               client.DownloadFile(new Uri(apiUrl), filename);
+            client.DownloadFile(new Uri(apiUrl), filename);
         }
         return ImageSource.FromFile(filename);
     }

@@ -2,8 +2,6 @@
 using OpenPOS_Settings;
 using OpenPOS_Database.Services.Models;
 using OpenPOS_Models;
-using OpenPOS_Settings;
-using System.Net;
 using OpenPOS_Controllers.Services;
 
 namespace OpenPOS_Controllers;
@@ -16,6 +14,7 @@ public class PaymentController
     public PaymentController()
     {
         _tikkiePaymentService = new TikkiePaymentService();
+        _utilityService = new UtilityService();
     }
 
     public Transaction NewTikkieTransaction(int amountInCents)

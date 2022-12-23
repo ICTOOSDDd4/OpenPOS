@@ -91,29 +91,32 @@
 		<MauiXaml Update="BarOverview.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="CategoryView.xaml">
-		  <Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
 		<MauiXaml Update="CheckoutItemCardView.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="CrewOverview.xaml">
+		<MauiXaml Update="CrewPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="OrderOverviewPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="OrderView.xaml">
-		  <Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="ProductView.xaml">
-			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="RealisatieMenu.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="CreateAccountPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Resources\Controls\CategoryView.xaml">
+		  <SubType>Designer</SubType>
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Resources\Controls\OrderView.xaml">
+		  <SubType>Designer</SubType>
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Resources\Controls\ProductView.xaml">
+		  <SubType>Designer</SubType>
+		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 	</ItemGroup>
 	<ItemGroup>
@@ -140,5 +143,19 @@
 	  <ProjectReference Include="..\OpenPOS-Controllers\OpenPOS-Controllers.csproj" />
 	  <ProjectReference Include="..\OpenPOS-Models\OpenPOS-Models.csproj" />
 	  <ProjectReference Include="..\OpenPOS-Settings\OpenPOS-Settings.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Compile Update="Resources\Controls\CategoryView.xaml.cs">
+	    <DependentUpon>CategoryView.xaml</DependentUpon>
+	    <SubType>Code</SubType>
+	  </Compile>
+	  <Compile Update="Resources\Controls\OrderView.xaml.cs">
+	    <DependentUpon>OrderView.xaml</DependentUpon>
+	    <SubType>Code</SubType>
+	  </Compile>
+	  <Compile Update="Resources\Controls\ProductView.xaml.cs">
+	    <DependentUpon>ProductView.xaml</DependentUpon>
+	    <SubType>Code</SubType>
+	  </Compile>
 	</ItemGroup>
 </Project>

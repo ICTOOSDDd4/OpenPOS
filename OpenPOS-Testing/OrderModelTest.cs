@@ -18,12 +18,12 @@ public class OrderModelTest
         
         Order order = new Order(id, status, userId, billId, updatedAt, createdAt);
         
-        Assert.AreEqual(id, order.Id);
-        Assert.AreEqual(status, order.Status);
-        Assert.AreEqual(userId, order.User_id);
-        Assert.AreEqual(billId, order.Bill_id);
-        Assert.AreEqual(updatedAt, order.Updated_At);
-        Assert.AreEqual(createdAt, order.Created_At);
+        Assert.That(order.Id, Is.EqualTo(id));
+        Assert.That(order.Status, Is.EqualTo(status));
+        Assert.That(order.User_id, Is.EqualTo(userId));
+        Assert.That(order.Bill_id, Is.EqualTo(billId));
+        Assert.That(order.Updated_At, Is.EqualTo(updatedAt));
+        Assert.That(order.Created_At, Is.EqualTo(createdAt));
 
     }
 }

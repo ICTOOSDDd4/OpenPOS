@@ -16,10 +16,10 @@ public class TableModelTest
         
         Table table = new Table(id, Table_number, Bill_id, Floor_id);
         
-        Assert.AreEqual(id, table.Id);
-        Assert.AreEqual(Table_number, table.Table_number);
-        Assert.AreEqual(Bill_id, table.Bill_id);
-        Assert.AreEqual(Floor_id, table.Floor_id);
+        Assert.That(table.Id, Is.EqualTo(id));
+        Assert.That(table.Table_number, Is.EqualTo(Table_number));
+        Assert.That(table.Bill_id, Is.EqualTo(Bill_id));
+        Assert.That(table.Floor_id, Is.EqualTo(Floor_id));
         
     }
 }

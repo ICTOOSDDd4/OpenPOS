@@ -124,7 +124,7 @@ public partial class MenuPage : ContentPage
         _horizontalLayout = hLayout;
     }
 
-    private async void OnInfoButtonClicked(object sender, InfoButtonEventArgs e)
+    private void OnInfoButtonClicked(object sender, InfoButtonEventArgs e)
     {
         ProductInfoPopUp infoPop = new();
         infoPop.SetProduct(e.product);

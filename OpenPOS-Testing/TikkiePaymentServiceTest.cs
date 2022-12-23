@@ -12,7 +12,7 @@ public class PaymentServiceTest
 {
     private TikkiePaymentService _tikkiePaymentService = new();
 
-    private string _testTransaction;
+    private string? _testTransaction;
     [SetUp]
     public void Setup()
     {
