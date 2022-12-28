@@ -1,9 +1,6 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.Configuration;
-using OpenPOS_Models;
-using OpenPOS_Settings;
 using OpenPOS_Database.Services.Models;
-using OpenPOS_Settings;
 
 namespace OpenPOS_Testing;
 
@@ -12,7 +9,7 @@ public class PaymentServiceTest
 {
     private TikkiePaymentService _tikkiePaymentService = new();
 
-    private string _testTransaction;
+    private string? _testTransaction;
     [SetUp]
     public void Setup()
     {

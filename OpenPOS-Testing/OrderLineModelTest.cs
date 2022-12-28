@@ -16,10 +16,10 @@ public class OrderLineModelTest
         
         OrderLine orderLine = new OrderLine(Order_Id, Product_Id, Amount, Comment);
         
-        Assert.AreEqual(Order_Id, orderLine.Order_id);
-        Assert.AreEqual(Product_Id, orderLine.Product_id);
-        Assert.AreEqual(Amount, orderLine.Amount);
-        Assert.AreEqual(Comment, orderLine.Comment);
+        Assert.That(orderLine.Order_id, Is.EqualTo(Order_Id));
+        Assert.That(orderLine.Product_id, Is.EqualTo(Product_Id));
+        Assert.That(orderLine.Amount, Is.EqualTo(Amount));
+        Assert.That(orderLine.Comment, Is.EqualTo(Comment));
         
     }
 }

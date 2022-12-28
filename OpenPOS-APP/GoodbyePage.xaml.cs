@@ -37,7 +37,8 @@ public partial class GoodbyePage : ContentPage
             if (_count == 0)
             {
                 _timer.Stop();
-                Device.BeginInvokeOnMainThread(RedirectToMainPage); //TODO: Fix this warning
+                Dispatcher.Dispatch(RedirectToMainPage); //Possible fix
+                // Device.BeginInvokeOnMainThread(RedirectToMainPage); //TODO: Fix this warning
             }
             else
             {

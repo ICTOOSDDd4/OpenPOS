@@ -51,9 +51,9 @@ namespace OpenPOS_Testing
             {
                 DatabaseService.SetConnectionString();
                 List<Role> roles = _roleService.GetAll();
-                List<string> ExpectedRoles = new List<string>() { "Owner", "Admin", "Crew", "Cook", "Bar", "Guest" };
+                List<string> expectedRoles = new List<string>() { "Owner", "Admin", "Crew", "Cook", "Bar", "Guest" };
 
-                foreach (string role in ExpectedRoles)
+                foreach (string role in expectedRoles)
                 {
                     if (roles.All(r => r.Title != role))
                     {

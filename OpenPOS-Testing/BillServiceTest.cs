@@ -9,7 +9,7 @@ public class BillServiceTest
 {
     private BillService _billService = new();
 
-    Bill Bill = new Bill
+    Bill _bill = new Bill
     {
         User_id = 1297,
         Paid = false,
@@ -44,60 +44,58 @@ public class BillServiceTest
     [Test]
     public void BillService_GetAllBills_ReturnsAllBills()
     {
-        var Bill = this.Bill;
-        var result = _billService.Create(Bill);
-        var Bills = _billService.GetAll();
-        
-        Assert.Greater(Bills.Count, 0);
-        
+        var bill = _bill;
+        var result = _billService.Create(bill);
+        var bills = _billService.GetAll();
         _billService.Delete(result);
+
+        Assert.Greater(bills.Count, 0);
     }
 
     [Test]
     public void BillService_CreateBill_ReturnsObject()
     {
 
-        var bill = this.Bill;
+        var bill = _bill;
         var result = _billService.Create(bill);
-        
-        Assert.That(bill.User_id, Is.EqualTo(result.User_id));
         _billService.Delete(result);
+
+        Assert.That(bill.User_id, Is.EqualTo(result.User_id));
     }
     
     [Test]
     public void BillService_FindBill_ReturnsBill()
     {
-        var Bill = this.Bill;
-        var createdBill = _billService.Create(Bill);
+        var bill = _bill;
+        var createdBill = _billService.Create(bill);
         var result = _billService.FindByID(createdBill.Id);
-
-        Assert.That(Bill.User_id, Is.EqualTo(result.User_id));
-       
         _billService.Delete(result);
+
+        Assert.That(bill.User_id, Is.EqualTo(result.User_id));
     }
 
     [Test]
     public void BillService_UpdateBill_ReturnsTrue()
     {
-        var bill = Bill;
+        var bill = _bill;
         var createdBill = _billService.Create(bill);
         
-        Assert.That(createdBill.User_id, Is.Not.EqualTo(239));
+        Assert.That(createdBill.User_id, Is.Not.EqualTo(1298));
         createdBill.User_id = 1298;
         
         var result = _billService.Update(createdBill);
-        
-        Assert.IsTrue(result);
-        Assert.That(_billService.FindByID(createdBill.Id).User_id, Is.EqualTo(1298));
-        
+        int id = _billService.FindByID(createdBill.Id).User_id;
         _billService.Delete(createdBill);
+
+        Assert.IsTrue(result);
+        Assert.That(id, Is.EqualTo(1298));
     }
 
     [Test]
     public void BillService_DeleteBill_ReturnsTrue()
     {
-        var Bill = this.Bill;
-        var createdBill = _billService.Create(Bill);
+        var bill = _bill;
+        var createdBill = _billService.Create(bill);
         var result = _billService.Delete(createdBill);
         
         Assert.IsTrue(result);

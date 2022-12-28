@@ -1,5 +1,4 @@
 using System.Data;
-using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using OpenPOS_Database;
@@ -9,16 +8,21 @@ namespace OpenPOS_Controllers.Services;
 
 public class UtilityService
 {
-    public ImageSource GenerateQrCodeFromUrl(string url)
+    public async Task<ImageSource> GenerateQrCodeFromUrl(string url)
     {
         string filename = $"{GetRootDirectory()}/qr.png";
         string apiUrl = ApplicationSettings.QRCodeGeneratorSet.Base_url + url;
+
+        Uri uri = new Uri(apiUrl);
+        HttpClient client = new HttpClient();
         
-        using (WebClient client = new WebClient())
+        var response = await client.GetAsync(uri);
+        using (var fs = new FileStream(Path.GetFullPath(filename), FileMode.Create))
         {
-               client.DownloadFile(new Uri(apiUrl), filename);
+            await response.Content.CopyToAsync(fs);
         }
         return ImageSource.FromFile(filename);
+
     }
 
     public string HashPassword(string unencrypted)
