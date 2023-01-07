@@ -20,13 +20,14 @@ public partial class MainPage : ContentPage
       {
 	      ExceptionHandler.HandleException(ex, this, true, true);
       }
+
 	}
 
 	private async void OnIconLoaded()
 	{
 		await OpenPosIcon.RelRotateTo(360, 4000);
 	}
-
+	
     private async void OnLoginButtonClicked(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync(nameof(LoginScreen)); 

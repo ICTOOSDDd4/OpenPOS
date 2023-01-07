@@ -1,8 +1,6 @@
 using LiveChartsCore;
 using LiveChartsCore.SkiaSharpView;
-using LiveChartsCore.SkiaSharpView.Drawing;
 using LiveChartsCore.SkiaSharpView.Painting;
-using LiveChartsCore.VisualElements;
 using OpenPOS_Controllers;
 using OpenPOS_Models;
 using SkiaSharp;

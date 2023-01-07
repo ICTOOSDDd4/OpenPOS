@@ -1,3 +1,4 @@
+using OpenPOS_APP.Resources.Controls;
 using OpenPOS_Controllers;
 using OpenPOS_Models;
 using OpenPOS_Settings.EventArgsClasses;

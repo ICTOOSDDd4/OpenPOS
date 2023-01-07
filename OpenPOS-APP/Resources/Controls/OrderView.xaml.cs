@@ -2,7 +2,7 @@ using OpenPOS_Controllers;
 using OpenPOS_Models;
 using OpenPOS_Settings.Exceptions;
 
-namespace OpenPOS_APP;
+namespace OpenPOS_APP.Resources.Controls;
 
 public partial class OrderView : ContentView
 {

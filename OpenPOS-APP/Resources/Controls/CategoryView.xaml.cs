@@ -1,7 +1,7 @@
 using OpenPOS_Controllers;
 using OpenPOS_Models;
 
-namespace OpenPOS_APP;
+namespace OpenPOS_APP.Resources.Controls;
 
 public partial class CategoryView : ContentView
 {

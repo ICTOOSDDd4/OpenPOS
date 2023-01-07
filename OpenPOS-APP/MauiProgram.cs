@@ -55,6 +55,7 @@ public static class MauiProgram
 							if (winuiAppWindow.Presenter is OverlappedPresenter p)
 							{
 								p.Maximize(); // Does work
+								
 		                        p.IsMaximizable = false; // Does not work, Maui Bug
 		                        //p.IsAlwaysOnTop = true; // Does work // COMMENT OUT FOR DEV!
 								p.IsResizable = false; // Does not work, MAUI Bug
@@ -66,6 +67,11 @@ public static class MauiProgram
 								winuiAppWindow.Resize(new SizeInt32(1920, 1080));
 								winuiAppWindow.MoveAndResize(new RectInt32(0, 0, 1920, 1080));
 							}
+							window.ExtendsContentIntoTitleBar = false;
+							IntPtr hWnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
+							WindowId myWndId = Win32Interop.GetWindowIdFromWindow(hWnd);
+							var _appWindow = AppWindow.GetFromWindowId(myWndId);
+							_appWindow.SetPresenter(AppWindowPresenterKind.FullScreen);
 						});
 					});
 				});
