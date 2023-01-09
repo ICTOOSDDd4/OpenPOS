@@ -14,7 +14,7 @@ public class ProductService : IModelService<Product>
 
         return resultList;
     }
-
+    
    public List<Product> GetAllByFilter(string filter)
    {
       string searchTerm = string.Format("%{0}%", filter);

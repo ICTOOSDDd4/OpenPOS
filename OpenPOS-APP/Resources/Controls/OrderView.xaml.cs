@@ -75,6 +75,7 @@ public partial class OrderView : ContentView
       Table table = _tableController.GetByBillId(Order.Bill_id);
       TableNumber.Text = $"Table: {table.Table_number}";
       AddOrderLinesToLayout();
+      
    }
 
     private void AddOrderLinesToLayout()

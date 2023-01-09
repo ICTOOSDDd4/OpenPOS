@@ -51,6 +51,11 @@ namespace OpenPOS_Controllers
         {
             return _orderService.FindByID(id);
         }
+        
+        public List<Order> PaymentAllowedForBill(int id)
+        {
+            return _orderService.PaymentTest(id);
+        }
 
         public List<Order> GetOpenOrders()
         {
@@ -71,6 +76,5 @@ namespace OpenPOS_Controllers
         {
             return _orderLineService.GetAll();
         }
-
     }
 }

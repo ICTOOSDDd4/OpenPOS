@@ -35,6 +35,16 @@ namespace OpenPOS_Database.ModelServices
 
             return result;
         }
+        
+        public List<Order> PaymentTest(int billId)
+        {
+            SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[Order] WHERE [bill_id] = @bill_id WHERE [status] = false");
+
+            query.Parameters.Add("@ID", SqlDbType.Int);
+            query.Parameters["@bill_id"].Value = billId;
+
+            return DatabaseService.Execute<Order>(query);
+        }
 
         public bool Delete(Order obj)
         {
