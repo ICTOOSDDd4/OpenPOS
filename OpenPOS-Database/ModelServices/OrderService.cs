@@ -8,6 +8,10 @@ namespace OpenPOS_Database.ModelServices
 
     public class OrderService : IModelService<Order>
     {
+        /// <summary>
+        /// Returns all Orders from database
+        /// </summary>
+        /// <returns>All Orders in list of models</returns>
         public List<Order> GetAll()
         {
             List<Order> resultList = DatabaseService.Execute<Order>(new SqlCommand("SELECT * FROM [dbo].[Order]"));
@@ -24,6 +28,11 @@ namespace OpenPOS_Database.ModelServices
             return DatabaseService.Execute<Order>(query);
         }
 
+        /// <summary>
+        /// Returns a Order by id
+        /// </summary>
+        /// <param name="id">OrderId</param>
+        /// <returns>Order</returns>
         public Order FindByID(int id)
         {
             SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[Order] WHERE [Id] = @ID");
@@ -46,6 +55,11 @@ namespace OpenPOS_Database.ModelServices
             return DatabaseService.Execute<Order>(query);
         }
 
+        /// <summary>
+        /// Deletes the Delete given by id
+        /// </summary>
+        /// <param name="obj">Delete model</param>
+        /// <returns>Bool for succeeded or not</returns>
         public bool Delete(Order obj)
         {
             SqlCommand query = new SqlCommand("DELETE FROM [dbo].[order] WHERE [ID] = @OrderId");
@@ -56,6 +70,11 @@ namespace OpenPOS_Database.ModelServices
             return DatabaseService.Execute(query);
         }
 
+        /// <summary>
+        /// Updates the Order by given id and other data
+        /// </summary>
+        /// <param name="obj">Order model</param>
+        /// <returns>Bool for succeeded or not</returns>
         public bool Update(Order obj)
         {
             SqlCommand query =
@@ -74,6 +93,11 @@ namespace OpenPOS_Database.ModelServices
             return DatabaseService.Execute(query);
         }
 
+        /// <summary>
+        /// Creates a new Order with given data
+        /// </summary>
+        /// <param name="obj">Order model</param>
+        /// <returns>Updated Order model</returns>
         public Order Create(Order obj)
         {
             SqlCommand query =

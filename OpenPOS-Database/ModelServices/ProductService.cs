@@ -8,6 +8,10 @@ namespace OpenPOS_Database.Services.Models;
 
 public class ProductService : IModelService<Product>
 {
+    /// <summary>
+    /// Returns all Products from database
+    /// </summary>
+    /// <returns>All Products in list of models</returns>
     public List<Product> GetAll()
     {
         List<Product> resultList = DatabaseService.Execute<Product>(new SqlCommand("SELECT * FROM [dbo].[Product]"));
@@ -50,6 +54,11 @@ public class ProductService : IModelService<Product>
         return result;
     }
 
+    /// <summary>
+    /// Returns a Product by id
+    /// </summary>
+    /// <param name="id">ProductId</param>
+    /// <returns>Product</returns>
     public Product FindByID(int id)
     {
         SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[Product] WHERE [ID] = @ID");
@@ -62,6 +71,11 @@ public class ProductService : IModelService<Product>
         return result;
     }
 
+    /// <summary>
+    /// Deletes the Product given by id
+    /// </summary>
+    /// <param name="obj">Product model</param>
+    /// <returns>Bool for succeeded or not</returns>
     public bool Delete(Product obj)
     {
         SqlCommand query = new SqlCommand("DELETE FROM [dbo].[product] WHERE [ID] = @ProductID");
@@ -72,6 +86,11 @@ public class ProductService : IModelService<Product>
         return DatabaseService.Execute(query);
     }
 
+    /// <summary>
+    /// Updates the Product by given id and other data
+    /// </summary>
+    /// <param name="obj">Product model</param>
+    /// <returns>Bool for succeeded or not</returns>
     public bool Update(Product obj)
     {
         SqlCommand query = new SqlCommand("UPDATE [dbo].[Product] SET [Name] = @Name, [Price] = @Price, [description] = @Description WHERE [ID] = @ID");
@@ -88,6 +107,11 @@ public class ProductService : IModelService<Product>
         return DatabaseService.Execute(query);
     }
 
+    /// <summary>
+    /// Creates a new Product with given data
+    /// </summary>
+    /// <param name="obj">Product model</param>
+    /// <returns>Updated Product model</returns>
     public Product Create(Product obj)
     {
         SqlCommand query = new SqlCommand("INSERT INTO [dbo].[Product] ([Name], [Price], [Description])  OUTPUT  inserted.*  VALUES (@Name, @Price, @Description)");

@@ -6,6 +6,10 @@ namespace OpenPOS_Database.ModelServices
 {
     public class OrderLineService
     {
+        /// <summary>
+        /// Returns all OrderLines from database
+        /// </summary>
+        /// <returns>All OrderLines in list of models</returns>
         public List<OrderLine> GetAll()
         {
             SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[order_product]");
@@ -28,6 +32,7 @@ namespace OpenPOS_Database.ModelServices
 
             return resultList;
         }
+
         public List<OrderLine> GetByIds(int Order_id, int Product_id)
         {
             SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[order_product] WHERE [order_id] = @OrderId AND [product_id] = @ProductId");
@@ -50,6 +55,11 @@ namespace OpenPOS_Database.ModelServices
             return resultList;
         }
 
+        /// <summary>
+        /// Deletes the OrderLineProduct given by id
+        /// </summary>
+        /// <param name="obj">OrderLineProduct model</param>
+        /// <returns>Bool for succeeded or not</returns>
         public bool Delete(OrderLineProduct obj)
         {
             SqlCommand query = new SqlCommand("DELETE FROM [dbo].[order_product] WHERE [order_id] = @OrderId AND [product_id] = @ProductId");
@@ -62,6 +72,11 @@ namespace OpenPOS_Database.ModelServices
             return DatabaseService.Execute(query);
         }
 
+        /// <summary>
+        /// Deletes the OrderLineProduct given by OrderLineId
+        /// </summary>
+        /// <param name="obj">OrderLine model</param>
+        /// <returns>Bool for succeeded or not</returns>
         public bool Delete(OrderLine obj)
         {
             SqlCommand query = new SqlCommand("DELETE FROM [dbo].[order_product] WHERE [order_id] = @OrderId AND [product_id] = @ProductId");
@@ -74,6 +89,11 @@ namespace OpenPOS_Database.ModelServices
             return DatabaseService.Execute(query);
         }
 
+        /// <summary>
+        /// Creates a new OrderLine with given data
+        /// </summary>
+        /// <param name="obj">OrderLine model</param>
+        /// <returns>Updated OrderLine model</returns>
         public OrderLine Create(OrderLine obj)
         {
             SqlCommand query = new SqlCommand("INSERT INTO [dbo].[order_product] ([order_id], [product_id], [amount], [comment])  OUTPUT  inserted.*  VALUES (@OrderId, @ProductId, @Amount, @Comment)");
