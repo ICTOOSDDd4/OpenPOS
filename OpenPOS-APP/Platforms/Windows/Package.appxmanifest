@@ -6,7 +6,7 @@
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
   IgnorableNamespaces="uap rescap">
 
-  <Identity Name="OpenPOS" Publisher="CN=Open Business Project" Version="0.2.0.1" />
+  <Identity Name="OpenPOS" Publisher="CN=Open Business Project" Version="0.3.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="638F6BBC-E91B-4F01-93F0-4E6103E31382" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
