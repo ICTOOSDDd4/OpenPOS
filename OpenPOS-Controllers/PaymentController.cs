@@ -3,7 +3,6 @@ using OpenPOS_Controllers.Services;
 using OpenPOS_Settings;
 using OpenPOS_Database.Services.Models;
 using OpenPOS_Models;
-using OpenPOS_Controllers.Services;
 
 namespace OpenPOS_Controllers;
 

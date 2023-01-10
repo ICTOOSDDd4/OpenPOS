@@ -7,8 +7,6 @@ namespace OpenPOS_APP;
 public partial class AdminDashboardPage : ContentPage
 {
 	private bool _isInitialized;
-	private ProductController _productController;
-	private CategoryController _categoryController;
 	public AdminDashboardPage()
 	{
 		InitializeComponent();
