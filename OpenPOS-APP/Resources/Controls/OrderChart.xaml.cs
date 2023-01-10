@@ -44,7 +44,7 @@ public partial class OrderChart : ContentView
 		{ 
 			new LineSeries<int>
 			{
-				Name = "Revenue",
+				Name = "Orders",
 				Values = _orderData.Values.ToArray(),
 				Stroke = new SolidColorPaint(SKColors.Blue) { StrokeThickness = 4 },
 				Fill = null,
