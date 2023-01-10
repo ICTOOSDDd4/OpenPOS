@@ -10,13 +10,10 @@ namespace OpenPOS_Controllers;
 public class PaymentController
 {
     private TikkiePaymentService _tikkiePaymentService;
-    private UtilityService _utilityService;
 
     public PaymentController()
     {
-        _utilityService = new UtilityService();
         _tikkiePaymentService = new TikkiePaymentService();
-        _utilityService = new UtilityService();
     }
 
     public Transaction NewTikkieTransaction(int amountInCents)

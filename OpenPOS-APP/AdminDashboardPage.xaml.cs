@@ -54,9 +54,6 @@ public partial class AdminDashboardPage : ContentPage
 		TopProducts.HeightRequest = itemHeight;
 		BottomCategories.HeightRequest = itemHeight;
 		BottomProducts.HeightRequest = itemHeight;
-
-		// List<Product> products = _productController.GetAllProducts();
-		// List<Category> categories = _categoryController.GetAll();
 		
 	}
 
