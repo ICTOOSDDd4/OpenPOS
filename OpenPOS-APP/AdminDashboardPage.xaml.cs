@@ -7,8 +7,6 @@ namespace OpenPOS_APP;
 public partial class AdminDashboardPage : ContentPage
 {
 	private bool _isInitialized;
-	private ProductController _productController;
-	private CategoryController _categoryController;
 	public AdminDashboardPage()
 	{
 		InitializeComponent();
@@ -56,9 +54,6 @@ public partial class AdminDashboardPage : ContentPage
 		TopProducts.HeightRequest = itemHeight;
 		BottomCategories.HeightRequest = itemHeight;
 		BottomProducts.HeightRequest = itemHeight;
-
-		// List<Product> products = _productController.GetAllProducts();
-		// List<Category> categories = _categoryController.GetAll();
 		
 	}
 
