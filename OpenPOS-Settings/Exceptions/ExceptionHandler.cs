@@ -1,4 +1,6 @@
-﻿namespace OpenPOS_Settings.Exceptions;
+﻿using System.Diagnostics;
+
+namespace OpenPOS_Settings.Exceptions;
 
 public class ExceptionHandler
 {
@@ -19,5 +21,7 @@ public class ExceptionHandler
             }
             // TODO: Add popup or screen for when the application hasn't been initialized yet
         }
+        Debug.WriteLine(ex.Message);
+        Debug.WriteLine(ex.StackTrace);
     }
 }

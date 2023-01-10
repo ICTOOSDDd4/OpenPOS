@@ -24,5 +24,5 @@ public class ProductModelTest
         Assert.That(product.Description, Is.EqualTo(description));
         Assert.That(product.Imagepath, Is.EqualTo(imagepath));
         Assert.That(product.Allergies, Is.EqualTo(allergies));
-   }
+    }
 }
