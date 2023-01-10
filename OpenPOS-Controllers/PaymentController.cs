@@ -3,6 +3,7 @@ using OpenPOS_Controllers.Services;
 using OpenPOS_Settings;
 using OpenPOS_Database.Services.Models;
 using OpenPOS_Models;
+using OpenPOS_TikkiePayment;
 
 namespace OpenPOS_Controllers;
 
