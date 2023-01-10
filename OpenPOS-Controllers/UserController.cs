@@ -9,6 +9,7 @@ namespace OpenPOS_Controllers
     {
         private UserService _userService;
         private UserRoleService _userRoleService;
+        private UtilityService _utilityService;
 
         public UserController()
         {
