@@ -14,7 +14,7 @@ public class ProductModelTest
         double price = 10.00;
         string description = "Test Description";
         string imagepath = "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png";
-        string allergies = "sugar";
+        string allergies = "Test Allergies";
 
         Product product = new Product(id,name, price, description, imagepath, allergies);
 

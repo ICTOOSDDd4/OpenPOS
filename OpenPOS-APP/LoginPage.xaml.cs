@@ -48,17 +48,17 @@ public partial class LoginScreen : ContentPage
 
     private async void OnLoginButtonClicked(object sender, EventArgs e)
     {
+        MainLoginButton.IsVisible = false;
+        MainLoginButton.IsEnabled = false;
+        LoadingIndicator.IsRunning = true;
+        LoadingIndicator.IsEnabled = true;
         if (UserAuth(_username, _password))
         {
-            MainLoginButton.IsVisible = false;
-            MainLoginButton.IsEnabled = false;
-            LoadingIndicator.IsRunning = true;
-            LoadingIndicator.IsEnabled = true;
             var role = Enum.Parse<RolesEnum>(_authenticationController.GetUserRole(_username, _password).Title);
             switch (role)
             {
                 case (RolesEnum.Owner or RolesEnum.Admin):
-                    await Shell.Current.GoToAsync(nameof(AdminOverview));
+                    await Shell.Current.GoToAsync(nameof(AdminDashboardPage));
                     break;
                 case (RolesEnum.Crew):
                     await Shell.Current.GoToAsync(nameof(CrewOverview));
@@ -80,14 +80,14 @@ public partial class LoginScreen : ContentPage
             _username = string.Empty;
             EmailEntry.Text = string.Empty;
             PasswordEntry.Text = string.Empty;
-      }
-      else
-      {
-         LoadingIndicator.IsVisible = false;
-         LoadingIndicator.IsRunning = false;
-         MainLoginButton.IsVisible = true;
-         await DisplayAlert("Invalid credentials", "This username and/or password are not correct.", "Try again");
-      }
+        }
+        else
+        {
+            LoadingIndicator.IsVisible = false;
+            LoadingIndicator.IsRunning = false;
+            MainLoginButton.IsVisible = true;
+            await DisplayAlert("Invalid credentials", "This username and/or password are not correct.", "Try again");
+        }
 
    }
 

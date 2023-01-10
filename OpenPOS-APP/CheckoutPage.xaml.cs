@@ -14,6 +14,7 @@ public partial class CheckoutOverview : ContentPage
     private double _totalPrice;
     private double _tip;
     private readonly PaymentController _paymentController = new();
+    private readonly OrderController _orderController = new();
 
     public static Dictionary<Product,int> GetCheckoutItems()
     {
@@ -24,7 +25,7 @@ public partial class CheckoutOverview : ContentPage
 	 {
         InitializeComponent();
 	      AddToCheckOut(ApplicationSettings.CheckoutList);
-        Header.currentPage = this;
+        Header.CurrentPage = this;
     }
 
     public void AddToCheckOut(Dictionary<Product, int> products)
@@ -45,6 +46,13 @@ public partial class CheckoutOverview : ContentPage
 
     public async void OnClickedSplitPay(object sender, EventArgs args)
     {
+        // TODO: Bugged
+        // if (!_orderController.PaymentAllowedForBill(ApplicationSettings.CurrentBill.Id).Any()) 
+        // {
+        //     await DisplayAlert("Oops", "You can't split pay when there are unserved orders", "OK");
+        //     return;
+        // }
+
         bool loop = true;
 
         while (loop)
@@ -67,7 +75,7 @@ public partial class CheckoutOverview : ContentPage
                         await Shell.Current.GoToAsync(nameof(PaymentPage));
                         continue;
                     }
-                    else throw new Exception($"Payment Error: {splitAmount} isn't compatible with the API.");
+                    throw new Exception($"Payment Error: {splitAmount} isn't compatible with the API.");
                 }
 
                 await DisplayAlert("Oops", "You can't split a bill with a negative amount of people!", "Try Again");
@@ -103,6 +111,13 @@ public partial class CheckoutOverview : ContentPage
 
     private async void OnClickedPay(object sender, EventArgs args)
     {
+        // TODO: Bugged
+        // if (!_orderController.PaymentAllowedForBill(ApplicationSettings.CurrentBill.Id).Any()) 
+        // {
+        //     await DisplayAlert("Oops", "You can't split pay when there are unserved orders", "OK");
+        //     return;
+        // }
+        
         int totalInCents = (int)Math.Round(_totalPrice * 100);
         int tipInCents = (int)Math.Round(_tip * 100);
         int total = totalInCents + tipInCents;

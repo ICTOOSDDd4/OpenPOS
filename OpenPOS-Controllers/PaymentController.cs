@@ -1,8 +1,9 @@
-﻿using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Linq;
 using OpenPOS_Controllers.Services;
 using OpenPOS_Settings;
 using OpenPOS_Database.Services.Models;
 using OpenPOS_Models;
+using OpenPOS_Controllers.Services;
 
 namespace OpenPOS_Controllers;
 
@@ -15,6 +16,7 @@ public class PaymentController
     {
         _utilityService = new UtilityService();
         _tikkiePaymentService = new TikkiePaymentService();
+        _utilityService = new UtilityService();
     }
 
     public Transaction NewTikkieTransaction(int amountInCents)

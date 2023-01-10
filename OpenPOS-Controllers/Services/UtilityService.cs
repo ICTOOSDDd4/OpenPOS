@@ -15,7 +15,6 @@ public class UtilityService
 
         Uri uri = new Uri(apiUrl);
         HttpClient client = new HttpClient();
-        
         var response = await client.GetAsync(uri);
         using (var fs = new FileStream(Path.GetFullPath(filename), FileMode.Create))
         {

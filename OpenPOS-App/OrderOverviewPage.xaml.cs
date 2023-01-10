@@ -1,7 +1,9 @@
+using OpenPOS_APP.Resources.Controls;
 using OpenPOS_Controllers;
 using OpenPOS_Models;
 using OpenPOS_Settings.EventArgsClasses;
 using OpenPOS_Settings.Exceptions;
+using Plugin.Maui.Audio;
 
 namespace OpenPOS_APP;
 
@@ -42,6 +44,9 @@ public partial class OrderOverviewPage : ContentPage
             Orders.Add(orderEvent.order); 
             AddOrderToLayout(orderEvent.order);
         });
+        
+        var audioPlayer = AudioManager.Current.CreatePlayer(await FileSystem.OpenAppPackageFileAsync("service-bell-ring.mp3"));
+        audioPlayer.Play();
         
     }
 

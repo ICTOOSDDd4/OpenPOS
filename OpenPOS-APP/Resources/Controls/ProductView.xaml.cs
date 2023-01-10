@@ -5,7 +5,7 @@ using OpenPOS_Settings.EventArgsClasses;
 using Brush = Microsoft.Maui.Controls.Brush;
 using Shadow = Microsoft.Maui.Controls.Shadow;
 
-namespace OpenPOS_APP;
+namespace OpenPOS_APP.Resources.Controls;
 
 public partial class ProductView : ContentView
 {

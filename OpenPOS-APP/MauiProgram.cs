@@ -5,6 +5,7 @@ using CommunityToolkit.Maui;
 using Microsoft.Maui.LifecycleEvents;
 using OpenPOS_Controllers.Services;
 using OpenPOS_Settings;
+using SkiaSharp.Views.Maui.Controls.Hosting;
 
 // Specific WinUI elements.
 #if WINDOWS
@@ -24,6 +25,7 @@ public static class MauiProgram
 		builder
 			.UseMauiApp<App>()
 			.UseMauiCommunityToolkit()
+			.UseSkiaSharp()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("LeagueSpartan-Black.ttf", "LeagueSpartanBlack");
@@ -38,7 +40,7 @@ public static class MauiProgram
 			});
             Initialize();
 
-      // Windows specific window size settings
+		// Windows specific window size settings
 #if WINDOWS
       builder.ConfigureLifecycleEvents(events =>
 				{
@@ -53,10 +55,11 @@ public static class MauiProgram
 							if (winuiAppWindow.Presenter is OverlappedPresenter p)
 							{
 								p.Maximize(); // Does work
-		                        p.IsMaximizable = false; // Does not work
+								
+		                        p.IsMaximizable = false; // Does not work, Maui Bug
 		                        //p.IsAlwaysOnTop = true; // Does work // COMMENT OUT FOR DEV!
-								p.IsResizable = false; // Does not work
-								p.IsMinimizable = false; // Does not work
+								p.IsResizable = false; // Does not work, MAUI Bug
+								p.IsMinimizable = false; // Does not work, MAUI Bug
 								p.IsModal = false;
 							}
 							else
@@ -64,13 +67,18 @@ public static class MauiProgram
 								winuiAppWindow.Resize(new SizeInt32(1920, 1080));
 								winuiAppWindow.MoveAndResize(new RectInt32(0, 0, 1920, 1080));
 							}
+							window.ExtendsContentIntoTitleBar = false;
+							IntPtr hWnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
+							WindowId myWndId = Win32Interop.GetWindowIdFromWindow(hWnd);
+							var _appWindow = AppWindow.GetFromWindowId(myWndId);
+							_appWindow.SetPresenter(AppWindowPresenterKind.FullScreen);
 						});
 					});
 				});
 #endif
 
 #if DEBUG
-      builder.Logging.AddDebug();
+		builder.Logging.AddDebug();
 #endif
       return builder.Build();
 	}

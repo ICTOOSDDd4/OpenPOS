@@ -14,7 +14,7 @@ public class ProductService : IModelService<Product>
 
         return resultList;
     }
-
+    
    public List<Product> GetAllByFilter(string filter)
    {
       string searchTerm = string.Format("%{0}%", filter);
@@ -28,7 +28,7 @@ public class ProductService : IModelService<Product>
       var result = DatabaseService.Execute<Product>(query);
         foreach (Product prod in result)
         {
-            System.Diagnostics.Debug.WriteLine(prod.Name);
+            Debug.WriteLine(prod.Name);
         }
       return result;
     }
