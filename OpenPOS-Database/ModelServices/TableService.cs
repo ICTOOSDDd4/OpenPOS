@@ -7,7 +7,11 @@ namespace OpenPOS_Database.Services.Models;
 
 public class TableService : IModelService<Table>
 {
-
+    /// <summary>
+    /// Returns a Table by number (not id but had given value)
+    /// </summary>
+    /// <param name="id">TableNumber</param>
+    /// <returns>Table</returns>
     public Table FindByTableNumber(int tableNumber) 
    {
       SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[restaurant_table] WHERE [table_number] = @TableNumber");
@@ -53,6 +57,11 @@ public class TableService : IModelService<Table>
         return result;
     }
 
+    /// <summary>
+    /// Returns a Table by BillId
+    /// </summary>
+    /// <param name="id">BillId</param>
+    /// <returns>Table</returns>
     public Table FindByBill(int id)
     {
 

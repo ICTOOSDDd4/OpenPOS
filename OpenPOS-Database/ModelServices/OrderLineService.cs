@@ -16,11 +16,12 @@ namespace OpenPOS_Database.ModelServices
 
             return DatabaseService.Execute<OrderLine>(query);
         }
+        
         /// <summary>
-        /// Deze methode haalt alle orderlines op die bij een bepaalde order horen
+        /// Returns all OrderLineProducts by id
         /// </summary>
-        /// <param name="id">Het orderID</param>
-        /// <returns>Lijst van orderlines</returns>
+        /// <param name="id">OrderId</param>
+        /// <returns>All OrderLineProducts in a list of models</returns>
         public List<OrderLineProduct> GetAllById(int id)
         {
             SqlCommand query = new SqlCommand("SELECT m.order_id, m.product_id, o.status, m.amount, p.name, m.comment, o.created_at FROM [OpenPOS_dev].[dbo].[order_product] as m INNER JOIN [dbo].[order] as o ON m.order_id = o.id INNER JOIN product as p ON m.product_id = p.id WHERE o.id = @ID");
@@ -33,6 +34,12 @@ namespace OpenPOS_Database.ModelServices
             return resultList;
         }
 
+        /// <summary>
+        /// Returns all OrderLines by OrderId and ProductId
+        /// </summary>
+        /// <param name="Order_id">OrderId</param>
+        /// <param name="Product_id">ProductId</param>
+        /// <returns>All OrderLines in a list of models</returns>
         public List<OrderLine> GetByIds(int Order_id, int Product_id)
         {
             SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[order_product] WHERE [order_id] = @OrderId AND [product_id] = @ProductId");
@@ -46,6 +53,11 @@ namespace OpenPOS_Database.ModelServices
 
             return resultList;
         }
+
+        /// <summary>
+        /// Returns all OrderLineProducts that are unfinished (status = false)
+        /// </summary>
+        /// <returns>All OrderLineProducts in a list of models</returns>
         public List<OrderLineProduct> GetAllUnfinished()
         {
             SqlCommand query = new SqlCommand("SELECT m.order_id, m.product_id, o.status, m.amount, p.name, m.comment, o.created_at FROM [OpenPOS_dev].[dbo].[order_product] as m INNER JOIN [dbo].[order] as o ON m.order_id = o.id INNER JOIN product as p ON m.product_id = p.id WHERE o.[status] = 0");

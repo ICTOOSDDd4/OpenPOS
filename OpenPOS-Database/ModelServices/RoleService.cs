@@ -83,6 +83,11 @@ public class RoleService : IModelService<Role>
         return DatabaseService.ExecuteSingle<Role>(query);
     }
 
+    /// <summary>
+    /// Returns a Role by UserId
+    /// </summary>
+    /// <param name="id">UserId</param>
+    /// <returns>Role</returns>
     public Role FindUserRole(int id)
     {
         SqlCommand query = new SqlCommand(
@@ -95,7 +100,12 @@ public class RoleService : IModelService<Role>
 
         return result;
     }
-    
+
+    /// <summary>
+    /// Returns a Role by RoleTitle
+    /// </summary>
+    /// <param name="id">RoleEnum</param>
+    /// <returns>Role</returns>
     public Role FindOnRoleTitle(RolesEnum role)
     {
         SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[Role] WHERE [title] = @Title");

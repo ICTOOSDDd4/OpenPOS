@@ -18,8 +18,13 @@ public class ProductService : IModelService<Product>
 
         return resultList;
     }
-    
-   public List<Product> GetAllByFilter(string filter)
+
+    /// <summary>
+    /// Returns all Products that contain the filter string from database
+    /// </summary>
+    /// <param name="filter">The string to filter Products by</param>
+    /// <returns>All Products in list of models</returns>
+    public List<Product> GetAllByFilter(string filter)
    {
       string searchTerm = string.Format("%{0}%", filter);
       SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[product] WHERE [name] LIKE @Filter");
@@ -36,7 +41,12 @@ public class ProductService : IModelService<Product>
         }
       return result;
     }
-    
+
+    /// <summary>
+    /// Returns all Products in given category from database
+    /// </summary>
+    /// <param name="categoryId">The Category to filter Products by</param>
+    /// <returns>All Products in list of models</returns>
     public List<Product> GetAllByCategoryId(int categoryId)
     {
         List<Product> result;

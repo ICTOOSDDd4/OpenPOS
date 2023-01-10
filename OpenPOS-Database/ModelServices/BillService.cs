@@ -75,8 +75,8 @@ public class BillService : IModelService<Bill>
     /// <summary>
     /// Creates a new Bill with given data
     /// </summary>
-    /// <param name="obj">User model</param>
-    /// <returns>Updated User model</returns>
+    /// <param name="obj">Bill model</param>
+    /// <returns>Updated Bill model</returns>
     public Bill Create(Bill obj)
     {
         SqlCommand query = new SqlCommand("INSERT INTO [dbo].[Bill] ([user_id], [paid], [created_at], [updated_at])  OUTPUT  inserted.*  VALUES (@userid, @paid, @created_at, @updated_at)");

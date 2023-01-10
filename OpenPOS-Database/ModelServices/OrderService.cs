@@ -19,6 +19,10 @@ namespace OpenPOS_Database.ModelServices
             return resultList;
         }
 
+        /// <summary>
+        /// Returns all Orders that have not been completed (status = false) from database
+        /// </summary>
+        /// <returns>All Orders in list of models</returns>
         public List<Order> GetAllOpenOrders()
         {
             SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[Order] WHERE [status] = @status");
@@ -44,7 +48,12 @@ namespace OpenPOS_Database.ModelServices
 
             return result;
         }
-        
+
+        /// <summary>
+        /// Returns all Orders that have not been completed (status = false) that are linked to a Bill
+        /// </summary>
+        /// <param name="billId">BillId</param>
+        /// <returns>All Orders in list of models</returns>
         public List<Order> PaymentTest(int billId)
         {
             SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[Order] WHERE [bill_id] = @bill_id WHERE [status] = false");
