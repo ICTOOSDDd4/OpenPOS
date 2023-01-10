@@ -9,7 +9,7 @@ public class FloorServiceTest
 {
     private FloorService _floorService = new();
 
-    Floor Floor = new Floor
+    private Floor _floor = new Floor
     {
         Storey = "7"
     };
@@ -41,61 +41,58 @@ public class FloorServiceTest
     [Test]
     public void FloorService_GetAllFloors_ReturnsAllFloors()
     {
-        var Floor = this.Floor;
-        var result = _floorService.Create(Floor);
-        var Floors = _floorService.GetAll();
-        
-        Assert.Greater(Floors.Count, 0);
-
+        var floor = _floor;
+        var result = _floorService.Create(floor);
+        var floors = _floorService.GetAll();
         _floorService.Delete(result);
+
+        Assert.Greater(floors.Count, 0);
     }
 
     [Test]
     public void FloorService_CreateFloor_ReturnsObject()
     {
 
-        var Floor = this.Floor;
-        var result = _floorService.Create(Floor);
-        
-        Assert.That(Floor.Storey, Is.EqualTo(result.Storey));
-        
+        var floor = _floor;
+        var result = _floorService.Create(floor);
         _floorService.Delete(result);
+        
+        Assert.That(floor.Storey, Is.EqualTo(result.Storey));
     }
     
     [Test]
     public void FloorService_FindFloor_ReturnsFloor()
     {
-        var Floor = this.Floor;
-        var createdFloor = _floorService.Create(Floor);
+        var floor = _floor;
+        var createdFloor = _floorService.Create(floor);
         var result = _floorService.FindByID(createdFloor.Id);
-       
-        Assert.That(Floor.Storey, Is.EqualTo(result.Storey));
-       
         _floorService.Delete(result);
+        
+        Assert.That(floor.Storey, Is.EqualTo(result.Storey));
     }
 
     [Test]
     public void FloorService_UpdateFloor_ReturnsTrue()
     {
-        var Floor = this.Floor;
-        var createdFloor = _floorService.Create(Floor);
+        var floor =_floor;
+        var createdFloor = _floorService.Create(floor);
         
         Assert.That(createdFloor.Storey, Is.Not.EqualTo("9"));
         createdFloor.Storey = "9";
         
         var result = _floorService.Update(createdFloor);
+        string re = _floorService.FindByID(createdFloor.Id).Storey;
+        _floorService.Delete(createdFloor);
         
         Assert.IsTrue(result);
-        Assert.That(_floorService.FindByID(createdFloor.Id).Storey, Is.EqualTo("9"));
-        
-        _floorService.Delete(createdFloor);
+        Assert.That(re, Is.EqualTo("9"));
     }
 
     [Test]
     public void FloorService_DeleteFloor_ReturnsTrue()
     {
-        var Floor = this.Floor;
-        var createdFloor = _floorService.Create(Floor);
+        var floor = _floor;
+        var createdFloor = _floorService.Create(floor);
         var result = _floorService.Delete(createdFloor);
         
         Assert.IsTrue(result);

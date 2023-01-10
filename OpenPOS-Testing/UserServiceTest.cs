@@ -11,7 +11,7 @@ public class UserServiceTest
     private UserService _userService = new();
     private UtilityService _utilityService = new();
 
-    User user = new User
+    private User _user = new User
     {
         Name = "Voornaam",
         Last_name = "Achternaam",
@@ -49,43 +49,40 @@ public class UserServiceTest
     [Test]
     public void UserService_GetAllUsers_ReturnsAllUsers()
     {
-        var user = this.user;
+        var user = _user;
         var result = _userService.Create(user);
         var users = _userService.GetAll();
-        
-        Assert.Greater(users.Count, 0);
-        
         _userService.Delete(result);
+
+        Assert.Greater(users.Count, 0);
     }
 
     [Test]
     public void UserService_CreateUser_ReturnsObject()
     {
 
-        var user = this.user;
+        var user = _user;
         var result = _userService.Create(user);
-        
-        Assert.That(user.Email, Is.EqualTo(result.Email));
-       
         _userService.Delete(result);
+
+        Assert.That(user.Email, Is.EqualTo(result.Email));
     }
     
     [Test]
     public void UserService_FindUser_ReturnsUser()
     {
-        var user = this.user;
+        var user = _user;
         var createdUser = _userService.Create(user);
         var result = _userService.FindByID(createdUser.Id);
-        
-        Assert.That(user.Email, Is.EqualTo(result.Email));
-        
         _userService.Delete(result);
+
+        Assert.That(user.Email, Is.EqualTo(result.Email));
     }
 
     [Test]
     public void UserService_UpdateUser_ReturnsTrue()
     {
-        var user = this.user;
+        var user = _user;
         var createdUser = _userService.Create(user);
         
         Assert.That(createdUser.Name, Is.Not.EqualTo("Gerard"));
@@ -93,17 +90,18 @@ public class UserServiceTest
         createdUser.Last_name = "Joling";
         
         var result = _userService.Update(createdUser);
+        string name = _userService.FindByID(createdUser.Id).Name;
+        _userService.Delete(createdUser);
+
         
         Assert.IsTrue(result);
-        Assert.That(_userService.FindByID(createdUser.Id).Name, Is.EqualTo("Gerard"));
-        
-        _userService.Delete(createdUser);
+        Assert.That(name, Is.EqualTo("Gerard"));
     }
 
     [Test]
     public void UserService_DeleteUser_ReturnsTrue()
     {
-        var user = this.user;
+        var user = _user;
         var createdUser = _userService.Create(user);
         var result = _userService.Delete(createdUser);
         
@@ -114,7 +112,6 @@ public class UserServiceTest
     [Test]
     public void UserService_LoginUser_ReturnsUserObject()
     {
-        //Deze user is al aangemaakt in de database
         string email = "unittest@openpos.org";
         string password = "unittest";
         

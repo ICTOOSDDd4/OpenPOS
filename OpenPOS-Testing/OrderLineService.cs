@@ -9,7 +9,7 @@ public class OrderLineServiceTest
 {
     private OrderLineService _orderLineService = new();
 
-    OrderLine OrderLine = new OrderLine
+    private OrderLine _orderLine = new OrderLine
     {
         Order_id = 1143,
         Product_id = 1168,
@@ -44,47 +44,44 @@ public class OrderLineServiceTest
     [Test]
     public void OrderService_GetAllOrders_ReturnsAllOrders()
     {
-        var OrderLine = this.OrderLine;
-        var result = _orderLineService.Create(OrderLine);
-        var OrderLines = _orderLineService.GetAll();
-
-        Assert.Greater(OrderLines.Count, 0);
-
+        var orderLine = _orderLine;
+        var result = _orderLineService.Create(orderLine);
+        var orderLines = _orderLineService.GetAll();
         _orderLineService.Delete(result);
+
+        Assert.Greater(orderLines.Count, 0);
     }
 
     [Test]
     public void OrderService_CreateOrder_ReturnsObject()
     {
 
-        var OrderLine = this.OrderLine;
-        var result = _orderLineService.Create(OrderLine);
-
-        Assert.That(OrderLine.Comment, Is.EqualTo(result.Comment));
-
+        var orderLine = this._orderLine;
+        var result = _orderLineService.Create(orderLine);
         _orderLineService.Delete(result);
+        
+        Assert.That(orderLine.Comment, Is.EqualTo(result.Comment));
     }
 
     [Test]
     public void OrderService_FindOrder_ReturnsOrder()
     {
-        var OrderLine = this.OrderLine;
-        var createdOrderLine = _orderLineService.Create(OrderLine);
+        var orderLine = this._orderLine;
+        var createdOrderLine = _orderLineService.Create(orderLine);
         var result = _orderLineService.GetAllById(createdOrderLine.Order_id);
-
-        Assert.Greater(result.Count, 0);
-
         foreach(var line in result) 
         { 
             _orderLineService.Delete(line);
         }
+        
+        Assert.Greater(result.Count, 0);
     }
 
     [Test]
     public void OrderService_DeleteOrder_ReturnsTrue()
     {
-        var OrderLine = this.OrderLine;
-        var createdOrderLine = _orderLineService.Create(OrderLine);
+        var orderLine = this._orderLine;
+        var createdOrderLine = _orderLineService.Create(orderLine);
         var result = _orderLineService.Delete(createdOrderLine);
 
         Assert.IsTrue(result);
@@ -94,9 +91,8 @@ public class OrderLineServiceTest
     [Test]
     public void OrderService_GetAllUnfinishedOrders_ReturnsAllUnfinishedOrders()
     {
-        var OrderLine = this.OrderLine;
-        var OrderLines = _orderLineService.GetAllUnfinished();
+        var orderLines = _orderLineService.GetAllUnfinished();
 
-        Assert.Greater(_orderLineService.GetAll().Count, OrderLines.Count);
+        Assert.Greater(_orderLineService.GetAll().Count, orderLines.Count);
     }
 }

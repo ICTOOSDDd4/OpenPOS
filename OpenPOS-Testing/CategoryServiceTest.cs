@@ -9,7 +9,7 @@ public class CategoryServiceTest
 {
     private CategoryService _categoryService = new();
 
-    Category Category = new Category
+    private Category _category = new Category
     {
         Name = "UnitTest Category"
     };
@@ -41,61 +41,58 @@ public class CategoryServiceTest
     [Test]
     public void CategoryService_GetAllCategorys_ReturnsAllCategorys()
     {
-        var Category = this.Category;
-        var result = _categoryService.Create(Category);
-        var Categorys = _categoryService.GetAll();
-        
-        Assert.Greater(Categorys.Count, 0);
-
+        var category = _category;
+        var result = _categoryService.Create(category);
+        var categories = _categoryService.GetAll();
         _categoryService.Delete(result);
+
+        Assert.Greater(categories.Count, 0);
     }
 
     [Test]
     public void CategoryService_CreateCategory_ReturnsObject()
     {
 
-        var Category = this.Category;
-        var result = _categoryService.Create(Category);
-        
-        Assert.That(Category.Name, Is.EqualTo(result.Name));
-
+        var category = this._category;
+        var result = _categoryService.Create(category);
         _categoryService.Delete(result);
+        
+        Assert.That(category.Name, Is.EqualTo(result.Name));
     }
     
     [Test]
     public void CategoryService_FindCategory_ReturnsCategory()
     {
-        var Category = this.Category;
-        var createdCategory = _categoryService.Create(Category);
+        var category = this._category;
+        var createdCategory = _categoryService.Create(category);
         var result = _categoryService.FindByID(createdCategory.Id);
-       
-        Assert.That(Category.Name, Is.EqualTo(result.Name));
-
         _categoryService.Delete(result);
+
+        Assert.That(category.Name, Is.EqualTo(result.Name));
     }
 
     [Test]
     public void CategoryService_UpdateCategory_ReturnsTrue()
     {
-        var Category = this.Category;
-        var createdCategory = _categoryService.Create(Category);
+        var category = this._category;
+        var createdCategory = _categoryService.Create(category);
         
         Assert.That(createdCategory.Name, Is.Not.EqualTo("Sushi"));
         createdCategory.Name = "Sushi";
         
         var result = _categoryService.Update(createdCategory);
-        
-        Assert.IsTrue(result);
-        Assert.That(_categoryService.FindByID(createdCategory.Id).Name, Is.EqualTo("Sushi"));
-
+        string re = _categoryService.FindByID(createdCategory.Id).Name;
         _categoryService.Delete(createdCategory);
+
+        Assert.IsTrue(result);
+        Assert.That(re, Is.EqualTo("Sushi"));
     }
 
     [Test]
     public void CategoryService_DeleteCategory_ReturnsTrue()
     {
-        var Category = this.Category;
-        var createdCategory = _categoryService.Create(Category);
+        var category = this._category;
+        var createdCategory = _categoryService.Create(category);
         var result = _categoryService.Delete(createdCategory);
         
         Assert.IsTrue(result);

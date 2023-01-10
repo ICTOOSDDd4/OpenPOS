@@ -1,6 +1,3 @@
-using NUnit.Framework;
-using OpenPOS_Models;
-
 namespace OpenPOS_Testing;
 
 [TestFixture]
