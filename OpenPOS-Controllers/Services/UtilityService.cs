@@ -8,10 +8,15 @@ namespace OpenPOS_Controllers.Services;
 
 public class UtilityService
 {
-    public async Task<ImageSource> GenerateQrCodeFromUrl(string url)
+    /// <summary>
+    /// Generates a QR-code with given URL
+    /// </summary>
+    /// <param name="URL">URL the QR-code needs to be generated for</param>
+    /// <returns>The QR-code as an ImageSource Object</returns>
+    public async Task<ImageSource> GenerateQrCodeFromUrl(string URL)
     {
         string filename = $"{GetRootDirectory()}/qr.png";
-        string apiUrl = ApplicationSettings.QRCodeGeneratorSet.Base_url + url;
+        string apiUrl = ApplicationSettings.QRCodeGeneratorSet.Base_url + URL;
 
         Uri uri = new Uri(apiUrl);
         HttpClient client = new HttpClient();
@@ -24,6 +29,11 @@ public class UtilityService
 
     }
 
+    /// <summary>
+    /// Hashes Password with SHA256
+    /// </summary>
+    /// <param name="unencrypted">Password inputted by User</param>
+    /// <returns>Hashed Password</returns>
     public string HashPassword(string unencrypted)
     {
         // ComputeHash - returns byte array  
@@ -38,11 +48,18 @@ public class UtilityService
         return builder.ToString();
     }
 
+    /// <summary>
+    /// Gets RootDirectory of the application
+    /// </summary>
+    /// <returns>Path to root of application</returns>
     public static string GetRootDirectory()
     {
        return AppDomain.CurrentDomain.BaseDirectory;
     }
 
+    /// <summary>
+    /// Initializes the DatabaseService
+    /// </summary>
     public static void StartDatabase()
     {
         DatabaseService.Initialize();
