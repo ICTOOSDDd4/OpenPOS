@@ -1,8 +1,9 @@
+using CommunityToolkit.Maui.Alerts;
 using OpenPOS_Controllers;
 using OpenPOS_Models;
 using OpenPOS_Settings.Exceptions;
 
-namespace OpenPOS_APP;
+namespace OpenPOS_APP.Resources.Controls;
 
 public partial class OrderView : ContentView
 {
@@ -44,6 +45,7 @@ public partial class OrderView : ContentView
       catch (Exception ex)
       {
          ExceptionHandler.HandleException(ex, null, true, false);
+         HorizontalLayout.DisplaySnackbar("A problem occurred while trying to complete the order.");
       }
       
    }
@@ -64,6 +66,7 @@ public partial class OrderView : ContentView
       catch (Exception ex)
       {
          ExceptionHandler.HandleException(ex, null, true, false);
+         HorizontalLayout.DisplaySnackbar("A problem occured while trying to cancel the order.");
       }
    }
 
@@ -75,6 +78,7 @@ public partial class OrderView : ContentView
       Table table = _tableController.GetByBillId(Order.Bill_id);
       TableNumber.Text = $"Table: {table.Table_number}";
       AddOrderLinesToLayout();
+      
    }
 
     private void AddOrderLinesToLayout()

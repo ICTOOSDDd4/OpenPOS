@@ -9,13 +9,13 @@ public partial class TipPopUp : Popup
 {
    private double _price;
    private CheckoutOverview _overview;
-   public double tip;
+   public double Tip;
 	public TipPopUp(double price, CheckoutOverview sender)
 	{
 		InitializeComponent();
       _price = price;
       _overview = sender;
-      string total = String.Format(((Math.Round(price) == price) ? "{0:0}" : "{0:0.00}"), price);
+      string total = String.Format(((Math.Round(price) == price) ? "{0:0}" : "{0:0.00}"), price); // The loss of precision is not a issue here, due to the set values.
       TotalLabel.Text = $"New Total: �{total}";
       double percentage = 0;
       TipLabel.Text = $"Tip Percentage {percentage}%";
@@ -40,15 +40,15 @@ public partial class TipPopUp : Popup
       double factor = 1 + percentage;
       double newPrice = _price * factor;
       newPrice = Math.Round(newPrice, 2);
-      tip = newPrice - _price;
-      string start = String.Format(((Math.Round(newPrice) == newPrice) ? "{0:0}" : "{0:0.00}"), newPrice);
+      Tip = newPrice - _price;
+      string start = String.Format(((Math.Round(newPrice) == newPrice) ? "{0:0}" : "{0:0.00}"), newPrice); // The loss of precision is not a issue for the small amounts processed here.
       TotalLabel.Text = $"New Total: �{start}";
       TipLabel.Text = $"Tip Percentage {Math.Round(e.NewValue)}%";
    }
 
    private void Add_Button_Clicked(object sender, EventArgs e)
    {
-      if (tip != 0)
+      if (Tip != 0)
       {
          _overview.OnTipAdded(this, e);
          Close();

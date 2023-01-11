@@ -7,6 +7,10 @@ namespace OpenPOS_Database.ModelServices;
 
 public class BillService : IModelService<Bill>
 {
+    /// <summary>
+    /// Returns all Bills from database
+    /// </summary>
+    /// <returns>All Bills in list of models</returns>
     public List<Bill> GetAll()
     {
         List<Bill> resultList = DatabaseService.Execute<Bill>(new SqlCommand("SELECT * FROM [dbo].[Bill]"));
@@ -14,6 +18,11 @@ public class BillService : IModelService<Bill>
         return resultList;
     }
 
+    /// <summary>
+    /// Returns a Bill by id
+    /// </summary>
+    /// <param name="id">BillId</param>
+    /// <returns>Bill</returns>
     public Bill FindByID(int id)
     {
         SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[Bill] WHERE [id] = @ID");
@@ -26,6 +35,11 @@ public class BillService : IModelService<Bill>
         return result;
     }
 
+    /// <summary>
+    /// Deletes the Bill given by id
+    /// </summary>
+    /// <param name="obj">Bill model</param>
+    /// <returns>Bool for succeeded or not</returns>
     public bool Delete(Bill obj)
     {
         SqlCommand query = new SqlCommand("DELETE FROM [dbo].[Bill] WHERE [id] = @BillId");
@@ -37,6 +51,11 @@ public class BillService : IModelService<Bill>
 
     }
 
+    /// <summary>
+    /// Updates the Bill by given id and other data
+    /// </summary>
+    /// <param name="obj">Bill model</param>
+    /// <returns>Bool for succeeded or not</returns>
     public bool Update(Bill obj)
     {
         SqlCommand query = new SqlCommand("UPDATE [dbo].[Bill] SET [user_id] = @userid, [paid] = @paid, [updated_at] = @updated_at WHERE [id] = @id");
@@ -53,6 +72,11 @@ public class BillService : IModelService<Bill>
         return DatabaseService.Execute(query);
     }
 
+    /// <summary>
+    /// Creates a new Bill with given data
+    /// </summary>
+    /// <param name="obj">Bill model</param>
+    /// <returns>Updated Bill model</returns>
     public Bill Create(Bill obj)
     {
         SqlCommand query = new SqlCommand("INSERT INTO [dbo].[Bill] ([user_id], [paid], [created_at], [updated_at])  OUTPUT  inserted.*  VALUES (@userid, @paid, @created_at, @updated_at)");

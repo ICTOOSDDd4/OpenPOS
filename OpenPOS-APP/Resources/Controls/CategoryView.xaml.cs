@@ -1,7 +1,7 @@
 using OpenPOS_Controllers;
 using OpenPOS_Models;
 
-namespace OpenPOS_APP;
+namespace OpenPOS_APP.Resources.Controls;
 
 public partial class CategoryView : ContentView
 {
@@ -14,6 +14,11 @@ public partial class CategoryView : ContentView
         InitializeComponent();
     }
 
+    /// <summary>
+    /// Sets all values for the Category View, this method is to be called before adding the view to a layout!
+    /// </summary>
+    /// <param name="page">Current menu page</param>
+    /// <param name="category">Selected category</param>
     public void SetCategoryValues(MenuPage page, Category category)
     {
         _productController = new ProductController();

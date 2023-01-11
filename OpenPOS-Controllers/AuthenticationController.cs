@@ -25,16 +25,35 @@ namespace OpenPOS_Controllers
             _userService = new UserService();
             _utilityService = new UtilityService();
         }
+
+        /// <summary>
+        /// Gets a Users Role by Username and Password
+        /// </summary>
+        /// <param name="Username">Username of Logged in User</param>
+        /// <param name="Password">Password of Logged in User</param>
+        /// <returns></returns>
         public Role GetUserRole(string Username, string Password)
         {
             return _roleService.FindUserRole(Authenticate(Username, Password).Id);
         }
 
+        /// <summary>
+        /// Loggs in the User if credentials are correct
+        /// </summary>
+        /// <param name="Username">Filled in Username</param>
+        /// <param name="Password">Filled in Password</param>
+        /// <returns>Found User or Null if incorrect credentials</returns>
         public User Authenticate(string Username, string Password)
         {
             return _userService.Authenticate(Username, _utilityService.HashPassword(Password));
         }
 
+        /// <summary>
+        /// Checks if the logged in User has the Role given
+        /// </summary>
+        /// <param name="user">User that needs to be checked</param>
+        /// <param name="role">Role that the User needs to be authorized</param>
+        /// <returns>Bool if authorized or not</returns>
         public bool IsAuthorized(User user, RolesEnum role)
         {
             return _accessLevelService.IsAuthorized(user, role);

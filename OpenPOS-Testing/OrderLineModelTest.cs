@@ -9,17 +9,17 @@ public class OrderLineModelTest
     [Test]
     public void OrderLine_NewOrderLine_ReturnsOrderLine()
     {
-        int Order_Id = 1;
-        int Product_Id = 3;
-        int Amount = 5;
-        string Comment = "Test";
+        int orderId = 1;
+        int productId = 3;
+        int amount = 5;
+        string comment = "Test";
         
-        OrderLine orderLine = new OrderLine(Order_Id, Product_Id, Amount, Comment);
+        OrderLine orderLine = new OrderLine(orderId, productId, amount, comment);
         
-        Assert.AreEqual(Order_Id, orderLine.Order_id);
-        Assert.AreEqual(Product_Id, orderLine.Product_id);
-        Assert.AreEqual(Amount, orderLine.Amount);
-        Assert.AreEqual(Comment, orderLine.Comment);
+        Assert.That(orderLine.Order_id, Is.EqualTo(orderId));
+        Assert.That(orderLine.Product_id, Is.EqualTo(productId));
+        Assert.That(orderLine.Amount, Is.EqualTo(amount));
+        Assert.That(orderLine.Comment, Is.EqualTo(comment));
         
     }
 }

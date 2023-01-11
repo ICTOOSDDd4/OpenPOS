@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<StackLayout xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OpenPOS_APP.Resources.Controls.AdminHeader"
+             x:Name="This">
+    <Frame
+        Padding="0,0,0,0"
+        Margin="0,0,0,20"
+        BackgroundColor="#e1e1e1"
+        HeightRequest="70"
+        CornerRadius="0"
+        >
+        <HorizontalStackLayout
+        HorizontalOptions="Center"
+        >
+            <HorizontalStackLayout
+            Margin="10"
+            Spacing="40"
+            Padding="30,0,30,0"
+            HorizontalOptions="Center"
+            >
+                <Image
+                Source="openpos_logo_v1.png"
+                HeightRequest="40"
+                WidthRequest="130"/>
+                <Label 
+                    x:Name="DashboardLabel"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center"
+                    Text="Dashboard"
+                    >
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnTappedDashboardLabel"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label 
+                    x:Name="UserLabel"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center"
+                    Text="Users"
+                >
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnTappedUserLabel"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label 
+                    x:Name="ProductLabel"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center"
+                    Text="Products"
+                >
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnTappedProductLabel"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label 
+                    x:Name="CategoryLabel"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center"
+                    Text="Categories"
+                >
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnTappedCategoryLabel"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <ImageButton
+                Source="logouticon.png"
+                x:Name="AccountButton"
+                Clicked="OnClickedLogout"
+                Padding="10"
+                BackgroundColor="#e1e1e1"
+                />
+            </HorizontalStackLayout>
+        </HorizontalStackLayout>
+    </Frame>
+</StackLayout>

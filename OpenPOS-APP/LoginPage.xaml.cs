@@ -20,7 +20,7 @@ public partial class LoginScreen : ContentPage
             "Resources/Styles/Colors.xaml", this.GetType().GetTypeInfo().Assembly, null);
     }
     
-    private void OnTextFilledUsername(object sender, TextChangedEventArgs e)
+    private void OnTextChangedUsername(object sender, TextChangedEventArgs e)
     {
         _username = e.NewTextValue;
         if (string.IsNullOrEmpty(_password) || string.IsNullOrEmpty(_username))
@@ -33,7 +33,7 @@ public partial class LoginScreen : ContentPage
         }
     }
 
-    private void OnTextFilledPassword(object sender, TextChangedEventArgs e)
+    private void OnTextChangedPassword(object sender, TextChangedEventArgs e)
     {
         _password = e.NewTextValue;
         if (string.IsNullOrEmpty(_password) || string.IsNullOrEmpty(_username))
@@ -48,17 +48,17 @@ public partial class LoginScreen : ContentPage
 
     private async void OnLoginButtonClicked(object sender, EventArgs e)
     {
+        MainLoginButton.IsVisible = false;
+        MainLoginButton.IsEnabled = false;
+        LoadingIndicator.IsRunning = true;
+        LoadingIndicator.IsEnabled = true;
         if (UserAuth(_username, _password))
         {
-            MainLoginButton.IsVisible = false;
-            MainLoginButton.IsEnabled = false;
-            LoadingIndicator.IsRunning = true;
-            LoadingIndicator.IsEnabled = true;
             var role = Enum.Parse<RolesEnum>(_authenticationController.GetUserRole(_username, _password).Title);
             switch (role)
             {
                 case (RolesEnum.Owner or RolesEnum.Admin):
-                    await Shell.Current.GoToAsync(nameof(AdminOverview));
+                    await Shell.Current.GoToAsync(nameof(AdminDashboardPage));
                     break;
                 case (RolesEnum.Crew):
                     await Shell.Current.GoToAsync(nameof(CrewOverview));
@@ -80,21 +80,19 @@ public partial class LoginScreen : ContentPage
             _username = string.Empty;
             EmailEntry.Text = string.Empty;
             PasswordEntry.Text = string.Empty;
-      }
-      else
-      {
-         LoadingIndicator.IsVisible = false;
-         LoadingIndicator.IsRunning = false;
-         MainLoginButton.IsVisible = true;
-         await DisplayAlert("Invalid credentials", "This username and/or password are not correct.", "Try again");
-      }
-
-   }
+        }
+        else
+        {
+            LoadingIndicator.IsVisible = false;
+            LoadingIndicator.IsRunning = false;
+            MainLoginButton.IsVisible = true;
+            await DisplayAlert("Invalid credentials", "This username and/or password are not correct.", "Try again");
+        }
+    }
 
     private async void CreateNewAccount_Tapped(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync(nameof(CreateAccountPage));
-        // await DisplayAlert("Work in Progress", "This feature is still under development try agian later.", "Alright");
     }
 
     private bool UserAuth(string username, string password)
@@ -110,6 +108,14 @@ public partial class LoginScreen : ContentPage
         {
             return false;
         }
+    }
+
+    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    {
+        // Makes the button visible & enables it when navigated back to the page with the back button
+        base.OnNavigatedTo(args);
+        MainLoginButton.IsVisible = true; 
+        MainLoginButton.IsEnabled = true;
     }
 
     private void ActivateButton(bool active)

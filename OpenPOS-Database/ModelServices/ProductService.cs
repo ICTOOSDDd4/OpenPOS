@@ -8,6 +8,10 @@ namespace OpenPOS_Database.Services.Models;
 
 public class ProductService : IModelService<Product>
 {
+    /// <summary>
+    /// Returns all Products from database
+    /// </summary>
+    /// <returns>All Products in list of models</returns>
     public List<Product> GetAll()
     {
         List<Product> resultList = DatabaseService.Execute<Product>(new SqlCommand("SELECT * FROM [dbo].[Product]"));
@@ -15,7 +19,12 @@ public class ProductService : IModelService<Product>
         return resultList;
     }
 
-   public List<Product> GetAllByFilter(string filter)
+    /// <summary>
+    /// Returns all Products that contain the filter string from database
+    /// </summary>
+    /// <param name="filter">The string to filter Products by</param>
+    /// <returns>All Products in list of models</returns>
+    public List<Product> GetAllByFilter(string filter)
    {
       string searchTerm = string.Format("%{0}%", filter);
       SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[product] WHERE [name] LIKE @Filter");
@@ -28,11 +37,16 @@ public class ProductService : IModelService<Product>
       var result = DatabaseService.Execute<Product>(query);
         foreach (Product prod in result)
         {
-            System.Diagnostics.Debug.WriteLine(prod.Name);
+            Debug.WriteLine(prod.Name);
         }
       return result;
     }
-    
+
+    /// <summary>
+    /// Returns all Products in given category from database
+    /// </summary>
+    /// <param name="categoryId">The Category to filter Products by</param>
+    /// <returns>All Products in list of models</returns>
     public List<Product> GetAllByCategoryId(int categoryId)
     {
         List<Product> result;
@@ -50,6 +64,11 @@ public class ProductService : IModelService<Product>
         return result;
     }
 
+    /// <summary>
+    /// Returns a Product by id
+    /// </summary>
+    /// <param name="id">ProductId</param>
+    /// <returns>Product</returns>
     public Product FindByID(int id)
     {
         SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[Product] WHERE [ID] = @ID");
@@ -62,6 +81,11 @@ public class ProductService : IModelService<Product>
         return result;
     }
 
+    /// <summary>
+    /// Deletes the Product given by id
+    /// </summary>
+    /// <param name="obj">Product model</param>
+    /// <returns>Bool for succeeded or not</returns>
     public bool Delete(Product obj)
     {
         SqlCommand query = new SqlCommand("DELETE FROM [dbo].[product] WHERE [ID] = @ProductID");
@@ -72,6 +96,11 @@ public class ProductService : IModelService<Product>
         return DatabaseService.Execute(query);
     }
 
+    /// <summary>
+    /// Updates the Product by given id and other data
+    /// </summary>
+    /// <param name="obj">Product model</param>
+    /// <returns>Bool for succeeded or not</returns>
     public bool Update(Product obj)
     {
         SqlCommand query = new SqlCommand("UPDATE [dbo].[Product] SET [Name] = @Name, [Price] = @Price, [description] = @Description WHERE [ID] = @ID");
@@ -88,6 +117,11 @@ public class ProductService : IModelService<Product>
         return DatabaseService.Execute(query);
     }
 
+    /// <summary>
+    /// Creates a new Product with given data
+    /// </summary>
+    /// <param name="obj">Product model</param>
+    /// <returns>Updated Product model</returns>
     public Product Create(Product obj)
     {
         SqlCommand query = new SqlCommand("INSERT INTO [dbo].[Product] ([Name], [Price], [Description])  OUTPUT  inserted.*  VALUES (@Name, @Price, @Description)");

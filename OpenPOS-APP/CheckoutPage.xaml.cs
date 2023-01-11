@@ -14,6 +14,7 @@ public partial class CheckoutOverview : ContentPage
     private double _totalPrice;
     private double _tip;
     private readonly PaymentController _paymentController = new();
+    private readonly OrderController _orderController = new();
 
     public static Dictionary<Product,int> GetCheckoutItems()
     {
@@ -24,7 +25,7 @@ public partial class CheckoutOverview : ContentPage
 	 {
         InitializeComponent();
 	      AddToCheckOut(ApplicationSettings.CheckoutList);
-        Header.currentPage = this;
+        Header.CurrentPage = this;
     }
 
     public void AddToCheckOut(Dictionary<Product, int> products)
@@ -37,7 +38,7 @@ public partial class CheckoutOverview : ContentPage
             _totalPrice += (products.ElementAt(i).Key.Price * products.ElementAt(i).Value);
         }
 
-        string value = String.Format(((Math.Round(_totalPrice + _tip) == _totalPrice + _tip) ? "{0:0}" : "{0:0.00}"),
+        string value = String.Format(((Math.Round(_totalPrice + _tip) == _totalPrice + _tip) ? "{0:0}" : "{0:0.00}"), // precision is not a issue for the small amounts processed
             _totalPrice + _tip);
 
         TotalPriceLabel.Text = $"Total: €{value}";
@@ -45,6 +46,13 @@ public partial class CheckoutOverview : ContentPage
 
     public async void OnClickedSplitPay(object sender, EventArgs args)
     {
+        // TODO: Bugged
+        // if (!_orderController.PaymentAllowedForBill(ApplicationSettings.CurrentBill.Id).Any()) 
+        // {
+        //     await DisplayAlert("Oops", "You can't split pay when there are unserved orders", "OK");
+        //     return;
+        // }
+
         bool loop = true;
 
         while (loop)
@@ -57,7 +65,6 @@ public partial class CheckoutOverview : ContentPage
                 {
                     int totalInCents = (int)Math.Round(_totalPrice * 100);
                     int tipInCents = (int)Math.Round(_tip * 100);
-                    int total = totalInCents + tipInCents;
                     int splitAmount = totalInCents / count;
                     Transaction transaction = _paymentController.NewTikkieTransaction(splitAmount);
                     if (transaction.Url != null)
@@ -67,7 +74,7 @@ public partial class CheckoutOverview : ContentPage
                         await Shell.Current.GoToAsync(nameof(PaymentPage));
                         continue;
                     }
-                    else throw new Exception($"Payment Error: {splitAmount} isn't compatible with the API.");
+                    throw new Exception($"Payment Error: {splitAmount} isn't compatible with the API.");
                 }
 
                 await DisplayAlert("Oops", "You can't split a bill with a negative amount of people!", "Try Again");
@@ -80,7 +87,6 @@ public partial class CheckoutOverview : ContentPage
                 {
                     int totalInCents = (int)Math.Round(_totalPrice * 100);
                     int tipInCents = (int)Math.Round(_tip * 100);
-                    int total = totalInCents + tipInCents;
                     int splitAmount = totalInCents / count;
                     Transaction transaction = _paymentController.NewTikkieTransaction(splitAmount);
                     if (transaction.Url != null)
@@ -103,6 +109,13 @@ public partial class CheckoutOverview : ContentPage
 
     private async void OnClickedPay(object sender, EventArgs args)
     {
+        // TODO: Bugged
+        // if (!_orderController.PaymentAllowedForBill(ApplicationSettings.CurrentBill.Id).Any()) 
+        // {
+        //     await DisplayAlert("Oops", "You can't split pay when there are unserved orders", "OK");
+        //     return;
+        // }
+        
         int totalInCents = (int)Math.Round(_totalPrice * 100);
         int tipInCents = (int)Math.Round(_tip * 100);
         int total = totalInCents + tipInCents;
@@ -121,10 +134,11 @@ public partial class CheckoutOverview : ContentPage
 
     public void OnTipAdded(object sender, EventArgs args)
     {
+        // Changes the event listener and edits the button label to the currently added tip.
         if (sender is TipPopUp)
         {
             TipPopUp pop = (TipPopUp)sender;
-            _tip = pop.tip;
+            _tip = pop.Tip;
             TipButton.Clicked -= OnClickedAddATip;
             TipButton.Clicked += OnEditTip;
             AddTipOnButton();
@@ -133,14 +147,14 @@ public partial class CheckoutOverview : ContentPage
         else if (sender is InputCustomTipPopUp)
         {
             InputCustomTipPopUp pop = (InputCustomTipPopUp)sender;
-            _tip = pop.tip;
+            _tip = pop.Tip;
             TipButton.Clicked -= OnClickedAddATip;
             TipButton.Clicked += OnEditTip;
             AddTipOnButton();
         }
     }
 
-    public async void OnEditTip(object sender, EventArgs args)
+    private async void OnEditTip(object sender, EventArgs args)
     {
         string[] options = { "Change tip", "Remove Tip" };
         var result = await DisplayActionSheet("Edit your tip", null, "Cancel", options);
@@ -156,7 +170,7 @@ public partial class CheckoutOverview : ContentPage
             TipButton.Clicked -= OnEditTip;
             TipButton.Clicked += OnClickedAddATip;
             string totalValue =
-                String.Format(((Math.Round(_totalPrice + _tip) == _totalPrice + _tip) ? "{0:0}" : "{0:0.00}"),
+                String.Format(((Math.Round(_totalPrice + _tip) == _totalPrice + _tip) ? "{0:0}" : "{0:0.00}"), // The loss of precision is not a issue for the small amounts processed here.
                     _totalPrice + _tip);
             TotalPriceLabel.Text = $"€{totalValue}";
             Debug.WriteLine("Remove");
@@ -165,11 +179,11 @@ public partial class CheckoutOverview : ContentPage
 
     private void AddTipOnButton()
     {
-        string tipValue = String.Format(((Math.Round(_tip) == _tip) ? "{0:0}" : "{0:0.00}"), _tip);
+        string tipValue = String.Format(((Math.Round(_tip) == _tip) ? "{0:0}" : "{0:0.00}"), _tip); // The loss of precision is not a issue for the small amounts processed here.
         TipButton.Text = $"Tip: €{tipValue}";
 
         string totalValue =
-            String.Format(((Math.Round(_totalPrice + _tip) == _totalPrice + _tip) ? "{0:0}" : "{0:0.00}"),
+            String.Format(((Math.Round(_totalPrice + _tip) == _totalPrice + _tip) ? "{0:0}" : "{0:0.00}"), // The loss of precision is not a issue for the small amounts processed here.
                 _totalPrice + _tip);
         TotalPriceLabel.Text = $"€{totalValue}";
     }

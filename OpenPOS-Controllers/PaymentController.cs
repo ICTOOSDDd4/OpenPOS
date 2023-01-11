@@ -1,17 +1,15 @@
-﻿using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Linq;
+using OpenPOS_Controllers.Services;
 using OpenPOS_Settings;
 using OpenPOS_Database.Services.Models;
 using OpenPOS_Models;
-using OpenPOS_Settings;
-using System.Net;
-using OpenPOS_Controllers.Services;
+using OpenPOS_TikkiePayment;
 
 namespace OpenPOS_Controllers;
 
 public class PaymentController
 {
     private TikkiePaymentService _tikkiePaymentService;
-    private UtilityService _utilityService;
 
     public PaymentController()
     {
@@ -42,23 +40,24 @@ public class PaymentController
         // Return the transaction
         return new Transaction
         {
+            
             PaymentRequestToken = obj["paymentRequestToken"]?.ToString(),
-            AmountInCents = (int)obj["amountInCents"]?.ToObject<int>(),
+            AmountInCents = (int)obj["amountInCents"]?.ToObject<int>(), //TODO: Fix warning
             TransactionId = obj["referenceId"]?.ToString(),
             Description = obj["description"]?.ToString(),
             Url = obj["url"]?.ToString(),
-            ExpiryDate = (DateTime)obj["expiryDate"]?.ToObject<DateTime>(),
-            CreatedDateTime = (DateTime)obj["createdDateTime"]?.ToObject<DateTime>(),
+            ExpiryDate = (DateTime)obj["expiryDate"]?.ToObject<DateTime>(), //TODO: Fix warning
+            CreatedDateTime = (DateTime)obj["createdDateTime"]?.ToObject<DateTime>(), //TODO: Fix warning
             Status = obj["status"]?.ToString(),
-            NumberOfPayments = (int)obj["numberOfPayments"]?.ToObject<int>(),
-            TotalAmountPayed = (int)obj["totalAmountPaidInCents"]?.ToObject<int>(),
+            NumberOfPayments = (int)obj["numberOfPayments"]?.ToObject<int>(), //TODO: Fix warning
+            TotalAmountPayed = (int)obj["totalAmountPaidInCents"]?.ToObject<int>(), //TODO: Fix warning
         };
     }
 
-    public Transaction GetTikkieTransaction(string paymentID)
+    public Transaction GetTikkieTransaction(string paymentId)
     {
         // Calling the tikkie API for a transaction
-        var response = _tikkiePaymentService.GetTransactionInformation(paymentID);
+        var response = _tikkiePaymentService.GetTransactionInformation(paymentId);
         
         // Return null if the response is null
         if (response == null)
@@ -79,19 +78,15 @@ public class PaymentController
         return new Transaction
         {
             PaymentRequestToken = obj["paymentRequestToken"]?.ToString(),
-            AmountInCents = (int)obj["amountInCents"]?.ToObject<int>(),
+            AmountInCents = (int)obj["amountInCents"]?.ToObject<int>(), //TODO: Fix warning
             TransactionId = obj["referenceId"]?.ToString(),
             Description = obj["description"]?.ToString(),
             Url = obj["url"]?.ToString(),
-            ExpiryDate = (DateTime)obj["expiryDate"]?.ToObject<DateTime>(),
-            CreatedDateTime = (DateTime)obj["createdDateTime"]?.ToObject<DateTime>(),
+            ExpiryDate = (DateTime)obj["expiryDate"]?.ToObject<DateTime>(), //TODO: Fix warning
+            CreatedDateTime = (DateTime)obj["createdDateTime"]?.ToObject<DateTime>(), //TODO: Fix warning
             Status = obj["status"]?.ToString(),
-            NumberOfPayments = (int)obj["numberOfPayments"]?.ToObject<int>(),
-            TotalAmountPayed = (int)obj["totalAmountPaidInCents"]?.ToObject<int>(),
+            NumberOfPayments = (int)obj["numberOfPayments"]?.ToObject<int>(), //TODO: Fix warning
+            TotalAmountPayed = (int)obj["totalAmountPaidInCents"]?.ToObject<int>(), //TODO: Fix warning
         };
-    }
-    public ImageSource GetPaymentQR(string url)
-    {
-        return _utilityService.GenerateQrCodeFromUrl(url);
     }
 }

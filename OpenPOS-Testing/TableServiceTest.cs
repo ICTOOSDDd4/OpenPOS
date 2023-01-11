@@ -40,7 +40,6 @@ public class TableServiceTest
                 System.Diagnostics.Debug.WriteLine(ApplicationSettings.DbSett.connection_string);
             }
         }
-        else throw new Exception();
         
         DatabaseService.Initialize();
     }
@@ -48,60 +47,56 @@ public class TableServiceTest
     [Test]
     public void TableService_GetAllTables_ReturnsAllTables()
     {
-        var table = this._table;
+        var table = _table;
         var result = _tableService.Create(table);
         var tables = _tableService.GetAll();
-        
-        Assert.Greater(tables.Count, 0);
-        
         _tableService.Delete(result);
+
+        Assert.Greater(tables.Count, 0);
     }
 
     [Test]
     public void TableService_CreateTable_ReturnsObject()
     {
-
-        var table = this._table;
+        var table = _table;
         var result = _tableService.Create(table);
+        _tableService.Delete(result);
 
         Assert.That(result.Bill_id, Is.EqualTo(table.Bill_id));
-        
-        _tableService.Delete(result);
     }
     
     [Test]
     public void TableService_FindTable_ReturnsTable()
     {
-        var table = this._table;
+        var table = _table;
         var createdTable = _tableService.Create(table);
         var result = _tableService.FindByID(createdTable.Id);
-       
-        Assert.That(table.Bill_id, Is.EqualTo(result.Bill_id));
-       
         _tableService.Delete(result);
+
+        Assert.That(table.Bill_id, Is.EqualTo(result.Bill_id));
     }
 
     [Test]
     public void TableService_UpdateTable_ReturnsTrue()
     {
-        var table = this._table;
+        var table = _table;
         var createdTable = _tableService.Create(table);
         
         Assert.That(createdTable.Table_number, Is.Not.EqualTo(123));
         createdTable.Table_number = 123;
         
         var result = _tableService.Update(createdTable);
-        
-        Assert.IsTrue(result);
-        Assert.That(_tableService.FindByID(createdTable.Id).Table_number, Is.EqualTo(123));
-        
+        int number = _tableService.FindByID(createdTable.Id).Table_number;
         _tableService.Delete(createdTable);
+
+        Assert.IsTrue(result);
+        Assert.That(number, Is.EqualTo(123));
     }
 
     [Test]
     public void TableService_DeleteTable_ReturnsTrue()
     {
-        var table = this._table;
+        var table = _table;
         var createdTable = _tableService.Create(table);
         var result = _tableService.Delete(createdTable);
         
@@ -112,14 +107,12 @@ public class TableServiceTest
     [Test]
     public void TableService_FindByTableNumber_ReturnsTable()
     {
-        var Table = this._table;
-        var createdTable = _tableService.Create(Table);
+        var table = _table;
+        var createdTable = _tableService.Create(table);
         var result = _tableService.FindByTableNumber(createdTable.Table_number);
-        
-        Assert.That(result.Table_number, Is.EqualTo(createdTable.Table_number));
-
         _tableService.Delete(createdTable);
 
+        Assert.That(result.Table_number, Is.EqualTo(createdTable.Table_number));
     }
     
     [Test]

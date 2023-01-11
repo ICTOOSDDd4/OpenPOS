@@ -5,7 +5,7 @@ using OpenPOS_Settings.EventArgsClasses;
 using Brush = Microsoft.Maui.Controls.Brush;
 using Shadow = Microsoft.Maui.Controls.Shadow;
 
-namespace OpenPOS_APP;
+namespace OpenPOS_APP.Resources.Controls;
 
 public partial class ProductView : ContentView
 {
@@ -33,7 +33,7 @@ public partial class ProductView : ContentView
         _product = product;
         ProductName.Text = product.Name;
         ProductInfo.Text = product.Description;
-        string value = String.Format(((Math.Round(product.Price) == product.Price) ? "{0:0}" : "{0:0.00}"), product.Price);
+        string value = String.Format(((Math.Round(product.Price) == product.Price) ? "{0:0}" : "{0:0.00}"), product.Price); // The loss of precision is not a issue here, due to the set values.
         ProductPrice.Text = $"€ {value}";
 
         if (product.Imagepath != null)

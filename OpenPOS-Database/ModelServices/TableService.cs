@@ -7,7 +7,11 @@ namespace OpenPOS_Database.Services.Models;
 
 public class TableService : IModelService<Table>
 {
-
+    /// <summary>
+    /// Returns a Table by number (not id but had given value)
+    /// </summary>
+    /// <param name="id">TableNumber</param>
+    /// <returns>Table</returns>
     public Table FindByTableNumber(int tableNumber) 
    {
       SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[restaurant_table] WHERE [table_number] = @TableNumber");
@@ -24,6 +28,11 @@ public class TableService : IModelService<Table>
       
       return result;
    }
+
+    /// <summary>
+    /// Returns all Tables from database
+    /// </summary>
+    /// <returns>All Tables in list of models</returns>
     public List<Table> GetAll()
     {
         List<Table> resultList = DatabaseService.Execute<Table>(new SqlCommand("SELECT * FROM [dbo].[restaurant_table]"));
@@ -31,6 +40,11 @@ public class TableService : IModelService<Table>
         return resultList;
     }
 
+    /// <summary>
+    /// Returns a Table by id
+    /// </summary>
+    /// <param name="id">TableId</param>
+    /// <returns>Table</returns>
     public Table FindByID(int id)
     {
         SqlCommand query = new SqlCommand("SELECT * FROM [dbo].[restaurant_table] WHERE [ID] = @ID");
@@ -43,6 +57,11 @@ public class TableService : IModelService<Table>
         return result;
     }
 
+    /// <summary>
+    /// Returns a Table by BillId
+    /// </summary>
+    /// <param name="id">BillId</param>
+    /// <returns>Table</returns>
     public Table FindByBill(int id)
     {
 
@@ -56,6 +75,11 @@ public class TableService : IModelService<Table>
         return result;
     }
 
+    /// <summary>
+    /// Deletes the Table given by id
+    /// </summary>
+    /// <param name="obj">Table model</param>
+    /// <returns>Bool for succeeded or not</returns>
     public bool Delete(Table obj)
     {
         SqlCommand query = new SqlCommand("DELETE FROM [dbo].[restaurant_table] WHERE [ID] = @ID");
@@ -66,6 +90,11 @@ public class TableService : IModelService<Table>
         return DatabaseService.Execute(query);
     }
 
+    /// <summary>
+    /// Updates the Table by given id and other data
+    /// </summary>
+    /// <param name="obj">Table model</param>
+    /// <returns>Bool for succeeded or not</returns>
     public bool Update(Table obj)
     {
         SqlCommand query = new SqlCommand("UPDATE [dbo].[restaurant_table] SET [table_number] = @TableNumber, [bill_id] = @BillId, [floor_id] = @FloorId WHERE [id] = @ID");
@@ -82,6 +111,11 @@ public class TableService : IModelService<Table>
         return DatabaseService.Execute(query);
     }
 
+    /// <summary>
+    /// Creates a new Table with given data
+    /// </summary>
+    /// <param name="obj">Table model</param>
+    /// <returns>Updated Table model</returns>
     public Table Create(Table obj)
     {
         SqlCommand query = new SqlCommand("INSERT INTO [dbo].[restaurant_table] ([table_number], [bill_id], [floor_id])  OUTPUT  inserted.*  VALUES (@TableNumber, @BillId, @FloorId)");

@@ -18,7 +18,7 @@ public partial class MenuPage : ContentPage
     private readonly ProductController _productController;
     private readonly CategoryController _categoryController;
     private readonly OrderController _orderController;
-    private const int _productCardViewWidth = 300;
+    private const int ProductCardViewWidth = 300;
     private bool _isInitialized;
 	  private double _width;
 
@@ -32,23 +32,24 @@ public partial class MenuPage : ContentPage
         Products = _productController.GetAllProducts();
         InitializeComponent();
         Header.Searched += OnSearch;
-        Header.currentPage = this;
+        Header.CurrentPage = this;
     }
 
     protected override void OnSizeAllocated(double width, double height)
     {
         // Gets called by MAUI
         base.OnSizeAllocated(width, height);
-        if (!_isInitialized)
+        if (_isInitialized)
         {
-            _isInitialized = true;
-            SetWindowScaling(width, height);
+	        return;
         }
+        _isInitialized = true;
+        SetWindowScaling(width, height);
     }
 
     private void SetWindowScaling(double width, double height)
 	  {
-        ScrView.HeightRequest = height - _productCardViewWidth;
+        ScrView.HeightRequest = height - ProductCardViewWidth;
         _width = width;
         AddAllCategories(_categoryController.GetAll());
         AddAllProducts();
@@ -71,9 +72,9 @@ public partial class MenuPage : ContentPage
         }
     }
 
-    public void AddProductToLayout(Product product)
+    private void AddProductToLayout(Product product)
     {
-        int moduloNumber = ((int)_width / _productCardViewWidth);
+        int moduloNumber = ((int)_width / ProductCardViewWidth);
         if (_horizontalLayout == null || _horizontalLayout.Children.Count % moduloNumber == 0)
         {
             AddHorizontalLayout();
@@ -93,7 +94,7 @@ public partial class MenuPage : ContentPage
     }
 
 
-    public void AddAllCategories(List<Category> categories)
+    private void AddAllCategories(List<Category> categories)
     {
 		//adds an "all" category
         CategoryView categoryView = new CategoryView();
@@ -106,7 +107,7 @@ public partial class MenuPage : ContentPage
         }
     }
 
-    public void AddCategoryToLayout(Category category)
+    private void AddCategoryToLayout(Category category)
     {
         CategoryView categoryView = new CategoryView();
         categoryView.SetCategoryValues(this, category);
@@ -124,14 +125,14 @@ public partial class MenuPage : ContentPage
         _horizontalLayout = hLayout;
     }
 
-    private async void OnInfoButtonClicked(object sender, InfoButtonEventArgs e)
+    private void OnInfoButtonClicked(object sender, InfoButtonEventArgs e)
     {
         ProductInfoPopUp infoPop = new();
         infoPop.SetProduct(e.product);
         this.ShowPopup(infoPop);
     }
 
-	private async void OrderButton_OnClicked(object sender, EventArgs e)
+	private async void OnOrderButtonClicked(object sender, EventArgs e)
 	{
 		OrderButton.IsVisible = false;
 		Loader.IsRunning = true;
@@ -159,16 +160,16 @@ public partial class MenuPage : ContentPage
 		}		
 	}
 
-	public virtual void OnSearch(object sender, EventArgs e) {
+	protected virtual void OnSearch(object sender, EventArgs e) {
 		MainVerticalLayout.Clear();
 		if (String.IsNullOrWhiteSpace(((SearchBar)sender).Text) || String.IsNullOrEmpty(((SearchBar)sender).Text))
 		{
 			Products = _productController.GetAllProducts();
 		} else
 		{
-      Products = _productController.GetProductsBySearch(((SearchBar)sender).Text);
-    }
+			Products = _productController.GetProductsBySearch(((SearchBar)sender).Text);
+		}
 
-        AddAllProducts();
+		AddAllProducts();
     }
 }

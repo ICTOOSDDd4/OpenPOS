@@ -5,7 +5,7 @@ namespace OpenPOS_APP.Resources.Controls.PopUps;
 public partial class InputCustomTipPopUp : Popup
 {
    public event EventHandler TipAdded;
-   public double tip;
+   public double Tip;
    public InputCustomTipPopUp()
 	{
 		InitializeComponent();
@@ -16,15 +16,18 @@ public partial class InputCustomTipPopUp : Popup
       string entryString = TipAmount.Text;
       if (!entryString.Contains('.'))
       {
-         if (double.TryParse(entryString.ToString().Trim(), out double value))
+         if (double.TryParse(entryString.Trim(), out double value))
          {
             if (!double.IsNegative(value))
             {
                if (value != 0)
                {
-                  tip = value;
-                  TipAdded.Invoke(this, e);
-                  Close();
+                  Tip = value;
+                  if (TipAdded != null)
+                  {
+                     TipAdded.Invoke(this, e);
+                     Close();
+                  } else { Change_Error_Label(true, "A system error occured, please contact a staff member."); }
                }
                else { Change_Error_Label(true, "You can't enter zero."); }
             }
@@ -40,7 +43,7 @@ public partial class InputCustomTipPopUp : Popup
       Close();
    }
 
-   private void Change_Error_Label(bool active, string text)
+   private void Change_Error_Label(bool active, string text) // A extra method to remove redundant code
    {
       ErrorDisplayLabel.IsVisible = active;
       ErrorDisplayLabel.Text = text;      

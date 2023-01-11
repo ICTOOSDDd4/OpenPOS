@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
+             x:Class="OpenPOS_APP.Resources.Controls.OrderChart">
+    <lvc:CartesianChart 
+        x:Name="OChart"
+        Title="{Binding Title}"
+        Series="{Binding Series}"
+        XAxes="{Binding XAxes}"
+        ZoomMode="X"
+        IsVisible="true"
+        LegendPosition="Right"/>
+</ContentView>

@@ -11,8 +11,8 @@ namespace OpenPOS_APP;
 
 public partial class PaymentPage : ContentPage
 {
-	public static Transaction CurrentTransaction { get; set; }
-	public static int RequiredPayments { get; set; } 
+   private static Transaction CurrentTransaction { get; set; }
+   private static int RequiredPayments { get; set; } 
    private Thread _thread;
    private string _paymentStatusString;
    private readonly System.Timers.Timer _timer = new System.Timers.Timer(500);
@@ -23,7 +23,8 @@ public partial class PaymentPage : ContentPage
       InitializeComponent();
       Connect();
    }
-   public async void Connect()
+
+   private async void Connect() // Connects to the OpenPOS API
    {
       try
       {
@@ -39,7 +40,7 @@ public partial class PaymentPage : ContentPage
 
       UtilityService utility = new UtilityService();
 
-      ImageSource imageSource = utility.GenerateQrCodeFromUrl(CurrentTransaction.Url);
+      ImageSource imageSource = await utility.GenerateQrCodeFromUrl(CurrentTransaction.Url);
       
       // Deleting the loader from the screen.
       Loader.IsVisible = false;
@@ -49,11 +50,14 @@ public partial class PaymentPage : ContentPage
       QRCode.IsVisible = true;
       QRCode.Source = imageSource;
 
-      if (RequiredPayments == 1)
+      if (RequiredPayments == 1) // Keeping the if to enhance readability
       {
          _paymentStatusString = "payment";
       }
-      else { _paymentStatusString = "payments"; }
+      else
+      {
+         _paymentStatusString = "payments";
+      }
       _thread = new Thread(StartStatusLabel);
       _thread.Start();
 
@@ -63,8 +67,10 @@ public partial class PaymentPage : ContentPage
       _timer.Elapsed += ChangeStatusLabel;
       _timer.Start();
    }
-	public void OnPaymentPayed(object? sender, PaymentEventArgs e)
+
+   private void OnPaymentPayed(object sender, PaymentEventArgs e)
 	{
+      if (sender == null) throw new ArgumentNullException(nameof(sender));
       _timer.Stop();
       _thread.Interrupt();
       Dispatcher.DispatchAsync(async () =>
@@ -85,7 +91,7 @@ public partial class PaymentPage : ContentPage
       
 	}
 
-   public void ChangeStatusLabel(object sender, object e)
+   private void ChangeStatusLabel(object sender, object e)
    {
       string newString = "";
       Dispatcher.DispatchAsync(() =>
@@ -111,7 +117,7 @@ public partial class PaymentPage : ContentPage
 		RequiredPayments = numberOfRequiredPayments;
       Debug.WriteLine(transaction.PaymentRequestToken);
    }
-   public void RemoveQrCodeFile()
+   public void RemoveQrCodeFile() // Removes the QR code file from the local storage, a future option that can be checked by the admin, per connected device.
    {
       File.Delete($"{UtilityService.GetRootDirectory()}/qr-{ApplicationSettings.CurrentBill.Id}.png");
    }
