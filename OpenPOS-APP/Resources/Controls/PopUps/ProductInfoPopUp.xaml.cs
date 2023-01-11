@@ -15,7 +15,7 @@ public partial class ProductInfoPopUp : Popup
         Image.Source = product.Imagepath;
         ProductName.Text = product.Name;
         ProductDescription.Text = product.Description;
-        ProductAllergies.Text = "allergenen: " + product.Allergies;
+        ProductAllergies.Text = "Allergies: " + product.Allergies;
     }
 
 }

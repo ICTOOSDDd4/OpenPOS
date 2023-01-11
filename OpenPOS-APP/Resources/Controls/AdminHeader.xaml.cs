@@ -24,17 +24,17 @@ public partial class AdminHeader : StackLayout
 	
 	private void OnTappedUserLabel(object sender, EventArgs e)
 	{
-		ChangeColor(2);
+		ChangeColor(2); // Marks User as selected
 	}
 	
 	private void OnTappedProductLabel(object sender, EventArgs e)
 	{
-		ChangeColor(3);
+		ChangeColor(3); // Marks Product as selected
 	}
 	
 	private void OnTappedCategoryLabel(object sender, EventArgs e)
 	{
-		ChangeColor(4);
+		ChangeColor(4); // Marks Category as selected
 	}
 	
 	private async void OnClickedLogout(object sender, EventArgs e)

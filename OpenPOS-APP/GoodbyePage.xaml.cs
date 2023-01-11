@@ -15,7 +15,7 @@ public partial class GoodbyePage : ContentPage
     {
         InitializeComponent();
 
-        // TODO: Need to become background tasks these can't stay in the constructor!
+        // TODO: Need to become background tasks these can't stay in the constructor! For performance reasons.
         ApplicationSettings.LoggedinUser = null;
 
         _billController.MarkAsPaid(ApplicationSettings.CurrentBill);
@@ -37,8 +37,7 @@ public partial class GoodbyePage : ContentPage
             if (_count == 0)
             {
                 _timer.Stop();
-                Dispatcher.Dispatch(RedirectToMainPage); //Possible fix
-                // Device.BeginInvokeOnMainThread(RedirectToMainPage); //TODO: Fix this warning
+                Dispatcher.Dispatch(RedirectToMainPage);
             }
             else
             {

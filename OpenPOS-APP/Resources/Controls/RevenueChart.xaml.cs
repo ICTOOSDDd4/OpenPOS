@@ -28,7 +28,7 @@ public partial class RevenueChart : ContentView
    private void CreateGraph()
    { // TODO: Create a query for this
       List<OrderLine> lines = _orderController.GetOrderLines();
-      foreach (OrderLine line in lines)
+      foreach (OrderLine line in lines) // Processes all the data to be displayed in the graph element
       {
          double price = _productController.GetProductById(line.Product_id).Price * line.Amount;
          TotalPrice += price;
@@ -46,7 +46,7 @@ public partial class RevenueChart : ContentView
       
       Series = new ISeries[]
       { 
-			new LineSeries<double>
+			new LineSeries<double> // Processes the data to be displayed as a line graph in the graph element
          {
             Name = "Revenue",
             Values = _revenueData.Values.ToArray(),
@@ -59,14 +59,13 @@ public partial class RevenueChart : ContentView
       
       List<Axis> xAxes = new List<Axis>
       {
-         new Axis()
+         new()
          {
-            Labels = _revenueData.Keys.ToArray()
+            Labels = _revenueData.Keys.ToArray() // Sets all the dates to the x-axis
          }
       };
       
-      
-      
+      // Adds everything to the graph element
       RChart.Series = Series;
       RChart.XAxes = xAxes;
    }

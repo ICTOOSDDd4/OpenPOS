@@ -9,7 +9,7 @@ namespace OpenPOS_APP;
 
 public partial class OrderOverviewPage : ContentPage
 {
-    public List<Order> Orders { get; set; }
+    private List<Order> Orders { get; }
     private HorizontalStackLayout _horizontalLayout;
     private readonly OpenPosApiController _openPosApiController;
     private readonly OrderController _orderController;
@@ -105,7 +105,7 @@ public partial class OrderOverviewPage : ContentPage
         }
     }
 
-    public void AddOrderToLayout(Order order)
+    private void AddOrderToLayout(Order order)
     {
         int moduloNumber = ((int)_width / 300);
         if (_horizontalLayout == null || _horizontalLayout.Children.Count % moduloNumber == 0)

@@ -5,6 +5,7 @@ public partial class AppShell : Shell
 	public AppShell()
 	{
 		InitializeComponent();
+		// Adding all the pages to the MAUI routing system
 		Routing.RegisterRoute(nameof(CheckoutOverview), typeof(CheckoutOverview));
 		Routing.RegisterRoute(nameof(TablePickerScreen), typeof(TablePickerScreen));
 		Routing.RegisterRoute(nameof(LoginScreen), typeof(LoginScreen));
