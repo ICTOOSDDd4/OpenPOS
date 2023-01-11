@@ -1,3 +1,4 @@
+using CommunityToolkit.Maui.Alerts;
 using OpenPOS_Controllers;
 using OpenPOS_Models;
 using OpenPOS_Settings.Exceptions;
@@ -44,6 +45,7 @@ public partial class OrderView : ContentView
       catch (Exception ex)
       {
          ExceptionHandler.HandleException(ex, null, true, false);
+         HorizontalLayout.DisplaySnackbar("A problem occurred while trying to complete the order.");
       }
       
    }
@@ -64,6 +66,7 @@ public partial class OrderView : ContentView
       catch (Exception ex)
       {
          ExceptionHandler.HandleException(ex, null, true, false);
+         HorizontalLayout.DisplaySnackbar("A problem occured while trying to cancel the order.");
       }
    }
 

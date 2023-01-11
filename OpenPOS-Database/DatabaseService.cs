@@ -5,6 +5,7 @@ using OpenPOS_Settings;
 
 namespace OpenPOS_Database
 {
+    //General service handler
     public static class DatabaseService
     {
         private static string _connectionString;
@@ -23,6 +24,12 @@ namespace OpenPOS_Database
                 ConnectionString = _connectionString,
             };
         }
+
+        /// <summary>
+        /// Executes SqlCommand without return value (delete and update)
+        /// </summary>
+        /// <param name="command">SqlCommand drafted in services</param>
+        /// <returns>Bool for succeeded or not</returns>
         public static bool Execute(SqlCommand command)
         {
             try
@@ -43,6 +50,12 @@ namespace OpenPOS_Database
             }
         }
 
+        /// <summary>
+        /// Executes SqlCommand for single return value (find by id)
+        /// </summary>
+        /// <typeparam name="T">The generic type for finding what model to use</typeparam>
+        /// <param name="command">SqlCommand drafted in services</param>
+        /// <returns>Model of the generic type given for T</returns>
         public static T ExecuteSingle<T>(SqlCommand command)
         {
             using (SqlConnection connection = new SqlConnection(GetConnectionString()))
@@ -64,6 +77,12 @@ namespace OpenPOS_Database
             }
         }
 
+        /// <summary>
+        /// Executes SqlCommand for list of return values (get all or get by filter)
+        /// </summary>
+        /// <typeparam name="T">The generic type for finding what model to use</typeparam>
+        /// <param name="command">SqlCommand drafted in services</param>
+        /// <returns>List of the generic type given for T</returns>
         public static List<T> Execute<T>(SqlCommand command)
         {
             using (SqlConnection connection = new SqlConnection(GetConnectionString()))
@@ -84,6 +103,12 @@ namespace OpenPOS_Database
             }
         }
 
+        /// <summary>
+        /// Creates the instance of the model given and sets its values by the database data returned
+        /// </summary>
+        /// <typeparam name="T">The generic type for finding what model to use</typeparam>
+        /// <param name="reader">SqlDataReader returned from opening the database connection</param>
+        /// <returns>Model of the generic type given for T</returns>
         private static T getObject<T>(SqlDataReader reader)
         {
             var type = typeof(T);
@@ -124,6 +149,12 @@ namespace OpenPOS_Database
             return obj;
         }
 
+        /// <summary>
+        /// Creates a list of the model given and sets its values by the database data returned
+        /// </summary>
+        /// <typeparam name="T">The generic type for finding what model to use</typeparam>
+        /// <param name="reader">SqlDataReader returned from opening the database connection</param>
+        /// <returns>List of the generic type given for T</returns>
         private static List<T> GetList<T>(SqlDataReader reader)
         {
             List<T> list = new List<T>();

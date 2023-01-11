@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.Configuration;
 using OpenPOS_Database.Services.Models;
+using OpenPOS_TikkiePayment;
 
 namespace OpenPOS_Testing;
 

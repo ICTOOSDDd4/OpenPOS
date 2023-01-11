@@ -7,8 +7,6 @@ namespace OpenPOS_APP;
 public partial class AdminDashboardPage : ContentPage
 {
 	private bool _isInitialized;
-	private ProductController _productController;
-	private CategoryController _categoryController;
 	public AdminDashboardPage()
 	{
 		InitializeComponent();
@@ -17,8 +15,8 @@ public partial class AdminDashboardPage : ContentPage
 	
 	protected override void OnSizeAllocated(double width, double height)
 	{
+		// Gets called by MAUI when the page is loaded
 		double margin = VerticalStackLayout.Spacing * 3;
-		// Gets called by MAUI
 		base.OnSizeAllocated(width, height);
 		if (!_isInitialized)
 		{
@@ -32,20 +30,21 @@ public partial class AdminDashboardPage : ContentPage
 	
 	private void SetGraphs(double itemWidth, double itemHeight)
 	{
-			
+		// Set the size of the graphs and updates the data to be displayed in the labels.
 		RChart.WidthRequest = itemWidth;
 		OChart.WidthRequest = itemWidth;
 
 		RChart.HeightRequest = itemHeight;
 		OChart.HeightRequest = itemHeight;
 			
-		string revenueValue = String.Format(((Math.Round(RChart.TotalPrice) == RChart.TotalPrice) ? "{0:0}" : "{0:0.00}"), RChart.TotalPrice);
+		string revenueValue = String.Format(((Math.Round(RChart.TotalPrice) == RChart.TotalPrice) ? "{0:0}" : "{0:0.00}"), RChart.TotalPrice); // precision is not a issue for the small amounts processed
 		TotalRevenueLabel.Text = $"Total Revenue: € {revenueValue}";
 		TotalOrderLabel.Text = "Total Amount of Orders: " + OChart.TotalAmount;
 	}
 
 	private void SetLists(double itemWidth, double itemHeight)
 	{
+		// Sets the size of the lists
 		double width = itemWidth / 2;
 		TopCategories.WidthRequest = width;
 		TopProducts.WidthRequest = width;
@@ -56,10 +55,8 @@ public partial class AdminDashboardPage : ContentPage
 		TopProducts.HeightRequest = itemHeight;
 		BottomCategories.HeightRequest = itemHeight;
 		BottomProducts.HeightRequest = itemHeight;
-
-		// List<Product> products = _productController.GetAllProducts();
-		// List<Category> categories = _categoryController.GetAll();
 		
+		// TODO: Fill lists with correct Data.
 	}
 
 	

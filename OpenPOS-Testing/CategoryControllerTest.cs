@@ -1,13 +1,13 @@
 using Microsoft.Extensions.Configuration;
-using OpenPOS_Database.ModelServices;
+using OpenPOS_Controllers;
 using System.Reflection;
 
 namespace OpenPOS_Testing;
 
 [TestFixture]
-public class CategoryServiceTest
+public class CategoryControllerTest
 {
-    private CategoryService _categoryService = new();
+    private CategoryController _categoryController = new();
 
     private Category _category = new Category
     {
@@ -42,9 +42,9 @@ public class CategoryServiceTest
     public void CategoryService_GetAllCategorys_ReturnsAllCategorys()
     {
         var category = _category;
-        var result = _categoryService.Create(category);
-        var categories = _categoryService.GetAll();
-        _categoryService.Delete(result);
+        var result = _categoryController.CreateNew(category.Name);
+        var categories = _categoryController.GetAll();
+        _categoryController.Delete(result);
 
         Assert.Greater(categories.Count, 0);
     }
@@ -54,8 +54,8 @@ public class CategoryServiceTest
     {
 
         var category = this._category;
-        var result = _categoryService.Create(category);
-        _categoryService.Delete(result);
+        var result = _categoryController.CreateNew(category.Name);
+        _categoryController.Delete(result);
         
         Assert.That(category.Name, Is.EqualTo(result.Name));
     }
@@ -64,9 +64,9 @@ public class CategoryServiceTest
     public void CategoryService_FindCategory_ReturnsCategory()
     {
         var category = this._category;
-        var createdCategory = _categoryService.Create(category);
-        var result = _categoryService.FindByID(createdCategory.Id);
-        _categoryService.Delete(result);
+        var createdCategory = _categoryController.CreateNew(category.Name);
+        var result = _categoryController.Get(createdCategory.Id);
+        _categoryController.Delete(result);
 
         Assert.That(category.Name, Is.EqualTo(result.Name));
     }
@@ -75,14 +75,14 @@ public class CategoryServiceTest
     public void CategoryService_UpdateCategory_ReturnsTrue()
     {
         var category = this._category;
-        var createdCategory = _categoryService.Create(category);
+        var createdCategory = _categoryController.CreateNew(category.Name);
         
         Assert.That(createdCategory.Name, Is.Not.EqualTo("Sushi"));
         createdCategory.Name = "Sushi";
         
-        var result = _categoryService.Update(createdCategory);
-        string re = _categoryService.FindByID(createdCategory.Id).Name;
-        _categoryService.Delete(createdCategory);
+        var result = _categoryController.UpdateAll(createdCategory);
+        string re = _categoryController.Get(createdCategory.Id).Name;
+        _categoryController.Delete(createdCategory);
 
         Assert.IsTrue(result);
         Assert.That(re, Is.EqualTo("Sushi"));
@@ -92,10 +92,10 @@ public class CategoryServiceTest
     public void CategoryService_DeleteCategory_ReturnsTrue()
     {
         var category = this._category;
-        var createdCategory = _categoryService.Create(category);
-        var result = _categoryService.Delete(createdCategory);
+        var createdCategory = _categoryController.CreateNew(category.Name);
+        var result = _categoryController.Delete(createdCategory);
         
         Assert.IsTrue(result);
-        Assert.That(_categoryService.FindByID(createdCategory.Id).Name, Is.Null);
+        Assert.That(_categoryController.Get(createdCategory.Id).Name, Is.Null);
     }
 }

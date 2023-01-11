@@ -12,7 +12,6 @@ public partial class OrderChart : ContentView
 	private OrderController _orderController;
 	private Dictionary<string, int> _orderData;
 	public ISeries[] Series { get; set; }
-	public string Title { get; set; } = "Orders";
 	public int TotalAmount { get; set; }
 
 	public OrderChart()
@@ -23,7 +22,7 @@ public partial class OrderChart : ContentView
 		CreateGraph();
 	}
 
-	private void CreateGraph()
+	private void CreateGraph() // Processes all the necessary data and puts it into the graph element
 	{
 		List<Order> orders = _orderController.GetAllOrders();
 		TotalAmount = orders.Count;
@@ -42,7 +41,7 @@ public partial class OrderChart : ContentView
 		
 		Series = new ISeries[]
 		{ 
-			new LineSeries<int>
+			new LineSeries<int> // Processes the created dataset to be display in the graph element
 			{
 				Name = "Orders",
 				Values = _orderData.Values.ToArray(),
@@ -56,12 +55,13 @@ public partial class OrderChart : ContentView
 
 		List<Axis> xAxes = new List<Axis>
 		{
-			new Axis()
+			new()
 			{
-				Labels = _orderData.Keys.ToArray()
+				Labels = _orderData.Keys.ToArray() // Adds the dates to the x-axis
 			}
 		};
 		
+		// Adds the data to the graph element
 		OChart.Series = Series;
 		OChart.XAxes = xAxes;
 	}

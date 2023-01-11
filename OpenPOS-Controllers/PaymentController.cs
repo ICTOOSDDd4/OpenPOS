@@ -3,20 +3,17 @@ using OpenPOS_Controllers.Services;
 using OpenPOS_Settings;
 using OpenPOS_Database.Services.Models;
 using OpenPOS_Models;
-using OpenPOS_Controllers.Services;
+using OpenPOS_TikkiePayment;
 
 namespace OpenPOS_Controllers;
 
 public class PaymentController
 {
     private TikkiePaymentService _tikkiePaymentService;
-    private UtilityService _utilityService;
 
     public PaymentController()
     {
-        _utilityService = new UtilityService();
         _tikkiePaymentService = new TikkiePaymentService();
-        _utilityService = new UtilityService();
     }
 
     public Transaction NewTikkieTransaction(int amountInCents)

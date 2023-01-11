@@ -40,7 +40,6 @@ public class TableServiceTest
                 System.Diagnostics.Debug.WriteLine(ApplicationSettings.DbSett.connection_string);
             }
         }
-        else throw new Exception();
         
         DatabaseService.Initialize();
     }

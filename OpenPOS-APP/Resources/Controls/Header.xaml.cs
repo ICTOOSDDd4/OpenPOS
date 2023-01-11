@@ -21,7 +21,7 @@ public partial class Header : StackLayout
       if (Searched != null) Searched.Invoke(sender, e);
    }
 
-   private void OnSearchTextChanged(object sender, EventArgs e) { }
+   private void OnSearchTextChanged(object sender, EventArgs e) { } // This is required for when live search will be added to the app
 
 
    private async void OnClickedLogout(object sender, EventArgs e)

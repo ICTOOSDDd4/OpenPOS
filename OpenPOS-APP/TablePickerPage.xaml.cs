@@ -67,15 +67,16 @@ public partial class TablePickerScreen : ContentPage
 
     private void OnTableNumberEntryChanged(object sender, TextChangedEventArgs e)
     {
+        // Keeping the values explicit for readability
         int value;
         string oldValue = e.OldTextValue;
-
+        
         if (int.TryParse(e.NewTextValue, out value))
         {
             _tableNumber = value;
             if (oldValue != null)
             {
-                if (oldValue.Any(c => char.IsLetter(c)))
+                if (oldValue.Any(char.IsLetter))
                 {
                     ErrorDisplayLabel.IsVisible = true;
                 }
@@ -104,7 +105,7 @@ public partial class TablePickerScreen : ContentPage
         }
     }
 
-    private void ActivateButton(bool active)
+    private void ActivateButton(bool active) // This is a method that I made to activate or deactivate the submit button.
     {
         if (active)
         {

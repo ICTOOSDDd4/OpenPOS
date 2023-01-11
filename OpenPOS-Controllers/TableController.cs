@@ -17,10 +17,16 @@ namespace OpenPOS_Controllers
         {
             _tableService = new TableService();
         }
-        public bool CreateTableAsync(int tableId)
+
+        /// <summary>
+        /// Creates a new table with given tableNumber if it doesn't already exists
+        /// </summary>
+        /// <param name="tableNumber">TableNumber given by the input</param>
+        /// <returns>Bool for succeeded or not</returns>
+        public bool CreateTableAsync(int tableNumber)
         {
             BillController billController = new BillController();
-            Table table = _tableService.FindByTableNumber(tableId);
+            Table table = _tableService.FindByTableNumber(tableNumber);
             if (table == null)
             {
                 return false;
@@ -36,6 +42,11 @@ namespace OpenPOS_Controllers
             }    
         }
 
+        /// <summary>
+        /// Checks if a Table has an open Bill assigned to it
+        /// </summary>
+        /// <param name="tableNumber">TableNumber that need to be checked</param>
+        /// <returns>Bool for taken or not</returns>
         public bool CheckForOpenBill(int tableNumber)
         {
             if (_tableService.FindByTableNumber(tableNumber).Bill_id == null)
@@ -44,10 +55,16 @@ namespace OpenPOS_Controllers
             }
             return true;
         }
-        
-        public bool AttachBillToTable(int tableId, int billId)
+
+        /// <summary>
+        /// Sets a Bill to a Table if it is not taken
+        /// </summary>
+        /// <param name="tableNumber">TableNumber that the Bill will be set to</param>
+        /// <param name="billId">BillId that will get assigned to the Table</param>
+        /// <returns>Bool for succeeded or not</returns>
+        public bool AttachBillToTable(int tableNumber, int billId)
         {
-            Table table = _tableService.FindByTableNumber(tableId);
+            Table table = _tableService.FindByTableNumber(tableNumber);
             if (table == null)
             {
                 return false;
@@ -57,16 +74,31 @@ namespace OpenPOS_Controllers
             return true;
         }
         
+        /// <summary>
+        /// Finds a Table by its number
+        /// </summary>
+        /// <param name="tableNumber">TableNumber that needs to be found</param>
+        /// <returns>Table model</returns>
         public Table GetByTableNumber(int tableNumber)
         {
             return _tableService.FindByTableNumber(tableNumber);
         }
-        
+
+        /// <summary>
+        /// Finds a Table by its BillId
+        /// </summary>
+        /// <param name="billId">BillId that needs to be found</param>
+        /// <returns>Table model</returns>
         public Table GetByBillId(int billId)
         {
             return _tableService.FindByBill(billId);
         }
 
+        /// <summary>
+        /// Unassignes a Bill from the Table by TableNumber
+        /// </summary>
+        /// <param name="tableNumber">TableNumber that the Bill will be unassigned from</param>
+        /// <returns>Bool for succeeded or not</returns>
         public bool RemoveBill(int tableNumber)
         {
             Table table = _tableService.FindByTableNumber(tableNumber);
