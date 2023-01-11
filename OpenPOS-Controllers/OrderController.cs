@@ -31,10 +31,13 @@ namespace OpenPOS_Controllers
             try
             {
                 Order order = new Order() { User_id = ApplicationSettings.LoggedinUser.Id, Bill_id = ApplicationSettings.CurrentBill.Id, Status = false, Updated_At = DateTime.Now, Created_At = DateTime.Now };
-                order = _orderService.Create(order);
-                if (order == null)
+                
+                if (!await _openPosApiService.NewOrderRequest(order))
+                {
                     return false;
-                await _openPosApiService.NewOrderRequest(order);
+                }
+                
+                order = _orderService.Create(order);
                 foreach (KeyValuePair<int, int> entry in selectedProducts)
                 {
                     OrderLine line = new OrderLine(order.Id, entry.Key, entry.Value, "In Development");
